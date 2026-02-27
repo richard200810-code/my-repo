@@ -18,6 +18,7 @@ export default function ProductsPage() {
   const [skip, setSkip] = useState(0);
   const [selectedType, setSelectedType] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
+  const [selectedStore, setSelectedStore] = useState<string>('all');
   const [showFilters, setShowFilters] = useState(false);
   
   const { addingItemId, actions } = useCart();
@@ -31,7 +32,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     applyFilters();
-  }, [products, selectedType, selectedColor]);
+  }, [products, selectedType, selectedColor, selectedStore]);
 
   const loadProducts = async () => {
     try {
@@ -67,6 +68,10 @@ export default function ProductsPage() {
       filtered = filtered.filter(p => p.color === selectedColor);
     }
 
+    if (selectedStore !== 'all') {
+      filtered = filtered.filter(p => p.storeId === selectedStore);
+    }
+
     setFilteredProducts(filtered);
   };
 
@@ -77,6 +82,7 @@ export default function ProductsPage() {
   // Extract unique values for filters
   const productTypes = ['all', ...Array.from(new Set(products.map(p => p.productType).filter(Boolean)))];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
+  const stores = ['all', ...Array.from(new Set(products.map(p => p.storeId).filter(Boolean)))];
 
   return (
     <div className="min-h-screen bg-background">
@@ -108,7 +114,7 @@ export default function ProductsPage() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 border border-primary/10"
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 border border-primary/10"
             >
               {/* Product Type Filter */}
               <div className="space-y-3">
@@ -141,6 +147,24 @@ export default function ProductsPage() {
                   {colors.map(color => (
                     <option key={color} value={color}>
                       {color === 'all' ? 'All Colors' : color}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Store Filter */}
+              <div className="space-y-3">
+                <label className="font-paragraph text-base text-primary font-semibold">
+                  Store
+                </label>
+                <select
+                  value={selectedStore}
+                  onChange={(e) => setSelectedStore(e.target.value)}
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary"
+                >
+                  {stores.map(store => (
+                    <option key={store} value={store}>
+                      {store === 'all' ? 'All Stores' : store}
                     </option>
                   ))}
                 </select>

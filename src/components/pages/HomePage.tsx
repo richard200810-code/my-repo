@@ -278,6 +278,79 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* --- SECTION 3B: SHOPPING MALL SECTION --- */}
+      <section className="relative w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-20 py-32">
+        <div className="text-center mb-16">
+          <h2 className="font-heading text-5xl md:text-7xl text-primary mb-6">
+            Discover Our Vendors
+          </h2>
+          <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
+            Explore a curated marketplace of premium hair extension and wig vendors, each offering unique collections and expertise.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <div className="space-y-4">
+              <h3 className="font-heading text-3xl text-primary">
+                A Marketplace of Excellence
+              </h3>
+              <p className="font-paragraph text-lg text-primary/70 leading-relaxed">
+                Our shopping mall brings together the finest vendors in the hair industry. Each store is carefully selected to ensure quality, authenticity, and exceptional customer service.
+              </p>
+            </div>
+
+            <ul className="space-y-3 font-paragraph text-lg">
+              <li className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-primary rounded-full" />
+                Curated vendor selection
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-primary rounded-full" />
+                Diverse product collections
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-primary rounded-full" />
+                Expert vendor support
+              </li>
+              <li className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-primary rounded-full" />
+                Unified shopping experience
+              </li>
+            </ul>
+
+            <Link
+              to="/stores"
+              className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              Browse All Vendors
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="aspect-[4/5] overflow-hidden"
+          >
+            <Image
+              src="https://static.wixstatic.com/media/37e681_3dbc4c8d9a494f8a8fbe0138857f89d9~mv2.png?originWidth=768&originHeight=960"
+              alt="Shopping mall vendors"
+              width={600}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* --- SECTION 4: VISUAL BREATHER (Full Bleed) --- */}
       <section className="relative w-full h-[80vh] overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 z-0">

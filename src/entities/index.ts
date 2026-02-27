@@ -13,6 +13,8 @@ export interface HairExtensionsandWigs {
   _createdDate?: Date;
   _updatedDate?: Date;
   /** @wixFieldType text */
+  storeId?: string;
+  /** @wixFieldType text */
   itemName?: string;
   /** @wixFieldType number */
   itemPrice?: number;
@@ -26,4 +28,25 @@ export interface HairExtensionsandWigs {
   color?: string;
   /** @wixFieldType number */
   length?: number;
+}
+
+
+/**
+ * Collection ID: stores
+ * Interface for Stores
+ */
+export interface Stores {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  storeName?: string;
+  /** @wixFieldType text */
+  description?: string;
+  /** @wixFieldType image - Contains image URL, render with <Image> component, NOT as text */
+  storeImage?: string;
+  /** @wixFieldType text */
+  ownerContactName?: string;
+  /** @wixFieldType text */
+  ownerContactEmail?: string;
 }
