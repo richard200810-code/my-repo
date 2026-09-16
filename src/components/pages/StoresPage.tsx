@@ -45,10 +45,10 @@ export default function StoresPage() {
         {/* Page Header */}
         <div className="mb-16 text-center">
           <h1 className="font-heading text-5xl md:text-7xl text-primary mb-6">
-            Nuestros Vendedores
+            Shopping
           </h1>
           <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Descubre extensiones de cabello premium y pelucas de nuestra selección curada de vendedores
+            Descubre extensiones de cabello premium y pelucas de nuestra colección seleccionada
           </p>
         </div>
 
@@ -61,7 +61,7 @@ export default function StoresPage() {
           ) : stores.length === 0 ? (
             <div className="text-center py-20">
               <p className="font-paragraph text-lg text-primary/60">
-                No hay tiendas disponibles en este momento
+                No hay productos disponibles en este momento
               </p>
             </div>
           ) : (
@@ -121,7 +121,7 @@ export default function StoresPage() {
                       {/* CTA */}
                       <div className="pt-4 mt-auto">
                         <button className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                          Ver Tienda
+                          Ver Detalles
                         </button>
                       </div>
                     </div>
