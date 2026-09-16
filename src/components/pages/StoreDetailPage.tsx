@@ -92,9 +92,9 @@ export default function StoreDetailPage() {
         <Header />
         <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
           <div className="text-center py-20">
-            <p className="font-paragraph text-lg text-primary/60">Store not found</p>
+            <p className="font-paragraph text-lg text-primary/60">Tienda no encontrada</p>
             <Link to="/stores" className="inline-block mt-4 px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-              Back to Stores
+              Volver a Tiendas
             </Link>
           </div>
         </main>
@@ -111,7 +111,7 @@ export default function StoreDetailPage() {
         {/* Back Button */}
         <Link to="/stores" className="inline-flex items-center gap-2 text-primary hover:opacity-70 transition-opacity mb-8">
           <ArrowLeft className="w-4 h-4" />
-          <span className="font-paragraph">Back to Stores</span>
+          <span className="font-paragraph">Volver a Tiendas</span>
         </Link>
 
         {/* Store Header */}
@@ -160,14 +160,14 @@ export default function StoreDetailPage() {
         {/* Products Section */}
         <div className="mb-12">
           <h2 className="font-heading text-4xl md:text-5xl text-primary mb-12">
-            Featured Products
+            Productos Destacados
           </h2>
 
           <div className="min-h-[600px]">
             {products.length === 0 ? (
               <div className="text-center py-20">
                 <p className="font-paragraph text-lg text-primary/60">
-                  No products available from this store
+                  No hay productos disponibles de esta tienda
                 </p>
               </div>
             ) : (
@@ -236,7 +236,7 @@ export default function StoreDetailPage() {
                           disabled={addingItemId === product._id}
                           className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                         >
-                          {addingItemId === product._id ? 'Adding...' : 'Add to Cart'}
+                          {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
                         </button>
                       </div>
                     </motion.div>
@@ -251,7 +251,7 @@ export default function StoreDetailPage() {
                       disabled={isLoading}
                       className="px-10 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                     >
-                      {isLoading ? 'Loading...' : 'Load More'}
+                      {isLoading ? 'Cargando...' : 'Cargar Más'}
                     </button>
                   </div>
                 )}

@@ -9,10 +9,10 @@ export default function Header() {
   const { itemCount, actions } = useCart();
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Stores', path: '/stores' },
-    { name: 'Products', path: '/products' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Inicio', path: '/' },
+    { name: 'Tiendas', path: '/stores' },
+    { name: 'Productos', path: '/products' },
+    { name: 'Contacto', path: '/contact' }
   ];
 
   return (
@@ -41,7 +41,7 @@ export default function Header() {
               <button
                 onClick={actions.toggleCart}
                 className="relative p-2 hover:opacity-70 transition-opacity"
-                aria-label="Shopping cart"
+                aria-label="Carrito de compras"
               >
                 <ShoppingCart className="w-6 h-6 text-primary" />
                 {itemCount > 0 && (
@@ -55,7 +55,7 @@ export default function Header() {
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="md:hidden p-2"
-                aria-label="Toggle menu"
+                aria-label="Alternar menú"
               >
                 {mobileMenuOpen ? (
                   <X className="w-6 h-6 text-primary" />

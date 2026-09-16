@@ -12,33 +12,33 @@ export default function Footer() {
               Luxe Hair
             </h3>
             <p className="font-paragraph text-base text-secondary-foreground/80 leading-relaxed">
-              Premium hair extensions and wigs crafted for those who appreciate quality and elegance.
+              Extensiones de cabello premium y pelucas elaboradas para quienes aprecian la calidad y la elegancia.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="font-heading text-xl text-secondary-foreground">
-              Quick Links
+              Enlaces Rápidos
             </h4>
             <nav className="flex flex-col gap-3">
               <Link
                 to="/"
                 className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
               >
-                Home
+                Inicio
               </Link>
               <Link
                 to="/products"
                 className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
               >
-                Products
+                Productos
               </Link>
               <Link
                 to="/contact"
                 className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
               >
-                Contact
+                Contacto
               </Link>
             </nav>
           </div>
@@ -46,7 +46,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="space-y-4">
             <h4 className="font-heading text-xl text-secondary-foreground">
-              Get in Touch
+              Ponte en Contacto
             </h4>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
@@ -68,7 +68,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-secondary-foreground/20 pt-8">
           <p className="font-paragraph text-sm text-secondary-foreground/60 text-center">
-            © {new Date().getFullYear()} Luxe Hair. All rights reserved.
+            © {new Date().getFullYear()} Luxe Hair. Todos los derechos reservados.
           </p>
         </div>
       </div>

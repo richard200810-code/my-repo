@@ -61,18 +61,18 @@ export default function HomePage() {
   // Canonical Data Sources (Preserved from original code)
   const features = [
     {
-      title: 'Premium Quality',
-      description: 'Sourced from the finest materials, each piece is crafted to perfection for lasting beauty and durability.',
+      title: 'Calidad Premium',
+      description: 'Elaboradas con los mejores materiales, cada pieza está hecha a la perfección para una belleza y durabilidad duraderas.',
       icon: Star
     },
     {
-      title: 'Natural Look',
-      description: 'Seamlessly blend with your natural hair for an authentic, undetectable appearance that enhances your style.',
+      title: 'Aspecto Natural',
+      description: 'Se mezcla perfectamente con tu cabello natural para una apariencia auténtica e indetectable que realza tu estilo.',
       icon: Sparkles
     },
     {
-      title: 'Expert Guidance',
-      description: 'Our team provides personalized recommendations to help you find the perfect match for your needs.',
+      title: 'Orientación Experta',
+      description: 'Nuestro equipo proporciona recomendaciones personalizadas para ayudarte a encontrar la opción perfecta para tus necesidades.',
       icon: Heart
     }
   ];
@@ -99,7 +99,7 @@ export default function HomePage() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="font-heading text-[15vw] md:text-[13vw] leading-[0.8] text-center md:text-left tracking-tighter text-primary w-full"
           >
-            ELEVATE <span className="italic font-light block md:inline">YOUR</span> BEAUTY
+            ELEVA <span className="italic font-light block md:inline">TU</span> BELLEZA
           </motion.h1>
         </div>
 
@@ -111,8 +111,8 @@ export default function HomePage() {
             <RevealText delay={0.2} className="space-y-8">
               <div className="w-12 h-px bg-primary mb-8" />
               <p className="font-paragraph text-xl md:text-2xl leading-relaxed max-w-md">
-                Step into a world of premium hair extensions and wigs where tradition meets innovation. 
-                Discover pieces where quality meets artistry.
+                Entra en un mundo de extensiones de cabello premium y pelucas donde la tradición se encuentra con la innovación. 
+                Descubre piezas donde la calidad se encuentra con el arte.
               </p>
               <div className="pt-8">
                 <Link
@@ -120,7 +120,7 @@ export default function HomePage() {
                   className="group relative inline-flex items-center justify-center px-8 py-4 border border-primary overflow-hidden transition-all duration-300 hover:bg-primary"
                 >
                   <span className="relative z-10 font-paragraph text-lg group-hover:text-background transition-colors duration-300">
-                    Explore Collection
+                    Explorar Colección
                   </span>
                 </Link>
               </div>
@@ -137,7 +137,7 @@ export default function HomePage() {
             >
                <ParallaxImage 
                 src="https://static.wixstatic.com/media/37e681_2270ccbe0fcb4fa58005304334a96411~mv2.png?originWidth=768&originHeight=1024"
-                alt="Premium texture detail"
+                alt="Detalle de textura premium"
                 className="w-full h-full"
                 speed={0.05}
                />
@@ -155,7 +155,7 @@ export default function HomePage() {
             >
               <ParallaxImage 
                 src="https://static.wixstatic.com/media/37e681_14585b69cb6048b4a0fb0c88e96fe698~mv2.png?originWidth=768&originHeight=1024"
-                alt="Model wearing luxury wig"
+                alt="Modelo usando peluca de lujo"
                 className="w-full h-full"
                 speed={0.15}
                />
@@ -175,28 +175,28 @@ export default function HomePage() {
           <div className="hidden lg:block relative h-full">
             <div className="sticky top-32 space-y-12">
               <h2 className="font-heading text-6xl md:text-7xl leading-none">
-                The Art of <br/> Transformation
+                El Arte de la <br/> Transformación
               </h2>
               <p className="font-paragraph text-xl max-w-md leading-relaxed text-primary/80">
-                Our collection is more than just hair; it is an expression of identity. 
-                We curate textures that speak to the soul and styles that empower your presence.
+                Nuestra colección es más que cabello; es una expresión de identidad. 
+                Curamos texturas que hablan al alma y estilos que potencian tu presencia.
               </p>
               <ul className="space-y-4 font-paragraph text-lg">
                 <li className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-primary rounded-full" />
-                  Ethically Sourced
+                  Obtenido Éticamente
                 </li>
                 <li className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-primary rounded-full" />
-                  Hand-Crafted Precision
+                  Precisión Hecha a Mano
                 </li>
                 <li className="flex items-center gap-4">
                   <span className="w-2 h-2 bg-primary rounded-full" />
-                  Unmatched Longevity
+                  Longevidad Incomparable
                 </li>
               </ul>
               <Link to="/products" className="inline-flex items-center gap-2 border-b border-primary pb-1 hover:opacity-60 transition-opacity">
-                Read Our Story <ArrowRight className="w-4 h-4" />
+                Lee Nuestra Historia <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -205,44 +205,44 @@ export default function HomePage() {
           <div className="space-y-24 lg:space-y-40">
             {/* Mobile Title (Visible only on small screens) */}
             <div className="lg:hidden mb-12">
-               <h2 className="font-heading text-5xl leading-none mb-6">The Art of Transformation</h2>
-               <p className="font-paragraph text-lg">Our collection is more than just hair; it is an expression of identity.</p>
+               <h2 className="font-heading text-5xl leading-none mb-6">El Arte de la Transformación</h2>
+               <p className="font-paragraph text-lg">Nuestra colección es más que cabello; es una expresión de identidad.</p>
             </div>
 
             <div className="group">
               <div className="aspect-[4/5] overflow-hidden mb-6">
                 <Image 
                   src="https://static.wixstatic.com/media/37e681_3dbc4c8d9a494f8a8fbe0138857f89d9~mv2.png?originWidth=768&originHeight=960"
-                  alt="Silky straight texture"
+                  alt="Textura liso sedoso"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="font-heading text-3xl">Silky Straight</h3>
-              <p className="font-paragraph text-sm mt-2 opacity-70">The epitome of sleek elegance.</p>
+              <h3 className="font-heading text-3xl">Liso Sedoso</h3>
+              <p className="font-paragraph text-sm mt-2 opacity-70">El epítome de la elegancia lisa.</p>
             </div>
 
             <div className="group pl-0 lg:pl-20">
               <div className="aspect-[4/5] overflow-hidden mb-6">
                 <Image 
                   src="https://static.wixstatic.com/media/37e681_c14f7f90f0c749f5b6e73a4f169e9ac8~mv2.png?originWidth=768&originHeight=960"
-                  alt="Deep wave texture"
+                  alt="Textura onda profunda"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="font-heading text-3xl">Deep Wave</h3>
-              <p className="font-paragraph text-sm mt-2 opacity-70">Voluminous, ocean-like waves.</p>
+              <h3 className="font-heading text-3xl">Onda Profunda</h3>
+              <p className="font-paragraph text-sm mt-2 opacity-70">Ondas voluminosas como el océano.</p>
             </div>
 
             <div className="group">
               <div className="aspect-[4/5] overflow-hidden mb-6">
                 <Image 
                   src="https://static.wixstatic.com/media/37e681_09cefe7d4f2d4d5c8e332d77b57455e8~mv2.png?originWidth=768&originHeight=960"
-                  alt="Kinky curly texture"
+                  alt="Textura rizado kinky"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="font-heading text-3xl">Kinky Curly</h3>
-              <p className="font-paragraph text-sm mt-2 opacity-70">Bold, beautiful, and unapologetic.</p>
+              <h3 className="font-heading text-3xl">Rizado Kinky</h3>
+              <p className="font-paragraph text-sm mt-2 opacity-70">Audaz, hermoso e imparable.</p>
             </div>
           </div>
         </div>
@@ -282,10 +282,10 @@ export default function HomePage() {
       <section className="relative w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-20 py-32">
         <div className="text-center mb-16">
           <h2 className="font-heading text-5xl md:text-7xl text-primary mb-6">
-            Discover Our Vendors
+            Descubre Nuestros Vendedores
           </h2>
           <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Explore a curated marketplace of premium hair extension and wig vendors, each offering unique collections and expertise.
+            Explora un mercado curado de vendedores premium de extensiones de cabello y pelucas, cada uno ofreciendo colecciones únicas y experiencia.
           </p>
         </div>
 
@@ -299,29 +299,29 @@ export default function HomePage() {
           >
             <div className="space-y-4">
               <h3 className="font-heading text-3xl text-primary">
-                A Marketplace of Excellence
+                Un Mercado de Excelencia
               </h3>
               <p className="font-paragraph text-lg text-primary/70 leading-relaxed">
-                Our shopping mall brings together the finest vendors in the hair industry. Each store is carefully selected to ensure quality, authenticity, and exceptional customer service.
+                Nuestro centro comercial reúne a los mejores vendedores de la industria del cabello. Cada tienda es cuidadosamente seleccionada para garantizar calidad, autenticidad y servicio al cliente excepcional.
               </p>
             </div>
 
             <ul className="space-y-3 font-paragraph text-lg">
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Curated vendor selection
+                Selección de vendedores curada
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Diverse product collections
+                Colecciones de productos diversos
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Expert vendor support
+                Soporte de vendedor experto
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Unified shopping experience
+                Experiencia de compra unificada
               </li>
             </ul>
 
@@ -329,7 +329,7 @@ export default function HomePage() {
               to="/stores"
               className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
-              Browse All Vendors
+              Explorar Todos los Vendedores
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -343,7 +343,7 @@ export default function HomePage() {
           >
             <Image
               src="https://static.wixstatic.com/media/37e681_3dbc4c8d9a494f8a8fbe0138857f89d9~mv2.png?originWidth=768&originHeight=960"
-              alt="Shopping mall vendors"
+              alt="Vendedores del centro comercial"
               width={600}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
@@ -356,7 +356,7 @@ export default function HomePage() {
         <div className="absolute inset-0 z-0">
           <ParallaxImage 
             src="https://static.wixstatic.com/media/37e681_b47948c9880b49299634b891fb3af307~mv2.png?originWidth=1280&originHeight=704"
-            alt="Atmospheric background"
+            alt="Fondo atmosférico"
             className="w-full h-full"
             speed={0.2}
           />
@@ -371,14 +371,14 @@ export default function HomePage() {
             transition={{ duration: 1 }}
           >
             <p className="font-heading text-5xl md:text-7xl text-white leading-tight drop-shadow-lg">
-              "Beauty is not just seen, <br/> it is felt."
+              "La belleza no solo se ve, <br/> se siente."
             </p>
             <div className="mt-12">
               <Link 
                 to="/products"
                 className="inline-block px-12 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white font-paragraph hover:bg-white hover:text-black transition-all duration-300"
               >
-                Shop The Look
+                Compra el Look
               </Link>
             </div>
           </motion.div>
@@ -393,7 +393,7 @@ export default function HomePage() {
                <div className="w-full h-full rounded-full overflow-hidden">
                  <Image 
                     src="https://static.wixstatic.com/media/37e681_e807b4cb55684b95b9faf52462f1afbb~mv2.png?originWidth=768&originHeight=768"
-                    alt="Circular showcase"
+                    alt="Escaparate circular"
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000"
                  />
                </div>
@@ -402,17 +402,17 @@ export default function HomePage() {
           
           <div className="order-1 lg:order-2 space-y-8 text-center lg:text-left">
             <h2 className="font-heading text-6xl md:text-8xl text-primary leading-[0.9]">
-              READY TO <br/> TRANSFORM?
+              ¿LISTO PARA <br/> TRANSFORMARTE?
             </h2>
             <p className="font-paragraph text-xl text-primary/70 max-w-md mx-auto lg:mx-0">
-              Browse our extensive collection and find the perfect extensions or wigs tailored to your unique style.
+              Explora nuestra extensa colección y encuentra las extensiones o pelucas perfectas adaptadas a tu estilo único.
             </p>
             <div className="pt-4">
               <Link
                 to="/products"
                 className="inline-block px-16 py-5 bg-primary text-primary-foreground font-paragraph text-lg hover:bg-secondary transition-colors duration-300"
               >
-                View All Products
+                Ver Todos los Productos
               </Link>
             </div>
           </div>

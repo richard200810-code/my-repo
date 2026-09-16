@@ -52,7 +52,7 @@ export default function ProductDetailPage() {
           className="inline-flex items-center gap-2 font-paragraph text-base text-primary hover:opacity-70 transition-opacity mb-8"
         >
           <ArrowLeft className="w-5 h-5" />
-          Back to Products
+          Volver a Productos
         </Link>
 
         <div className="min-h-[600px]">
@@ -63,16 +63,16 @@ export default function ProductDetailPage() {
           ) : !product ? (
             <div className="text-center py-20">
               <h2 className="font-heading text-3xl text-primary mb-4">
-                Product Not Found
+                Producto No Encontrado
               </h2>
               <p className="font-paragraph text-base text-primary/60 mb-8">
-                The product you're looking for doesn't exist
+                El producto que buscas no existe
               </p>
               <Link
                 to="/products"
                 className="inline-block px-8 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
               >
-                Browse Products
+                Explorar Productos
               </Link>
             </div>
           ) : (
@@ -110,7 +110,7 @@ export default function ProductDetailPage() {
                   {product.productType && (
                     <div className="flex items-center justify-between">
                       <span className="font-paragraph text-base text-primary/70">
-                        Type
+                        Tipo
                       </span>
                       <span className="font-paragraph text-base text-primary font-semibold">
                         {product.productType}
@@ -130,10 +130,10 @@ export default function ProductDetailPage() {
                   {product.length && (
                     <div className="flex items-center justify-between">
                       <span className="font-paragraph text-base text-primary/70">
-                        Length
+                        Largo
                       </span>
                       <span className="font-paragraph text-base text-primary font-semibold">
-                        {product.length} inches
+                        {product.length} pulgadas
                       </span>
                     </div>
                   )}
@@ -143,7 +143,7 @@ export default function ProductDetailPage() {
                 {product.itemDescription && (
                   <div className="space-y-3">
                     <h2 className="font-heading text-2xl text-primary">
-                      Description
+                      Descripción
                     </h2>
                     <p className="font-paragraph text-base text-primary leading-relaxed">
                       {product.itemDescription}
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
                 {/* Quantity Selector */}
                 <div className="space-y-3">
                   <label className="font-paragraph text-base text-primary font-semibold">
-                    Quantity
+                    Cantidad
                   </label>
                   <div className="flex items-center gap-4">
                     <button
@@ -185,19 +185,19 @@ export default function ProductDetailPage() {
                   disabled={addingItemId === product._id}
                   className="w-full px-8 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                 >
-                  {addingItemId === product._id ? 'Adding to Cart...' : 'Add to Cart'}
+                  {addingItemId === product._id ? 'Agregando al Carrito...' : 'Agregar al Carrito'}
                 </button>
 
                 {/* Additional Info */}
                 <div className="space-y-3 pt-6 border-t border-primary/10">
                   <p className="font-paragraph text-sm text-primary/70">
-                    Premium quality guaranteed
+                    Calidad premium garantizada
                   </p>
                   <p className="font-paragraph text-sm text-primary/70">
-                    Free shipping on orders over $100
+                    Envío gratis en pedidos superiores a $100
                   </p>
                   <p className="font-paragraph text-sm text-primary/70">
-                    30-day return policy
+                    Política de devolución de 30 días
                   </p>
                 </div>
               </div>

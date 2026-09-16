@@ -92,10 +92,10 @@ export default function ProductsPage() {
         {/* Page Header */}
         <div className="mb-12 text-center">
           <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
-            Our Collection
+            Nuestra Colección
           </h1>
           <p className="font-paragraph text-lg text-primary max-w-2xl mx-auto">
-            Browse our premium selection of hair extensions and wigs
+            Explora nuestra selección premium de extensiones de cabello y pelucas
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export default function ProductsPage() {
             className="flex items-center gap-2 px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 mb-6"
           >
             <Filter className="w-5 h-5" />
-            {showFilters ? 'Hide Filters' : 'Show Filters'}
+            {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
           </button>
 
           {showFilters && (
@@ -119,7 +119,7 @@ export default function ProductsPage() {
               {/* Product Type Filter */}
               <div className="space-y-3">
                 <label className="font-paragraph text-base text-primary font-semibold">
-                  Product Type
+                  Tipo de Producto
                 </label>
                 <select
                   value={selectedType}
@@ -128,7 +128,7 @@ export default function ProductsPage() {
                 >
                   {productTypes.map(type => (
                     <option key={type} value={type}>
-                      {type === 'all' ? 'All Types' : type}
+                      {type === 'all' ? 'Todos los Tipos' : type}
                     </option>
                   ))}
                 </select>
@@ -146,7 +146,7 @@ export default function ProductsPage() {
                 >
                   {colors.map(color => (
                     <option key={color} value={color}>
-                      {color === 'all' ? 'All Colors' : color}
+                      {color === 'all' ? 'Todos los Colores' : color}
                     </option>
                   ))}
                 </select>
@@ -155,7 +155,7 @@ export default function ProductsPage() {
               {/* Store Filter */}
               <div className="space-y-3">
                 <label className="font-paragraph text-base text-primary font-semibold">
-                  Store
+                  Tienda
                 </label>
                 <select
                   value={selectedStore}
@@ -164,7 +164,7 @@ export default function ProductsPage() {
                 >
                   {stores.map(store => (
                     <option key={store} value={store}>
-                      {store === 'all' ? 'All Stores' : store}
+                      {store === 'all' ? 'Todas las Tiendas' : store}
                     </option>
                   ))}
                 </select>
@@ -180,7 +180,7 @@ export default function ProductsPage() {
               {filteredProducts.length === 0 ? (
                 <div className="text-center py-20">
                   <p className="font-paragraph text-lg text-primary/60">
-                    No products found matching your filters
+                    No se encontraron productos que coincidan con tus filtros
                   </p>
                 </div>
               ) : (
@@ -248,7 +248,7 @@ export default function ProductsPage() {
                           disabled={addingItemId === product._id}
                           className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                         >
-                          {addingItemId === product._id ? 'Adding...' : 'Add to Cart'}
+                          {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
                         </button>
                       </div>
                     </motion.div>
@@ -264,7 +264,7 @@ export default function ProductsPage() {
                     disabled={isLoading}
                     className="px-10 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                   >
-                    {isLoading ? 'Loading...' : 'Load More'}
+                    {isLoading ? 'Cargando...' : 'Cargar Más'}
                   </button>
                 </div>
               )}
