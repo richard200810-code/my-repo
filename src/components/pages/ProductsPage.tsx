@@ -24,6 +24,20 @@ export default function ProductsPage() {
 
   const LIMIT = 12;
 
+  // Predefined application methods (Aplicación)
+  const PREDEFINED_APPLICATIONS = [
+    'TAPE INVISIBLE',
+    'TAPE NORMAL',
+    'K-TIP',
+    'I-TIP',
+    'FUSION',
+    'CLIP-IN',
+    'SEW-IN'
+  ];
+
+  // Predefined lengths from 14 to 30 inches
+  const PREDEFINED_LENGTHS = Array.from({ length: 17 }, (_, i) => (14 + i).toString());
+
   useEffect(() => {
     loadProducts();
   }, [skip]);
@@ -78,8 +92,8 @@ export default function ProductsPage() {
   };
 
   // Extract unique values for filters
-  const applicationMethods = ['all', ...Array.from(new Set(products.map(p => p.applicationMethod).filter(Boolean)))];
-  const lengths = ['all', ...Array.from(new Set(products.map(p => p.length?.toString()).filter(Boolean)))];
+  const applicationMethods = ['all', ...PREDEFINED_APPLICATIONS];
+  const lengths = ['all', ...PREDEFINED_LENGTHS];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
 
   return (
@@ -101,31 +115,25 @@ export default function ProductsPage() {
         <div className="flex gap-8">
           {/* Vertical Sidebar Filter */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24 space-y-8 p-6 border border-primary/10 bg-white">
+            <div className="sticky top-24 space-y-8 p-6 border border-primary/10 bg-background">
               <h2 className="font-heading text-2xl text-primary">Filtros</h2>
 
-              {/* Application Method Filter */}
+              {/* Application Method Filter (Aplicación) */}
               <div className="space-y-4">
                 <h3 className="font-paragraph text-base text-primary font-semibold">
-                  Tipo de Unión
+                  Aplicación
                 </h3>
-                <div className="space-y-3">
+                <select
+                  value={selectedApplicationMethod}
+                  onChange={(e) => setSelectedApplicationMethod(e.target.value)}
+                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                >
                   {applicationMethods.map(method => (
-                    <label key={method} className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="applicationMethod"
-                        value={method}
-                        checked={selectedApplicationMethod === method}
-                        onChange={(e) => setSelectedApplicationMethod(e.target.value)}
-                        className="w-4 h-4 accent-primary"
-                      />
-                      <span className="font-paragraph text-sm text-primary">
-                        {method === 'all' ? 'Todos' : method}
-                      </span>
-                    </label>
+                    <option key={method} value={method}>
+                      {method === 'all' ? 'Todas las Aplicaciones' : method}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Length Filter */}
@@ -133,23 +141,17 @@ export default function ProductsPage() {
                 <h3 className="font-paragraph text-base text-primary font-semibold">
                   Longitud
                 </h3>
-                <div className="space-y-3">
+                <select
+                  value={selectedLength}
+                  onChange={(e) => setSelectedLength(e.target.value)}
+                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                >
                   {lengths.map(length => (
-                    <label key={length} className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="length"
-                        value={length}
-                        checked={selectedLength === length}
-                        onChange={(e) => setSelectedLength(e.target.value)}
-                        className="w-4 h-4 accent-primary"
-                      />
-                      <span className="font-paragraph text-sm text-primary">
-                        {length === 'all' ? 'Todas' : `${length}"`}
-                      </span>
-                    </label>
+                    <option key={length} value={length}>
+                      {length === 'all' ? 'Todas las Longitudes' : `${length}"`}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Color Filter */}
@@ -157,23 +159,17 @@ export default function ProductsPage() {
                 <h3 className="font-paragraph text-base text-primary font-semibold">
                   Color
                 </h3>
-                <div className="space-y-3">
+                <select
+                  value={selectedColor}
+                  onChange={(e) => setSelectedColor(e.target.value)}
+                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                >
                   {colors.map(color => (
-                    <label key={color} className="flex items-center gap-3 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="color"
-                        value={color}
-                        checked={selectedColor === color}
-                        onChange={(e) => setSelectedColor(e.target.value)}
-                        className="w-4 h-4 accent-primary"
-                      />
-                      <span className="font-paragraph text-sm text-primary">
-                        {color === 'all' ? 'Todos' : color}
-                      </span>
-                    </label>
+                    <option key={color} value={color}>
+                      {color === 'all' ? 'Todos los Colores' : color}
+                    </option>
                   ))}
-                </div>
+                </select>
               </div>
 
               {/* Reset Filters Button */}
