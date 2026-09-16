@@ -40,16 +40,11 @@ export default function StoresPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
       <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
         {/* Page Header */}
         <div className="mb-16 text-center">
-          <h1 className="font-heading text-5xl md:text-7xl text-primary mb-6">
-            Shopping
-          </h1>
-          <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Descubre extensiones de cabello premium y pelucas de nuestra colección seleccionada
-          </p>
+          <h1 className="font-heading text-5xl md:text-7xl text-primary mb-6">De Compras</h1>
+          <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">Seleciones</p>
         </div>
 
         {/* Stores Grid */}
@@ -132,7 +127,6 @@ export default function StoresPage() {
           )}
         </div>
       </main>
-
       <Footer />
     </div>
   );
