@@ -21,9 +21,7 @@ export default function Header() {
         <div className="max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="font-heading text-2xl md:text-3xl text-primary">
-              Luxe Hair
-            </Link>
+            <Link to="/" className="font-heading text-2xl md:text-3xl text-primary">Lux Hair</Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-12">
