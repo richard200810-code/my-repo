@@ -72,9 +72,9 @@ export default function ProductsPage() {
       {/* Hero Section */}
       <section className="w-full bg-gradient-to-b from-background/30 to-white">
         <div className="max-w-[100rem] mx-auto px-6 py-20">
-          <h1 className="font-heading text-6xl md:text-7xl text-primary mb-4">Shop Hair Extensions</h1>
+          <h1 className="font-heading text-6xl md:text-7xl text-primary mb-4">Tienda de Extensiones de Cabello</h1>
           <p className="font-paragraph text-xl text-secondary/70 max-w-3xl">
-            Discover our premium collection of hair extensions, wigs, and hairpieces. From tape-in to K-tip applications, find the perfect match for your style.
+            Descubre nuestra colección premium de extensiones de cabello, pelucas y piezas de cabello. Desde aplicaciones Tape-in hasta K-tip, encuentra el ajuste perfecto para tu estilo.
           </p>
         </div>
       </section>
@@ -85,14 +85,14 @@ export default function ProductsPage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12 pb-6 border-b border-background">
           <div className="flex items-center gap-4">
             <span className="font-paragraph text-secondary/70">
-              {sortedProducts.length} {sortedProducts.length === 1 ? 'product' : 'products'}
+              {sortedProducts.length} {sortedProducts.length === 1 ? 'producto' : 'productos'}
             </span>
             {hasActiveFilters && (
               <button
                 onClick={() => setFilters({ type: '', applicationMethod: '', texture: '' })}
                 className="font-paragraph text-sm text-primary hover:text-secondary transition-colors underline"
               >
-                Clear filters
+                Limpiar filtros
               </button>
             )}
           </div>
@@ -105,10 +105,10 @@ export default function ProductsPage() {
                 onChange={(e) => setSortBy(e.target.value)}
                 className="appearance-none px-4 py-2 border border-background rounded-lg font-paragraph text-secondary bg-white cursor-pointer pr-10"
               >
-                <option value="featured">Featured</option>
-                <option value="newest">Newest</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
+                <option value="featured">Destacado</option>
+                <option value="newest">Más Nuevo</option>
+                <option value="price-low">Precio: Menor a Mayor</option>
+                <option value="price-high">Precio: Mayor a Menor</option>
               </select>
               <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-secondary pointer-events-none" />
             </div>
@@ -118,7 +118,7 @@ export default function ProductsPage() {
               onClick={() => setShowFilters(!showFilters)}
               className="md:hidden px-4 py-2 border border-background rounded-lg font-paragraph text-secondary hover:bg-background transition-colors"
             >
-              {showFilters ? 'Hide Filters' : 'Show Filters'}
+              {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
             </button>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function ProductsPage() {
             <div className="space-y-8 sticky top-24">
               {/* Hair Type Filter */}
               <div>
-                <h3 className="font-heading text-lg text-primary mb-4">Hair Type</h3>
+                <h3 className="font-heading text-lg text-primary mb-4">Tipo de Cabello</h3>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <input
@@ -140,7 +140,7 @@ export default function ProductsPage() {
                       onChange={() => setFilters({ ...filters, type: '' })}
                       className="w-4 h-4"
                     />
-                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">All Types</span>
+                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">Todos los Tipos</span>
                   </label>
                   {uniqueTypes.map((type) => (
                     <label key={type} className="flex items-center gap-3 cursor-pointer group">
@@ -159,7 +159,7 @@ export default function ProductsPage() {
 
               {/* Application Method Filter */}
               <div className="border-t border-background pt-8">
-                <h3 className="font-heading text-lg text-primary mb-4">Application</h3>
+                <h3 className="font-heading text-lg text-primary mb-4">Aplicación</h3>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <input
@@ -169,7 +169,7 @@ export default function ProductsPage() {
                       onChange={() => setFilters({ ...filters, applicationMethod: '' })}
                       className="w-4 h-4"
                     />
-                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">All Methods</span>
+                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">Todos los Métodos</span>
                   </label>
                   {uniqueMethods.map((method) => (
                     <label key={method} className="flex items-center gap-3 cursor-pointer group">
@@ -188,7 +188,7 @@ export default function ProductsPage() {
 
               {/* Texture Filter */}
               <div className="border-t border-background pt-8">
-                <h3 className="font-heading text-lg text-primary mb-4">Texture</h3>
+                <h3 className="font-heading text-lg text-primary mb-4">Textura</h3>
                 <div className="space-y-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <input
@@ -198,7 +198,7 @@ export default function ProductsPage() {
                       onChange={() => setFilters({ ...filters, texture: '' })}
                       className="w-4 h-4"
                     />
-                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">All Textures</span>
+                    <span className="font-paragraph text-secondary group-hover:text-primary transition-colors">Todas las Texturas</span>
                   </label>
                   {uniqueTextures.map((texture) => (
                     <label key={texture} className="flex items-center gap-3 cursor-pointer group">
@@ -238,7 +238,7 @@ export default function ProductsPage() {
                       <div className="bg-background aspect-square relative">
                         <Image
                           src={product.itemImage || 'https://static.wixstatic.com/media/37e681_0db7ce50d12949b7917c01750c78880c~mv2.png?originWidth=384&originHeight=384'}
-                          alt={product.itemName || 'Product'}
+                          alt={product.itemName || 'Producto'}
                           width={400}
                           height={400}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -283,7 +283,7 @@ export default function ProductsPage() {
                           disabled={addingItemId === product._id}
                           className="px-3 py-2 bg-primary text-primary-foreground font-paragraph text-sm font-semibold rounded-lg hover:bg-secondary transition-colors disabled:opacity-50"
                         >
-                          {addingItemId === product._id ? 'Adding...' : 'Add'}
+                          {addingItemId === product._id ? 'Agregando...' : 'Agregar'}
                         </button>
                       </div>
                     </div>
@@ -293,13 +293,13 @@ export default function ProductsPage() {
             ) : (
               <div className="text-center py-20">
                 <p className="font-paragraph text-lg text-secondary/70 mb-8">
-                  No products found matching your filters
+                  No se encontraron productos que coincidan con tus filtros
                 </p>
                 <button
                   onClick={() => setFilters({ type: '', applicationMethod: '', texture: '' })}
                   className="px-6 py-3 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors"
                 >
-                  Clear Filters
+                  Limpiar Filtros
                 </button>
               </div>
             )}

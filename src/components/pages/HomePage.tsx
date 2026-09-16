@@ -23,19 +23,19 @@ export default function HomePage() {
                 Luxe Strands
               </h1>
               <p className="font-paragraph text-xl text-secondary/80">
-                Premium hair extensions crafted for elegance and confidence
+                Extensiones de cabello premium elaboradas para elegancia y confianza
               </p>
             </div>
             
             <p className="font-paragraph text-lg text-secondary/70 leading-relaxed max-w-md">
-              Experience the transformation with our curated collection of human and premium synthetic hair extensions. Each strand is selected for quality, durability, and natural beauty.
+              Experimenta la transformación con nuestra colección seleccionada de extensiones de cabello humano y sintético premium. Cada hebra se selecciona por calidad, durabilidad y belleza natural.
             </p>
             
             <Link
               to="/products"
               className="inline-block px-8 py-4 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors duration-300"
             >
-              Shop Collection
+              Ver Colección
             </Link>
           </motion.div>
           
@@ -48,7 +48,7 @@ export default function HomePage() {
             <div className="bg-background rounded-lg overflow-hidden aspect-square">
               <Image
                 src="https://static.wixstatic.com/media/37e681_4272dcd4eeb3410a96669df2b1b3418f~mv2.png?originWidth=576&originHeight=576"
-                alt="Premium hair extensions showcase"
+                alt="Escaparate de extensiones de cabello premium"
                 width={600}
                 height={600}
                 className="w-full h-full object-cover"
@@ -61,25 +61,25 @@ export default function HomePage() {
       {/* Why Choose Us Section */}
       <section className="w-full max-w-[100rem] mx-auto px-6 py-20 bg-secondary/5">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-5xl text-primary mb-4">Why Luxe Strands</h2>
+          <h2 className="font-heading text-5xl text-primary mb-4">Por Qué Luxe Strands</h2>
           <p className="font-paragraph text-lg text-secondary/70 max-w-2xl mx-auto">
-            We're committed to providing the highest quality hair extensions with exceptional customer service
+            Nos comprometemos a proporcionar extensiones de cabello de la más alta calidad con servicio al cliente excepcional
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              title: "Premium Quality",
-              description: "100% human hair and premium synthetic options, carefully selected for durability and natural appearance"
+              title: "Calidad Premium",
+              description: "Cabello 100% humano y opciones sintéticas premium, cuidadosamente seleccionadas por durabilidad y apariencia natural"
             },
             {
-              title: "Expert Application",
-              description: "Multiple application methods including Tape-in, K-tip, and Clip-in for your convenience"
+              title: "Aplicación Experta",
+              description: "Múltiples métodos de aplicación incluyendo Tape-in, K-tip y Clip-in para tu conveniencia"
             },
             {
-              title: "Lifetime Support",
-              description: "Detailed care instructions and customer support to ensure your extensions last"
+              title: "Soporte de por Vida",
+              description: "Instrucciones detalladas de cuidado y soporte al cliente para asegurar que tus extensiones duren"
             }
           ].map((item, idx) => (
             <motion.div
@@ -100,28 +100,28 @@ export default function HomePage() {
       {/* Featured Products Preview */}
       <section className="w-full max-w-[100rem] mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-5xl text-primary mb-4">Featured Collection</h2>
+          <h2 className="font-heading text-5xl text-primary mb-4">Colección Destacada</h2>
           <p className="font-paragraph text-lg text-secondary/70">
-            Discover our most popular hair extension styles
+            Descubre nuestros estilos de extensiones de cabello más populares
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              name: "Tape-In Extensions",
+              name: "Extensiones Tape-In",
               image: "https://static.wixstatic.com/media/37e681_a173bdda04d647dc8dd59b1b85f95d5f~mv2.png?originWidth=384&originHeight=384",
-              description: "Seamless, lightweight application method"
+              description: "Método de aplicación sin costuras y ligero"
             },
             {
-              name: "K-Tip Extensions",
+              name: "Extensiones K-Tip",
               image: "https://static.wixstatic.com/media/37e681_55613b01249949c7af094b2a82828985~mv2.png?originWidth=384&originHeight=384",
-              description: "Durable keratin-bonded extensions"
+              description: "Extensiones duraderas unidas con queratina"
             },
             {
-              name: "Clip-In Extensions",
+              name: "Extensiones Clip-In",
               image: "https://static.wixstatic.com/media/37e681_247244dd6d8240159aca55e91e8cab7a~mv2.png?originWidth=384&originHeight=384",
-              description: "Temporary, damage-free styling"
+              description: "Peinado temporal sin daño"
             }
           ].map((item, idx) => (
             <motion.div
@@ -152,7 +152,7 @@ export default function HomePage() {
             to="/products"
             className="inline-block px-8 py-4 border-2 border-primary text-primary font-paragraph font-semibold rounded-lg hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
           >
-            View All Products
+            Ver Todos los Productos
           </Link>
         </div>
       </section>
@@ -160,15 +160,15 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="w-full max-w-[100rem] mx-auto px-6 py-20 bg-primary text-primary-foreground rounded-lg">
         <div className="text-center space-y-6">
-          <h2 className="font-heading text-5xl">Ready to Transform?</h2>
+          <h2 className="font-heading text-5xl">¿Listo para Transformarte?</h2>
           <p className="font-paragraph text-lg max-w-2xl mx-auto opacity-90">
-            Join thousands of satisfied customers who've discovered their confidence with Luxe Strands
+            Únete a miles de clientes satisfechos que han descubierto su confianza con Luxe Strands
           </p>
           <Link
             to="/products"
             className="inline-block px-8 py-4 bg-primary-foreground text-primary font-paragraph font-semibold rounded-lg hover:bg-background transition-colors duration-300"
           >
-            Start Shopping
+            Comenzar a Comprar
           </Link>
         </div>
       </section>

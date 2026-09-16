@@ -25,19 +25,37 @@ export default function Header() {
               to="/"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Home
+              Inicio
             </Link>
             <Link
               to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Shop
+              Tienda
             </Link>
-            <Link
-              to="/stores"
+            <a
+              href="#"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Stores
+              Herramientas y Accesorios
+            </a>
+            <a
+              href="#"
+              className="font-paragraph text-secondary hover:text-primary transition-colors"
+            >
+              Academia
+            </a>
+            <a
+              href="#"
+              className="font-paragraph text-secondary hover:text-primary transition-colors"
+            >
+              Guía de Cabello
+            </a>
+            <Link
+              to="/contact"
+              className="font-paragraph text-secondary hover:text-primary transition-colors"
+            >
+              Contacto
             </Link>
           </nav>
 
@@ -80,21 +98,42 @@ export default function Header() {
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                Inicio
               </Link>
               <Link
                 to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Shop
+                Tienda
               </Link>
-              <Link
-                to="/stores"
+              <a
+                href="#"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Stores
+                Herramientas y Accesorios
+              </a>
+              <a
+                href="#"
+                className="block font-paragraph text-secondary hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Academia
+              </a>
+              <a
+                href="#"
+                className="block font-paragraph text-secondary hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Guía de Cabello
+              </a>
+              <Link
+                to="/contact"
+                className="block font-paragraph text-secondary hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contacto
               </Link>
             </div>
           </nav>

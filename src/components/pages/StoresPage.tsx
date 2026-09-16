@@ -34,9 +34,9 @@ export default function StoresPage() {
 
       {/* Page Header */}
       <section className="w-full max-w-[100rem] mx-auto px-6 py-16">
-        <h1 className="font-heading text-5xl md:text-6xl text-primary mb-4">Our Stores</h1>
+        <h1 className="font-heading text-5xl md:text-6xl text-primary mb-4">Nuestras Tiendas</h1>
         <p className="font-paragraph text-lg text-secondary/70 max-w-2xl">
-          Visit our authorized retailers to experience our premium hair extensions in person
+          Visita nuestros minoristas autorizados para experimentar nuestras extensiones de cabello premium en persona
         </p>
       </section>
 
@@ -61,7 +61,7 @@ export default function StoresPage() {
                     <div className="bg-background rounded-t-lg overflow-hidden aspect-video">
                       <Image
                         src={store.storeImage || 'https://static.wixstatic.com/media/37e681_4da36709d81f4b828dda9dd32b6691b0~mv2.png?originWidth=384&originHeight=256'}
-                        alt={store.storeName || 'Store'}
+                        alt={store.storeName || 'Tienda'}
                         width={400}
                         height={300}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -81,19 +81,19 @@ export default function StoresPage() {
                       <div className="space-y-2 border-t border-background pt-4">
                         {store.ownerContactName && (
                           <p className="font-paragraph text-sm text-secondary">
-                            <span className="text-secondary/60">Manager:</span> {store.ownerContactName}
+                            <span className="text-secondary/60">Gerente:</span> {store.ownerContactName}
                           </p>
                         )}
                         {store.ownerContactEmail && (
                           <p className="font-paragraph text-sm text-secondary">
-                            <span className="text-secondary/60">Email:</span> {store.ownerContactEmail}
+                            <span className="text-secondary/60">Correo:</span> {store.ownerContactEmail}
                           </p>
                         )}
                       </div>
 
                       {/* View Button */}
                       <button className="mt-4 w-full px-4 py-3 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors">
-                        View Store
+                        Ver Tienda
                       </button>
                     </div>
                   </div>
@@ -104,13 +104,13 @@ export default function StoresPage() {
         ) : (
           <div className="text-center py-20">
             <p className="font-paragraph text-lg text-secondary/70 mb-8">
-              No stores available at this time
+              No hay tiendas disponibles en este momento
             </p>
             <Link
               to="/products"
               className="inline-block px-8 py-4 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors"
             >
-              Shop Online
+              Comprar en Línea
             </Link>
           </div>
         )}

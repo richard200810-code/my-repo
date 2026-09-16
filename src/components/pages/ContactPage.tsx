@@ -50,9 +50,9 @@ export default function ContactPage() {
             className="space-y-8"
           >
             <div>
-              <h2 className="font-heading text-3xl text-primary mb-6">Contact Information</h2>
+              <h2 className="font-heading text-3xl text-primary mb-6">Información de Contacto</h2>
               <p className="font-paragraph text-secondary/70 mb-8">
-                Whether you have questions about our hair extensions, need styling advice, or want to place a bulk order, our team is ready to assist you.
+                Ya sea que tengas preguntas sobre nuestras extensiones de cabello, necesites consejos de estilo o desees hacer un pedido al por mayor, nuestro equipo está listo para ayudarte.
               </p>
             </div>
 
@@ -65,12 +65,12 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Email</h3>
+                  <h3 className="font-heading text-lg text-primary mb-1">Correo Electrónico</h3>
                   <a href="mailto:hello@luxestrands.com" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
                     hello@luxestrands.com
                   </a>
                   <p className="font-paragraph text-sm text-secondary/50 mt-1">
-                    We'll respond within 24 hours
+                    Responderemos dentro de 24 horas
                   </p>
                 </div>
               </div>
@@ -82,12 +82,12 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Phone</h3>
+                  <h3 className="font-heading text-lg text-primary mb-1">Teléfono</h3>
                   <a href="tel:+1234567890" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
                     +1 (234) 567-890
                   </a>
                   <p className="font-paragraph text-sm text-secondary/50 mt-1">
-                    Mon - Fri, 9am - 6pm EST
+                    Lun - Vie, 9am - 6pm EST
                   </p>
                 </div>
               </div>
@@ -99,11 +99,11 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Address</h3>
+                  <h3 className="font-heading text-lg text-primary mb-1">Dirección</h3>
                   <p className="font-paragraph text-secondary/70">
                     123 Fashion Avenue<br />
                     New York, NY 10001<br />
-                    United States
+                    Estados Unidos
                   </p>
                 </div>
               </div>
@@ -111,26 +111,26 @@ export default function ContactPage() {
 
             {/* FAQ Quick Links */}
             <div className="bg-background/20 rounded-lg p-6">
-              <h3 className="font-heading text-lg text-primary mb-4">Quick Help</h3>
+              <h3 className="font-heading text-lg text-primary mb-4">Ayuda Rápida</h3>
               <ul className="space-y-2">
                 <li>
                   <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Shipping & Returns
+                    → Envío y Devoluciones
                   </a>
                 </li>
                 <li>
                   <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Hair Care Guide
+                    → Guía de Cuidado del Cabello
                   </a>
                 </li>
                 <li>
                   <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Application Methods
+                    → Métodos de Aplicación
                   </a>
                 </li>
                 <li>
                   <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Bulk Orders
+                    → Pedidos al Por Mayor
                   </a>
                 </li>
               </ul>
@@ -146,7 +146,7 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit} className="bg-background/10 rounded-lg p-8 space-y-6">
               <div>
                 <label htmlFor="name" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Full Name
+                  Nombre Completo
                 </label>
                 <input
                   type="text"
@@ -156,13 +156,13 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Your name"
+                  placeholder="Tu nombre"
                 />
               </div>
 
               <div>
                 <label htmlFor="email" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Email Address
+                  Correo Electrónico
                 </label>
                 <input
                   type="email"
@@ -172,13 +172,13 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="your@email.com"
+                  placeholder="tu@correo.com"
                 />
               </div>
 
               <div>
                 <label htmlFor="subject" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Subject
+                  Asunto
                 </label>
                 <input
                   type="text"
@@ -188,13 +188,13 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="How can we help?"
+                  placeholder="¿Cómo podemos ayudarte?"
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Message
+                  Mensaje
                 </label>
                 <textarea
                   id="message"
@@ -204,7 +204,7 @@ export default function ContactPage() {
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Tell us more about your inquiry..."
+                  placeholder="Cuéntanos más sobre tu consulta..."
                 />
               </div>
 
@@ -215,7 +215,7 @@ export default function ContactPage() {
                   className="p-4 bg-green-50 border border-green-200 rounded-lg"
                 >
                   <p className="font-paragraph text-green-800">
-                    ✓ Thank you! We've received your message and will get back to you soon.
+                    ✓ ¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto pronto.
                   </p>
                 </motion.div>
               )}
@@ -225,7 +225,7 @@ export default function ContactPage() {
                 className="w-full px-6 py-4 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors flex items-center justify-center gap-2"
               >
                 <Send className="w-5 h-5" />
-                Send Message
+                Enviar Mensaje
               </button>
             </form>
           </motion.div>
