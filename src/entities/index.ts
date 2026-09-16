@@ -12,8 +12,20 @@ export interface HairExtensionsandWigs {
   _id: string;
   _createdDate?: Date;
   _updatedDate?: Date;
+  /** @wixFieldType number */
+  weightInGrams?: number;
+  /** @wixFieldType text */
+  careInstructions?: string;
+  /** @wixFieldType number */
+  quantityInPack?: number;
+  /** @wixFieldType text */
+  applicationMethod?: string;
   /** @wixFieldType text */
   storeId?: string;
+  /** @wixFieldType text */
+  texture?: string;
+  /** @wixFieldType text */
+  hairType?: string;
   /** @wixFieldType text */
   itemName?: string;
   /** @wixFieldType number */
