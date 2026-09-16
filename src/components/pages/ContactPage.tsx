@@ -39,7 +39,6 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
       <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
         {/* Page Header */}
         <motion.div
@@ -83,9 +82,7 @@ export default function ContactPage() {
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
                     Email
                   </h3>
-                  <p className="font-paragraph text-base text-primary/70">
-                    info@luxehair.com
-                  </p>
+                  <p className="font-paragraph text-base text-primary/70">in.com</p>
                 </div>
               </div>
 
@@ -98,9 +95,7 @@ export default function ContactPage() {
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
                     Phone
                   </h3>
-                  <p className="font-paragraph text-base text-primary/70">
-                    +1 (555) 123-4567
-                  </p>
+                  <p className="font-paragraph text-base text-primary/70">+52 (55) 3955 5886</p>
                 </div>
               </div>
 
@@ -240,7 +235,6 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </main>
-
       <Footer />
     </div>
   );

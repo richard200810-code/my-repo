@@ -51,21 +51,15 @@ export default function Footer() {
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
-                <span className="font-paragraph text-base text-secondary-foreground/80">
-                  info@luxehair.com
-                </span>
+                <span className="font-paragraph text-base text-secondary-foreground/80">richard200810@gmail.com</span>
               </div>
               <div className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
-                <span className="font-paragraph text-base text-secondary-foreground/80">
-                  +1 (555) 123-4567
-                </span>
+                <span className="font-paragraph text-base text-secondary-foreground/80">+52 (55) 3955 5886</span>
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
-                <span className="font-paragraph text-base text-secondary-foreground/80">
-                  123 Beauty Avenue, Style City
-                </span>
+                <span className="font-paragraph text-base text-secondary-foreground/80">Polanco CDMX Mexico</span>
               </div>
             </div>
           </div>
