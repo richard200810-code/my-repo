@@ -2,39 +2,53 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
+import { HairExtensionsandWigs } from '@/entities';
+import { useCart, useCurrency, formatPrice, DEFAULT_CURRENCY } from '@/integrations';
 import { Image } from '@/components/ui/image';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { MapPin, Mail, User } from 'lucide-react';
-
-interface Store {
-  _id: string;
-  storeName?: string;
-  description?: string;
-  storeImage?: string;
-  ownerContactName?: string;
-  ownerContactEmail?: string;
-}
 
 export default function StoresPage() {
-  const [stores, setStores] = useState<Store[]>([]);
+  const [products, setProducts] = useState<HairExtensionsandWigs[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasNext, setHasNext] = useState(false);
+  const [skip, setSkip] = useState(0);
+  
+  const { addingItemId, actions } = useCart();
+  const { currency } = useCurrency();
+
+  const LIMIT = 12;
 
   useEffect(() => {
-    loadStores();
-  }, []);
+    loadProducts();
+  }, [skip]);
 
-  const loadStores = async () => {
+  const loadProducts = async () => {
     try {
       setIsLoading(true);
-      const result = await BaseCrudService.getAll<Store>('stores', {});
-      setStores(result.items);
+      const result = await BaseCrudService.getAll<HairExtensionsandWigs>(
+        'hairextensions',
+        {},
+        { limit: LIMIT, skip }
+      );
+      
+      if (skip === 0) {
+        setProducts(result.items);
+      } else {
+        setProducts(prev => [...prev, ...result.items]);
+      }
+      
+      setHasNext(result.hasNext);
     } catch (error) {
-      console.error('Failed to load stores:', error);
+      console.error('Failed to load products:', error);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const loadMore = () => {
+    setSkip(prev => prev + LIMIT);
   };
 
   return (
@@ -42,93 +56,119 @@ export default function StoresPage() {
       <Header />
 
       <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
-        {/* Page Header */}
-        <div className="mb-16 text-center">
-          <h1 className="font-heading text-5xl md:text-7xl text-primary mb-6">
-            Nuestros Vendedores
-          </h1>
-          <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Descubre extensiones de cabello premium y pelucas de nuestra selección curada de vendedores
-          </p>
+        {/* Hero Section */}
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h1 className="font-heading text-6xl md:text-7xl text-primary mb-6">
+              Colección Premium
+            </h1>
+            <p className="font-paragraph text-lg text-primary/70 max-w-3xl mx-auto mb-8">
+              Descubre nuestra exclusiva colección de extensiones de cabello de alta calidad. Desde tape invisible hasta I-tip, encontrarás la solución perfecta para tu cabello.
+            </p>
+          </motion.div>
         </div>
 
-        {/* Stores Grid */}
+        {/* Products Grid */}
         <div className="min-h-[600px]">
-          {isLoading ? (
-            <div className="flex justify-center items-center py-20">
-              <LoadingSpinner />
-            </div>
-          ) : stores.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="font-paragraph text-lg text-primary/60">
-                No hay tiendas disponibles en este momento
-              </p>
-            </div>
-          ) : (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {stores.map((store, index) => (
+          {isLoading && skip === 0 ? null : (
+            <>
+              {products.length === 0 ? (
+                <div className="text-center py-20">
+                  <p className="font-paragraph text-lg text-primary/60">
+                    No hay productos disponibles en este momento
+                  </p>
+                </div>
+              ) : (
                 <motion.div
-                  key={store._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="group"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
                 >
-                  <Link to={`/stores/${store._id}`} className="block h-full">
-                    <div className="space-y-4 h-full flex flex-col">
-                      {/* Store Image */}
-                      <div className="aspect-[4/3] overflow-hidden mb-4">
-                        <Image
-                          src={store.storeImage || 'https://static.wixstatic.com/media/37e681_222d12ae19904ef780cfab596ce9a09d~mv2.png?originWidth=384&originHeight=256'}
-                          alt={store.storeName || 'Store'}
-                          width={400}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
+                  {products.map((product, index) => (
+                    <motion.div
+                      key={product._id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.05 }}
+                      className="group space-y-4"
+                    >
+                      {/* Product Image */}
+                      <Link to={`/products/${product._id}`} className="block">
+                        <div className="aspect-[3/4] overflow-hidden mb-4">
+                          <Image
+                            src={product.itemImage || 'https://static.wixstatic.com/media/37e681_9e787a2481d1449eac415e51fe35f9ff~mv2.png?originWidth=384&originHeight=512'}
+                            alt={product.itemName || 'Product'}
+                            width={400}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      </Link>
 
-                      {/* Store Info */}
-                      <div className="flex-1 flex flex-col">
-                        <h3 className="font-heading text-2xl text-primary mb-2 group-hover:opacity-70 transition-opacity">
-                          {store.storeName}
-                        </h3>
+                      {/* Product Info */}
+                      <div className="space-y-2">
+                        <Link to={`/products/${product._id}`}>
+                          <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
+                            {product.itemName}
+                          </h3>
+                        </Link>
                         
-                        <p className="font-paragraph text-base text-primary/70 mb-4 flex-1">
-                          {store.description}
-                        </p>
-
-                        {/* Contact Info */}
-                        <div className="space-y-2 text-sm font-paragraph text-primary/60">
-                          {store.ownerContactName && (
-                            <div className="flex items-center gap-2">
-                              <User className="w-4 h-4" />
-                              <span>{store.ownerContactName}</span>
-                            </div>
+                        <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
+                          {product.productType && <span>{product.productType}</span>}
+                          {product.color && (
+                            <>
+                              <span>•</span>
+                              <span>{product.color}</span>
+                            </>
                           )}
-                          {store.ownerContactEmail && (
-                            <div className="flex items-center gap-2">
-                              <Mail className="w-4 h-4" />
-                              <span className="truncate">{store.ownerContactEmail}</span>
-                            </div>
+                          {product.length && (
+                            <>
+                              <span>•</span>
+                              <span>{product.length}"</span>
+                            </>
                           )}
                         </div>
-                      </div>
 
-                      {/* CTA */}
-                      <div className="pt-4 mt-auto">
-                        <button className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                          Ver Tienda
+                        <p className="font-paragraph text-lg text-primary font-semibold">
+                          {formatPrice(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
+                        </p>
+
+                        {/* Add to Cart Button */}
+                        <button
+                          onClick={() => actions.addToCart({
+                            collectionId: 'hairextensions',
+                            itemId: product._id,
+                            quantity: 1
+                          })}
+                          disabled={addingItemId === product._id}
+                          className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                        >
+                          {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
                         </button>
                       </div>
-                    </div>
-                  </Link>
+                    </motion.div>
+                  ))}
                 </motion.div>
-              ))}
-            </motion.div>
+              )}
+
+              {/* Load More Button */}
+              {hasNext && (
+                <div className="text-center">
+                  <button
+                    onClick={loadMore}
+                    disabled={isLoading}
+                    className="px-10 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                  >
+                    {isLoading ? 'Cargando...' : 'Cargar Más'}
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </main>
