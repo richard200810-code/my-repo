@@ -9,55 +9,55 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="font-heading text-2xl font-bold">Luxe Strands</h3>
             <p className="font-paragraph text-primary-foreground/80">
-              Premium hair extensions for every style and occasion
+              Extensiones de cabello premium para cada estilo y ocasión
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Shop</h4>
+            <h4 className="font-heading text-lg font-semibold">Tienda</h4>
             <nav className="space-y-2">
               <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                All Products
+                Todos los Productos
               </Link>
               <Link to="/stores" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Our Stores
+                Nuestras Tiendas
               </Link>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 Tape-In
-              </a>
+              </Link>
             </nav>
           </div>
 
           {/* Support */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Support</h4>
+            <h4 className="font-heading text-lg font-semibold">Soporte</h4>
             <nav className="space-y-2">
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Care Guide
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                FAQ
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Shipping Info
-              </a>
+              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Guía de Cuidado
+              </Link>
+              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Preguntas Frecuentes
+              </Link>
+              <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Información de Envío
+              </Link>
             </nav>
           </div>
 
           {/* Contact */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">About</h4>
+            <h4 className="font-heading text-lg font-semibold">Acerca de</h4>
             <nav className="space-y-2">
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                About Us
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+              <Link to="/" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Sobre Nosotros
+              </Link>
+              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 Blog
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Careers
-              </a>
+              </Link>
+              <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Carreras
+              </Link>
             </nav>
           </div>
         </div>
@@ -66,18 +66,18 @@ export default function Footer() {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-paragraph text-primary-foreground/70 text-sm">
-              © 2026 Luxe Strands. All rights reserved.
+              © 2026 Luxe Strands. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
-              <a href="#" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Privacy Policy
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Terms of Service
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Shipping Info
-              </a>
+              <Link to="/" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                Política de Privacidad
+              </Link>
+              <Link to="/" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                Términos de Servicio
+              </Link>
+              <Link to="/contact" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                Información de Envío
+              </Link>
             </div>
           </div>
         </div>

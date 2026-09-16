@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
       
       {/* Hero Section */}
@@ -45,7 +45,7 @@ export default function HomePage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="bg-background rounded-lg overflow-hidden aspect-square">
+            <div className="bg-white rounded-lg overflow-hidden aspect-square shadow-sm">
               <Image
                 src="https://static.wixstatic.com/media/37e681_4272dcd4eeb3410a96669df2b1b3418f~mv2.png?originWidth=576&originHeight=576"
                 alt="Escaparate de extensiones de cabello premium"
@@ -59,7 +59,7 @@ export default function HomePage() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 py-20 bg-secondary/5">
+      <section className="w-full max-w-[100rem] mx-auto px-6 py-20">
         <div className="text-center mb-16">
           <h2 className="font-heading text-5xl text-primary mb-4">Por Qué Luxe Strands</h2>
           <p className="font-paragraph text-lg text-secondary/70 max-w-2xl mx-auto">
@@ -88,7 +88,7 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-8 rounded-lg border border-background"
+              className="bg-white p-8 rounded-lg border border-background/30"
             >
               <h3 className="font-heading text-2xl text-primary mb-3">{item.title}</h3>
               <p className="font-paragraph text-secondary/70">{item.description}</p>
@@ -132,7 +132,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               className="group cursor-pointer"
             >
-              <div className="bg-background rounded-lg overflow-hidden mb-4 aspect-square">
+              <div className="bg-white rounded-lg overflow-hidden mb-4 aspect-square">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -166,7 +166,7 @@ export default function HomePage() {
           </p>
           <Link
             to="/products"
-            className="inline-block px-8 py-4 bg-primary-foreground text-primary font-paragraph font-semibold rounded-lg hover:bg-background transition-colors duration-300"
+            className="inline-block px-8 py-4 bg-primary-foreground text-primary font-paragraph font-semibold rounded-lg hover:bg-white transition-colors duration-300"
           >
             Comenzar a Comprar
           </Link>

@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="w-full bg-white border-b border-background sticky top-0 z-40">
+      <header className="w-full bg-background border-b border-background/30 sticky top-0 z-40">
         <div className="max-w-[100rem] mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
@@ -33,24 +33,24 @@ export default function Header() {
             >
               Tienda
             </Link>
-            <a
-              href="#"
+            <Link
+              to="/stores"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
               Herramientas y Accesorios
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
               Academia
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
               Guía de Cabello
-            </a>
+            </Link>
             <Link
               to="/contact"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
@@ -91,7 +91,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden border-t border-background bg-white">
+          <nav className="md:hidden border-t border-background/30 bg-background">
             <div className="max-w-[100rem] mx-auto px-6 py-4 space-y-4">
               <Link
                 to="/"
@@ -107,27 +107,27 @@ export default function Header() {
               >
                 Tienda
               </Link>
-              <a
-                href="#"
+              <Link
+                to="/stores"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Herramientas y Accesorios
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Academia
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Guía de Cabello
-              </a>
+              </Link>
               <Link
                 to="/contact"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
