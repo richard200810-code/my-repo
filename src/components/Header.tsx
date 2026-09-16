@@ -34,10 +34,10 @@ export default function Header() {
               Shop
             </Link>
             <Link
-              to="/contact"
+              to="/stores"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Contact
+              Stores
             </Link>
           </nav>
 
@@ -90,11 +90,11 @@ export default function Header() {
                 Shop
               </Link>
               <Link
-                to="/contact"
+                to="/stores"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                Stores
               </Link>
             </div>
           </nav>

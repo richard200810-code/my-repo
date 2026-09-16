@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Mail, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -21,14 +20,11 @@ export default function Footer() {
               <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 All Products
               </Link>
+              <Link to="/stores" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Our Stores
+              </Link>
               <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 Tape-In
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                K-Tip
-              </a>
-              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Clip-In
               </a>
             </nav>
           </div>
@@ -37,31 +33,32 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-heading text-lg font-semibold">Support</h4>
             <nav className="space-y-2">
-              <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Contact Us
-              </Link>
               <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 Care Guide
               </a>
               <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
                 FAQ
               </a>
+              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Shipping Info
+              </a>
             </nav>
           </div>
 
           {/* Contact */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Contact</h4>
-            <div className="space-y-3">
-              <a href="mailto:hello@luxestrands.com" className="flex items-center gap-2 font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                <Mail className="w-4 h-4" />
-                hello@luxestrands.com
+            <h4 className="font-heading text-lg font-semibold">About</h4>
+            <nav className="space-y-2">
+              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                About Us
               </a>
-              <a href="tel:+1234567890" className="flex items-center gap-2 font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                <Phone className="w-4 h-4" />
-                +1 (234) 567-890
+              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Blog
               </a>
-            </div>
+              <a href="#" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
+                Careers
+              </a>
+            </nav>
           </div>
         </div>
 
