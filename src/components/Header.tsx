@@ -15,7 +15,7 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <div className="font-heading text-3xl text-primary font-bold">
-              Luxe Strands
+              Lux Hair
             </div>
           </Link>
 

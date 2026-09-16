@@ -20,7 +20,7 @@ export default function HomePage() {
           >
             <div>
               <h1 className="font-heading text-6xl md:text-7xl text-primary mb-4 leading-tight">
-                Luxe Strands
+                Lux Hair
               </h1>
               <p className="font-paragraph text-xl text-secondary/80">
                 Extensiones de cabello premium elaboradas para elegancia y confianza
@@ -61,7 +61,7 @@ export default function HomePage() {
       {/* Why Choose Us Section */}
       <section className="w-full max-w-[100rem] mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h2 className="font-heading text-5xl text-primary mb-4">Por Qué Luxe Strands</h2>
+          <h2 className="font-heading text-5xl text-primary mb-4">Por Qué Lux Hair</h2>
           <p className="font-paragraph text-lg text-secondary/70 max-w-2xl mx-auto">
             Nos comprometemos a proporcionar extensiones de cabello de la más alta calidad con servicio al cliente excepcional
           </p>
@@ -162,7 +162,7 @@ export default function HomePage() {
         <div className="text-center space-y-6">
           <h2 className="font-heading text-5xl">¿Listo para Transformarte?</h2>
           <p className="font-paragraph text-lg max-w-2xl mx-auto opacity-90">
-            Únete a miles de clientes satisfechos que han descubierto su confianza con Luxe Strands
+            Únete a miles de clientes satisfechos que han descubierto su confianza con Lux Hair
           </p>
           <Link
             to="/products"

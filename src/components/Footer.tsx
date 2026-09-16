@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-heading text-2xl font-bold">Luxe Strands</h3>
+            <h3 className="font-heading text-2xl font-bold">Lux Hair</h3>
             <p className="font-paragraph text-primary-foreground/80">
               Extensiones de cabello premium para cada estilo y ocasión
             </p>
@@ -66,7 +66,7 @@ export default function Footer() {
         <div className="border-t border-primary-foreground/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-paragraph text-primary-foreground/70 text-sm">
-              © 2026 Luxe Strands. Todos los derechos reservados.
+              © 2026 Lux Hair. Todos los derechos reservados.
             </p>
             <div className="flex gap-6">
               <Link to="/" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
