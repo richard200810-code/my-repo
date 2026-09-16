@@ -8,7 +8,6 @@ import { Image } from '@/components/ui/image';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Filter } from 'lucide-react';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<HairExtensionsandWigs[]>([]);
@@ -16,10 +15,9 @@ export default function ProductsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasNext, setHasNext] = useState(false);
   const [skip, setSkip] = useState(0);
-  const [selectedType, setSelectedType] = useState<string>('all');
+  const [selectedApplicationMethod, setSelectedApplicationMethod] = useState<string>('all');
+  const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
-  const [selectedStore, setSelectedStore] = useState<string>('all');
-  const [showFilters, setShowFilters] = useState(false);
   
   const { addingItemId, actions } = useCart();
   const { currency } = useCurrency();
@@ -32,7 +30,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     applyFilters();
-  }, [products, selectedType, selectedColor, selectedStore]);
+  }, [products, selectedApplicationMethod, selectedLength, selectedColor]);
 
   const loadProducts = async () => {
     try {
@@ -60,16 +58,16 @@ export default function ProductsPage() {
   const applyFilters = () => {
     let filtered = [...products];
 
-    if (selectedType !== 'all') {
-      filtered = filtered.filter(p => p.productType === selectedType);
+    if (selectedApplicationMethod !== 'all') {
+      filtered = filtered.filter(p => p.applicationMethod === selectedApplicationMethod);
+    }
+
+    if (selectedLength !== 'all') {
+      filtered = filtered.filter(p => p.length?.toString() === selectedLength);
     }
 
     if (selectedColor !== 'all') {
       filtered = filtered.filter(p => p.color === selectedColor);
-    }
-
-    if (selectedStore !== 'all') {
-      filtered = filtered.filter(p => p.storeId === selectedStore);
     }
 
     setFilteredProducts(filtered);
@@ -80,9 +78,9 @@ export default function ProductsPage() {
   };
 
   // Extract unique values for filters
-  const productTypes = ['all', ...Array.from(new Set(products.map(p => p.productType).filter(Boolean)))];
+  const applicationMethods = ['all', ...Array.from(new Set(products.map(p => p.applicationMethod).filter(Boolean)))];
+  const lengths = ['all', ...Array.from(new Set(products.map(p => p.length?.toString()).filter(Boolean)))];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
-  const stores = ['all', ...Array.from(new Set(products.map(p => p.storeId).filter(Boolean)))];
 
   return (
     <div className="min-h-screen bg-background">
@@ -99,177 +97,197 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="mb-12">
-          <button
-            onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center gap-2 px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 mb-6"
-          >
-            <Filter className="w-5 h-5" />
-            {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
-          </button>
+        {/* Main Layout: Sidebar + Products */}
+        <div className="flex gap-8">
+          {/* Vertical Sidebar Filter */}
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-24 space-y-8 p-6 border border-primary/10 bg-white">
+              <h2 className="font-heading text-2xl text-primary">Filtros</h2>
 
-          {showFilters && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 border border-primary/10"
-            >
-              {/* Product Type Filter */}
-              <div className="space-y-3">
-                <label className="font-paragraph text-base text-primary font-semibold">
-                  Tipo de Producto
-                </label>
-                <select
-                  value={selectedType}
-                  onChange={(e) => setSelectedType(e.target.value)}
-                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary"
-                >
-                  {productTypes.map(type => (
-                    <option key={type} value={type}>
-                      {type === 'all' ? 'Todos los Tipos' : type}
-                    </option>
+              {/* Application Method Filter */}
+              <div className="space-y-4">
+                <h3 className="font-paragraph text-base text-primary font-semibold">
+                  Tipo de Unión
+                </h3>
+                <div className="space-y-3">
+                  {applicationMethods.map(method => (
+                    <label key={method} className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="applicationMethod"
+                        value={method}
+                        checked={selectedApplicationMethod === method}
+                        onChange={(e) => setSelectedApplicationMethod(e.target.value)}
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <span className="font-paragraph text-sm text-primary">
+                        {method === 'all' ? 'Todos' : method}
+                      </span>
+                    </label>
                   ))}
-                </select>
+                </div>
+              </div>
+
+              {/* Length Filter */}
+              <div className="space-y-4">
+                <h3 className="font-paragraph text-base text-primary font-semibold">
+                  Longitud
+                </h3>
+                <div className="space-y-3">
+                  {lengths.map(length => (
+                    <label key={length} className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="length"
+                        value={length}
+                        checked={selectedLength === length}
+                        onChange={(e) => setSelectedLength(e.target.value)}
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <span className="font-paragraph text-sm text-primary">
+                        {length === 'all' ? 'Todas' : `${length}"`}
+                      </span>
+                    </label>
+                  ))}
+                </div>
               </div>
 
               {/* Color Filter */}
-              <div className="space-y-3">
-                <label className="font-paragraph text-base text-primary font-semibold">
+              <div className="space-y-4">
+                <h3 className="font-paragraph text-base text-primary font-semibold">
                   Color
-                </label>
-                <select
-                  value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary"
-                >
+                </h3>
+                <div className="space-y-3">
                   {colors.map(color => (
-                    <option key={color} value={color}>
-                      {color === 'all' ? 'Todos los Colores' : color}
-                    </option>
+                    <label key={color} className="flex items-center gap-3 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="color"
+                        value={color}
+                        checked={selectedColor === color}
+                        onChange={(e) => setSelectedColor(e.target.value)}
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <span className="font-paragraph text-sm text-primary">
+                        {color === 'all' ? 'Todos' : color}
+                      </span>
+                    </label>
                   ))}
-                </select>
-              </div>
-
-              {/* Store Filter */}
-              <div className="space-y-3">
-                <label className="font-paragraph text-base text-primary font-semibold">
-                  Tienda
-                </label>
-                <select
-                  value={selectedStore}
-                  onChange={(e) => setSelectedStore(e.target.value)}
-                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary"
-                >
-                  {stores.map(store => (
-                    <option key={store} value={store}>
-                      {store === 'all' ? 'Todas las Tiendas' : store}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Products Grid */}
-        <div className="min-h-[600px]">
-          {isLoading && skip === 0 ? null : (
-            <>
-              {filteredProducts.length === 0 ? (
-                <div className="text-center py-20">
-                  <p className="font-paragraph text-lg text-primary/60">
-                    No se encontraron productos que coincidan con tus filtros
-                  </p>
                 </div>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
-                >
-                  {filteredProducts.map((product, index) => (
-                    <motion.div
-                      key={product._id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.05 }}
-                      className="group space-y-4"
-                    >
-                      {/* Product Image */}
-                      <Link to={`/products/${product._id}`} className="block">
-                        <div className="aspect-[3/4] overflow-hidden mb-4">
-                          <Image
-                            src={product.itemImage || 'https://static.wixstatic.com/media/37e681_9e787a2481d1449eac415e51fe35f9ff~mv2.png?originWidth=384&originHeight=512'}
-                            alt={product.itemName || 'Product'}
-                            width={400}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                      </Link>
+              </div>
 
-                      {/* Product Info */}
-                      <div className="space-y-2">
-                        <Link to={`/products/${product._id}`}>
-                          <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                            {product.itemName}
-                          </h3>
-                        </Link>
-                        
-                        <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
-                          {product.productType && <span>{product.productType}</span>}
-                          {product.color && (
-                            <>
-                              <span>•</span>
-                              <span>{product.color}</span>
-                            </>
-                          )}
-                          {product.length && (
-                            <>
-                              <span>•</span>
-                              <span>{product.length}"</span>
-                            </>
-                          )}
-                        </div>
+              {/* Reset Filters Button */}
+              <button
+                onClick={() => {
+                  setSelectedApplicationMethod('all');
+                  setSelectedLength('all');
+                  setSelectedColor('all');
+                }}
+                className="w-full px-4 py-2 border border-buttonborder bg-buttonbackground text-primary font-paragraph text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Limpiar Filtros
+              </button>
+            </div>
+          </aside>
 
-                        <p className="font-paragraph text-lg text-primary font-semibold">
-                          {formatPrice(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
-                        </p>
-
-                        {/* Add to Cart Button */}
-                        <button
-                          onClick={() => actions.addToCart({
-                            collectionId: 'hairextensions',
-                            itemId: product._id,
-                            quantity: 1
-                          })}
-                          disabled={addingItemId === product._id}
-                          className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
-                        >
-                          {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-
-              {/* Load More Button */}
-              {hasNext && (
-                <div className="text-center">
-                  <button
-                    onClick={loadMore}
-                    disabled={isLoading}
-                    className="px-10 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+          {/* Products Grid */}
+          <div className="flex-1 min-h-[600px]">
+            {isLoading && skip === 0 ? null : (
+              <>
+                {filteredProducts.length === 0 ? (
+                  <div className="text-center py-20">
+                    <p className="font-paragraph text-lg text-primary/60">
+                      No se encontraron productos que coincidan con tus filtros
+                    </p>
+                  </div>
+                ) : (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12"
                   >
-                    {isLoading ? 'Cargando...' : 'Cargar Más'}
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+                    {filteredProducts.map((product, index) => (
+                      <motion.div
+                        key={product._id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.05 }}
+                        className="group space-y-4"
+                      >
+                        {/* Product Image */}
+                        <Link to={`/products/${product._id}`} className="block">
+                          <div className="aspect-[3/4] overflow-hidden mb-4">
+                            <Image
+                              src={product.itemImage || 'https://static.wixstatic.com/media/37e681_9e787a2481d1449eac415e51fe35f9ff~mv2.png?originWidth=384&originHeight=512'}
+                              alt={product.itemName || 'Product'}
+                              width={400}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
+                        </Link>
+
+                        {/* Product Info */}
+                        <div className="space-y-2">
+                          <Link to={`/products/${product._id}`}>
+                            <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
+                              {product.itemName}
+                            </h3>
+                          </Link>
+                          
+                          <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
+                            {product.productType && <span>{product.productType}</span>}
+                            {product.color && (
+                              <>
+                                <span>•</span>
+                                <span>{product.color}</span>
+                              </>
+                            )}
+                            {product.length && (
+                              <>
+                                <span>•</span>
+                                <span>{product.length}"</span>
+                              </>
+                            )}
+                          </div>
+
+                          <p className="font-paragraph text-lg text-primary font-semibold">
+                            {formatPrice(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
+                          </p>
+
+                          {/* Add to Cart Button */}
+                          <button
+                            onClick={() => actions.addToCart({
+                              collectionId: 'hairextensions',
+                              itemId: product._id,
+                              quantity: 1
+                            })}
+                            disabled={addingItemId === product._id}
+                            className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                          >
+                            {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+
+                {/* Load More Button */}
+                {hasNext && (
+                  <div className="text-center">
+                    <button
+                      onClick={loadMore}
+                      disabled={isLoading}
+                      className="px-10 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                    >
+                      {isLoading ? 'Cargando...' : 'Cargar Más'}
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </main>
 
