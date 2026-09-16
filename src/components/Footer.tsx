@@ -35,6 +35,18 @@ export default function Footer() {
                 Productos
               </Link>
               <Link
+                to="/tools-accessories"
+                className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
+              >
+                Herramientas y Accesorios
+              </Link>
+              <Link
+                to="/academy"
+                className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
+              >
+                Academia
+              </Link>
+              <Link
                 to="/contact"
                 className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
               >

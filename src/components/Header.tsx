@@ -12,6 +12,8 @@ export default function Header() {
     { name: 'Inicio', path: '/' },
     { name: 'Tiendas', path: '/stores' },
     { name: 'Productos', path: '/products' },
+    { name: 'Herramientas y Accesorios', path: '/tools-accessories' },
+    { name: 'Academia', path: '/academy' },
     { name: 'Contacto', path: '/contact' }
   ];
 
