@@ -1,85 +1,75 @@
 import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-primary text-primary-foreground mt-20">
-      <div className="max-w-[100rem] mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+    <footer className="w-full bg-secondary text-secondary-foreground">
+      <div className="max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="font-heading text-2xl font-bold">Lux Hair</h3>
-            <p className="font-paragraph text-primary-foreground/80">
-              Extensiones de cabello premium para cada estilo y ocasión
+            <h3 className="font-heading text-2xl text-secondary-foreground">
+              Luxe Hair
+            </h3>
+            <p className="font-paragraph text-base text-secondary-foreground/80 leading-relaxed">
+              Extensiones de cabello premium y pelucas elaboradas para quienes aprecian la calidad y la elegancia.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Tienda</h4>
-            <nav className="space-y-2">
-              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Todos los Productos
+            <h4 className="font-heading text-xl text-secondary-foreground">
+              Enlaces Rápidos
+            </h4>
+            <nav className="flex flex-col gap-3">
+              <Link
+                to="/"
+                className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
+              >
+                Inicio
               </Link>
-              <Link to="/stores" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Nuestras Tiendas
+              <Link
+                to="/products"
+                className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
+              >
+                Productos
               </Link>
-              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Tape-In
-              </Link>
-            </nav>
-          </div>
-
-          {/* Support */}
-          <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Soporte</h4>
-            <nav className="space-y-2">
-              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Guía de Cuidado
-              </Link>
-              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Preguntas Frecuentes
-              </Link>
-              <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Información de Envío
+              <Link
+                to="/contact"
+                className="font-paragraph text-base text-secondary-foreground/80 hover:text-secondary-foreground transition-colors"
+              >
+                Contacto
               </Link>
             </nav>
           </div>
 
-          {/* Contact */}
+          {/* Contact Info */}
           <div className="space-y-4">
-            <h4 className="font-heading text-lg font-semibold">Acerca de</h4>
-            <nav className="space-y-2">
-              <Link to="/" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Sobre Nosotros
-              </Link>
-              <Link to="/products" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Blog
-              </Link>
-              <Link to="/contact" className="font-paragraph text-primary-foreground/80 hover:text-primary-foreground transition-colors block">
-                Carreras
-              </Link>
-            </nav>
+            <h4 className="font-heading text-xl text-secondary-foreground">
+              Ponte en Contacto
+            </h4>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
+                <span className="font-paragraph text-base text-secondary-foreground/80">richard200810@gmail.com</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <Phone className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
+                <span className="font-paragraph text-base text-secondary-foreground/80">+52 (55) 3955 5886</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
+                <span className="font-paragraph text-base text-secondary-foreground/80">Polanco CDMX Mexico</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-primary-foreground/20 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-paragraph text-primary-foreground/70 text-sm">
-              © 2026 Lux Hair. Todos los derechos reservados.
-            </p>
-            <div className="flex gap-6">
-              <Link to="/" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Política de Privacidad
-              </Link>
-              <Link to="/" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Términos de Servicio
-              </Link>
-              <Link to="/contact" className="font-paragraph text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                Información de Envío
-              </Link>
-            </div>
-          </div>
+        {/* Bottom Bar */}
+        <div className="border-t border-secondary-foreground/20 pt-8">
+          <p className="font-paragraph text-sm text-secondary-foreground/60 text-center">
+            © {new Date().getFullYear()} Luxe Hair. Todos los derechos reservados.
+          </p>
         </div>
       </div>
     </footer>

@@ -1,152 +1,142 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
-    message: '',
+    phone: '',
+    message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
+    setFormData({ name: '', email: '', phone: '', message: '' });
+
+    // Reset success message after 5 seconds
+    setTimeout(() => setSubmitSuccess(false), 5000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, you'd send this to a backend
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setSubmitted(false), 3000);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Header />
+      <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
+        {/* Page Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
+            Get in Touch
+          </h1>
+          <p className="font-paragraph text-lg text-primary max-w-2xl mx-auto">
+            Have questions about our products? We're here to help you find the perfect hair extensions or wigs.
+          </p>
+        </motion.div>
 
-      {/* Page Header */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 py-16">
-        <h1 className="font-heading text-5xl md:text-6xl text-primary mb-4">Get in Touch</h1>
-        <p className="font-paragraph text-lg text-secondary/70 max-w-2xl">
-          Have questions about our products? We're here to help. Reach out to our team anytime.
-        </p>
-      </section>
-
-      {/* Contact Section */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Contact Information */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
             <div>
-              <h2 className="font-heading text-3xl text-primary mb-6">Información de Contacto</h2>
-              <p className="font-paragraph text-secondary/70 mb-8">
-                Ya sea que tengas preguntas sobre nuestras extensiones de cabello, necesites consejos de estilo o desees hacer un pedido al por mayor, nuestro equipo está listo para ayudarte.
+              <h2 className="font-heading text-3xl text-primary mb-6">
+                Contact Information
+              </h2>
+              <p className="font-paragraph text-base text-primary leading-relaxed mb-8">
+                Reach out to us through any of the following channels. Our team is ready to assist you with product inquiries, orders, or any questions you may have.
               </p>
             </div>
 
-            {/* Contact Methods */}
             <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
+              {/* Email */}
+              <div className="flex items-start gap-4">
+                <div className="p-3 border border-buttonborder bg-buttonbackground">
+                  <Mail className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Correo Electrónico</h3>
-                  <a href="mailto:hello@luxestrands.com" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    hello@luxestrands.com
-                  </a>
-                  <p className="font-paragraph text-sm text-secondary/50 mt-1">
-                    Responderemos dentro de 24 horas
-                  </p>
+                  <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
+                    Email
+                  </h3>
+                  <p className="font-paragraph text-base text-primary/70">richard200810@gmail.comin.com</p>
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
+              {/* Phone */}
+              <div className="flex items-start gap-4">
+                <div className="p-3 border border-buttonborder bg-buttonbackground">
+                  <Phone className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Teléfono</h3>
-                  <a href="tel:+1234567890" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    +1 (234) 567-890
-                  </a>
-                  <p className="font-paragraph text-sm text-secondary/50 mt-1">
-                    Lun - Vie, 9am - 6pm EST
-                  </p>
+                  <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
+                    Phone
+                  </h3>
+                  <p className="font-paragraph text-base text-primary/70">+52 (55) 3955 5886</p>
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
+              {/* Address */}
+              <div className="flex items-start gap-4">
+                <div className="p-3 border border-buttonborder bg-buttonbackground">
+                  <MapPin className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg text-primary mb-1">Dirección</h3>
-                  <p className="font-paragraph text-secondary/70">
-                    123 Fashion Avenue<br />
-                    New York, NY 10001<br />
-                    Estados Unidos
-                  </p>
+                  <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
+                    Address
+                  </h3>
+
                 </div>
               </div>
             </div>
 
-            {/* FAQ Quick Links */}
-            <div className="bg-background/20 rounded-lg p-6">
-              <h3 className="font-heading text-lg text-primary mb-4">Ayuda Rápida</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Envío y Devoluciones
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Guía de Cuidado del Cabello
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Métodos de Aplicación
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="font-paragraph text-secondary/70 hover:text-primary transition-colors">
-                    → Pedidos al Por Mayor
-                  </a>
-                </li>
-              </ul>
+            {/* Business Hours */}
+            <div className="pt-8 border-t border-primary/10">
+              <h3 className="font-heading text-xl text-primary mb-4">
+                Business Hours
+              </h3>
+              <div className="space-y-2 font-paragraph text-base text-primary/70">
+                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                <p>Saturday: 10:00 AM - 4:00 PM</p>
+                <p>Sunday: Closed</p>
+              </div>
             </div>
           </motion.div>
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="bg-background/10 rounded-lg p-8 space-y-6">
-              <div>
-                <label htmlFor="name" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Nombre Completo
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Name */}
+              <div className="space-y-2">
+                <label htmlFor="name" className="font-paragraph text-base text-primary font-semibold">
+                  Name *
                 </label>
                 <input
                   type="text"
@@ -155,14 +145,15 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Tu nombre"
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
+                  placeholder="Your name"
                 />
               </div>
 
-              <div>
-                <label htmlFor="email" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Correo Electrónico
+              {/* Email */}
+              <div className="space-y-2">
+                <label htmlFor="email" className="font-paragraph text-base text-primary font-semibold">
+                  Email *
                 </label>
                 <input
                   type="email"
@@ -171,30 +162,31 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="tu@correo.com"
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
+                  placeholder="your.email@example.com"
                 />
               </div>
 
-              <div>
-                <label htmlFor="subject" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Asunto
+              {/* Phone */}
+              <div className="space-y-2">
+                <label htmlFor="phone" className="font-paragraph text-base text-primary font-semibold">
+                  Phone
                 </label>
                 <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="¿Cómo podemos ayudarte?"
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
+                  placeholder="(555) 123-4567"
                 />
               </div>
 
-              <div>
-                <label htmlFor="message" className="block font-paragraph text-sm font-semibold text-primary mb-2">
-                  Mensaje
+              {/* Message */}
+              <div className="space-y-2">
+                <label htmlFor="message" className="font-paragraph text-base text-primary font-semibold">
+                  Message *
                 </label>
                 <textarea
                   id="message"
@@ -202,36 +194,44 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  rows={5}
-                  className="w-full px-4 py-3 border border-background rounded-lg font-paragraph text-secondary focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Cuéntanos más sobre tu consulta..."
+                  rows={6}
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors resize-none"
+                  placeholder="Tell us about your inquiry..."
                 />
               </div>
 
-              {submitted && (
+              {/* Success Message */}
+              {submitSuccess && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-50 border border-green-200 rounded-lg"
+                  className="p-4 border border-primary/20 bg-buttonbackground"
                 >
-                  <p className="font-paragraph text-green-800">
-                    ✓ ¡Gracias! Hemos recibido tu mensaje y nos pondremos en contacto pronto.
+                  <p className="font-paragraph text-base text-primary">
+                    Thank you for your message! We'll get back to you soon.
                   </p>
                 </motion.div>
               )}
 
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full px-6 py-4 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:bg-secondary transition-colors flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full px-8 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                <Send className="w-5 h-5" />
-                Enviar Mensaje
+                {isSubmitting ? (
+                  'Sending...'
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
         </div>
-      </section>
-
+      </main>
       <Footer />
     </div>
   );
