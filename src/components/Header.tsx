@@ -22,12 +22,6 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <Link
-              to="/"
-              className="font-paragraph text-secondary hover:text-primary transition-colors"
-            >
-              Inicio
-            </Link>
-            <Link
               to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
@@ -37,25 +31,25 @@ export default function Header() {
               to="/stores"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Herramientas y Accesorios
+              Tools & Accessories
             </Link>
             <Link
               to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Academia
+              Academy
             </Link>
             <Link
               to="/products"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Guía de Cabello
+              Hair Guide
             </Link>
             <Link
               to="/contact"
               className="font-paragraph text-secondary hover:text-primary transition-colors"
             >
-              Contacto
+              contacto
             </Link>
           </nav>
 
@@ -94,13 +88,6 @@ export default function Header() {
           <nav className="md:hidden border-t border-background/30 bg-background">
             <div className="max-w-[100rem] mx-auto px-6 py-4 space-y-4">
               <Link
-                to="/"
-                className="block font-paragraph text-secondary hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Inicio
-              </Link>
-              <Link
                 to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
@@ -112,28 +99,28 @@ export default function Header() {
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Herramientas y Accesorios
+                Tools & Accessories
               </Link>
               <Link
                 to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Academia
+                Academy
               </Link>
               <Link
                 to="/products"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Guía de Cabello
+                Hair Guide
               </Link>
               <Link
                 to="/contact"
                 className="block font-paragraph text-secondary hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contacto
+                contacto
               </Link>
             </div>
           </nav>
