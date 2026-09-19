@@ -7,7 +7,7 @@ const methods = [
   { name: 'Genius Weft', description: 'Trama ultrafina para una integración flexible' },
   { name: 'Hand Tied Weft', description: 'Trama ligera pensada para una instalación por filas' },
   { name: 'Flat Weft', description: 'Base plana para una colocación uniforme' },
-  { name: 'Double Piece Flat Weft', description: 'Dos piezas planas para ajustar la densidad' },
+  { name: 'Double Piece Flat Weft', description: 'Dos piezas planas para ajustar la densidad', detailLink: '/aplicaciones/double-piece-flat-weft' },
   { name: 'Machine Weft', description: 'Trama cosida de construcción clásica' },
   { name: 'Volume Weft', description: 'Trama orientada a añadir volumen' },
   { name: 'Genius Weft with Hole', description: 'Variante con orificios de apoyo para la instalación' },

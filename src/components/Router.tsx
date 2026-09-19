@@ -13,6 +13,7 @@ import ClipInGuidePage from '@/components/pages/ClipInGuidePage';
 import TapeInGuidePage from '@/components/pages/TapeInGuidePage';
 import KeratinGuidePage from '@/components/pages/KeratinGuidePage';
 import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
+import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -105,6 +106,13 @@ const router = createBrowserRouter([
         element: <FeatherGuidePage />,
         routeMetadata: {
           pageIdentifier: 'feather-guide',
+        },
+      },
+      {
+        path: "aplicaciones/double-piece-flat-weft",
+        element: <DoublePieceFlatWeftPage />,
+        routeMetadata: {
+          pageIdentifier: 'double-piece-flat-weft',
         },
       },
       {
