@@ -58,11 +58,19 @@ export default function ProductsPage() {
     }
   };
 
+  const normalizeString = (str: string | undefined): string => {
+    if (!str) return '';
+    return str.toLowerCase().trim();
+  };
+
   const applyFilters = () => {
     let filtered = [...products];
 
     if (selectedApplicationMethod !== 'all') {
-      filtered = filtered.filter(p => p.applicationMethod === selectedApplicationMethod);
+      const normalizedSelected = normalizeString(selectedApplicationMethod);
+      filtered = filtered.filter(p => 
+        normalizeString(p.applicationMethod) === normalizedSelected
+      );
     }
 
     if (selectedLength !== 'all') {
