@@ -58,9 +58,48 @@ export default function ProductsPage() {
     }
   };
 
+  // Normalize string: lowercase, remove spaces, hyphens, and non-alphanumeric characters
   const normalizeString = (str: string | undefined): string => {
     if (!str) return '';
-    return str.toLowerCase().trim();
+    return str.toLowerCase().replace(/[\s\-_]/g, '').replace(/[^a-z0-9]/g, '');
+  };
+
+  // Explicit alias map for application methods
+  // Maps visible UI options to actual database values
+  const APPLICATION_ALIAS_MAP: Record<string, string[]> = {
+    'K-Tip': ['ktip', 'k-tip'],
+    'I-Tip': ['itip', 'i-tip'],
+    'Clip In': ['clipin', 'clip-in', 'clipinextension', 'clip-in extension'],
+    'Tape In': ['tapein', 'tape-in', 'tapenormal', 'tape normal', 'tapeinextension', 'tape-in extension'],
+    'Invisible Tape In': ['tapeinvisible', 'tape invisible'],
+    'U-Tip': ['prebonded', 'pre-bonded', 'utip', 'u-tip'],
+    'Machine Weft': ['sewin', 'sew-in'],
+    'Nano-Tip': ['nanotip', 'nano-tip'],
+    'V-Tip': ['vtip', 'v-tip'],
+    'Y-Tip': ['ytip', 'y-tip'],
+    'Genius Weft': ['geniusweft', 'genius weft'],
+    'Hand Tied Weft': ['handtiedweft', 'hand tied weft'],
+    'Flat Weft': ['flatweft', 'flat weft'],
+    'Double Piece Flat Weft': ['doublepieceflatweft', 'double piece flat weft'],
+    'Volume Weft': ['volumeweft', 'volume weft'],
+    'Genius Weft with Hole': ['geniusweftwithhole', 'genius weft with hole'],
+    'Genius UP with Hole': ['geniusupwithhole', 'genius up with hole'],
+    'Halo': ['halo'],
+    'Ponytail': ['ponytail'],
+    'One Piece Clip In': ['onepiececlipin', 'one piece clip in'],
+    'Lace Clip In': ['laceclipin', 'lace clip in'],
+    'PU Clip In': ['puclipin', 'pu clip in'],
+    'Mini Tape In': ['minitapein', 'mini tape in'],
+    'Seamless Tape In': ['seamlesstapein', 'seamless tape in'],
+    'PU Invisible with Hole': ['puinvisiblewithhole', 'pu invisible with hole'],
+    'PU with Hole': ['puwithhole', 'pu with hole'],
+    'Long Invisible Tape In': ['longinvisibletapein', 'long invisible tape in'],
+    'Long Tape In': ['longtapein', 'long tape in'],
+    'Stitched Tape In': ['stitchedtapein', 'stitched tape in'],
+    'Micro Loop Hair Extension': ['microloophairextension', 'micro loop hair extension'],
+    'Feather Hair Weft': ['featherhairweft', 'feather hair weft'],
+    'H6 Feather Hair Extension': ['h6featherhairextension', 'h6 feather hair extension'],
+    'Plastic Nano Tip': ['plasticnanotip', 'plastic nano tip']
   };
 
   const applyFilters = () => {
@@ -68,9 +107,12 @@ export default function ProductsPage() {
 
     if (selectedApplicationMethod !== 'all') {
       const normalizedSelected = normalizeString(selectedApplicationMethod);
-      filtered = filtered.filter(p => 
-        normalizeString(p.applicationMethod) === normalizedSelected
-      );
+      const acceptedValues = APPLICATION_ALIAS_MAP[selectedApplicationMethod] || [normalizedSelected];
+      
+      filtered = filtered.filter(p => {
+        const normalizedProductValue = normalizeString(p.applicationMethod);
+        return acceptedValues.includes(normalizedProductValue);
+      });
     }
 
     if (selectedLength !== 'all') {
