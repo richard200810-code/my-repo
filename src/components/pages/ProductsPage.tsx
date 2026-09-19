@@ -35,8 +35,8 @@ export default function ProductsPage() {
     'SEW-IN'
   ];
 
-  // Predefined lengths from 14 to 30 inches
-  const PREDEFINED_LENGTHS = Array.from({ length: 17 }, (_, i) => (14 + i).toString());
+  // Predefined lengths - only even numbers from 14 to 30 inches
+  const PREDEFINED_LENGTHS = [14, 16, 18, 20, 22, 24, 26, 28, 30].map(n => n.toString());
 
   useEffect(() => {
     loadProducts();
