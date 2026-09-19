@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
@@ -51,6 +52,14 @@ const APPLICATION_CATEGORIES = {
     'Feather Hair Weft',
     'H6 Feather Hair Extension'
   ]
+};
+
+const GUIDE_LINKS: Record<string, string> = {
+  'Hair Weft': '/aplicaciones-hair-weft',
+  'Clip In': '/aplicaciones-clip-in',
+  'Tape In': '/aplicaciones-tape-in',
+  'Keratin Hair Extension': '/aplicaciones-keratin',
+  'Feather Hair Extension': '/aplicaciones-feather'
 };
 
 export default function ApplicationMegaMenu({
@@ -107,9 +116,18 @@ export default function ApplicationMegaMenu({
                 <div className="grid grid-cols-5 gap-8">
                   {Object.entries(APPLICATION_CATEGORIES).map(([category, items]) => (
                     <div key={category} className="space-y-3">
-                      <h4 className="font-heading text-sm text-primary font-semibold uppercase tracking-wide">
-                        {category}
-                      </h4>
+                      <div className="flex flex-col gap-2">
+                        <h4 className="font-heading text-sm text-primary font-semibold uppercase tracking-wide">
+                          {category}
+                        </h4>
+                        <Link
+                          to={GUIDE_LINKS[category]}
+                          className="text-xs font-paragraph text-primary/50 hover:text-primary/80 transition-colors underline"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Ver guía
+                        </Link>
+                      </div>
                       <ul className="space-y-2">
                         {items.map((item) => (
                           <li key={item}>
@@ -229,22 +247,31 @@ function MobileAccordionItem({
             transition={{ duration: 0.2 }}
             className="overflow-hidden bg-primary/5"
           >
-            <ul className="space-y-2 px-4 py-3">
-              {items.map((item) => (
-                <li key={item}>
-                  <button
-                    onClick={() => onSelect(item)}
-                    className={`text-sm font-paragraph transition-all duration-200 w-full text-left py-1 ${
-                      selectedApplication === item
-                        ? 'text-primary font-semibold'
-                        : 'text-primary/60 hover:text-primary'
-                    }`}
-                  >
-                    {item}
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <div className="px-4 py-3 space-y-3">
+              <Link
+                to={GUIDE_LINKS[category]}
+                className="text-xs font-paragraph text-primary/50 hover:text-primary/80 transition-colors underline block"
+                onClick={() => setIsExpanded(false)}
+              >
+                Ver guía
+              </Link>
+              <ul className="space-y-2">
+                {items.map((item) => (
+                  <li key={item}>
+                    <button
+                      onClick={() => onSelect(item)}
+                      className={`text-sm font-paragraph transition-all duration-200 w-full text-left py-1 ${
+                        selectedApplication === item
+                          ? 'text-primary font-semibold'
+                          : 'text-primary/60 hover:text-primary'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

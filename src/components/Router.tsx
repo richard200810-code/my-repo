@@ -8,6 +8,11 @@ import ProductDetailPage from '@/components/pages/ProductDetailPage';
 import ContactPage from '@/components/pages/ContactPage';
 import StoresPage from '@/components/pages/StoresPage';
 import StoreDetailPage from '@/components/pages/StoreDetailPage';
+import HairWeftGuidePage from '@/components/pages/HairWeftGuidePage';
+import ClipInGuidePage from '@/components/pages/ClipInGuidePage';
+import TapeInGuidePage from '@/components/pages/TapeInGuidePage';
+import KeratinGuidePage from '@/components/pages/KeratinGuidePage';
+import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -65,6 +70,41 @@ const router = createBrowserRouter([
         element: <StoreDetailPage />,
         routeMetadata: {
           pageIdentifier: 'store-detail',
+        },
+      },
+      {
+        path: "aplicaciones-hair-weft",
+        element: <HairWeftGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'hair-weft-guide',
+        },
+      },
+      {
+        path: "aplicaciones-clip-in",
+        element: <ClipInGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'clip-in-guide',
+        },
+      },
+      {
+        path: "aplicaciones-tape-in",
+        element: <TapeInGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'tape-in-guide',
+        },
+      },
+      {
+        path: "aplicaciones-keratin",
+        element: <KeratinGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'keratin-guide',
+        },
+      },
+      {
+        path: "aplicaciones-feather",
+        element: <FeatherGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'feather-guide',
         },
       },
       {
