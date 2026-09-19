@@ -85,64 +85,95 @@ export default function ApplicationMegaMenu({
       {/* Mega Menu Panel */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 mt-2 bg-white border border-primary/20 shadow-lg z-50"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Desktop: Grid Layout */}
-            <div className="hidden md:grid grid-cols-5 gap-6 p-8">
-              {Object.entries(APPLICATION_CATEGORIES).map(([category, items]) => (
-                <div key={category} className="space-y-3">
-                  <h4 className="font-heading text-sm text-primary font-semibold uppercase tracking-wide">
-                    {category}
-                  </h4>
-                  <ul className="space-y-2">
-                    {items.map((item) => (
-                      <li key={item}>
-                        <button
-                          onClick={() => handleSelect(item)}
-                          className={`text-sm font-paragraph transition-all duration-200 hover:text-primary/70 ${
-                            selectedApplication === item
-                              ? 'text-primary font-semibold'
-                              : 'text-primary/60'
-                          }`}
-                        >
-                          {item}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+          <>
+            {/* Desktop: Full-width panel positioned below */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="hidden md:block fixed left-0 right-0 top-auto bg-white border-t border-b border-primary/20 z-50"
+              style={{
+                top: 'auto',
+                left: '0',
+                right: '0',
+                width: '100%',
+                marginTop: '0'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-8">
+                {/* Grid Layout with 5 columns */}
+                <div className="grid grid-cols-5 gap-8">
+                  {Object.entries(APPLICATION_CATEGORIES).map(([category, items]) => (
+                    <div key={category} className="space-y-3">
+                      <h4 className="font-heading text-sm text-primary font-semibold uppercase tracking-wide">
+                        {category}
+                      </h4>
+                      <ul className="space-y-2">
+                        {items.map((item) => (
+                          <li key={item}>
+                            <button
+                              onClick={() => handleSelect(item)}
+                              className={`text-sm font-paragraph transition-all duration-200 hover:text-primary/70 block text-left ${
+                                selectedApplication === item
+                                  ? 'text-primary font-semibold'
+                                  : 'text-primary/60'
+                              }`}
+                            >
+                              {item}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+
+                {/* Clear Selection Option */}
+                <div className="border-t border-primary/10 mt-6 pt-4">
+                  <button
+                    onClick={() => handleSelect('all')}
+                    className="text-sm font-paragraph text-primary/60 hover:text-primary transition-colors py-2"
+                  >
+                    Ver Todas las Aplicaciones
+                  </button>
+                </div>
+              </div>
+            </motion.div>
 
             {/* Mobile: Accordion Layout */}
-            <div className="md:hidden space-y-0">
-              {Object.entries(APPLICATION_CATEGORIES).map(([category, items]) => (
-                <MobileAccordionItem
-                  key={category}
-                  category={category}
-                  items={items}
-                  selectedApplication={selectedApplication}
-                  onSelect={handleSelect}
-                />
-              ))}
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white border border-primary/20 z-50"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="space-y-0">
+                {Object.entries(APPLICATION_CATEGORIES).map(([category, items]) => (
+                  <MobileAccordionItem
+                    key={category}
+                    category={category}
+                    items={items}
+                    selectedApplication={selectedApplication}
+                    onSelect={handleSelect}
+                  />
+                ))}
+              </div>
 
-            {/* Clear Selection Option */}
-            <div className="border-t border-primary/10 p-4">
-              <button
-                onClick={() => handleSelect('all')}
-                className="w-full text-sm font-paragraph text-primary/60 hover:text-primary transition-colors py-2"
-              >
-                Ver Todas las Aplicaciones
-              </button>
-            </div>
-          </motion.div>
+              {/* Clear Selection Option */}
+              <div className="border-t border-primary/10 p-4">
+                <button
+                  onClick={() => handleSelect('all')}
+                  className="w-full text-sm font-paragraph text-primary/60 hover:text-primary transition-colors py-2"
+                >
+                  Ver Todas las Aplicaciones
+                </button>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 

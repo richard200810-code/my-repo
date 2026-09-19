@@ -99,76 +99,122 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {/* Main Layout: Sidebar + Products */}
-        <div className="flex gap-8">
-          {/* Vertical Sidebar Filter */}
-          <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24 space-y-8 p-6 border border-primary/10 bg-background">
-              <h2 className="font-heading text-2xl text-primary">Filtros</h2>
+        {/* Horizontal Filters Row - Desktop Only */}
+        <div className="hidden lg:grid grid-cols-3 gap-6 mb-8">
+          {/* Application Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Aplicación
+            </h3>
+            <ApplicationMegaMenu
+              selectedApplication={selectedApplicationMethod}
+              onSelect={setSelectedApplicationMethod}
+            />
+          </div>
 
-              {/* Application Method Filter (Aplicación) - Now using Mega Menu */}
-              <div className="space-y-4">
-                <h3 className="font-paragraph text-base text-primary font-semibold">
-                  Aplicación
-                </h3>
-                <ApplicationMegaMenu
-                  selectedApplication={selectedApplicationMethod}
-                  onSelect={setSelectedApplicationMethod}
-                />
-              </div>
+          {/* Length Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Longitud
+            </h3>
+            <select
+              value={selectedLength}
+              onChange={(e) => setSelectedLength(e.target.value)}
+              className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            >
+              {lengths.map(length => (
+                <option key={length} value={length}>
+                  {length === 'all' ? 'Todas las Longitudes' : `${length}\"`}
+                </option>
+              ))}
+            </select>
+          </div>
 
-              {/* Length Filter */}
-              <div className="space-y-4">
-                <h3 className="font-paragraph text-base text-primary font-semibold">
-                  Longitud
-                </h3>
-                <select
-                  value={selectedLength}
-                  onChange={(e) => setSelectedLength(e.target.value)}
-                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                >
-                  {lengths.map(length => (
-                    <option key={length} value={length}>
-                      {length === 'all' ? 'Todas las Longitudes' : `${length}"`}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          {/* Color Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Color
+            </h3>
+            <select
+              value={selectedColor}
+              onChange={(e) => setSelectedColor(e.target.value)}
+              className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            >
+              {colors.map(color => (
+                <option key={color} value={color}>
+                  {color === 'all' ? 'Todos los Colores' : color}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
 
-              {/* Color Filter */}
-              <div className="space-y-4">
-                <h3 className="font-paragraph text-base text-primary font-semibold">
-                  Color
-                </h3>
-                <select
-                  value={selectedColor}
-                  onChange={(e) => setSelectedColor(e.target.value)}
-                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                >
-                  {colors.map(color => (
-                    <option key={color} value={color}>
-                      {color === 'all' ? 'Todos los Colores' : color}
-                    </option>
-                  ))}
-                </select>
-              </div>
+        {/* Mobile Filters - Accordion Style */}
+        <div className="lg:hidden mb-8 space-y-4">
+          {/* Application Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Aplicación
+            </h3>
+            <ApplicationMegaMenu
+              selectedApplication={selectedApplicationMethod}
+              onSelect={setSelectedApplicationMethod}
+            />
+          </div>
 
-              {/* Reset Filters Button */}
-              <button
-                onClick={() => {
-                  setSelectedApplicationMethod('all');
-                  setSelectedLength('all');
-                  setSelectedColor('all');
-                }}
-                className="w-full px-4 py-2 border border-buttonborder bg-buttonbackground text-primary font-paragraph text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-              >
-                Limpiar Filtros
-              </button>
-            </div>
-          </aside>
+          {/* Length Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Longitud
+            </h3>
+            <select
+              value={selectedLength}
+              onChange={(e) => setSelectedLength(e.target.value)}
+              className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            >
+              {lengths.map(length => (
+                <option key={length} value={length}>
+                  {length === 'all' ? 'Todas las Longitudes' : `${length}\"`}
+                </option>
+              ))}
+            </select>
+          </div>
 
+          {/* Color Filter */}
+          <div className="space-y-2">
+            <h3 className="font-paragraph text-sm text-primary font-semibold">
+              Color
+            </h3>
+            <select
+              value={selectedColor}
+              onChange={(e) => setSelectedColor(e.target.value)}
+              className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+            >
+              {colors.map(color => (
+                <option key={color} value={color}>
+                  {color === 'all' ? 'Todos los Colores' : color}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Reset Filters Button */}
+          <button
+            onClick={() => {
+              setSelectedApplicationMethod('all');
+              setSelectedLength('all');
+              setSelectedColor('all');
+            }}
+            className="w-full px-4 py-2 border border-buttonborder bg-buttonbackground text-primary font-paragraph text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+          >
+            Limpiar Filtros
+          </button>
+        </div>
+
+        {/* Products Section */}
+        <div className="w-full">
           {/* Products Grid */}
-          <div className="flex-1 min-h-[600px]">
+          <div className="min-h-[600px]">
             {isLoading && skip === 0 ? null : (
               <>
                 {filteredProducts.length === 0 ? (
