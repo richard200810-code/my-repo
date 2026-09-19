@@ -5,9 +5,9 @@ import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { useCart, useCurrency, formatPrice, DEFAULT_CURRENCY } from '@/integrations';
 import { Image } from '@/components/ui/image';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ApplicationMegaMenu from '@/components/ApplicationMegaMenu';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<HairExtensionsandWigs[]>([]);
@@ -23,17 +23,6 @@ export default function ProductsPage() {
   const { currency } = useCurrency();
 
   const LIMIT = 12;
-
-  // Predefined application methods (Aplicación)
-  const PREDEFINED_APPLICATIONS = [
-    'TAPE INVISIBLE',
-    'TAPE NORMAL',
-    'K-TIP',
-    'I-TIP',
-    'FUSION',
-    'CLIP-IN',
-    'SEW-IN'
-  ];
 
   // Predefined lengths - only even numbers from 14 to 30 inches
   const PREDEFINED_LENGTHS = [14, 16, 18, 20, 22, 24, 26, 28, 30].map(n => n.toString());
@@ -92,7 +81,6 @@ export default function ProductsPage() {
   };
 
   // Extract unique values for filters
-  const applicationMethods = ['all', ...PREDEFINED_APPLICATIONS];
   const lengths = ['all', ...PREDEFINED_LENGTHS];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
 
@@ -118,22 +106,15 @@ export default function ProductsPage() {
             <div className="sticky top-24 space-y-8 p-6 border border-primary/10 bg-background">
               <h2 className="font-heading text-2xl text-primary">Filtros</h2>
 
-              {/* Application Method Filter (Aplicación) */}
+              {/* Application Method Filter (Aplicación) - Now using Mega Menu */}
               <div className="space-y-4">
                 <h3 className="font-paragraph text-base text-primary font-semibold">
                   Aplicación
                 </h3>
-                <select
-                  value={selectedApplicationMethod}
-                  onChange={(e) => setSelectedApplicationMethod(e.target.value)}
-                  className="w-full px-4 py-2 border border-primary/20 bg-white text-primary font-paragraph text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-                >
-                  {applicationMethods.map(method => (
-                    <option key={method} value={method}>
-                      {method === 'all' ? 'Todas las Aplicaciones' : method}
-                    </option>
-                  ))}
-                </select>
+                <ApplicationMegaMenu
+                  selectedApplication={selectedApplicationMethod}
+                  onSelect={setSelectedApplicationMethod}
+                />
               </div>
 
               {/* Length Filter */}
