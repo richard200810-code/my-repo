@@ -102,15 +102,21 @@ export default function ProductsPage() {
     'Plastic Nano Tip': ['plasticnanotip', 'plastic nano tip']
   };
 
+  // Get application value from product - checks multiple fields with fallback
+  const getApplicationValue = (product: HairExtensionsandWigs): string => {
+    // Check in order: applicationMethod, productType, then fallback to name
+    const value = product.applicationMethod || product.productType || product.itemName || '';
+    return normalizeString(value);
+  };
+
   const applyFilters = () => {
     let filtered = [...products];
 
     if (selectedApplicationMethod !== 'all') {
-      const normalizedSelected = normalizeString(selectedApplicationMethod);
-      const acceptedValues = APPLICATION_ALIAS_MAP[selectedApplicationMethod] || [normalizedSelected];
+      const acceptedValues = APPLICATION_ALIAS_MAP[selectedApplicationMethod] || [normalizeString(selectedApplicationMethod)];
       
       filtered = filtered.filter(p => {
-        const normalizedProductValue = normalizeString(p.applicationMethod);
+        const normalizedProductValue = getApplicationValue(p);
         return acceptedValues.includes(normalizedProductValue);
       });
     }
@@ -174,7 +180,7 @@ export default function ProductsPage() {
             >
               {lengths.map(length => (
                 <option key={length} value={length}>
-                  {length === 'all' ? 'Todas las Longitudes' : `${length}\"`}
+                  {length === 'all' ? 'Todas las Longitudes' : `${length}"`}
                 </option>
               ))}
             </select>
@@ -224,7 +230,7 @@ export default function ProductsPage() {
             >
               {lengths.map(length => (
                 <option key={length} value={length}>
-                  {length === 'all' ? 'Todas las Longitudes' : `${length}\"`}
+                  {length === 'all' ? 'Todas las Longitudes' : `${length}"`}
                 </option>
               ))}
             </select>
