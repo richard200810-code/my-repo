@@ -30,11 +30,11 @@ export default function Cart() {
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-primary/10">
-              <h2 className="font-heading text-2xl text-primary">Your Cart</h2>
+              <h2 className="font-heading text-2xl text-primary">Tu Carrito</h2>
               <button
                 onClick={actions.closeCart}
                 className="p-2 hover:opacity-70 transition-opacity"
-                aria-label="Close cart"
+                aria-label="Cerrar carrito"
               >
                 <X className="w-6 h-6 text-primary" />
               </button>
@@ -46,8 +46,14 @@ export default function Cart() {
                 <div className="flex flex-col items-center justify-center h-full space-y-4">
                   <ShoppingBag className="w-16 h-16 text-primary/30" />
                   <p className="font-paragraph text-base text-primary/60">
-                    Your cart is empty
+                    Tu carrito está vacío
                   </p>
+                  <button
+                    onClick={actions.closeCart}
+                    className="px-6 py-2 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-sm hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  >
+                    <a href="/products" className="no-underline">Seguir comprando</a>
+                  </button>
                 </div>
               ) : (
                 <div className="space-y-6">
@@ -116,20 +122,29 @@ export default function Cart() {
               <div className="border-t border-primary/10 p-6 space-y-4">
                 {/* Total */}
                 <div className="flex items-center justify-between">
-                  <span className="font-heading text-xl text-primary">Total</span>
+                  <span className="font-heading text-xl text-primary">Subtotal</span>
                   <span className="font-heading text-xl text-primary">
                     {formatPrice(totalPrice, currency ?? DEFAULT_CURRENCY)}
                   </span>
                 </div>
 
-                {/* Checkout Button */}
-                <button
-                  onClick={actions.checkout}
-                  disabled={isCheckingOut}
-                  className="w-full px-6 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isCheckingOut ? 'Processing...' : 'Checkout'}
-                </button>
+                {/* View Cart and Checkout Buttons */}
+                <div className="space-y-3">
+                  <a
+                    href="/products"
+                    onClick={actions.closeCart}
+                    className="block w-full px-6 py-3 border-2 border-buttonborder bg-white text-primary font-paragraph text-base hover:bg-buttonbackground transition-all duration-300 text-center no-underline"
+                  >
+                    Ver carrito
+                  </a>
+                  <button
+                    onClick={actions.checkout}
+                    disabled={isCheckingOut}
+                    className="w-full px-6 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isCheckingOut ? 'Procesando...' : 'Finalizar compra'}
+                  </button>
+                </div>
               </div>
             )}
           </motion.div>
