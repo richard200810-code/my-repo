@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ColorRing from '@/components/ColorRing';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 
 export default function DoublePieceFlatWeftPage() {
   const [selectedLength, setSelectedLength] = useState('18');
-  const [selectedColor, setSelectedColor] = useState('Natural');
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
 
   const lengths = ['14', '16', '18', '20', '22', '24', '26', '28', '30'];
-  const colors = ['Natural', 'Rubio', 'Castaño', 'Negro', 'Rojo', 'Personalizado'];
 
   const trustPoints = [
     {
@@ -43,7 +43,7 @@ export default function DoublePieceFlatWeftPage() {
     },
     {
       title: 'Especificaciones',
-      content: 'Disponible en largos pares de 14 a 30 pulgadas. Colores disponibles: Natural, Rubio, Castaño, Negro, Rojo y opciones personalizadas. Todas las especificaciones están sujetas a disponibilidad y requieren consulta profesional previa para confirmar la mejor opción según tus necesidades.'
+      content: 'Disponible en largos pares de 14 a 30 pulgadas. Colores disponibles según catálogo profesional. Todas las especificaciones están sujetas a disponibilidad y requieren consulta profesional previa para confirmar la mejor opción según tus necesidades.'
     }
   ];
 
@@ -163,26 +163,17 @@ export default function DoublePieceFlatWeftPage() {
                 </div>
               </div>
 
-              {/* Color Selector */}
+              {/* Color Ring Selector */}
               <div>
                 <label className="font-paragraph text-sm text-secondary/70 block mb-4 uppercase tracking-wide">
-                  Color
+                  Selector de color
                 </label>
-                <div className="flex flex-wrap gap-3">
-                  {colors.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`px-4 py-2 font-paragraph text-sm transition-all border ${
-                        selectedColor === color
-                          ? 'bg-secondary text-white border-secondary'
-                          : 'bg-white text-secondary border-secondary/20 hover:border-secondary/50'
-                      }`}
-                    >
-                      {color}
-                    </button>
-                  ))}
-                </div>
+                <ColorRing 
+                  onSelect={setSelectedColor} 
+                  selectedCode={selectedColor || undefined}
+                  showGuideLink={true}
+                  compact={true}
+                />
               </div>
 
               {/* Availability Note */}

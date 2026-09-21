@@ -14,6 +14,7 @@ import TapeInGuidePage from '@/components/pages/TapeInGuidePage';
 import KeratinGuidePage from '@/components/pages/KeratinGuidePage';
 import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
 import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage';
+import ColorGuidePage from '@/components/pages/ColorGuidePage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -113,6 +114,13 @@ const router = createBrowserRouter([
         element: <DoublePieceFlatWeftPage />,
         routeMetadata: {
           pageIdentifier: 'double-piece-flat-weft',
+        },
+      },
+      {
+        path: "academy/color-ring",
+        element: <ColorGuidePage />,
+        routeMetadata: {
+          pageIdentifier: 'color-guide',
         },
       },
       {

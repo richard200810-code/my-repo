@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { ChevronRight } from 'lucide-react';
 
 const methods = [
   { name: 'Genius Weft', description: 'Trama ultrafina para una integración flexible' },
@@ -74,6 +75,30 @@ export default function HairWeftGuidePage() {
           <p className="font-paragraph text-base md:text-lg text-secondary/70">
             Material disponible para proyectos personalizados. Consulta con nuestro equipo para conocer opciones de personalización y adaptación a tus necesidades específicas.
           </p>
+        </div>
+      </section>
+
+      {/* Color Guide Section */}
+      <section className="w-full bg-secondary/5 py-16 md:py-24">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
+          <Link
+            to="/academy/color-ring"
+            className="block bg-white p-8 md:p-12 border border-secondary/10 hover:border-secondary/30 transition-all group"
+          >
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <h3 className="font-heading text-3xl md:text-4xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
+                  Guía de Color LUX Hair
+                </h3>
+                <p className="font-paragraph text-base text-secondary/70 max-w-2xl">
+                  Referencia visual profesional de tonos disponibles. Explora todas las familias de color, mezclas, tonos rooted y efectos especiales para seleccionar el tono perfecto para tu aplicación.
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide flex-shrink-0">
+                Ver guía <ChevronRight size={16} />
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 
