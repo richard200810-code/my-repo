@@ -7,7 +7,7 @@ import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
 
 interface SearchResult {
-  type: 'product' | 'guide' | 'page';
+  type: 'product' | 'aplicacion' | 'page';
   id: string;
   title: string;
   description?: string;
@@ -26,12 +26,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [isSearching, setIsSearching] = useState(false);
 
   const guides = [
-    { title: 'Guía Hair Weft', path: '/aplicaciones-hair-weft' },
-    { title: 'Guía Clip In', path: '/aplicaciones-clip-in' },
-    { title: 'Guía Tape In', path: '/aplicaciones-tape-in' },
-    { title: 'Guía Keratin', path: '/aplicaciones-keratin' },
-    { title: 'Guía Feather', path: '/aplicaciones-feather' },
-    { title: 'Guía Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft' },
+    { title: 'Hair Weft', path: '/aplicaciones-hair-weft' },
+    { title: 'Clip In', path: '/aplicaciones-clip-in' },
+    { title: 'Tape In', path: '/aplicaciones-tape-in' },
+    { title: 'Keratin', path: '/aplicaciones-keratin' },
+    { title: 'Feather', path: '/aplicaciones-feather' },
+    { title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft' },
   ];
 
   const pages = [
@@ -63,7 +63,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               p.itemName?.toLowerCase().includes(queryLower) ||
               p.productType?.toLowerCase().includes(queryLower) ||
               p.color?.toLowerCase().includes(queryLower) ||
-              p.applicationMethod?.toLowerCase().includes(queryLower)
+              p.applicationMethod?.toLowerCase().includes(queryLower) ||
+              p.itemDescription?.toLowerCase().includes(queryLower) ||
+              p.length?.toString().includes(queryLower)
           )
           .slice(0, 5)
           .map((p) => ({
@@ -78,7 +80,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         const guideResults: SearchResult[] = guides
           .filter((g) => g.title.toLowerCase().includes(queryLower))
           .map((g) => ({
-            type: 'guide' as const,
+            type: 'aplicacion' as const,
             id: g.path,
             title: g.title,
             description: 'Guía de aplicación',
@@ -202,8 +204,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         <span className="text-xs font-paragraph text-primary/40 flex-shrink-0">
                           {result.type === 'product'
                             ? 'Producto'
-                            : result.type === 'guide'
-                            ? 'Guía'
+                            : result.type === 'aplicacion'
+                            ? 'Aplicación'
                             : 'Página'}
                         </span>
                       </Link>

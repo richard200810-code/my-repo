@@ -3,12 +3,12 @@ import { X, Search as SearchIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
-import { HairExtensionsandWigs, Stores } from '@/entities';
+import { HairExtensionsandWigs } from '@/entities';
 
 interface SearchResult {
   id: string;
   title: string;
-  type: 'product' | 'guide' | 'store';
+  type: 'product' | 'aplicacion' | 'page';
   path: string;
   description?: string;
 }
@@ -22,28 +22,32 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [allProducts, setAllProducts] = useState<HairExtensionsandWigs[]>([]);
-  const [allStores, setAllStores] = useState<Stores[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Guide pages data
-  const guides = [
-    { id: 'hair-weft', title: 'Hair Weft', path: '/aplicaciones-hair-weft', type: 'guide' as const },
-    { id: 'clip-in', title: 'Clip In', path: '/aplicaciones-clip-in', type: 'guide' as const },
-    { id: 'tape-in', title: 'Tape In', path: '/aplicaciones-tape-in', type: 'guide' as const },
-    { id: 'keratin', title: 'Keratin', path: '/aplicaciones-keratin', type: 'guide' as const },
-    { id: 'feather', title: 'Feather', path: '/aplicaciones-feather', type: 'guide' as const },
-    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'guide' as const },
+  // Application pages data
+  const aplicaciones = [
+    { id: 'hair-weft', title: 'Hair Weft', path: '/aplicaciones-hair-weft', type: 'aplicacion' as const },
+    { id: 'clip-in', title: 'Clip In', path: '/aplicaciones-clip-in', type: 'aplicacion' as const },
+    { id: 'tape-in', title: 'Tape In', path: '/aplicaciones-tape-in', type: 'aplicacion' as const },
+    { id: 'keratin', title: 'Keratin', path: '/aplicaciones-keratin', type: 'aplicacion' as const },
+    { id: 'feather', title: 'Feather', path: '/aplicaciones-feather', type: 'aplicacion' as const },
+    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'aplicacion' as const },
   ];
 
-  // Load all products and stores on mount
+  // Main pages data
+  const mainPages = [
+    { id: 'home', title: 'Inicio', path: '/', type: 'page' as const },
+    { id: 'products', title: 'Productos', path: '/products', type: 'page' as const },
+    { id: 'stores', title: 'Compra', path: '/stores', type: 'page' as const },
+    { id: 'contact', title: 'Contacto', path: '/contact', type: 'page' as const },
+  ];
+
+  // Load all products on mount
   useEffect(() => {
     const loadData = async () => {
       try {
         const productsResult = await BaseCrudService.getAll<HairExtensionsandWigs>('hairextensions', {}, { limit: 100 });
         setAllProducts(productsResult.items);
-
-        const storesResult = await BaseCrudService.getAll<Stores>('stores', {}, { limit: 100 });
-        setAllStores(storesResult.items);
       } catch (error) {
         console.error('Error loading search data:', error);
       }
@@ -68,7 +72,9 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         product.itemName?.toLowerCase().includes(searchQuery) ||
         product.itemDescription?.toLowerCase().includes(searchQuery) ||
         product.applicationMethod?.toLowerCase().includes(searchQuery) ||
-        product.productType?.toLowerCase().includes(searchQuery)
+        product.productType?.toLowerCase().includes(searchQuery) ||
+        product.color?.toLowerCase().includes(searchQuery) ||
+        product.length?.toString().includes(searchQuery)
       )
       .map(product => ({
         id: product._id,
@@ -78,35 +84,31 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         description: product.itemDescription,
       }));
 
-    // Search in guides
-    const guideResults = guides.filter(guide =>
-      guide.title.toLowerCase().includes(searchQuery)
-    ).map(guide => ({
-      id: guide.id,
-      title: guide.title,
-      type: 'guide' as const,
-      path: guide.path,
+    // Search in application pages
+    const aplicacionResults = aplicaciones.filter(app =>
+      app.title.toLowerCase().includes(searchQuery)
+    ).map(app => ({
+      id: app.id,
+      title: app.title,
+      type: 'aplicacion' as const,
+      path: app.path,
     }));
 
-    // Search in stores
-    const storeResults = allStores
-      .filter(store =>
-        store.storeName?.toLowerCase().includes(searchQuery) ||
-        store.description?.toLowerCase().includes(searchQuery)
-      )
-      .map(store => ({
-        id: store._id,
-        title: store.storeName || 'Tienda sin nombre',
-        type: 'store' as const,
-        path: `/stores/${store._id}`,
-        description: store.description,
-      }));
+    // Search in main pages
+    const pageResults = mainPages.filter(page =>
+      page.title.toLowerCase().includes(searchQuery)
+    ).map(page => ({
+      id: page.id,
+      title: page.title,
+      type: 'page' as const,
+      path: page.path,
+    }));
 
     // Combine and limit results
-    const combined = [...productResults, ...guideResults, ...storeResults].slice(0, 10);
+    const combined = [...productResults, ...aplicacionResults, ...pageResults].slice(0, 10);
     setResults(combined);
     setIsLoading(false);
-  }, [query, allProducts, allStores]);
+  }, [query, allProducts]);
 
   const handleClose = () => {
     setQuery('');
@@ -190,7 +192,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
                               )}
                             </div>
                             <span className="ml-4 px-2 py-1 bg-primary/10 text-primary text-xs font-paragraph rounded">
-                              {result.type === 'product' ? 'Producto' : result.type === 'guide' ? 'Guía' : 'Tienda'}
+                              {result.type === 'product' ? 'Producto' : result.type === 'aplicacion' ? 'Aplicación' : 'Página'}
                             </span>
                           </div>
                         </Link>
