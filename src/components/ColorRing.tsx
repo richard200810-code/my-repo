@@ -7,6 +7,7 @@ interface ColorCode {
   type: 'virgin' | 'remy' | 'rooted' | 'blend' | 'ombre' | 'piano' | 'balayage' | 'creative';
   hexColor?: string;
   description?: string;
+  isEffect?: boolean;
 }
 
 const colorCodes: ColorCode[] = [
@@ -69,13 +70,13 @@ const colorCodes: ColorCode[] = [
   { code: 'R8-18/22', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8d8680', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio muy pálido' },
   { code: 'R8-18/613', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#9d9690', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio platino blanco' },
 
-  // Ombre, Piano, Balayage
-  { code: 'Ombre', family: 'Ombre / Piano / Balayage', type: 'ombre', hexColor: '#4d4640', description: 'Degradado oscuro a claro' },
-  { code: 'Piano/Highlight', family: 'Ombre / Piano / Balayage', type: 'piano', hexColor: '#6d6660', description: 'Mechas destacadas' },
-  { code: 'Balayage', family: 'Ombre / Piano / Balayage', type: 'balayage', hexColor: '#8d8680', description: 'Efecto barrido natural' },
+  // Ombre, Piano, Balayage - Effects (kept for filtering but not displayed in grid)
+  { code: 'Ombre', family: 'Ombre / Piano / Balayage', type: 'ombre', hexColor: '#4d4640', description: 'Degradado oscuro a claro', isEffect: true },
+  { code: 'Piano/Highlight', family: 'Ombre / Piano / Balayage', type: 'piano', hexColor: '#6d6660', description: 'Mechas destacadas', isEffect: true },
+  { code: 'Balayage', family: 'Ombre / Piano / Balayage', type: 'balayage', hexColor: '#8d8680', description: 'Efecto barrido natural', isEffect: true },
 
-  // Tonos creativos
-  { code: 'Creativo', family: 'Tonos creativos', type: 'creative', hexColor: '#ff69b4', description: 'Tonos personalizados' },
+  // Tonos creativos - Creative (kept for filtering but not displayed in grid)
+  { code: 'Creativo', family: 'Tonos creativos', type: 'creative', hexColor: '#ff69b4', description: 'Tonos personalizados', isEffect: true },
 ];
 
 interface ColorRingProps {
@@ -98,6 +99,9 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
     if (selectedType && c.type !== selectedType) return false;
     return true;
   });
+
+  // Separate effects from tone codes for grid display
+  const gridCodes = filteredCodes.filter(c => !c.isEffect);
 
   const typeLabels: Record<string, string> = {
     virgin: 'Virgin Hair',
@@ -180,7 +184,7 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
 
       {/* Color Grid - Compact Swatches */}
       <div className={`grid gap-6 ${compact ? 'grid-cols-6 md:grid-cols-8 lg:grid-cols-10' : 'grid-cols-5 md:grid-cols-7 lg:grid-cols-9'}`}>
-        {filteredCodes.map(color => (
+        {gridCodes.map(color => (
           <button
             key={color.code}
             onClick={() => {
@@ -199,8 +203,8 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
               }`}
               style={{ backgroundColor: color.hexColor || '#cccccc' }}
             />
-            {/* Code Label */}
-            <span className={`font-paragraph text-xs font-semibold text-center leading-tight ${
+            {/* Code Label - Smaller text with better spacing and line wrapping */}
+            <span className={`font-paragraph text-xs font-semibold text-center leading-tight break-words max-w-[3rem] ${
               selectedCode === color.code || detailCode?.code === color.code
                 ? 'text-secondary'
                 : 'text-secondary/70 group-hover:text-secondary'
