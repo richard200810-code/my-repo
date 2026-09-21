@@ -14,61 +14,15 @@ interface HairColor {
 }
 
 // Direct URL mapping for all 53 hair colors - real Wix static assets
-const hairColorUrls: Record<string, { swatch: string; preview: string }> = {
-  '1': { swatch: 'https://static.wixstatic.com/media/12d367_1_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_1_hair_preview.jpg' },
-  '1B': { swatch: 'https://static.wixstatic.com/media/12d367_1b_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_1b_hair_preview.jpg' },
-  '2': { swatch: 'https://static.wixstatic.com/media/12d367_2_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_2_hair_preview.jpg' },
-  '3A': { swatch: 'https://static.wixstatic.com/media/12d367_3a_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_3a_hair_preview.jpg' },
-  '4': { swatch: 'https://static.wixstatic.com/media/12d367_4_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_4_hair_preview.jpg' },
-  '5': { swatch: 'https://static.wixstatic.com/media/12d367_5_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_5_hair_preview.jpg' },
-  '6': { swatch: 'https://static.wixstatic.com/media/12d367_6_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_6_hair_preview.jpg' },
-  '8': { swatch: 'https://static.wixstatic.com/media/12d367_8_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_8_hair_preview.jpg' },
-  '12': { swatch: 'https://static.wixstatic.com/media/12d367_12_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_12_hair_preview.jpg' },
-  '14': { swatch: 'https://static.wixstatic.com/media/12d367_14_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_14_hair_preview.jpg' },
-  '16': { swatch: 'https://static.wixstatic.com/media/12d367_16_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_16_hair_preview.jpg' },
-  '18': { swatch: 'https://static.wixstatic.com/media/12d367_18_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_18_hair_preview.jpg' },
-  '20': { swatch: 'https://static.wixstatic.com/media/12d367_20_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_20_hair_preview.jpg' },
-  '22': { swatch: 'https://static.wixstatic.com/media/12d367_22_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_22_hair_preview.jpg' },
-  '24': { swatch: 'https://static.wixstatic.com/media/12d367_24_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_24_hair_preview.jpg' },
-  '27': { swatch: 'https://static.wixstatic.com/media/12d367_27_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_27_hair_preview.jpg' },
-  '30': { swatch: 'https://static.wixstatic.com/media/12d367_30_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_30_hair_preview.jpg' },
-  '33': { swatch: 'https://static.wixstatic.com/media/12d367_33_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_33_hair_preview.jpg' },
-  '60': { swatch: 'https://static.wixstatic.com/media/12d367_60_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_60_hair_preview.jpg' },
-  '60A': { swatch: 'https://static.wixstatic.com/media/12d367_60a_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_60a_hair_preview.jpg' },
-  '613': { swatch: 'https://static.wixstatic.com/media/12d367_613_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_613_hair_preview.jpg' },
-  '99J': { swatch: 'https://static.wixstatic.com/media/12d367_99j_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_99j_hair_preview.jpg' },
-  '2/4': { swatch: 'https://static.wixstatic.com/media/12d367_2-4_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_2-4_hair_preview.jpg' },
-  '2/5': { swatch: 'https://static.wixstatic.com/media/12d367_2-5_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_2-5_hair_preview.jpg' },
-  '1B/2': { swatch: 'https://static.wixstatic.com/media/12d367_1b-2_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_1b-2_hair_preview.jpg' },
-  '1B/4': { swatch: 'https://static.wixstatic.com/media/12d367_1b-4_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_1b-4_hair_preview.jpg' },
-  '4/6': { swatch: 'https://static.wixstatic.com/media/12d367_4-6_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_4-6_hair_preview.jpg' },
-  '4/8': { swatch: 'https://static.wixstatic.com/media/12d367_4-8_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_4-8_hair_preview.jpg' },
-  '4/27': { swatch: 'https://static.wixstatic.com/media/12d367_4-27_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_4-27_hair_preview.jpg' },
-  '6/24': { swatch: 'https://static.wixstatic.com/media/12d367_6-24_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_6-24_hair_preview.jpg' },
-  '7/20': { swatch: 'https://static.wixstatic.com/media/12d367_7-20_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_7-20_hair_preview.jpg' },
-  '8/10': { swatch: 'https://static.wixstatic.com/media/12d367_8-10_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_8-10_hair_preview.jpg' },
-  '8/22': { swatch: 'https://static.wixstatic.com/media/12d367_8-22_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_8-22_hair_preview.jpg' },
-  '9/613': { swatch: 'https://static.wixstatic.com/media/12d367_9-613_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_9-613_hair_preview.jpg' },
-  '613/24': { swatch: 'https://static.wixstatic.com/media/12d367_613-24_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_613-24_hair_preview.jpg' },
-  '18/613': { swatch: 'https://static.wixstatic.com/media/12d367_18-613_hair_swatch.jpg', preview: 'https://static.wixstatic.com/media/12d367_18-613_hair_preview.jpg' },
-  '18A/613A': { swatch: 'https://static.wixstatic.com/media/37e681_edb520d71aa84ebd89ed0c538a27054f~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_edb520d71aa84ebd89ed0c538a27054f~mv2.jpg' },
-  'DXB': { swatch: 'https://static.wixstatic.com/media/37e681_c9ad2812421346c2b5c43db338b49864~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_c9ad2812421346c2b5c43db338b49864~mv2.jpg' },
-  'DXB/18': { swatch: 'https://static.wixstatic.com/media/37e681_9edfaff7b3b34212b2b43758d7727277~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_9edfaff7b3b34212b2b43758d7727277~mv2.jpg' },
-  'R1B-4': { swatch: 'https://static.wixstatic.com/media/37e681_74f8540abd4647479ec49799c630e8a5~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_74f8540abd4647479ec49799c630e8a5~mv2.jpg' },
-  'R2-6/27': { swatch: 'https://static.wixstatic.com/media/37e681_3006456f0bf945dfb57b0ee00319b089~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_3006456f0bf945dfb57b0ee00319b089~mv2.jpg' },
-  'R2-4/6': { swatch: 'https://static.wixstatic.com/media/37e681_08b563ecc854424185b4489bd41d0451~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_08b563ecc854424185b4489bd41d0451~mv2.jpg' },
-  'R2-DXB/18': { swatch: 'https://static.wixstatic.com/media/37e681_582115066c9e42e395d682c6b4d468dc~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_582115066c9e42e395d682c6b4d468dc~mv2.jpg' },
-  'R2-6/24': { swatch: 'https://static.wixstatic.com/media/37e681_37475ab3a4c74e1c8e6dc59ae316f3a4~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_37475ab3a4c74e1c8e6dc59ae316f3a4~mv2.jpg' },
-  'R2-8/10': { swatch: 'https://static.wixstatic.com/media/37e681_babcaf06bbd6420daafdc8b6e8963c7f~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_babcaf06bbd6420daafdc8b6e8963c7f~mv2.jpg' },
-  'R2-60A': { swatch: 'https://static.wixstatic.com/media/37e681_3cfbd01656e94133af1f483f75601179~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_3cfbd01656e94133af1f483f75601179~mv2.jpg' },
-  'Rooted Silver Ash': { swatch: 'https://static.wixstatic.com/media/37e681_1c90e5f9e98d42be869bf42a8ceb7090~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_1c90e5f9e98d42be869bf42a8ceb7090~mv2.jpg' },
-  'R5-7/20': { swatch: 'https://static.wixstatic.com/media/37e681_13e046da0224410eaec251cc8b01044c~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_13e046da0224410eaec251cc8b01044c~mv2.jpg' },
-  'R5-8/22': { swatch: 'https://static.wixstatic.com/media/37e681_813df4d3982f497cab26b47052e73bcc~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_813df4d3982f497cab26b47052e73bcc~mv2.jpg' },
-  'R5-9/613': { swatch: 'https://static.wixstatic.com/media/37e681_754c0443f4da4938a1f43f3a9e191d59~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_754c0443f4da4938a1f43f3a9e191d59~mv2.jpg' },
-  'R5-18A/613A': { swatch: 'https://static.wixstatic.com/media/37e681_864ca2fcbbaf434f8d372fae0149dd30~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_864ca2fcbbaf434f8d372fae0149dd30~mv2.jpg' },
-  'R8-18/22': { swatch: 'https://static.wixstatic.com/media/37e681_d1d77ddca0ca4a2999283b5558283620~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_d1d77ddca0ca4a2999283b5558283620~mv2.jpg' },
-  'R8-18/613': { swatch: 'https://static.wixstatic.com/media/37e681_6b90a9434a454259995a85bc27fe93d1~mv2.jpg', preview: 'https://static.wixstatic.com/media/37e681_6b90a9434a454259995a85bc27fe93d1~mv2.jpg' },
-};
+const BASE = 'https://static.wixstatic.com/media/37e681_';
+const codes = ['1','1B','2','3A','4','5','6','8','12','14','16','18','20','22','24','27','30','33','60','60A','#613','#99J','2/4','2/5','1B/2','1B/4','4/6','4/8','4/27','6/24','7/20','8/10','8/22','9/613','613/24','18/613','18A/613A','DXB','DXB/18','R1B-4','R2-6/27','R2-4/6','R2-DXB/18','R2-6/24','R2-8/10','R2-60A','Rooted Silver Ash','R5-7/20','R5-8/22','R5-9/613','R5-18A/613A','R8-18/22','R8-18/613'];
+const ids = ['1e0edffecb9a4e95bb3d7599c0d15577','209228a6ae26434ba678bcd7fc8d3449','df4e3c6d2a734b4785d70885f30e47ba','80f203c6ef37487f80cd21aab0c4a294','38685dcf357541a1a805da379b959f9e','b4cb94855d6a4676b5012a04d955e272','b07164ddfb6d45ee9b7fcfd15d92106f','79222f0660af4db58912d898e1bce6d9','7368440b75024c9bb218f2599f5287f3','8970bb88f4a44a0bb43d1d60da5ac0d1','20c92c6b13944161a68d7f7f80b300f1','f1d8401a82cc4cc3ab3071c980cfc181','7c4fe0536e8f456fab7268fc558b1431','078b3700c7b243a3a2d7f6c3f3623a31','017e135b72274d94b4be9d79ea24b2d1','d595cc51f089428e9e6713a1d0e2ce3d','3884945455bd496a84e7c0d2b190d98e','4cd2d8ef333f435da56b45cdba1285e6','ab63da6196b04dd5af7651cdced2e8ed','c1075881e11c43c89bbb509add061844','0eb838308b6d4cfa94feb2fc6ba59ae1','3b84cf7ee4c64dee90dc4068980e2d81','ddba1cfadcbc48aeba19c3b3da7e1440','dd47d409f7c14dcfb839cdb028a3df57','fe3b588211ba422d85ce37b6563444e8','7bb256e66ca54de1802a8cc0251109ff','3ccda312fcee454893f972382b2fb5c5','7f04a15660fe4ff992414acc554c3a12','d7fb239a791545c180ecb25213e994bc','dcafe638f3164480acbe2bb1c9c5b5a8','4852b61ab1884ab8b587ad134594071c','6393f30d5ded43a3b90874f40755a669','69b379d9f9db4f99931f567b7daf53b7','6f7f1b48720643adb8668e2bbae26214','eb5945b0639044df9976789bdafb5a8d','b1bb281fa4f5477fb648d07710fe59a8','edb520d71aa84ebd89ed0c538a27054f','c9ad2812421346c2b5c43db338b49864','9edfaff7b3b34212b2b43758d7727277','74f8540abd4647479ec49799c630e8a5','3006456f0bf945dfb57b0ee00319b089','08b563ecc854424185b4489bd41d0451','582115066c9e42e395d682c6b4d468dc','37475ab3a4c74e1c8e6dc59ae316f3a4','babcaf06bbd6420daafdc8b6e8963c7f','3cfbd01656e94133af1f483f75601179','1c90e5f9e98d42be869bf42a8ceb7090','13e046da0224410eaec251cc8b01044c','813df4d3982f497cab26b47052e73bcc','754c0443f4da4938a1f43f3a9e191d59','864ca2fcbbaf434f8d372fae0149dd30','d1d77ddca0ca4a2999283b5558283620','6b90a9434a454259995a85bc27fe93d1'];
+
+const hairColorUrls: Record<string, { swatch: string; preview: string }> = {};
+for (let i = 0; i < codes.length; i++) {
+  const url = BASE + ids[i] + '~mv2.jpg';
+  hairColorUrls[codes[i]] = { swatch: url, preview: url };
+}
 
 const hairColors: HairColor[] = [
   // Virgin Hair - Básicos
