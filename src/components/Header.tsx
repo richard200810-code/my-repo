@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Menu, X, ShoppingCart } from 'lucide-react';
+import { Menu, X, ShoppingCart, Search, User } from 'lucide-react';
 import { useState } from 'react';
 import { useCart } from '@/integrations';
 import Cart from '@/components/Cart';
+import SearchPanel from '@/components/SearchPanel';
+import AccountPanel from '@/components/AccountPanel';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
   const { itemCount, actions } = useCart();
 
   const navLinks = [
@@ -40,6 +44,25 @@ export default function Header() {
 
             {/* Cart Icon */}
             <div className="flex items-center gap-4">
+              {/* Search Icon */}
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="p-2 hover:opacity-70 transition-opacity"
+                aria-label="Buscar"
+              >
+                <Search className="w-6 h-6 text-primary" />
+              </button>
+
+              {/* Account Icon */}
+              <button
+                onClick={() => setAccountOpen(true)}
+                className="p-2 hover:opacity-70 transition-opacity"
+                aria-label="Mi cuenta"
+              >
+                <User className="w-6 h-6 text-primary" />
+              </button>
+
+              {/* Cart Icon */}
               <button
                 onClick={actions.toggleCart}
                 className="relative p-2 hover:opacity-70 transition-opacity"
@@ -85,6 +108,8 @@ export default function Header() {
           )}
         </div>
       </header>
+      <SearchPanel isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <AccountPanel isOpen={accountOpen} onClose={() => setAccountOpen(false)} />
       <Cart />
     </>
   );
