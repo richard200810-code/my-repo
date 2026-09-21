@@ -8,6 +8,7 @@ import ProductDetailPage from '@/components/pages/ProductDetailPage';
 import ContactPage from '@/components/pages/ContactPage';
 import StoresPage from '@/components/pages/StoresPage';
 import StoreDetailPage from '@/components/pages/StoreDetailPage';
+import AcademyPage from '@/components/pages/AcademyPage';
 import HairWeftGuidePage from '@/components/pages/HairWeftGuidePage';
 import ClipInGuidePage from '@/components/pages/ClipInGuidePage';
 import TapeInGuidePage from '@/components/pages/TapeInGuidePage';
@@ -72,6 +73,13 @@ const router = createBrowserRouter([
         element: <StoreDetailPage />,
         routeMetadata: {
           pageIdentifier: 'store-detail',
+        },
+      },
+      {
+        path: "academy",
+        element: <AcademyPage />,
+        routeMetadata: {
+          pageIdentifier: 'academy',
         },
       },
       {
