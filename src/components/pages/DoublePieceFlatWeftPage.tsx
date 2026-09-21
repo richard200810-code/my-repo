@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ColorRing from '@/components/ColorRing';
+import HairColorSelector from '@/components/HairColorSelector';
 import { ChevronRight, ChevronDown } from 'lucide-react';
 
 export default function DoublePieceFlatWeftPage() {
@@ -168,10 +168,9 @@ export default function DoublePieceFlatWeftPage() {
                 <label className="font-paragraph text-sm text-secondary/70 block mb-4 uppercase tracking-wide">
                   Selector de color
                 </label>
-                <ColorRing 
+                <HairColorSelector 
                   onSelect={setSelectedColor} 
                   selectedCode={selectedColor || undefined}
-                  showGuideLink={true}
                   compact={true}
                 />
               </div>
