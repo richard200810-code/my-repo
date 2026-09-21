@@ -184,6 +184,11 @@ export default function DoublePieceFlatWeftPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Availability Note */}
+              <p className="font-paragraph text-sm text-secondary/60 pt-4 border-t border-secondary/10 mt-4">
+                Las opciones se confirman según disponibilidad y evaluación profesional.
+              </p>
             </div>
 
             {/* CTAs */}
