@@ -46,8 +46,8 @@ const hairColors: HairColor[] = [
   { code: '33', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rubio dorado', swatchImage: hairColorUrls['33'].swatch, previewImage: hairColorUrls['33'].preview },
   { code: '60', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rubio platino claro', swatchImage: hairColorUrls['60'].swatch, previewImage: hairColorUrls['60'].preview },
   { code: '60A', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rubio platino muy claro', swatchImage: hairColorUrls['60A'].swatch, previewImage: hairColorUrls['60A'].preview },
-  { code: '#613', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rubio platino blanco', swatchImage: hairColorUrls['613'].swatch, previewImage: hairColorUrls['613'].preview },
-  { code: '#99J', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rojo vino', swatchImage: hairColorUrls['99J'].swatch, previewImage: hairColorUrls['99J'].preview },
+  { code: '#613', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rubio platino blanco', swatchImage: hairColorUrls['#613'].swatch, previewImage: hairColorUrls['#613'].preview },
+  { code: '#99J', family: 'Virgin Hair', type: 'virgin', nameEs: 'Rojo vino', swatchImage: hairColorUrls['#99J'].swatch, previewImage: hairColorUrls['#99J'].preview },
 
   // Remy Hair - Mezclas
   { code: '2/4', family: 'Remy Hair', type: 'remy', nameEs: 'Marrón muy oscuro/Marrón', swatchImage: hairColorUrls['2/4'].swatch, previewImage: hairColorUrls['2/4'].preview, hasBlend: true },
