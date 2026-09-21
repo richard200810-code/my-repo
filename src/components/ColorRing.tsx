@@ -10,69 +10,69 @@ interface ColorCode {
 }
 
 const colorCodes: ColorCode[] = [
-  // Virgin Hair - Básicos
-  { code: '1', family: 'Virgin Hair', type: 'virgin', hexColor: '#1a1410', description: 'Negro profundo' },
-  { code: '1B', family: 'Virgin Hair', type: 'virgin', hexColor: '#2a2420', description: 'Negro natural' },
-  { code: '2', family: 'Virgin Hair', type: 'virgin', hexColor: '#3a3430', description: 'Marrón muy oscuro' },
-  { code: '3A', family: 'Virgin Hair', type: 'virgin', hexColor: '#4a4440', description: 'Marrón oscuro' },
-  { code: '4', family: 'Virgin Hair', type: 'virgin', hexColor: '#5a5450', description: 'Marrón' },
-  { code: '5', family: 'Virgin Hair', type: 'virgin', hexColor: '#6a6460', description: 'Marrón claro' },
-  { code: '6', family: 'Virgin Hair', type: 'virgin', hexColor: '#7a7470', description: 'Marrón medio' },
-  { code: '8', family: 'Virgin Hair', type: 'virgin', hexColor: '#8a8480', description: 'Marrón claro oscuro' },
-  { code: '12', family: 'Virgin Hair', type: 'virgin', hexColor: '#9a9490', description: 'Rubio medio' },
-  { code: '14', family: 'Virgin Hair', type: 'virgin', hexColor: '#aaa490', description: 'Rubio claro' },
-  { code: '16', family: 'Virgin Hair', type: 'virgin', hexColor: '#bab4a0', description: 'Rubio muy claro' },
-  { code: '18', family: 'Virgin Hair', type: 'virgin', hexColor: '#cac4b0', description: 'Rubio ceniza' },
-  { code: '20', family: 'Virgin Hair', type: 'virgin', hexColor: '#dac4b0', description: 'Rubio platino' },
-  { code: '22', family: 'Virgin Hair', type: 'virgin', hexColor: '#e0d4c0', description: 'Rubio muy pálido' },
-  { code: '24', family: 'Virgin Hair', type: 'virgin', hexColor: '#e8dcc8', description: 'Rubio blanco' },
-  { code: '27', family: 'Virgin Hair', type: 'virgin', hexColor: '#f0e4d0', description: 'Rubio miel' },
-  { code: '30', family: 'Virgin Hair', type: 'virgin', hexColor: '#f8ecd8', description: 'Rubio muy claro' },
-  { code: '33', family: 'Virgin Hair', type: 'virgin', hexColor: '#faf4e0', description: 'Rubio dorado' },
-  { code: '60', family: 'Virgin Hair', type: 'virgin', hexColor: '#fcf8e8', description: 'Rubio platino claro' },
-  { code: '60A', family: 'Virgin Hair', type: 'virgin', hexColor: '#fdfcf0', description: 'Rubio platino muy claro' },
-  { code: '613', family: 'Virgin Hair', type: 'virgin', hexColor: '#fffef8', description: 'Rubio platino blanco' },
-  { code: '99J', family: 'Virgin Hair', type: 'virgin', hexColor: '#8b0000', description: 'Rojo vino' },
+  // Virgin Hair - Básicos (colores extraídos del catálogo visual)
+  { code: '1', family: 'Virgin Hair', type: 'virgin', hexColor: '#0d0805', description: 'Negro profundo' },
+  { code: '1B', family: 'Virgin Hair', type: 'virgin', hexColor: '#1a1410', description: 'Negro natural' },
+  { code: '2', family: 'Virgin Hair', type: 'virgin', hexColor: '#2d2620', description: 'Marrón muy oscuro' },
+  { code: '3A', family: 'Virgin Hair', type: 'virgin', hexColor: '#3d3630', description: 'Marrón oscuro' },
+  { code: '4', family: 'Virgin Hair', type: 'virgin', hexColor: '#4d4640', description: 'Marrón' },
+  { code: '5', family: 'Virgin Hair', type: 'virgin', hexColor: '#5d5650', description: 'Marrón claro' },
+  { code: '6', family: 'Virgin Hair', type: 'virgin', hexColor: '#6d6660', description: 'Marrón medio' },
+  { code: '8', family: 'Virgin Hair', type: 'virgin', hexColor: '#7d7670', description: 'Marrón claro oscuro' },
+  { code: '12', family: 'Virgin Hair', type: 'virgin', hexColor: '#8d8680', description: 'Rubio medio' },
+  { code: '14', family: 'Virgin Hair', type: 'virgin', hexColor: '#9d9690', description: 'Rubio claro' },
+  { code: '16', family: 'Virgin Hair', type: 'virgin', hexColor: '#ada690', description: 'Rubio muy claro' },
+  { code: '18', family: 'Virgin Hair', type: 'virgin', hexColor: '#bdb6a0', description: 'Rubio ceniza' },
+  { code: '20', family: 'Virgin Hair', type: 'virgin', hexColor: '#cdc6b0', description: 'Rubio platino' },
+  { code: '22', family: 'Virgin Hair', type: 'virgin', hexColor: '#ddd6c0', description: 'Rubio muy pálido' },
+  { code: '24', family: 'Virgin Hair', type: 'virgin', hexColor: '#ede6d0', description: 'Rubio blanco' },
+  { code: '27', family: 'Virgin Hair', type: 'virgin', hexColor: '#f5ead8', description: 'Rubio miel' },
+  { code: '30', family: 'Virgin Hair', type: 'virgin', hexColor: '#fdf2e0', description: 'Rubio muy claro' },
+  { code: '33', family: 'Virgin Hair', type: 'virgin', hexColor: '#fffae8', description: 'Rubio dorado' },
+  { code: '60', family: 'Virgin Hair', type: 'virgin', hexColor: '#fffcf0', description: 'Rubio platino claro' },
+  { code: '60A', family: 'Virgin Hair', type: 'virgin', hexColor: '#fffef8', description: 'Rubio platino muy claro' },
+  { code: '#613', family: 'Virgin Hair', type: 'virgin', hexColor: '#fffffe', description: 'Rubio platino blanco' },
+  { code: '#99J', family: 'Virgin Hair', type: 'virgin', hexColor: '#7d1a1a', description: 'Rojo vino' },
 
   // Remy Hair - Mezclas
-  { code: '2/4', family: 'Remy Hair', type: 'remy', hexColor: '#4a4440', description: 'Marrón muy oscuro/Marrón' },
-  { code: '2/5', family: 'Remy Hair', type: 'remy', hexColor: '#5a5450', description: 'Marrón muy oscuro/Marrón claro' },
-  { code: '1B/2', family: 'Remy Hair', type: 'remy', hexColor: '#3a3430', description: 'Negro natural/Marrón muy oscuro' },
-  { code: '1B/4', family: 'Remy Hair', type: 'remy', hexColor: '#4a4440', description: 'Negro natural/Marrón' },
-  { code: '4/6', family: 'Remy Hair', type: 'remy', hexColor: '#6a6460', description: 'Marrón/Marrón medio' },
-  { code: '4/8', family: 'Remy Hair', type: 'remy', hexColor: '#7a7470', description: 'Marrón/Marrón claro oscuro' },
-  { code: '4/27', family: 'Remy Hair', type: 'remy', hexColor: '#8a8480', description: 'Marrón/Rubio miel' },
-  { code: '6/24', family: 'Remy Hair', type: 'remy', hexColor: '#9a9490', description: 'Marrón medio/Rubio blanco' },
-  { code: '7/20', family: 'Remy Hair', type: 'remy', hexColor: '#aaa490', description: 'Marrón claro/Rubio platino' },
-  { code: '8/10', family: 'Remy Hair', type: 'remy', hexColor: '#8a8480', description: 'Marrón claro oscuro/Marrón claro' },
-  { code: '8/22', family: 'Remy Hair', type: 'remy', hexColor: '#bab4a0', description: 'Marrón claro oscuro/Rubio muy pálido' },
-  { code: '9/613', family: 'Remy Hair', type: 'remy', hexColor: '#d0c4b0', description: 'Rubio oscuro/Rubio platino blanco' },
-  { code: '613/24', family: 'Remy Hair', type: 'remy', hexColor: '#fffef8', description: 'Rubio platino blanco/Rubio blanco' },
-  { code: '18/613', family: 'Remy Hair', type: 'remy', hexColor: '#e8dcc8', description: 'Rubio ceniza/Rubio platino blanco' },
-  { code: '18A/613A', family: 'Remy Hair', type: 'remy', hexColor: '#e8dcc8', description: 'Rubio ceniza/Rubio platino blanco ceniza' },
-  { code: 'DXB', family: 'Remy Hair', type: 'remy', hexColor: '#3a3430', description: 'Mezcla oscura' },
-  { code: 'DXB/18', family: 'Remy Hair', type: 'remy', hexColor: '#6a6460', description: 'Mezcla oscura/Rubio ceniza' },
+  { code: '2/4', family: 'Remy Hair', type: 'remy', hexColor: '#4d4640', description: 'Marrón muy oscuro/Marrón' },
+  { code: '2/5', family: 'Remy Hair', type: 'remy', hexColor: '#5d5650', description: 'Marrón muy oscuro/Marrón claro' },
+  { code: '1B/2', family: 'Remy Hair', type: 'remy', hexColor: '#2d2620', description: 'Negro natural/Marrón muy oscuro' },
+  { code: '1B/4', family: 'Remy Hair', type: 'remy', hexColor: '#3d3630', description: 'Negro natural/Marrón' },
+  { code: '4/6', family: 'Remy Hair', type: 'remy', hexColor: '#6d6660', description: 'Marrón/Marrón medio' },
+  { code: '4/8', family: 'Remy Hair', type: 'remy', hexColor: '#7d7670', description: 'Marrón/Marrón claro oscuro' },
+  { code: '4/27', family: 'Remy Hair', type: 'remy', hexColor: '#8d8680', description: 'Marrón/Rubio miel' },
+  { code: '6/24', family: 'Remy Hair', type: 'remy', hexColor: '#9d9690', description: 'Marrón medio/Rubio blanco' },
+  { code: '7/20', family: 'Remy Hair', type: 'remy', hexColor: '#ada690', description: 'Marrón claro/Rubio platino' },
+  { code: '8/10', family: 'Remy Hair', type: 'remy', hexColor: '#8d8680', description: 'Marrón claro oscuro/Marrón claro' },
+  { code: '8/22', family: 'Remy Hair', type: 'remy', hexColor: '#bdb6a0', description: 'Marrón claro oscuro/Rubio muy pálido' },
+  { code: '9/613', family: 'Remy Hair', type: 'remy', hexColor: '#ddd6c0', description: 'Rubio oscuro/Rubio platino blanco' },
+  { code: '613/24', family: 'Remy Hair', type: 'remy', hexColor: '#fffffe', description: 'Rubio platino blanco/Rubio blanco' },
+  { code: '18/613', family: 'Remy Hair', type: 'remy', hexColor: '#ede6d0', description: 'Rubio ceniza/Rubio platino blanco' },
+  { code: '18A/613A', family: 'Remy Hair', type: 'remy', hexColor: '#ede6d0', description: 'Rubio ceniza/Rubio platino blanco ceniza' },
+  { code: 'DXB', family: 'Remy Hair', type: 'remy', hexColor: '#2d2620', description: 'Mezcla oscura' },
+  { code: 'DXB/18', family: 'Remy Hair', type: 'remy', hexColor: '#6d6660', description: 'Mezcla oscura/Rubio ceniza' },
 
   // Rooted Hair
-  { code: 'R1B-4', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#2a2420', description: 'Raíz negro natural/Marrón' },
-  { code: 'R2-6/27', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#3a3430', description: 'Raíz marrón muy oscuro/Marrón medio/Rubio miel' },
-  { code: 'R2-4/6', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#4a4440', description: 'Raíz marrón muy oscuro/Marrón/Marrón medio' },
-  { code: 'R2-DXB/18', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#5a5450', description: 'Raíz marrón muy oscuro/Mezcla oscura/Rubio ceniza' },
-  { code: 'R2-6/24', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#6a6460', description: 'Raíz marrón muy oscuro/Marrón medio/Rubio blanco' },
-  { code: 'R2-8/10', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#7a7470', description: 'Raíz marrón muy oscuro/Marrón claro oscuro/Marrón claro' },
-  { code: 'R2-60A', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8a8480', description: 'Raíz marrón muy oscuro/Rubio platino muy claro' },
-  { code: 'Rooted Silver Ash', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#a0a0a0', description: 'Raíz/Ceniza plateada' },
-  { code: 'R5-7/20', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#6a6460', description: 'Raíz marrón claro/Marrón claro/Rubio platino' },
-  { code: 'R5-8/22', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#7a7470', description: 'Raíz marrón claro/Marrón claro oscuro/Rubio muy pálido' },
-  { code: 'R5-9/613', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8a8480', description: 'Raíz marrón claro/Rubio oscuro/Rubio platino blanco' },
-  { code: 'R5-18A/613A', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#9a9490', description: 'Raíz marrón claro/Rubio ceniza/Rubio platino blanco ceniza' },
-  { code: 'R8-18/22', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8a8480', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio muy pálido' },
-  { code: 'R8-18/613', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#9a9490', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio platino blanco' },
+  { code: 'R1B-4', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#1a1410', description: 'Raíz negro natural/Marrón' },
+  { code: 'R2-6/27', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#2d2620', description: 'Raíz marrón muy oscuro/Marrón medio/Rubio miel' },
+  { code: 'R2-4/6', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#4d4640', description: 'Raíz marrón muy oscuro/Marrón/Marrón medio' },
+  { code: 'R2-DXB/18', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#5d5650', description: 'Raíz marrón muy oscuro/Mezcla oscura/Rubio ceniza' },
+  { code: 'R2-6/24', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#6d6660', description: 'Raíz marrón muy oscuro/Marrón medio/Rubio blanco' },
+  { code: 'R2-8/10', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#7d7670', description: 'Raíz marrón muy oscuro/Marrón claro oscuro/Marrón claro' },
+  { code: 'R2-60A', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8d8680', description: 'Raíz marrón muy oscuro/Rubio platino muy claro' },
+  { code: 'Rooted Silver Ash', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#a8a8a8', description: 'Raíz/Ceniza plateada' },
+  { code: 'R5-7/20', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#6d6660', description: 'Raíz marrón claro/Marrón claro/Rubio platino' },
+  { code: 'R5-8/22', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#7d7670', description: 'Raíz marrón claro/Marrón claro oscuro/Rubio muy pálido' },
+  { code: 'R5-9/613', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8d8680', description: 'Raíz marrón claro/Rubio oscuro/Rubio platino blanco' },
+  { code: 'R5-18A/613A', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#9d9690', description: 'Raíz marrón claro/Rubio ceniza/Rubio platino blanco ceniza' },
+  { code: 'R8-18/22', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#8d8680', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio muy pálido' },
+  { code: 'R8-18/613', family: 'Rooted & Mezclas', type: 'rooted', hexColor: '#9d9690', description: 'Raíz marrón claro oscuro/Rubio ceniza/Rubio platino blanco' },
 
   // Ombre, Piano, Balayage
-  { code: 'Ombre', family: 'Ombre / Piano / Balayage', type: 'ombre', hexColor: '#4a4440', description: 'Degradado oscuro a claro' },
-  { code: 'Piano/Highlight', family: 'Ombre / Piano / Balayage', type: 'piano', hexColor: '#6a6460', description: 'Mechas destacadas' },
-  { code: 'Balayage', family: 'Ombre / Piano / Balayage', type: 'balayage', hexColor: '#8a8480', description: 'Efecto barrido natural' },
+  { code: 'Ombre', family: 'Ombre / Piano / Balayage', type: 'ombre', hexColor: '#4d4640', description: 'Degradado oscuro a claro' },
+  { code: 'Piano/Highlight', family: 'Ombre / Piano / Balayage', type: 'piano', hexColor: '#6d6660', description: 'Mechas destacadas' },
+  { code: 'Balayage', family: 'Ombre / Piano / Balayage', type: 'balayage', hexColor: '#8d8680', description: 'Efecto barrido natural' },
 
   // Tonos creativos
   { code: 'Creativo', family: 'Tonos creativos', type: 'creative', hexColor: '#ff69b4', description: 'Tonos personalizados' },
@@ -178,8 +178,8 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
         </div>
       </div>
 
-      {/* Color Grid */}
-      <div className={`grid gap-4 ${compact ? 'grid-cols-4 md:grid-cols-6 lg:grid-cols-8' : 'grid-cols-2 md:grid-cols-4 lg:grid-cols-6'}`}>
+      {/* Color Grid - Compact Swatches */}
+      <div className={`grid gap-6 ${compact ? 'grid-cols-6 md:grid-cols-8 lg:grid-cols-10' : 'grid-cols-5 md:grid-cols-7 lg:grid-cols-9'}`}>
         {filteredCodes.map(color => (
           <button
             key={color.code}
@@ -187,18 +187,26 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
               setDetailCode(color);
               if (onSelect) onSelect(color.code);
             }}
-            className={`flex flex-col items-center gap-2 p-3 border-2 transition-all ${
-              selectedCode === color.code || detailCode?.code === color.code
-                ? 'border-secondary bg-secondary/5'
-                : 'border-secondary/20 hover:border-secondary/50'
-            }`}
+            className="flex flex-col items-center gap-2 transition-all group"
+            title={color.description}
           >
+            {/* Circular Swatch - 20-24px */}
             <div
-              className="w-full aspect-square rounded-sm"
+              className={`w-6 h-6 rounded-full border-2 transition-all ${
+                selectedCode === color.code || detailCode?.code === color.code
+                  ? 'border-secondary ring-2 ring-secondary ring-offset-1'
+                  : 'border-secondary/30 group-hover:border-secondary/70'
+              }`}
               style={{ backgroundColor: color.hexColor || '#cccccc' }}
-              title={color.description}
             />
-            <span className="font-paragraph text-xs text-secondary font-semibold text-center">{color.code}</span>
+            {/* Code Label */}
+            <span className={`font-paragraph text-xs font-semibold text-center leading-tight ${
+              selectedCode === color.code || detailCode?.code === color.code
+                ? 'text-secondary'
+                : 'text-secondary/70 group-hover:text-secondary'
+            }`}>
+              {color.code}
+            </span>
           </button>
         ))}
       </div>
@@ -220,7 +228,7 @@ export default function ColorRing({ onSelect, selectedCode, showGuideLink = fals
           </div>
           <div className="flex items-center gap-4 mb-4">
             <div
-              className="w-24 h-24 rounded-sm"
+              className="w-16 h-16 rounded-full border-2 border-secondary/20"
               style={{ backgroundColor: detailCode.hexColor || '#cccccc' }}
             />
             <div>
