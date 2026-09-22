@@ -198,33 +198,103 @@ export function createProductSearchIndex(product: {
   // Build base index from all fields
   let index = fields.filter(Boolean).join(' ');
 
-  // Add aliases based on application method and product type
+  // Add aliases based on application method and product type - STRICTLY BY CATEGORY
   const appMethod = normalizeText(product.applicationMethod || '');
   const prodType = normalizeText(product.productType || '');
   const itemName = normalizeText(product.itemName || '');
 
-  // Add weft aliases if it's a weft product
-  if (appMethod.includes('weft') || prodType.includes('weft') || itemName.includes('weft') || itemName.includes('sew')) {
+  // Add weft aliases ONLY if it's explicitly a weft product
+  // Check for exact weft category matches
+  if (
+    appMethod === 'machine weft' ||
+    appMethod === 'hand tied weft' ||
+    appMethod === 'flat weft' ||
+    appMethod === 'double piece flat weft' ||
+    appMethod === 'volume weft' ||
+    appMethod === 'genius weft' ||
+    appMethod === 'genius weft with hole' ||
+    appMethod === 'genius up with hole' ||
+    prodType === 'machine weft' ||
+    prodType === 'hand tied weft' ||
+    prodType === 'flat weft' ||
+    prodType === 'double piece flat weft' ||
+    prodType === 'volume weft' ||
+    prodType === 'genius weft' ||
+    prodType === 'genius weft with hole' ||
+    prodType === 'genius up with hole' ||
+    itemName === 'machine weft' ||
+    itemName === 'hand tied weft' ||
+    itemName === 'flat weft' ||
+    itemName === 'double piece flat weft' ||
+    itemName === 'volume weft' ||
+    itemName === 'genius weft' ||
+    itemName === 'genius weft with hole' ||
+    itemName === 'genius up with hole'
+  ) {
     index += ' weft wefts wft sew in sew-in trama';
   }
 
-  // Add tape aliases if it's a tape product
-  if (appMethod.includes('tape') || prodType.includes('tape')) {
+  // Add tape aliases ONLY if it's explicitly a tape product
+  if (
+    appMethod === 'tape in' ||
+    appMethod === 'invisible tape in' ||
+    appMethod === 'mini tape in' ||
+    appMethod === 'seamless tape in' ||
+    appMethod === 'long invisible tape in' ||
+    appMethod === 'long tape in' ||
+    appMethod === 'stitched tape in' ||
+    prodType === 'tape in' ||
+    prodType === 'invisible tape in' ||
+    prodType === 'mini tape in' ||
+    prodType === 'seamless tape in' ||
+    prodType === 'long invisible tape in' ||
+    prodType === 'long tape in' ||
+    prodType === 'stitched tape in'
+  ) {
     index += ' tape tape-in tape in cinta';
   }
 
-  // Add keratin aliases if it's a keratin product
-  if (appMethod.includes('keratin') || prodType.includes('keratin')) {
+  // Add keratin aliases ONLY if it's explicitly a keratin product
+  if (
+    appMethod === 'keratin' ||
+    appMethod === 'k-tip' ||
+    prodType === 'keratin' ||
+    prodType === 'k-tip'
+  ) {
     index += ' keratin k-tip ktip k tip queratina';
   }
 
-  // Add clip aliases if it's a clip product
-  if (appMethod.includes('clip') || prodType.includes('clip')) {
+  // Add i-tip aliases ONLY if it's explicitly an i-tip product
+  if (
+    appMethod === 'i-tip' ||
+    appMethod === 'micro ring' ||
+    prodType === 'i-tip' ||
+    prodType === 'micro ring'
+  ) {
+    index += ' i-tip itip i tip micro ring microring micro-ring';
+  }
+
+  // Add clip aliases ONLY if it's explicitly a clip product
+  if (
+    appMethod === 'clip in' ||
+    appMethod === 'one piece clip in' ||
+    appMethod === 'lace clip in' ||
+    appMethod === 'pu clip in' ||
+    prodType === 'clip in' ||
+    prodType === 'one piece clip in' ||
+    prodType === 'lace clip in' ||
+    prodType === 'pu clip in'
+  ) {
     index += ' clip clip-in clipin';
   }
 
-  // Add feather aliases if it's a feather product
-  if (appMethod.includes('feather') || prodType.includes('feather')) {
+  // Add feather aliases ONLY if it's explicitly a feather product
+  if (
+    appMethod === 'feather hair weft' ||
+    appMethod === 'h6 feather hair extension' ||
+    prodType === 'feather hair weft' ||
+    prodType === 'h6 feather hair extension'
+  ) {
     index += ' feather feathering pluma';
   }
 

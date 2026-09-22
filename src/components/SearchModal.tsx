@@ -27,9 +27,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [isSearching, setIsSearching] = useState(false);
 
   const guides = [
-    { title: 'Hair Weft', path: '/aplicaciones-hair-weft', keywords: 'weft wefts wft sew in sew-in trama' },
-    { title: 'Clip In', path: '/aplicaciones-clip-in', keywords: 'clip clip-in clipin' },
-    { title: 'Tape In', path: '/aplicaciones-tape-in', keywords: 'tape tape-in tape in cinta' },
+    { title: 'Hair Weft', path: '/aplicaciones-hair-weft', keywords: 'hair weft weft wefts wft sew in sew-in trama' },
+    { title: 'Clip In', path: '/aplicaciones-clip-in', keywords: 'clip in clip clip-in clipin' },
+    { title: 'Tape In', path: '/aplicaciones-tape-in', keywords: 'tape in tape tape-in cinta' },
     { title: 'Keratin', path: '/aplicaciones-keratin', keywords: 'keratin k-tip ktip k tip queratina' },
     { title: 'Feather', path: '/aplicaciones-feather', keywords: 'feather feathering pluma' },
     { title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', keywords: 'double piece flat weft weft wefts wft sew in sew-in trama' },
