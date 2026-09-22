@@ -71,6 +71,58 @@ export function checkKnownAlias(query: string): string | null {
   return KNOWN_ALIASES[normalized] || null;
 }
 
+// Check if query is a fuzzy variant of a category keyword
+// For each category, check if query fuzzy-matches any of its keywords
+// Returns the locked category if found, null otherwise
+// CRITICAL: Requires similarity >= 0.80 or Levenshtein <= 1 for words of 4+ chars
+export function checkFuzzyVariantCategory(query: string): string | null {
+  const normalized = normalizeText(query);
+  const queryTokens = normalized.split(' ').filter(t => t.length > 0);
+  
+  // If query has multiple tokens, only check the first one for category locking
+  const primaryToken = queryTokens[0];
+  
+  if (!primaryToken) return null;
+
+  // Define category keywords and their fuzzy variants
+  const categoryKeywords: Record<string, string[]> = {
+    'weft': ['weft', 'wefts', 'wft', 'sew', 'trama'],
+    'tape': ['tape', 'tapein', 'cinta'],
+    'keratin': ['keratin', 'keratina', 'ktip'],
+    'i-tip': ['itip', 'microring'],
+    'feather': ['feather', 'pluma'],
+    'clip-in': ['clip', 'clipin'],
+  };
+
+  // For each category, check if primaryToken fuzzy-matches any keyword
+  for (const [category, keywords] of Object.entries(categoryKeywords)) {
+    for (const keyword of keywords) {
+      // For words 4+ chars: require similarity >= 0.80 or Levenshtein <= 1
+      if (primaryToken.length >= 4 && keyword.length >= 4) {
+        const distance = levenshteinDistance(primaryToken, keyword);
+        const similarity = stringSimilarity(primaryToken, keyword);
+        
+        if (distance <= 1 || similarity >= 0.8) {
+          return category;
+        }
+      }
+      // For shorter words: require exact match or distance <= 1
+      else if (primaryToken.length >= 3 && keyword.length >= 3) {
+        const distance = levenshteinDistance(primaryToken, keyword);
+        if (distance <= 1) {
+          return category;
+        }
+      }
+      // Exact match always works
+      if (primaryToken === keyword) {
+        return category;
+      }
+    }
+  }
+
+  return null;
+}
+
 // Check if query is a Brazilian product search (exact match for brazilian/brazlian/brasilian)
 // Returns true if query should trigger Virgin Brazilian Sew-in Weft only
 export function isBrazilianSearch(query: string): boolean {

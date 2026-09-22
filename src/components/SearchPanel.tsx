@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
-import { calculateSearchScore, normalizeText, createProductSearchIndex, checkKnownAlias, isBrazilianSearch } from '@/lib/fuzzy-search';
+import { calculateSearchScore, normalizeText, createProductSearchIndex, checkKnownAlias, checkFuzzyVariantCategory, isBrazilianSearch } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   id: string;
@@ -70,7 +70,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
     const isBrazilian = isBrazilianSearch(query);
     
     // Check if query is a known alias that locks to a category
-    const lockedCategory = checkKnownAlias(query);
+    const lockedCategory = checkKnownAlias(query) || checkFuzzyVariantCategory(query);
 
     // Search in products with scoring against normalized search index
     // If isBrazilian, only return Virgin Brazilian Sew-in Weft (ID: af7eb76e-51cc-4949-bf30-ef2a66c74181)

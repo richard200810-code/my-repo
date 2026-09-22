@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText, createProductSearchIndex, checkKnownAlias, isBrazilianSearch } from '@/lib/fuzzy-search';
+import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText, createProductSearchIndex, checkKnownAlias, checkFuzzyVariantCategory, isBrazilianSearch } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   type: 'product' | 'aplicacion' | 'page';
@@ -55,7 +55,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         const isBrazilian = isBrazilianSearch(query);
         
         // Check if query is a known alias that locks to a category
-        const lockedCategory = checkKnownAlias(query);
+        const lockedCategory = checkKnownAlias(query) || checkFuzzyVariantCategory(query);
 
         const allProducts = await BaseCrudService.getAll<HairExtensionsandWigs>(
           'hairextensions',
