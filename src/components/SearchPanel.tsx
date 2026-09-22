@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
-import { calculateSearchScore, normalizeText, createProductSearchIndex } from '@/lib/fuzzy-search';
+import { calculateSearchScore, normalizeText, createProductSearchIndex, checkKnownAlias } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   id: string;
@@ -66,12 +66,16 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     setIsLoading(true);
 
+    // Check if query is a known alias that locks to a category
+    const lockedCategory = checkKnownAlias(query);
+
     // Search in products with scoring against normalized search index
+    // If lockedCategory is set, only products from that category will score > 0
     const productResults = allProducts
       .map(product => ({
         product,
         searchIndex: createProductSearchIndex(product),
-        score: calculateSearchScore(query, createProductSearchIndex(product))
+        score: calculateSearchScore(query, createProductSearchIndex(product), lockedCategory || undefined)
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
@@ -84,11 +88,12 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
       }));
 
     // Search in application pages with scoring against normalized search index
+    // If lockedCategory is set, only guides matching that category will score > 0
     const aplicacionResults = aplicaciones
       .map(app => ({
         app,
         searchIndex: normalizeText(`${app.title} ${app.keywords}`),
-        score: calculateSearchScore(query, normalizeText(`${app.title} ${app.keywords}`))
+        score: calculateSearchScore(query, normalizeText(`${app.title} ${app.keywords}`), lockedCategory || undefined)
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
@@ -100,7 +105,8 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
       }));
 
     // Search in main pages with scoring against normalized search index
-    const pageResults = mainPages
+    // Pages are not category-specific, so they only show if no locked category
+    const pageResults = !lockedCategory ? mainPages
       .map(page => ({
         page,
         searchIndex: normalizeText(`${page.title} ${page.keywords}`),
@@ -113,7 +119,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         title: page.title,
         type: 'page' as const,
         path: page.path,
-      }));
+      })) : [];
 
     // Combine and limit results
     const combined = [...productResults, ...aplicacionResults, ...pageResults].slice(0, 10);

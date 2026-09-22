@@ -7,6 +7,7 @@
  * - Space/hyphen normalization
  * - Synonyms (weft, tape, k-tip, i-tip)
  * - Plural support
+ * - STRICT ALIAS LOCKING: Known aliases resolve to specific categories and block fallback
  */
 
 // Synonym mappings
@@ -19,6 +20,38 @@ const SYNONYMS: Record<string, string[]> = {
   'clip-in': ['clip-in', 'clip in', 'clipin', 'clip'],
 };
 
+// Known aliases that STRICTLY lock to a category (no fallback allowed)
+const KNOWN_ALIASES: Record<string, string> = {
+  'wft': 'weft',
+  'trama': 'weft',
+  'weft': 'weft',
+  'wefts': 'weft',
+  'sew in': 'weft',
+  'sew-in': 'weft',
+  'tape': 'tape',
+  'tape-in': 'tape',
+  'tape in': 'tape',
+  'cinta': 'tape',
+  'keratin': 'keratin',
+  'k-tip': 'keratin',
+  'ktip': 'keratin',
+  'k tip': 'keratin',
+  'queratina': 'keratin',
+  'i-tip': 'i-tip',
+  'itip': 'i-tip',
+  'i tip': 'i-tip',
+  'micro ring': 'i-tip',
+  'microring': 'i-tip',
+  'micro-ring': 'i-tip',
+  'feather': 'feather',
+  'feathering': 'feather',
+  'pluma': 'feather',
+  'clip': 'clip-in',
+  'clip-in': 'clip-in',
+  'clip in': 'clip-in',
+  'clipin': 'clip-in',
+};
+
 // Normalize text: remove accents, lowercase, trim spaces/hyphens
 export function normalizeText(text: string): string {
   if (!text) return '';
@@ -29,6 +62,13 @@ export function normalizeText(text: string): string {
     .replace(/[\u0300-\u036f]/g, '') // Remove accents
     .replace(/[-\s]+/g, ' ') // Normalize spaces and hyphens
     .trim();
+}
+
+// Check if query is a known alias and return the locked category
+// Returns { category: string } if it's a known alias, null otherwise
+export function checkKnownAlias(query: string): string | null {
+  const normalized = normalizeText(query);
+  return KNOWN_ALIASES[normalized] || null;
 }
 
 // Calculate Levenshtein distance for typo tolerance
@@ -93,12 +133,21 @@ export function expandWithSynonyms(query: string): string[] {
   return expanded;
 }
 
-// Main fuzzy search function
-export function fuzzySearch(query: string, text: string): boolean {
+// Main fuzzy search function with strict alias locking
+export function fuzzySearch(query: string, text: string, lockedCategory?: string): boolean {
   if (!query || !text) return false;
 
   const normalizedQuery = normalizeText(query);
   const normalizedText = normalizeText(text);
+
+  // If a category is locked (from known alias), only match if text contains that category
+  if (lockedCategory) {
+    // Check if text belongs to the locked category
+    const textCategory = getProductCategory(text);
+    if (textCategory !== lockedCategory) {
+      return false; // Block all other categories
+    }
+  }
 
   // Exact match (after normalization)
   if (normalizedText.includes(normalizedQuery)) {
@@ -111,32 +160,72 @@ export function fuzzySearch(query: string, text: string): boolean {
     return true;
   }
 
-  // Typo tolerance
-  if (matchesWithTypos(normalizedQuery, normalizedText)) {
+  // Typo tolerance (only if no locked category)
+  if (!lockedCategory && matchesWithTypos(normalizedQuery, normalizedText)) {
     return true;
   }
 
-  // Synonym matching
-  const expandedQueries = expandWithSynonyms(normalizedQuery);
-  return expandedQueries.some(expandedQuery => {
-    if (normalizedText.includes(expandedQuery)) {
-      return true;
-    }
-    return matchesWithTypos(expandedQuery, normalizedText);
-  });
+  // Synonym matching (only if no locked category)
+  if (!lockedCategory) {
+    const expandedQueries = expandWithSynonyms(normalizedQuery);
+    return expandedQueries.some(expandedQuery => {
+      if (normalizedText.includes(expandedQuery)) {
+        return true;
+      }
+      return matchesWithTypos(expandedQuery, normalizedText);
+    });
+  }
+
+  return false;
 }
 
-// Search across multiple fields
+// Determine product category from search index
+function getProductCategory(searchIndex: string): string | null {
+  const normalized = normalizeText(searchIndex);
+  
+  if (normalized.includes('weft') || normalized.includes('wft') || normalized.includes('trama') || normalized.includes('sew in')) {
+    return 'weft';
+  }
+  if (normalized.includes('tape') || normalized.includes('cinta')) {
+    return 'tape';
+  }
+  if (normalized.includes('keratin') || normalized.includes('k-tip') || normalized.includes('queratina')) {
+    return 'keratin';
+  }
+  if (normalized.includes('i-tip') || normalized.includes('micro ring')) {
+    return 'i-tip';
+  }
+  if (normalized.includes('feather') || normalized.includes('pluma')) {
+    return 'feather';
+  }
+  if (normalized.includes('clip')) {
+    return 'clip-in';
+  }
+  
+  return null;
+}
+
+// Search across multiple fields with optional category lock
 export function fuzzySearchMultiField(
   query: string,
-  fields: (string | undefined)[]
+  fields: (string | undefined)[],
+  lockedCategory?: string
 ): boolean {
-  return fields.some(field => fuzzySearch(query, field || ''));
+  return fields.some(field => fuzzySearch(query, field || '', lockedCategory));
 }
 
 // Score results for ranking (higher score = better match)
-export function calculateSearchScore(query: string, text: string): number {
+// If a known alias is detected, only score items from that category
+export function calculateSearchScore(query: string, text: string, lockedCategory?: string): number {
   if (!query || !text) return 0;
+
+  // If category is locked, check if text belongs to that category
+  if (lockedCategory) {
+    const textCategory = getProductCategory(text);
+    if (textCategory !== lockedCategory) {
+      return 0; // Block all other categories
+    }
+  }
 
   const normalizedQuery = normalizeText(query);
   const normalizedText = normalizeText(text);
@@ -166,10 +255,12 @@ export function calculateSearchScore(query: string, text: string): number {
   );
   score += matchedWords.length * 10;
 
-  // Synonym match
-  const expandedQueries = expandWithSynonyms(normalizedQuery);
-  if (expandedQueries.some(eq => normalizedText.includes(eq))) {
-    score += 20;
+  // Synonym match (only if no locked category)
+  if (!lockedCategory) {
+    const expandedQueries = expandWithSynonyms(normalizedQuery);
+    if (expandedQueries.some(eq => normalizedText.includes(eq))) {
+      score += 20;
+    }
   }
 
   return score;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText, createProductSearchIndex } from '@/lib/fuzzy-search';
+import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText, createProductSearchIndex, checkKnownAlias } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   type: 'product' | 'aplicacion' | 'page';
@@ -51,6 +51,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const searchProducts = async () => {
       setIsSearching(true);
       try {
+        // Check if query is a known alias that locks to a category
+        const lockedCategory = checkKnownAlias(query);
+
         const allProducts = await BaseCrudService.getAll<HairExtensionsandWigs>(
           'hairextensions',
           {},
@@ -58,11 +61,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         );
 
         // Fuzzy search products with scoring against normalized search index
+        // If lockedCategory is set, only products from that category will score > 0
         const productResults: SearchResult[] = allProducts.items
           .map(p => ({
             product: p,
             searchIndex: createProductSearchIndex(p),
-            score: calculateSearchScore(query, createProductSearchIndex(p))
+            score: calculateSearchScore(query, createProductSearchIndex(p), lockedCategory || undefined)
           }))
           .filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
@@ -77,11 +81,12 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           }));
 
         // Fuzzy search guides with scoring against normalized search index
+        // If lockedCategory is set, only guides matching that category will score > 0
         const guideResults: SearchResult[] = guides
           .map(g => ({
             guide: g,
             searchIndex: normalizeText(`${g.title} ${g.keywords}`),
-            score: calculateSearchScore(query, normalizeText(`${g.title} ${g.keywords}`))
+            score: calculateSearchScore(query, normalizeText(`${g.title} ${g.keywords}`), lockedCategory || undefined)
           }))
           .filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
@@ -94,7 +99,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           }));
 
         // Fuzzy search pages with scoring against normalized search index
-        const pageResults: SearchResult[] = pages
+        // Pages are not category-specific, so they only show if no locked category
+        const pageResults: SearchResult[] = !lockedCategory ? pages
           .map(p => ({
             page: p,
             searchIndex: normalizeText(`${p.title} ${p.keywords}`),
@@ -107,7 +113,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             id: p.path,
             title: p.title,
             path: p.path,
-          }));
+          })) : [];
 
         setResults([...productResults, ...guideResults, ...pageResults]);
       } catch (error) {
