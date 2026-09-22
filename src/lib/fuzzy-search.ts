@@ -411,6 +411,11 @@ export function createProductSearchIndex(product: {
     itemName?.includes('weft')
   ) {
     index += ' weft wefts wft sew in sew-in trama';
+    
+    // Add Brazilian-specific keywords for Virgin Brazilian Sew-in Weft
+    if (itemName?.toLowerCase().includes('virgin brazilian') || itemName?.toLowerCase().includes('brazilian')) {
+      index += ' brazilian brazlian brasilian virgin';
+    }
   }
 
   // Add tape aliases ONLY if it's explicitly a tape product
