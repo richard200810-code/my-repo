@@ -62,7 +62,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
         // Fuzzy search products with scoring against normalized search index
         // If lockedCategory is set, only products from that category will score > 0
-        // CRITICAL: Only show products with score > 0 (threshold already enforced in calculateSearchScore)
+        // CRITICAL: Only show products with score >= 60 (strict threshold enforcement)
         // Never use default catalog as fallback - if no results meet threshold, show "No results found"
         const productResults: SearchResult[] = allProducts.items
           .map(p => {
@@ -70,9 +70,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             const score = calculateSearchScore(query, searchIndex, lockedCategory || undefined);
             return { product: p, searchIndex, score };
           })
-          .filter(({ score }) => score > 0)  // STRICT: Only items that pass threshold
+          .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
           .sort((a, b) => b.score - a.score)
-          .slice(0, 5)
+          .slice(0, 6)
           .map(({ product: p }) => ({
             type: 'product' as const,
             id: p._id,
@@ -90,7 +90,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             searchIndex: normalizeText(`${g.title} ${g.keywords}`),
             score: calculateSearchScore(query, normalizeText(`${g.title} ${g.keywords}`), lockedCategory || undefined)
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
           .sort((a, b) => b.score - a.score)
           .map(({ guide: g }) => ({
             type: 'aplicacion' as const,
@@ -108,7 +108,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             searchIndex: normalizeText(`${p.title} ${p.keywords}`),
             score: calculateSearchScore(query, normalizeText(`${p.title} ${p.keywords}`))
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
           .sort((a, b) => b.score - a.score)
           .map(({ page: p }) => ({
             type: 'page' as const,
@@ -117,7 +117,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: p.path,
           })) : [];
 
-        setResults([...productResults, ...guideResults, ...pageResults]);
+        // Combine results - max 6 total
+        setResults([...productResults, ...guideResults, ...pageResults].slice(0, 6));
       } catch (error) {
         console.error('Search error:', error);
       } finally {

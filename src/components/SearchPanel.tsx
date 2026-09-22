@@ -71,7 +71,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     // Search in products with scoring against normalized search index
     // If lockedCategory is set, only products from that category will score > 0
-    // CRITICAL: Only show products with score > 0 (threshold already enforced in calculateSearchScore)
+    // CRITICAL: Only show products with score >= 60 (strict threshold enforcement)
     // Never use default catalog as fallback - if no results meet threshold, show "No results found"
     const productResults = allProducts
       .map(product => {
@@ -79,7 +79,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         const score = calculateSearchScore(query, searchIndex, lockedCategory || undefined);
         return { product, searchIndex, score };
       })
-      .filter(({ score }) => score > 0)  // STRICT: Only items that pass threshold
+      .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
       .sort((a, b) => b.score - a.score)
       .map(({ product }) => ({
         id: product._id,
@@ -97,7 +97,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         searchIndex: normalizeText(`${app.title} ${app.keywords}`),
         score: calculateSearchScore(query, normalizeText(`${app.title} ${app.keywords}`), lockedCategory || undefined)
       }))
-      .filter(({ score }) => score > 0)
+      .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
       .sort((a, b) => b.score - a.score)
       .map(({ app }) => ({
         id: app.id,
@@ -114,7 +114,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         searchIndex: normalizeText(`${page.title} ${page.keywords}`),
         score: calculateSearchScore(query, normalizeText(`${page.title} ${page.keywords}`))
       }))
-      .filter(({ score }) => score > 0)
+      .filter(({ score }) => score >= 60)  // STRICT: Only items with score >= 60
       .sort((a, b) => b.score - a.score)
       .map(({ page }) => ({
         id: page.id,
@@ -123,8 +123,8 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         path: page.path,
       })) : [];
 
-    // Combine and limit results
-    const combined = [...productResults, ...aplicacionResults, ...pageResults].slice(0, 10);
+    // Combine and limit results to 6 total
+    const combined = [...productResults, ...aplicacionResults, ...pageResults].slice(0, 6);
     setResults(combined);
     setIsLoading(false);
   }, [query, allProducts]);
