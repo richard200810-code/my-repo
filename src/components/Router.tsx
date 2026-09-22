@@ -16,6 +16,7 @@ import KeratinGuidePage from '@/components/pages/KeratinGuidePage';
 import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
 import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage';
 import ColorGuidePage from '@/components/pages/ColorGuidePage';
+import DebugProductImages from '@/components/pages/DebugProductImages';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -129,6 +130,13 @@ const router = createBrowserRouter([
         element: <ColorGuidePage />,
         routeMetadata: {
           pageIdentifier: 'color-guide',
+        },
+      },
+      {
+        path: "debug-images",
+        element: <DebugProductImages />,
+        routeMetadata: {
+          pageIdentifier: 'debug-images',
         },
       },
       {
