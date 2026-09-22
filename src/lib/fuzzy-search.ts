@@ -295,7 +295,7 @@ export function createProductSearchIndex(product: {
   const itemName = normalizeText(product.itemName || '');
 
   // Add weft aliases ONLY if it's explicitly a weft product
-  // Check for exact weft category matches
+  // Check for exact weft category matches OR if itemName contains 'weft'
   if (
     appMethod === 'machine weft' ||
     appMethod === 'hand tied weft' ||
@@ -326,7 +326,8 @@ export function createProductSearchIndex(product: {
     itemName === 'genius weft with hole' ||
     itemName === 'genius up with hole' ||
     itemName?.includes('sew in') ||
-    itemName?.includes('sew-in')
+    itemName?.includes('sew-in') ||
+    itemName?.includes('weft')
   ) {
     index += ' weft wefts wft sew in sew-in trama';
   }
