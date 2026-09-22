@@ -214,6 +214,41 @@ export function fuzzySearchMultiField(
   return fields.some(field => fuzzySearch(query, field || '', lockedCategory));
 }
 
+// Calculate similarity between two strings (0-1 scale)
+function stringSimilarity(a: string, b: string): number {
+  if (a === b) return 1;
+  if (!a || !b) return 0;
+
+  const longer = a.length > b.length ? a : b;
+  const shorter = a.length > b.length ? b : a;
+
+  if (longer.length === 0) return 1;
+
+  const editDistance = levenshteinDistance(longer, shorter);
+  return (longer.length - editDistance) / longer.length;
+}
+
+// Calculate token-level similarity (word-by-word matching)
+function tokenSimilarity(queryTokens: string[], textTokens: string[]): number {
+  if (queryTokens.length === 0) return 0;
+
+  let matchedTokens = 0;
+  for (const qt of queryTokens) {
+    // Check if any text token matches or is similar to this query token
+    const bestMatch = Math.max(
+      ...textTokens.map(tt => {
+        // Exact substring match
+        if (tt.includes(qt) || qt.includes(tt)) return 1;
+        // Similarity-based match (for typos)
+        return stringSimilarity(qt, tt);
+      })
+    );
+    if (bestMatch > 0.7) matchedTokens++;
+  }
+
+  return matchedTokens / queryTokens.length;
+}
+
 // Score results for ranking (higher score = better match)
 // If a known alias is detected, only score items from that category
 export function calculateSearchScore(query: string, text: string, lockedCategory?: string): number {
@@ -234,32 +269,47 @@ export function calculateSearchScore(query: string, text: string, lockedCategory
 
   // Exact match (highest priority)
   if (normalizedText === normalizedQuery) {
-    score += 100;
+    return 100;
   }
 
   // Starts with query
   if (normalizedText.startsWith(normalizedQuery)) {
-    score += 50;
+    score += 80;
   }
 
   // Contains query as substring
   if (normalizedText.includes(normalizedQuery)) {
-    score += 30;
+    score += 60;
   }
 
-  // Word boundary match
-  const queryWords = normalizedQuery.split(' ');
-  const textWords = normalizedText.split(' ');
-  const matchedWords = queryWords.filter(qw =>
-    textWords.some(tw => tw.includes(qw) || qw.includes(tw))
-  );
-  score += matchedWords.length * 10;
+  // Token-level similarity (word-by-word matching)
+  const queryTokens = normalizedQuery.split(' ').filter(t => t.length > 0);
+  const textTokens = normalizedText.split(' ').filter(t => t.length > 0);
+  
+  if (queryTokens.length > 0 && textTokens.length > 0) {
+    const tokenMatch = tokenSimilarity(queryTokens, textTokens);
+    score += tokenMatch * 50;
+  }
 
   // Synonym match (only if no locked category)
   if (!lockedCategory) {
     const expandedQueries = expandWithSynonyms(normalizedQuery);
     if (expandedQueries.some(eq => normalizedText.includes(eq))) {
-      score += 20;
+      score += 30;
+    }
+  }
+
+  // THRESHOLD ENFORCEMENT: For terms 5+ letters, enforce high threshold
+  // This prevents irrelevant matches for longer search terms
+  if (normalizedQuery.length >= 5) {
+    // For longer queries, require at least 40% relevance
+    if (score < 40) {
+      return 0;
+    }
+  } else {
+    // For shorter queries, require at least 20% relevance
+    if (score < 20) {
+      return 0;
     }
   }
 

@@ -71,6 +71,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     // Search in products with scoring against normalized search index
     // If lockedCategory is set, only products from that category will score > 0
+    // Filter out low-relevance matches to prevent generic catalog fallback
     const productResults = allProducts
       .map(product => ({
         product,
