@@ -32,7 +32,7 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
     { id: 'tape-in', title: 'Tape In', path: '/aplicaciones-tape-in', type: 'aplicacion' as const, keywords: 'tape tape-in tape in cinta' },
     { id: 'keratin', title: 'Keratin', path: '/aplicaciones-keratin', type: 'aplicacion' as const, keywords: 'keratin k-tip ktip k tip queratina' },
     { id: 'feather', title: 'Feather', path: '/aplicaciones-feather', type: 'aplicacion' as const, keywords: 'feather feathering pluma' },
-    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'aplicacion' as const, keywords: 'weft wefts double piece flat' },
+    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'aplicacion' as const, keywords: 'double piece flat weft weft wefts wft sew in sew-in trama' },
   ];
 
   // Main pages data
