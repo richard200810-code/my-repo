@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText } from '@/lib/fuzzy-search';
+import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText, createProductSearchIndex } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   type: 'product' | 'aplicacion' | 'page';
@@ -51,49 +51,20 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const searchProducts = async () => {
       setIsSearching(true);
       try {
-        // Expand query with synonyms BEFORE filtering
-        const expandedQueries = expandWithSynonyms(query);
-        const normalizedQuery = normalizeText(query);
-
         const allProducts = await BaseCrudService.getAll<HairExtensionsandWigs>(
           'hairextensions',
           {},
           { limit: 100 }
         );
 
-        // Helper function to check if any expanded query matches any field
-        const matchesExpandedQuery = (fields: (string | undefined)[]): boolean => {
-          const normalizedFields = fields.map(f => normalizeText(f || ''));
-          return expandedQueries.some(expandedQuery =>
-            normalizedFields.some(field => field.includes(expandedQuery))
-          );
-        };
-
-        // Fuzzy search products with scoring - apply synonym expansion
+        // Fuzzy search products with scoring against normalized search index
         const productResults: SearchResult[] = allProducts.items
           .map(p => ({
             product: p,
-            score: Math.max(
-              calculateSearchScore(query, p.itemName || ''),
-              calculateSearchScore(query, p.productType || ''),
-              calculateSearchScore(query, p.color || ''),
-              calculateSearchScore(query, p.applicationMethod || ''),
-              calculateSearchScore(query, p.itemDescription || ''),
-              calculateSearchScore(query, p.texture || ''),
-              calculateSearchScore(query, p.hairType || '')
-            )
+            searchIndex: createProductSearchIndex(p),
+            score: calculateSearchScore(query, createProductSearchIndex(p))
           }))
-          .filter(({ product: p, score }) => 
-            score > 0 || matchesExpandedQuery([
-              p.itemName,
-              p.productType,
-              p.color,
-              p.applicationMethod,
-              p.itemDescription,
-              p.texture,
-              p.hairType
-            ])
-          )
+          .filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
           .slice(0, 5)
           .map(({ product: p }) => ({
@@ -105,18 +76,14 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: `/products/${p._id}`,
           }));
 
-        // Fuzzy search guides - apply synonym expansion
+        // Fuzzy search guides with scoring against normalized search index
         const guideResults: SearchResult[] = guides
           .map(g => ({
             guide: g,
-            score: Math.max(
-              calculateSearchScore(query, g.title),
-              calculateSearchScore(query, g.keywords)
-            )
+            searchIndex: normalizeText(`${g.title} ${g.keywords}`),
+            score: calculateSearchScore(query, normalizeText(`${g.title} ${g.keywords}`))
           }))
-          .filter(({ guide: g, score }) =>
-            score > 0 || matchesExpandedQuery([g.title, g.keywords])
-          )
+          .filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
           .map(({ guide: g }) => ({
             type: 'aplicacion' as const,
@@ -126,18 +93,14 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: g.path,
           }));
 
-        // Fuzzy search pages - apply synonym expansion
+        // Fuzzy search pages with scoring against normalized search index
         const pageResults: SearchResult[] = pages
           .map(p => ({
             page: p,
-            score: Math.max(
-              calculateSearchScore(query, p.title),
-              calculateSearchScore(query, p.keywords)
-            )
+            searchIndex: normalizeText(`${p.title} ${p.keywords}`),
+            score: calculateSearchScore(query, normalizeText(`${p.title} ${p.keywords}`))
           }))
-          .filter(({ page: p, score }) =>
-            score > 0 || matchesExpandedQuery([p.title, p.keywords])
-          )
+          .filter(({ score }) => score > 0)
           .sort((a, b) => b.score - a.score)
           .map(({ page: p }) => ({
             type: 'page' as const,

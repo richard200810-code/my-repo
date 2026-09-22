@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
-import { fuzzySearchMultiField, calculateSearchScore } from '@/lib/fuzzy-search';
+import { calculateSearchScore, normalizeText, createProductSearchIndex } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   id: string;
@@ -66,19 +66,12 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     setIsLoading(true);
 
-    // Search in products with fuzzy matching
+    // Search in products with scoring against normalized search index
     const productResults = allProducts
       .map(product => ({
         product,
-        score: Math.max(
-          calculateSearchScore(query, product.itemName || ''),
-          calculateSearchScore(query, product.itemDescription || ''),
-          calculateSearchScore(query, product.applicationMethod || ''),
-          calculateSearchScore(query, product.productType || ''),
-          calculateSearchScore(query, product.color || ''),
-          calculateSearchScore(query, product.texture || ''),
-          calculateSearchScore(query, product.hairType || '')
-        )
+        searchIndex: createProductSearchIndex(product),
+        score: calculateSearchScore(query, createProductSearchIndex(product))
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
@@ -90,14 +83,12 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         description: product.itemDescription,
       }));
 
-    // Search in application pages with fuzzy matching
+    // Search in application pages with scoring against normalized search index
     const aplicacionResults = aplicaciones
       .map(app => ({
         app,
-        score: Math.max(
-          calculateSearchScore(query, app.title),
-          calculateSearchScore(query, app.keywords)
-        )
+        searchIndex: normalizeText(`${app.title} ${app.keywords}`),
+        score: calculateSearchScore(query, normalizeText(`${app.title} ${app.keywords}`))
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
@@ -108,14 +99,12 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         path: app.path,
       }));
 
-    // Search in main pages with fuzzy matching
+    // Search in main pages with scoring against normalized search index
     const pageResults = mainPages
       .map(page => ({
         page,
-        score: Math.max(
-          calculateSearchScore(query, page.title),
-          calculateSearchScore(query, page.keywords)
-        )
+        searchIndex: normalizeText(`${page.title} ${page.keywords}`),
+        score: calculateSearchScore(query, normalizeText(`${page.title} ${page.keywords}`))
       }))
       .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)

@@ -174,3 +174,59 @@ export function calculateSearchScore(query: string, text: string): number {
 
   return score;
 }
+
+// Create a normalized search index for a product with aliases
+export function createProductSearchIndex(product: {
+  itemName?: string;
+  productType?: string;
+  color?: string;
+  applicationMethod?: string;
+  itemDescription?: string;
+  texture?: string;
+  hairType?: string;
+}): string {
+  const fields = [
+    product.itemName,
+    product.productType,
+    product.color,
+    product.applicationMethod,
+    product.itemDescription,
+    product.texture,
+    product.hairType
+  ];
+
+  // Build base index from all fields
+  let index = fields.filter(Boolean).join(' ');
+
+  // Add aliases based on application method and product type
+  const appMethod = normalizeText(product.applicationMethod || '');
+  const prodType = normalizeText(product.productType || '');
+  const itemName = normalizeText(product.itemName || '');
+
+  // Add weft aliases if it's a weft product
+  if (appMethod.includes('weft') || prodType.includes('weft') || itemName.includes('weft') || itemName.includes('sew')) {
+    index += ' weft wefts wft sew in sew-in trama';
+  }
+
+  // Add tape aliases if it's a tape product
+  if (appMethod.includes('tape') || prodType.includes('tape')) {
+    index += ' tape tape-in tape in cinta';
+  }
+
+  // Add keratin aliases if it's a keratin product
+  if (appMethod.includes('keratin') || prodType.includes('keratin')) {
+    index += ' keratin k-tip ktip k tip queratina';
+  }
+
+  // Add clip aliases if it's a clip product
+  if (appMethod.includes('clip') || prodType.includes('clip')) {
+    index += ' clip clip-in clipin';
+  }
+
+  // Add feather aliases if it's a feather product
+  if (appMethod.includes('feather') || prodType.includes('feather')) {
+    index += ' feather feathering pluma';
+  }
+
+  return normalizeText(index);
+}
