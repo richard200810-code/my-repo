@@ -62,14 +62,15 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
         // Fuzzy search products with scoring against normalized search index
         // If lockedCategory is set, only products from that category will score > 0
-        // Filter out low-relevance matches to prevent generic catalog fallback
+        // CRITICAL: Only show products with score > 0 (threshold already enforced in calculateSearchScore)
+        // Never use default catalog as fallback - if no results meet threshold, show "No results found"
         const productResults: SearchResult[] = allProducts.items
           .map(p => ({
             product: p,
             searchIndex: createProductSearchIndex(p),
             score: calculateSearchScore(query, createProductSearchIndex(p), lockedCategory || undefined)
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ score }) => score > 0)  // STRICT: Only items that pass threshold
           .sort((a, b) => b.score - a.score)
           .slice(0, 5)
           .map(({ product: p }) => ({

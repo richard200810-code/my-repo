@@ -299,16 +299,22 @@ export function calculateSearchScore(query: string, text: string, lockedCategory
     }
   }
 
-  // THRESHOLD ENFORCEMENT: For terms 5+ letters, enforce high threshold
-  // This prevents irrelevant matches for longer search terms
+  // THRESHOLD ENFORCEMENT: Strict thresholds to prevent irrelevant matches
+  // This ensures only genuinely relevant results are shown
   if (normalizedQuery.length >= 5) {
-    // For longer queries, require at least 40% relevance
+    // For longer queries (5+ letters), require at least 60% relevance
+    // This prevents typos like "brazlian" from matching unrelated products
+    if (score < 60) {
+      return 0;
+    }
+  } else if (normalizedQuery.length >= 3) {
+    // For medium queries (3-4 letters), require at least 40% relevance
     if (score < 40) {
       return 0;
     }
   } else {
-    // For shorter queries, require at least 20% relevance
-    if (score < 20) {
+    // For very short queries (1-2 letters), require at least 30% relevance
+    if (score < 30) {
       return 0;
     }
   }

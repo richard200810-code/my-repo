@@ -71,14 +71,15 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     // Search in products with scoring against normalized search index
     // If lockedCategory is set, only products from that category will score > 0
-    // Filter out low-relevance matches to prevent generic catalog fallback
+    // CRITICAL: Only show products with score > 0 (threshold already enforced in calculateSearchScore)
+    // Never use default catalog as fallback - if no results meet threshold, show "No results found"
     const productResults = allProducts
       .map(product => ({
         product,
         searchIndex: createProductSearchIndex(product),
         score: calculateSearchScore(query, createProductSearchIndex(product), lockedCategory || undefined)
       }))
-      .filter(({ score }) => score > 0)
+      .filter(({ score }) => score > 0)  // STRICT: Only items that pass threshold
       .sort((a, b) => b.score - a.score)
       .map(({ product }) => ({
         id: product._id,
