@@ -305,6 +305,8 @@ export function createProductSearchIndex(product: {
     appMethod === 'genius weft' ||
     appMethod === 'genius weft with hole' ||
     appMethod === 'genius up with hole' ||
+    appMethod === 'sew in' ||
+    appMethod === 'sew-in' ||
     prodType === 'machine weft' ||
     prodType === 'hand tied weft' ||
     prodType === 'flat weft' ||
@@ -313,6 +315,8 @@ export function createProductSearchIndex(product: {
     prodType === 'genius weft' ||
     prodType === 'genius weft with hole' ||
     prodType === 'genius up with hole' ||
+    prodType === 'sew in' ||
+    prodType === 'sew-in' ||
     itemName === 'machine weft' ||
     itemName === 'hand tied weft' ||
     itemName === 'flat weft' ||
@@ -320,7 +324,9 @@ export function createProductSearchIndex(product: {
     itemName === 'volume weft' ||
     itemName === 'genius weft' ||
     itemName === 'genius weft with hole' ||
-    itemName === 'genius up with hole'
+    itemName === 'genius up with hole' ||
+    itemName?.includes('sew in') ||
+    itemName?.includes('sew-in')
   ) {
     index += ' weft wefts wft sew in sew-in trama';
   }
