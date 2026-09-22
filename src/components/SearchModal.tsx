@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
+import { fuzzySearchMultiField, calculateSearchScore } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   type: 'product' | 'aplicacion' | 'page';
@@ -26,19 +27,19 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [isSearching, setIsSearching] = useState(false);
 
   const guides = [
-    { title: 'Hair Weft', path: '/aplicaciones-hair-weft' },
-    { title: 'Clip In', path: '/aplicaciones-clip-in' },
-    { title: 'Tape In', path: '/aplicaciones-tape-in' },
-    { title: 'Keratin', path: '/aplicaciones-keratin' },
-    { title: 'Feather', path: '/aplicaciones-feather' },
-    { title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft' },
+    { title: 'Hair Weft', path: '/aplicaciones-hair-weft', keywords: 'weft wefts wft sew in sew-in trama' },
+    { title: 'Clip In', path: '/aplicaciones-clip-in', keywords: 'clip clip-in clipin' },
+    { title: 'Tape In', path: '/aplicaciones-tape-in', keywords: 'tape tape-in tape in cinta' },
+    { title: 'Keratin', path: '/aplicaciones-keratin', keywords: 'keratin k-tip ktip k tip queratina' },
+    { title: 'Feather', path: '/aplicaciones-feather', keywords: 'feather feathering pluma' },
+    { title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', keywords: 'weft wefts double piece flat' },
   ];
 
   const pages = [
-    { title: 'Inicio', path: '/' },
-    { title: 'Productos', path: '/products' },
-    { title: 'Compra', path: '/stores' },
-    { title: 'Contacto', path: '/contact' },
+    { title: 'Inicio', path: '/', keywords: 'inicio home' },
+    { title: 'Productos', path: '/products', keywords: 'productos products' },
+    { title: 'Compra', path: '/stores', keywords: 'compra stores tiendas' },
+    { title: 'Contacto', path: '/contact', keywords: 'contacto contact' },
   ];
 
   useEffect(() => {
@@ -56,19 +57,24 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           { limit: 100 }
         );
 
-        const queryLower = query.toLowerCase();
+        // Fuzzy search products with scoring
         const productResults: SearchResult[] = allProducts.items
-          .filter(
-            (p) =>
-              p.itemName?.toLowerCase().includes(queryLower) ||
-              p.productType?.toLowerCase().includes(queryLower) ||
-              p.color?.toLowerCase().includes(queryLower) ||
-              p.applicationMethod?.toLowerCase().includes(queryLower) ||
-              p.itemDescription?.toLowerCase().includes(queryLower) ||
-              p.length?.toString().includes(queryLower)
-          )
+          .map(p => ({
+            product: p,
+            score: Math.max(
+              calculateSearchScore(query, p.itemName || ''),
+              calculateSearchScore(query, p.productType || ''),
+              calculateSearchScore(query, p.color || ''),
+              calculateSearchScore(query, p.applicationMethod || ''),
+              calculateSearchScore(query, p.itemDescription || ''),
+              calculateSearchScore(query, p.texture || ''),
+              calculateSearchScore(query, p.hairType || '')
+            )
+          }))
+          .filter(({ score }) => score > 0)
+          .sort((a, b) => b.score - a.score)
           .slice(0, 5)
-          .map((p) => ({
+          .map(({ product: p }) => ({
             type: 'product' as const,
             id: p._id,
             title: p.itemName || 'Producto',
@@ -77,9 +83,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: `/products/${p._id}`,
           }));
 
+        // Fuzzy search guides
         const guideResults: SearchResult[] = guides
-          .filter((g) => g.title.toLowerCase().includes(queryLower))
-          .map((g) => ({
+          .map(g => ({
+            guide: g,
+            score: Math.max(
+              calculateSearchScore(query, g.title),
+              calculateSearchScore(query, g.keywords)
+            )
+          }))
+          .filter(({ score }) => score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(({ guide: g }) => ({
             type: 'aplicacion' as const,
             id: g.path,
             title: g.title,
@@ -87,9 +102,18 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: g.path,
           }));
 
+        // Fuzzy search pages
         const pageResults: SearchResult[] = pages
-          .filter((p) => p.title.toLowerCase().includes(queryLower))
-          .map((p) => ({
+          .map(p => ({
+            page: p,
+            score: Math.max(
+              calculateSearchScore(query, p.title),
+              calculateSearchScore(query, p.keywords)
+            )
+          }))
+          .filter(({ score }) => score > 0)
+          .sort((a, b) => b.score - a.score)
+          .map(({ page: p }) => ({
             type: 'page' as const,
             id: p.path,
             title: p.title,

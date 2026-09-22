@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
+import { fuzzySearchMultiField, calculateSearchScore } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   id: string;
@@ -26,20 +27,20 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
   // Application pages data
   const aplicaciones = [
-    { id: 'hair-weft', title: 'Hair Weft', path: '/aplicaciones-hair-weft', type: 'aplicacion' as const },
-    { id: 'clip-in', title: 'Clip In', path: '/aplicaciones-clip-in', type: 'aplicacion' as const },
-    { id: 'tape-in', title: 'Tape In', path: '/aplicaciones-tape-in', type: 'aplicacion' as const },
-    { id: 'keratin', title: 'Keratin', path: '/aplicaciones-keratin', type: 'aplicacion' as const },
-    { id: 'feather', title: 'Feather', path: '/aplicaciones-feather', type: 'aplicacion' as const },
-    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'aplicacion' as const },
+    { id: 'hair-weft', title: 'Hair Weft', path: '/aplicaciones-hair-weft', type: 'aplicacion' as const, keywords: 'weft wefts wft sew in sew-in trama' },
+    { id: 'clip-in', title: 'Clip In', path: '/aplicaciones-clip-in', type: 'aplicacion' as const, keywords: 'clip clip-in clipin' },
+    { id: 'tape-in', title: 'Tape In', path: '/aplicaciones-tape-in', type: 'aplicacion' as const, keywords: 'tape tape-in tape in cinta' },
+    { id: 'keratin', title: 'Keratin', path: '/aplicaciones-keratin', type: 'aplicacion' as const, keywords: 'keratin k-tip ktip k tip queratina' },
+    { id: 'feather', title: 'Feather', path: '/aplicaciones-feather', type: 'aplicacion' as const, keywords: 'feather feathering pluma' },
+    { id: 'double-piece', title: 'Double Piece Flat Weft', path: '/aplicaciones/double-piece-flat-weft', type: 'aplicacion' as const, keywords: 'weft wefts double piece flat' },
   ];
 
   // Main pages data
   const mainPages = [
-    { id: 'home', title: 'Inicio', path: '/', type: 'page' as const },
-    { id: 'products', title: 'Productos', path: '/products', type: 'page' as const },
-    { id: 'stores', title: 'Compra', path: '/stores', type: 'page' as const },
-    { id: 'contact', title: 'Contacto', path: '/contact', type: 'page' as const },
+    { id: 'home', title: 'Inicio', path: '/', type: 'page' as const, keywords: 'inicio home' },
+    { id: 'products', title: 'Productos', path: '/products', type: 'page' as const, keywords: 'productos products' },
+    { id: 'stores', title: 'Compra', path: '/stores', type: 'page' as const, keywords: 'compra stores tiendas' },
+    { id: 'contact', title: 'Contacto', path: '/contact', type: 'page' as const, keywords: 'contacto contact' },
   ];
 
   // Load all products on mount
@@ -64,19 +65,24 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
     }
 
     setIsLoading(true);
-    const searchQuery = query.toLowerCase();
 
-    // Search in products
+    // Search in products with fuzzy matching
     const productResults = allProducts
-      .filter(product =>
-        product.itemName?.toLowerCase().includes(searchQuery) ||
-        product.itemDescription?.toLowerCase().includes(searchQuery) ||
-        product.applicationMethod?.toLowerCase().includes(searchQuery) ||
-        product.productType?.toLowerCase().includes(searchQuery) ||
-        product.color?.toLowerCase().includes(searchQuery) ||
-        product.length?.toString().includes(searchQuery)
-      )
       .map(product => ({
+        product,
+        score: Math.max(
+          calculateSearchScore(query, product.itemName || ''),
+          calculateSearchScore(query, product.itemDescription || ''),
+          calculateSearchScore(query, product.applicationMethod || ''),
+          calculateSearchScore(query, product.productType || ''),
+          calculateSearchScore(query, product.color || ''),
+          calculateSearchScore(query, product.texture || ''),
+          calculateSearchScore(query, product.hairType || '')
+        )
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ product }) => ({
         id: product._id,
         title: product.itemName || 'Producto sin nombre',
         type: 'product' as const,
@@ -84,25 +90,41 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
         description: product.itemDescription,
       }));
 
-    // Search in application pages
-    const aplicacionResults = aplicaciones.filter(app =>
-      app.title.toLowerCase().includes(searchQuery)
-    ).map(app => ({
-      id: app.id,
-      title: app.title,
-      type: 'aplicacion' as const,
-      path: app.path,
-    }));
+    // Search in application pages with fuzzy matching
+    const aplicacionResults = aplicaciones
+      .map(app => ({
+        app,
+        score: Math.max(
+          calculateSearchScore(query, app.title),
+          calculateSearchScore(query, app.keywords)
+        )
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ app }) => ({
+        id: app.id,
+        title: app.title,
+        type: 'aplicacion' as const,
+        path: app.path,
+      }));
 
-    // Search in main pages
-    const pageResults = mainPages.filter(page =>
-      page.title.toLowerCase().includes(searchQuery)
-    ).map(page => ({
-      id: page.id,
-      title: page.title,
-      type: 'page' as const,
-      path: page.path,
-    }));
+    // Search in main pages with fuzzy matching
+    const pageResults = mainPages
+      .map(page => ({
+        page,
+        score: Math.max(
+          calculateSearchScore(query, page.title),
+          calculateSearchScore(query, page.keywords)
+        )
+      }))
+      .filter(({ score }) => score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(({ page }) => ({
+        id: page.id,
+        title: page.title,
+        type: 'page' as const,
+        path: page.path,
+      }));
 
     // Combine and limit results
     const combined = [...productResults, ...aplicacionResults, ...pageResults].slice(0, 10);
