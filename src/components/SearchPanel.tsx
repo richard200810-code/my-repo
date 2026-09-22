@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
-import { calculateSearchScore, normalizeText, createProductSearchIndex, checkKnownAlias } from '@/lib/fuzzy-search';
+import { calculateSearchScore, normalizeText, createProductSearchIndex, checkKnownAlias, isBrazilianSearch } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   id: string;
@@ -66,14 +66,25 @@ export default function SearchPanel({ isOpen, onClose }: SearchPanelProps) {
 
     setIsLoading(true);
 
+    // Check if query is a Brazilian product search (brazilian/brazlian/brasilian)
+    const isBrazilian = isBrazilianSearch(query);
+    
     // Check if query is a known alias that locks to a category
     const lockedCategory = checkKnownAlias(query);
 
     // Search in products with scoring against normalized search index
+    // If isBrazilian, only return Virgin Brazilian Sew-in Weft (ID: af7eb76e-51cc-4949-bf30-ef2a66c74181)
     // If lockedCategory is set, only products from that category will score > 0
     // CRITICAL: Only show products with score >= 60 (strict threshold enforcement)
     // Never use default catalog as fallback - if no results meet threshold, show "No results found"
     const productResults = allProducts
+      .filter(product => {
+        // If Brazilian search, only include Virgin Brazilian Sew-in Weft
+        if (isBrazilian) {
+          return product._id === 'af7eb76e-51cc-4949-bf30-ef2a66c74181';
+        }
+        return true;
+      })
       .map(product => {
         const searchIndex = createProductSearchIndex(product);
         const score = calculateSearchScore(query, searchIndex, lockedCategory || undefined);

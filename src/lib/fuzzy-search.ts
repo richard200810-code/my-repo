@@ -71,6 +71,13 @@ export function checkKnownAlias(query: string): string | null {
   return KNOWN_ALIASES[normalized] || null;
 }
 
+// Check if query is a Brazilian product search (exact match for brazilian/brazlian/brasilian)
+// Returns true if query should trigger Virgin Brazilian Sew-in Weft only
+export function isBrazilianSearch(query: string): boolean {
+  const normalized = normalizeText(query);
+  return normalized === 'brazilian' || normalized === 'brazlian' || normalized === 'brasilian';
+}
+
 // Calculate Levenshtein distance for typo tolerance
 function levenshteinDistance(a: string, b: string): number {
   const matrix: number[][] = [];
