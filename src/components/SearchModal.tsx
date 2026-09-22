@@ -65,11 +65,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         // CRITICAL: Only show products with score > 0 (threshold already enforced in calculateSearchScore)
         // Never use default catalog as fallback - if no results meet threshold, show "No results found"
         const productResults: SearchResult[] = allProducts.items
-          .map(p => ({
-            product: p,
-            searchIndex: createProductSearchIndex(p),
-            score: calculateSearchScore(query, createProductSearchIndex(p), lockedCategory || undefined)
-          }))
+          .map(p => {
+            const searchIndex = createProductSearchIndex(p);
+            const score = calculateSearchScore(query, searchIndex, lockedCategory || undefined);
+            return { product: p, searchIndex, score };
+          })
           .filter(({ score }) => score > 0)  // STRICT: Only items that pass threshold
           .sort((a, b) => b.score - a.score)
           .slice(0, 5)

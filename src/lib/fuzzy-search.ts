@@ -134,7 +134,7 @@ function tokenMatch(queryToken: string, textToken: string): boolean {
   }
   
   // For shorter tokens: only allow distance <= 1 if very close
-  if (queryToken.length < 5 && textToken.length < 5) {
+  if (queryToken.length >= 3 && queryToken.length < 5 && textToken.length >= 3 && textToken.length < 5) {
     const distance = levenshteinDistance(queryToken, textToken);
     if (distance <= 1) return true;
   }
@@ -354,6 +354,7 @@ export function createProductSearchIndex(product: {
   itemDescription?: string;
   texture?: string;
   hairType?: string;
+  keywords?: string;
 }): string {
   const fields = [
     product.itemName,
@@ -362,7 +363,8 @@ export function createProductSearchIndex(product: {
     product.applicationMethod,
     product.itemDescription,
     product.texture,
-    product.hairType
+    product.hairType,
+    product.keywords
   ];
 
   // Build base index from all fields

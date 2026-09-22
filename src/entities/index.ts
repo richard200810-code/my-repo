@@ -15,6 +15,8 @@ export interface HairExtensionsandWigs {
   /** @wixFieldType number */
   weightInGrams?: number;
   /** @wixFieldType text */
+  keywords?: string;
+  /** @wixFieldType text */
   careInstructions?: string;
   /** @wixFieldType number */
   quantityInPack?: number;
