@@ -74,13 +74,13 @@ function matchesWithTypos(query: string, text: string, maxDistance: number = 2):
 }
 
 // Expand query with synonyms
-function expandWithSynonyms(query: string): string[] {
+export function expandWithSynonyms(query: string): string[] {
   const normalized = normalizeText(query);
   const expanded = [normalized];
 
   for (const [key, synonymList] of Object.entries(SYNONYMS)) {
     const normalizedKey = normalizeText(key);
-    if (normalized.includes(normalizedKey)) {
+    if (normalized.includes(normalizedKey) || normalizedKey.includes(normalized)) {
       synonymList.forEach(synonym => {
         const normalizedSynonym = normalizeText(synonym);
         if (!expanded.includes(normalizedSynonym)) {

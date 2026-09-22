@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { BaseCrudService } from '@/integrations';
 import { HairExtensionsandWigs } from '@/entities';
 import { Image } from '@/components/ui/image';
-import { fuzzySearchMultiField, calculateSearchScore } from '@/lib/fuzzy-search';
+import { fuzzySearchMultiField, calculateSearchScore, expandWithSynonyms, normalizeText } from '@/lib/fuzzy-search';
 
 interface SearchResult {
   type: 'product' | 'aplicacion' | 'page';
@@ -51,13 +51,25 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const searchProducts = async () => {
       setIsSearching(true);
       try {
+        // Expand query with synonyms BEFORE filtering
+        const expandedQueries = expandWithSynonyms(query);
+        const normalizedQuery = normalizeText(query);
+
         const allProducts = await BaseCrudService.getAll<HairExtensionsandWigs>(
           'hairextensions',
           {},
           { limit: 100 }
         );
 
-        // Fuzzy search products with scoring
+        // Helper function to check if any expanded query matches any field
+        const matchesExpandedQuery = (fields: (string | undefined)[]): boolean => {
+          const normalizedFields = fields.map(f => normalizeText(f || ''));
+          return expandedQueries.some(expandedQuery =>
+            normalizedFields.some(field => field.includes(expandedQuery))
+          );
+        };
+
+        // Fuzzy search products with scoring - apply synonym expansion
         const productResults: SearchResult[] = allProducts.items
           .map(p => ({
             product: p,
@@ -71,7 +83,17 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               calculateSearchScore(query, p.hairType || '')
             )
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ product: p, score }) => 
+            score > 0 || matchesExpandedQuery([
+              p.itemName,
+              p.productType,
+              p.color,
+              p.applicationMethod,
+              p.itemDescription,
+              p.texture,
+              p.hairType
+            ])
+          )
           .sort((a, b) => b.score - a.score)
           .slice(0, 5)
           .map(({ product: p }) => ({
@@ -83,7 +105,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: `/products/${p._id}`,
           }));
 
-        // Fuzzy search guides
+        // Fuzzy search guides - apply synonym expansion
         const guideResults: SearchResult[] = guides
           .map(g => ({
             guide: g,
@@ -92,7 +114,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               calculateSearchScore(query, g.keywords)
             )
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ guide: g, score }) =>
+            score > 0 || matchesExpandedQuery([g.title, g.keywords])
+          )
           .sort((a, b) => b.score - a.score)
           .map(({ guide: g }) => ({
             type: 'aplicacion' as const,
@@ -102,7 +126,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             path: g.path,
           }));
 
-        // Fuzzy search pages
+        // Fuzzy search pages - apply synonym expansion
         const pageResults: SearchResult[] = pages
           .map(p => ({
             page: p,
@@ -111,7 +135,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               calculateSearchScore(query, p.keywords)
             )
           }))
-          .filter(({ score }) => score > 0)
+          .filter(({ page: p, score }) =>
+            score > 0 || matchesExpandedQuery([p.title, p.keywords])
+          )
           .sort((a, b) => b.score - a.score)
           .map(({ page: p }) => ({
             type: 'page' as const,
