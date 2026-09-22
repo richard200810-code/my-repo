@@ -100,16 +100,56 @@ function levenshteinDistance(a: string, b: string): number {
   return matrix[b.length][a.length];
 }
 
-// Check if query matches text with typo tolerance
-function matchesWithTypos(query: string, text: string, maxDistance: number = 2): boolean {
-  const queryWords = query.split(' ');
-  const textWords = text.split(' ');
+// Calculate string similarity (0-1 scale)
+function stringSimilarity(a: string, b: string): number {
+  if (a === b) return 1;
+  if (!a || !b) return 0;
 
-  return queryWords.every(queryWord => {
-    return textWords.some(textWord => {
-      const distance = levenshteinDistance(queryWord, textWord);
-      return distance <= maxDistance || textWord.includes(queryWord);
-    });
+  const longer = a.length > b.length ? a : b;
+  const shorter = a.length > b.length ? b : a;
+
+  if (longer.length === 0) return 1;
+
+  const editDistance = levenshteinDistance(longer, shorter);
+  return (longer.length - editDistance) / longer.length;
+}
+
+// Token-based matching with Levenshtein distance for 5+ letter tokens
+// For tokens >= 5 letters: allow distance <= 1 or similarity >= 80%
+// For tokens < 5 letters: require exact substring match or distance <= 1
+function tokenMatch(queryToken: string, textToken: string): boolean {
+  // Exact match
+  if (queryToken === textToken) return true;
+  
+  // Substring match (for short tokens or partial matches)
+  if (textToken.includes(queryToken) || queryToken.includes(textToken)) return true;
+  
+  // For tokens 5+ letters: allow Levenshtein distance <= 1 or similarity >= 80%
+  if (queryToken.length >= 5 && textToken.length >= 5) {
+    const distance = levenshteinDistance(queryToken, textToken);
+    if (distance <= 1) return true;
+    
+    const similarity = stringSimilarity(queryToken, textToken);
+    if (similarity >= 0.8) return true;
+  }
+  
+  // For shorter tokens: only allow distance <= 1 if very close
+  if (queryToken.length < 5 && textToken.length < 5) {
+    const distance = levenshteinDistance(queryToken, textToken);
+    if (distance <= 1) return true;
+  }
+  
+  return false;
+}
+
+// Check if query matches text with token-based typo tolerance
+function matchesWithTypos(query: string, text: string): boolean {
+  const queryTokens = query.split(' ').filter(t => t.length > 0);
+  const textTokens = text.split(' ').filter(t => t.length > 0);
+
+  // Every query token must match at least one text token
+  return queryTokens.every(queryToken => {
+    return textTokens.some(textToken => tokenMatch(queryToken, textToken));
   });
 }
 
@@ -214,36 +254,16 @@ export function fuzzySearchMultiField(
   return fields.some(field => fuzzySearch(query, field || '', lockedCategory));
 }
 
-// Calculate similarity between two strings (0-1 scale)
-function stringSimilarity(a: string, b: string): number {
-  if (a === b) return 1;
-  if (!a || !b) return 0;
-
-  const longer = a.length > b.length ? a : b;
-  const shorter = a.length > b.length ? b : a;
-
-  if (longer.length === 0) return 1;
-
-  const editDistance = levenshteinDistance(longer, shorter);
-  return (longer.length - editDistance) / longer.length;
-}
-
 // Calculate token-level similarity (word-by-word matching)
+// Uses the same token matching logic as matchesWithTypos
 function tokenSimilarity(queryTokens: string[], textTokens: string[]): number {
   if (queryTokens.length === 0) return 0;
 
   let matchedTokens = 0;
   for (const qt of queryTokens) {
-    // Check if any text token matches or is similar to this query token
-    const bestMatch = Math.max(
-      ...textTokens.map(tt => {
-        // Exact substring match
-        if (tt.includes(qt) || qt.includes(tt)) return 1;
-        // Similarity-based match (for typos)
-        return stringSimilarity(qt, tt);
-      })
-    );
-    if (bestMatch > 0.7) matchedTokens++;
+    // Check if any text token matches using token-based matching
+    const hasMatch = textTokens.some(tt => tokenMatch(qt, tt));
+    if (hasMatch) matchedTokens++;
   }
 
   return matchedTokens / queryTokens.length;
@@ -282,13 +302,16 @@ export function calculateSearchScore(query: string, text: string, lockedCategory
     score += 60;
   }
 
-  // Token-level similarity (word-by-word matching)
+  // Token-level similarity (word-by-word matching with real token matching)
   const queryTokens = normalizedQuery.split(' ').filter(t => t.length > 0);
   const textTokens = normalizedText.split(' ').filter(t => t.length > 0);
   
   if (queryTokens.length > 0 && textTokens.length > 0) {
-    const tokenMatch = tokenSimilarity(queryTokens, textTokens);
-    score += tokenMatch * 50;
+    const tokenMatchScore = tokenSimilarity(queryTokens, textTokens);
+    // For single-token queries with token matches, give higher weight (70 instead of 50)
+    // This ensures typos like "brazlian" -> "brazilian" pass the 60% threshold
+    const tokenWeight = queryTokens.length === 1 ? 70 : 50;
+    score += tokenMatchScore * tokenWeight;
   }
 
   // Synonym match (only if no locked category)
