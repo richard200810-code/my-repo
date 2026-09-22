@@ -4,12 +4,38 @@ import { Image } from '@/components/ui/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HairColorSelector from '@/components/HairColorSelector';
-import { ChevronRight, ChevronDown } from 'lucide-react';
+import { ChevronRight, ChevronDown, ChevronLeft, ZoomIn } from 'lucide-react';
 
 export default function DoublePieceFlatWeftPage() {
   const [selectedLength, setSelectedLength] = useState('18');
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [expandedAccordion, setExpandedAccordion] = useState<number | null>(null);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  // Gallery images for Double Piece Flat Weft
+  const galleryImages = [
+    {
+      url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
+      alt: 'Double Piece Flat Weft - Vista general de la trama'
+    },
+    {
+      url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
+      alt: 'Double Piece Flat Weft - Detalle de la base plana'
+    },
+    {
+      url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
+      alt: 'Double Piece Flat Weft - Textura del cabello'
+    }
+  ];
+
+  const handlePrevImage = () => {
+    setMainImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+  };
+
+  const handleNextImage = () => {
+    setMainImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+  };
 
   const lengths = ['14', '16', '18', '20', '22', '24', '26', '28', '30'];
 
@@ -73,16 +99,67 @@ export default function DoublePieceFlatWeftPage() {
       {/* Hero Section - Two Columns with ample white space */}
       <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 py-16 md:py-32">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
-          {/* Image Column */}
+          {/* Image Gallery Column */}
           <div className="flex flex-col gap-8">
-            <div className="w-full aspect-[3/4] rounded-sm overflow-hidden bg-background/10">
+            {/* Main Image with Zoom */}
+            <div 
+              className="w-full aspect-[3/4] rounded-sm overflow-hidden bg-background/10 relative group cursor-pointer"
+              onClick={() => setIsZoomed(!isZoomed)}
+            >
               <Image
-                src="https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg"
-                alt="Double Piece Flat Weft - Trama profesional"
-                className="w-full h-full object-cover"
+                src={galleryImages[mainImageIndex].url}
+                alt={galleryImages[mainImageIndex].alt}
+                className={`w-full h-full object-cover transition-transform duration-300 ${isZoomed ? 'scale-150' : 'scale-100'}`}
                 width={600}
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <ZoomIn size={32} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
             </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex items-center justify-between gap-4">
+              <button
+                onClick={handlePrevImage}
+                className="p-3 border border-secondary/20 hover:border-secondary/50 hover:bg-secondary/5 transition-all"
+                aria-label="Imagen anterior"
+              >
+                <ChevronLeft size={20} className="text-secondary" />
+              </button>
+              <div className="flex-1 text-center text-xs font-paragraph text-secondary/50 uppercase tracking-widest">
+                {mainImageIndex + 1} / {galleryImages.length}
+              </div>
+              <button
+                onClick={handleNextImage}
+                className="p-3 border border-secondary/20 hover:border-secondary/50 hover:bg-secondary/5 transition-all"
+                aria-label="Siguiente imagen"
+              >
+                <ChevronRight size={20} className="text-secondary" />
+              </button>
+            </div>
+
+            {/* Thumbnail Gallery */}
+            <div className="flex gap-3">
+              {galleryImages.map((image, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setMainImageIndex(idx)}
+                  className={`flex-1 aspect-square rounded-sm overflow-hidden border-2 transition-all ${
+                    mainImageIndex === idx
+                      ? 'border-secondary'
+                      : 'border-secondary/20 hover:border-secondary/50'
+                  }`}
+                >
+                  <Image
+                    src={image.url}
+                    alt={`Miniatura ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                    width={120}
+                  />
+                </button>
+              ))}
+            </div>
+
             <div className="text-xs font-paragraph text-secondary/40 uppercase tracking-widest">
               Catálogo
             </div>
@@ -251,53 +328,88 @@ export default function DoublePieceFlatWeftPage() {
         </div>
       </section>
 
-      {/* Related Section */}
+      {/* Related Section - Recommendations with Visual Cards */}
       <section className="w-full bg-secondary/5 py-16 md:py-24">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
           <h2 className="font-heading text-4xl md:text-5xl text-secondary mb-12">
             También te puede interesar
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Hair Weft Guide Card */}
             <Link
               to="/aplicaciones-hair-weft"
-              className="bg-white p-8 border border-secondary/10 hover:border-secondary/30 transition-all group"
+              className="bg-white overflow-hidden border border-secondary/10 hover:border-secondary/30 transition-all group"
             >
-              <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
-                Guía Hair Weft
-              </h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-6">
-                Explora todos los métodos de aplicación y encuentra el más adecuado para tus necesidades.
-              </p>
-              <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
-                Explorar <ChevronRight size={16} />
+              <div className="w-full aspect-[4/3] overflow-hidden bg-background/10">
+                <Image
+                  src="https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg"
+                  alt="Guía Hair Weft - Métodos de aplicación"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
+                  Guía Hair Weft
+                </h3>
+                <p className="font-paragraph text-base text-secondary/70 mb-6">
+                  Explora todos los métodos de aplicación de trama y encuentra el más adecuado para tus necesidades.
+                </p>
+                <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
+                  Explorar <ChevronRight size={16} />
+                </div>
               </div>
             </Link>
+
+            {/* Hair Weft Guide - Tape In Card */}
             <Link
-              to="/products"
-              className="bg-white p-8 border border-secondary/10 hover:border-secondary/30 transition-all group"
+              to="/aplicaciones-tape-in"
+              className="bg-white overflow-hidden border border-secondary/10 hover:border-secondary/30 transition-all group"
             >
-              <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
-                Productos
-              </h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-6">
-                Descubre nuestro catálogo completo de extensiones y productos profesionales.
-              </p>
-              <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
-                Ver catálogo <ChevronRight size={16} />
+              <div className="w-full aspect-[4/3] overflow-hidden bg-background/10">
+                <Image
+                  src="https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg"
+                  alt="Tape In - Método de aplicación con cinta"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
+                  Tape In
+                </h3>
+                <p className="font-paragraph text-base text-secondary/70 mb-6">
+                  Descubre el método Tape In, otra opción de trama para aplicación profesional y resultados duraderos.
+                </p>
+                <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
+                  Conocer más <ChevronRight size={16} />
+                </div>
               </div>
             </Link>
+
+            {/* Hair Weft Guide - Keratin Card */}
             <Link
-              to="/contact"
-              className="bg-white p-8 border border-secondary/10 hover:border-secondary/30 transition-all group"
+              to="/aplicaciones-keratin"
+              className="bg-white overflow-hidden border border-secondary/10 hover:border-secondary/30 transition-all group"
             >
-              <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
-                Contacto
-              </h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-6">
-                Consulta con nuestros especialistas para una evaluación personalizada.
-              </p>
-              <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
-                Contactar <ChevronRight size={16} />
+              <div className="w-full aspect-[4/3] overflow-hidden bg-background/10">
+                <Image
+                  src="https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg"
+                  alt="Keratin - Método de aplicación con queratina"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  width={400}
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="font-heading text-2xl text-secondary mb-3 group-hover:text-secondary/80 transition-colors">
+                  Keratin
+                </h3>
+                <p className="font-paragraph text-base text-secondary/70 mb-6">
+                  Explora el método Keratin, una alternativa profesional para aplicación de extensiones de cabello.
+                </p>
+                <div className="flex items-center gap-2 text-secondary font-paragraph text-sm uppercase tracking-wide">
+                  Explorar <ChevronRight size={16} />
+                </div>
               </div>
             </Link>
           </div>
