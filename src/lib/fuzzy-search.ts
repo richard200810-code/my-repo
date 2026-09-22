@@ -271,6 +271,8 @@ function tokenSimilarity(queryTokens: string[], textTokens: string[]): number {
 
 // Score results for ranking (higher score = better match)
 // If a known alias is detected, only score items from that category
+// CRITICAL: Initialize score=0; only assign score for valid matches (exact, alias, substring, or fuzzy token)
+// Items with no valid match receive score=0 and are filtered out
 export function calculateSearchScore(query: string, text: string, lockedCategory?: string): number {
   if (!query || !text) return 0;
 
@@ -294,52 +296,41 @@ export function calculateSearchScore(query: string, text: string, lockedCategory
 
   // Starts with query
   if (normalizedText.startsWith(normalizedQuery)) {
-    score += 80;
+    score = 80;
   }
-
-  // Contains query as substring
-  if (normalizedText.includes(normalizedQuery)) {
-    score += 60;
+  // Contains query as substring (only if not already scored higher)
+  else if (normalizedText.includes(normalizedQuery)) {
+    score = 60;
   }
-
   // Token-level similarity (word-by-word matching with real token matching)
-  const queryTokens = normalizedQuery.split(' ').filter(t => t.length > 0);
-  const textTokens = normalizedText.split(' ').filter(t => t.length > 0);
-  
-  if (queryTokens.length > 0 && textTokens.length > 0) {
-    const tokenMatchScore = tokenSimilarity(queryTokens, textTokens);
-    // For single-token queries with token matches, give higher weight (70 instead of 50)
-    // This ensures typos like "brazlian" -> "brazilian" pass the 60% threshold
-    const tokenWeight = queryTokens.length === 1 ? 70 : 50;
-    score += tokenMatchScore * tokenWeight;
+  else {
+    const queryTokens = normalizedQuery.split(' ').filter(t => t.length > 0);
+    const textTokens = normalizedText.split(' ').filter(t => t.length > 0);
+    
+    if (queryTokens.length > 0 && textTokens.length > 0) {
+      const tokenMatchScore = tokenSimilarity(queryTokens, textTokens);
+      // Only assign score if there's a valid token match (> 0)
+      if (tokenMatchScore > 0) {
+        // For single-token queries with token matches, give higher weight (70 instead of 50)
+        // This ensures typos like "brazlian" -> "brazilian" pass the 60% threshold
+        const tokenWeight = queryTokens.length === 1 ? 70 : 50;
+        score = tokenMatchScore * tokenWeight;
+      }
+    }
   }
 
-  // Synonym match (only if no locked category)
-  if (!lockedCategory) {
+  // Synonym match (only if no locked category and no score yet)
+  if (score === 0 && !lockedCategory) {
     const expandedQueries = expandWithSynonyms(normalizedQuery);
     if (expandedQueries.some(eq => normalizedText.includes(eq))) {
-      score += 30;
+      score = 60;
     }
   }
 
-  // THRESHOLD ENFORCEMENT: Strict thresholds to prevent irrelevant matches
-  // This ensures only genuinely relevant results are shown
-  if (normalizedQuery.length >= 5) {
-    // For longer queries (5+ letters), require at least 60% relevance
-    // This prevents typos like "brazlian" from matching unrelated products
-    if (score < 60) {
-      return 0;
-    }
-  } else if (normalizedQuery.length >= 3) {
-    // For medium queries (3-4 letters), require at least 40% relevance
-    if (score < 40) {
-      return 0;
-    }
-  } else {
-    // For very short queries (1-2 letters), require at least 30% relevance
-    if (score < 30) {
-      return 0;
-    }
+  // CRITICAL: Return 0 for items with no valid match
+  // Only return items with score >= 60
+  if (score < 60) {
+    return 0;
   }
 
   return score;
