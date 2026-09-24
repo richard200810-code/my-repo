@@ -17,15 +17,20 @@ export default function DoublePieceFlatWeftPage() {
   const galleryImages = [
     {
       url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
-      alt: 'Double Piece Flat Weft - Vista general de la trama'
+      alt: 'Double Piece Flat Weft - Vista general de la trama',
+      isReference: false
     },
     {
-      url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
-      alt: 'Double Piece Flat Weft - Detalle de la base plana'
+      url: 'https://beautylinkhairpro.com/wp-content/uploads/2025/06/volume-flat-weft022716.jpg',
+      alt: 'Imagen de referencia - Flat Weft de otro fabricante',
+      isReference: true,
+      sourceUrl: 'https://beautylinkhairpro.com/wefts/'
     },
     {
-      url: 'https://static.wixstatic.com/media/37e681_682396f4cb994c298aea0c305d3710d8~mv2.jpg',
-      alt: 'Double Piece Flat Weft - Textura del cabello'
+      url: 'https://glhair.uk/cdn/shop/files/Flat_weft-_Category.2_9c71e6dc-97d6-4679-93a7-d29453f2807a_700x700.png?v=1767185226',
+      alt: 'Imagen de referencia - Flat Weft de otro fabricante',
+      isReference: true,
+      sourceUrl: 'https://glhair.uk/products/flat-weft-90g-24inch-luxe'
     }
   ];
 
@@ -101,14 +106,14 @@ export default function DoublePieceFlatWeftPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
           {/* Image Gallery Column */}
           <div className="flex flex-col gap-8">
-            {/* Main Image with Zoom - Single Image Only */}
+            {/* Main Image with Zoom */}
             <div 
               className="w-full aspect-[3/4] rounded-sm overflow-hidden bg-background/10 relative group cursor-pointer"
               onClick={() => setIsZoomed(!isZoomed)}
             >
               <Image
-                src={galleryImages[0].url}
-                alt={galleryImages[0].alt}
+                src={galleryImages[mainImageIndex].url}
+                alt={galleryImages[mainImageIndex].alt}
                 className={`w-full h-full object-cover transition-transform duration-300 ${isZoomed ? 'scale-150' : 'scale-100'}`}
                 width={600}
               />
@@ -117,8 +122,60 @@ export default function DoublePieceFlatWeftPage() {
               </div>
             </div>
 
-            {/* Gallery component ready for future images - currently hidden */}
-            {/* Navigation Arrows and Thumbnails will be enabled when more distinct images are available */}
+            {/* Thumbnails Gallery */}
+            <div className="flex gap-3">
+              {galleryImages.map((image, idx) => (
+                <div key={idx} className="flex flex-col gap-2">
+                  <button
+                    onClick={() => {
+                      setMainImageIndex(idx);
+                      setIsZoomed(false);
+                    }}
+                    className={`w-20 h-24 rounded-sm overflow-hidden border-2 transition-all ${
+                      mainImageIndex === idx
+                        ? 'border-secondary'
+                        : 'border-secondary/20 hover:border-secondary/50'
+                    }`}
+                  >
+                    <Image
+                      src={image.url}
+                      alt={image.alt}
+                      className="w-full h-full object-cover"
+                      width={80}
+                    />
+                  </button>
+                  {image.isReference && (
+                    <a
+                      href={image.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-paragraph text-secondary/50 hover:text-secondary/70 transition-colors underline"
+                    >
+                      Ver fuente
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Reference Note */}
+            <div className="space-y-2">
+              {galleryImages.slice(1).map((image, idx) => (
+                mainImageIndex === idx + 1 && (
+                  <div key={idx} className="text-xs font-paragraph text-secondary/60 bg-secondary/5 p-3 rounded-sm border border-secondary/10">
+                    <p className="font-semibold text-secondary/70 mb-1">Imagen de referencia de otro fabricante; no es producto LUX Hair</p>
+                    <a
+                      href={image.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-secondary/50 hover:text-secondary/70 transition-colors underline break-all"
+                    >
+                      {image.sourceUrl}
+                    </a>
+                  </div>
+                )
+              ))}
+            </div>
 
             <div className="text-xs font-paragraph text-secondary/40 uppercase tracking-widest">
               Catálogo
