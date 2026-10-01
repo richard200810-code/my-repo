@@ -4,6 +4,64 @@
  */
 
 /**
+ * Collection ID: customers
+ * Interface for Customers
+ */
+export interface Customers {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  companyName?: string;
+  /** @wixFieldType text */
+  contactPerson?: string;
+  /** @wixFieldType text */
+  phoneNumber?: string;
+  /** @wixFieldType text */
+  whatsAppNumber?: string;
+  /** @wixFieldType text */
+  email?: string;
+  /** @wixFieldType text */
+  source?: string;
+  /** @wixFieldType text */
+  customerType?: string;
+  /** @wixFieldType text */
+  salesStage?: string;
+  /** @wixFieldType text */
+  owner?: string;
+  /** @wixFieldType text */
+  notes?: string;
+  /** @wixFieldType date */
+  nextFollowUpDate?: Date | string;
+  /** @wixFieldType text */
+  createdBy?: string;
+}
+
+
+/**
+ * Collection ID: followups
+ * Interface for CustomerFollowups
+ */
+export interface CustomerFollowups {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  customerIdentifier?: string;
+  /** @wixFieldType text */
+  followUpAction?: string;
+  /** @wixFieldType datetime */
+  followUpDate?: Date | string;
+  /** @wixFieldType datetime */
+  nextActionDate?: Date | string;
+  /** @wixFieldType text */
+  notes?: string;
+  /** @wixFieldType text */
+  createdBy?: string;
+}
+
+
+/**
  * Collection ID: hairextensions
  * @catalog This collection is an eCommerce catalog
  * Interface for HairExtensionsandWigs
