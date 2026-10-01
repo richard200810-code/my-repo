@@ -17,6 +17,7 @@ import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
 import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage';
 import ColorGuidePage from '@/components/pages/ColorGuidePage';
 import DebugProductImages from '@/components/pages/DebugProductImages';
+import CRMPage from '@/components/pages/CRMPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -137,6 +138,13 @@ const router = createBrowserRouter([
         element: <DebugProductImages />,
         routeMetadata: {
           pageIdentifier: 'debug-images',
+        },
+      },
+      {
+        path: "crm",
+        element: <CRMPage />,
+        routeMetadata: {
+          pageIdentifier: 'crm',
         },
       },
       {
