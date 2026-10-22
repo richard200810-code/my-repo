@@ -82,7 +82,7 @@ export default function ContactPage() {
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
                     Correo electrónico
                   </h3>
-                  <p className="font-paragraph text-base text-primary/70">richard200810@gmail.comin.com</p>
+                  <p className="font-paragraph text-base text-primary/70">richard200810@gmail.com</p>
                 </div>
               </div>
 
