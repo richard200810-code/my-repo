@@ -1,348 +1,239 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight, Wrench, Zap, Scissors, Droplet, HelpCircle } from 'lucide-react';
+import { Search, X } from 'lucide-react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Image } from '@/components/ui/image';
 
 const toolCategories = [
   {
     id: 'installation-prep',
-    title: 'Preparación de Instalación',
+    name: 'Preparación de Instalación',
+    category: 'Instalación',
     description: 'Herramientas esenciales para preparar el cabello y organizar las extensiones antes de la aplicación.',
-    tools: [
-      'Peine de secciones',
-      'Pinzas de cocodrilo',
-      'Soportes para mechones',
-      'Clips de organización'
-    ],
-    icon: '🔧'
+    image: 'https://static.wixstatic.com/media/37e681_e2cc94aec4704448a62db95eb0bed1fa~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'tape-in',
-    title: 'Tape-In',
+    name: 'Herramientas Tape-In',
+    category: 'Tape-In',
     description: 'Herramientas especializadas para aplicar y mantener extensiones adhesivas con precisión.',
-    tools: [
-      'Adhesivos y reemplazos de cinta',
-      'Herramientas de compresión',
-      'Removedor de adhesivo',
-      'Aplicadores de precisión'
-    ],
-    icon: '📌'
+    image: 'https://static.wixstatic.com/media/37e681_e3c828df29eb4c9db78f9192f64d228b~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'weft-sewing',
-    title: 'Weft / Costura',
+    name: 'Herramientas Weft / Costura',
+    category: 'Weft',
     description: 'Equipos para coser y asegurar extensiones con método de costura tradicional.',
-    tools: [
-      'Agujas curvas',
-      'Hilo de calidad profesional',
-      'Microanillos',
-      'Enhebrador de anillos',
-      'Pinzas de apertura/cierre'
-    ],
-    icon: '🧵'
+    image: 'https://static.wixstatic.com/media/37e681_37ff1bcfba0f402da3092f90f3be29e9~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'i-tip-flat-tip',
-    title: 'I-Tip / Flat-Tip',
+    name: 'Herramientas I-Tip / Flat-Tip',
+    category: 'I-Tip',
     description: 'Herramientas para aplicar extensiones con punta individual o plana.',
-    tools: [
-      'Microanillos',
-      'Enhebrador de anillos',
-      'Pinzas de apertura/cierre',
-      'Aplicadores de precisión'
-    ],
-    icon: '💎'
+    image: 'https://static.wixstatic.com/media/37e681_c6f63eeb026d46fea171b0930d406a7a~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'k-tip-keratin',
-    title: 'K-Tip / Queratina',
+    name: 'Herramientas K-Tip / Queratina',
+    category: 'K-Tip',
     description: 'Equipos especializados para fusión por calor y aplicación de queratina.',
-    tools: [
-      'Pinzas de fusión por calor',
-      'Láminas aislantes',
-      'Removedor de queratina',
-      'Herramientas de separación'
-    ],
-    icon: '🔥'
+    image: 'https://static.wixstatic.com/media/37e681_23d1c4d75f604400b3281e2d617077a9~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'clip-in',
-    title: 'Clip-In',
+    name: 'Accesorios Clip-In',
+    category: 'Clip-In',
     description: 'Accesorios y herramientas para extensiones removibles con clips.',
-    tools: [
-      'Clips de reemplazo',
-      'Organizadores de clips',
-      'Peine especializado',
-      'Accesorios de fijación'
-    ],
-    icon: '📎'
+    image: 'https://static.wixstatic.com/media/37e681_9a26230d76c84a1088ed454dd87acbe4~mv2.png?originWidth=256&originHeight=256'
   },
   {
     id: 'care-maintenance',
-    title: 'Cuidado y Mantenimiento',
+    name: 'Productos de Cuidado y Mantenimiento',
+    category: 'Mantenimiento',
     description: 'Productos y herramientas para mantener las extensiones en óptimas condiciones.',
-    tools: [
-      'Peine especializado para extensiones',
-      'Estantes de almacenamiento',
-      'Productos de cuidado profesional',
-      'Acondicionadores especializados'
-    ],
-    icon: '🧴'
+    image: 'https://static.wixstatic.com/media/37e681_801cfeaf1a89488aae3ec0c2ea047ee5~mv2.png?originWidth=256&originHeight=256'
   },
   {
-    id: 'color-consultation',
-    title: 'Anillo de Color y Consulta',
+    id: 'color-ring',
+    name: 'Anillo de Color',
+    category: 'Color',
     description: 'Acceso a nuestro anillo de color profesional y consultas personalizadas.',
-    tools: [
-      'Anillo de color completo',
-      'Consulta de tonos',
-      'Asesoramiento personalizado',
-      'Muestras de textura'
-    ],
-    icon: '🎨',
-    link: '/academy/color-ring'
+    image: 'https://static.wixstatic.com/media/37e681_dd279c18ceb14356b1a4e26ae8553913~mv2.png?originWidth=256&originHeight=256'
   }
 ];
 
-const applicationMethods = [
-  {
-    name: 'Tape-In',
-    description: 'Piezas adhesivas para integración plana y discreta',
-    categoryId: 'tape-in'
-  },
-  {
-    name: 'Weft / Costura',
-    description: 'Método tradicional de costura para máxima durabilidad',
-    categoryId: 'weft-sewing'
-  },
-  {
-    name: 'I-Tip / Flat-Tip',
-    description: 'Puntas individuales para aplicación precisa',
-    categoryId: 'i-tip-flat-tip'
-  },
-  {
-    name: 'K-Tip / Queratina',
-    description: 'Fusión por calor para acabado natural',
-    categoryId: 'k-tip-keratin'
-  },
-  {
-    name: 'Clip-In',
-    description: 'Extensiones removibles para versatilidad',
-    categoryId: 'clip-in'
-  }
-];
-
-const processStages = [
-  {
-    stage: 'Instalación',
-    description: 'Preparación, secciones, aplicación de extensiones con herramientas especializadas',
-    tools: 'Peines, pinzas, adhesivos, agujas, microanillos'
-  },
-  {
-    stage: 'Mantenimiento',
-    description: 'Cuidado regular, peinado, acondicionamiento para prolongar la vida útil',
-    tools: 'Peines especializados, productos de cuidado, acondicionadores'
-  },
-  {
-    stage: 'Remoción',
-    description: 'Desmontaje seguro sin dañar el cabello natural',
-    tools: 'Removedores de adhesivo, pinzas, herramientas de separación'
-  }
-];
-
-const faqItems = [
-  {
-    question: '¿Qué herramientas necesito para cada técnica?',
-    answer: 'Cada técnica requiere herramientas específicas. Tape-In necesita adhesivos y compresores; Weft requiere agujas y hilo; I-Tip/Flat-Tip usan microanillos; K-Tip necesita pinzas de fusión. Consulta con nuestro equipo para recomendaciones personalizadas.'
-  },
-  {
-    question: '¿Cómo elijo el kit de herramientas adecuado?',
-    answer: 'Podemos orientarte para elegir las herramientas según el método de aplicación; consulta disponibilidad antes de comprar.'
-  },
-  {
-    question: '¿Cómo debo cuidar mis herramientas?',
-    answer: 'Limpia y guarda cada herramienta según las instrucciones del fabricante. Desconecta y deja enfriar los equipos térmicos antes de limpiarlos; evita humedad en componentes eléctricos.'
-  },
-  {
-    question: '¿Cómo confirmo disponibilidad de productos?',
-    answer: 'Contáctanos directamente a través del formulario de consulta. Nuestro equipo verificará disponibilidad y te proporcionará opciones de envío.'
-  }
-];
+const categories = ['Todos', 'Instalación', 'Tape-In', 'Weft', 'I-Tip', 'K-Tip', 'Clip-In', 'Mantenimiento', 'Color'];
 
 export default function ToolsAccessoriesPage() {
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredTools = useMemo(() => {
+    return toolCategories.filter(tool => {
+      const matchesCategory = selectedCategory === 'Todos' || tool.category === selectedCategory;
+      const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           tool.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
       
       {/* Hero Section */}
-      <section className="w-full bg-background py-16 md:py-24">
+      <section className="w-full bg-background py-12 md:py-16">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-4"
           >
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl text-primary">
-              Herramientas y accesorios para extensiones
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-primary">
+              Herramientas y Accesorios
             </h1>
-            <p className="font-paragraph text-lg md:text-xl text-primary/80 max-w-3xl leading-relaxed">
-              Todo lo que necesitas para instalar, mantener y cuidar tus extensiones de cabello con profesionalismo. Herramientas de calidad para cada técnica de aplicación.
+            <p className="font-paragraph text-base md:text-lg text-primary/80 max-w-2xl">
+              Todo lo que necesitas para instalar, mantener y cuidar tus extensiones de cabello con profesionalismo.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Quick Access by Method */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
-        <h2 className="font-heading text-4xl md:text-5xl text-primary mb-12">
-          Encuentra herramientas por método
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          {applicationMethods.map((method, idx) => (
-            <motion.a
-              key={idx}
-              href={`#${method.categoryId}`}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 hover:bg-background/30 transition-all cursor-pointer block"
+      {/* Filters and Search Section */}
+      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
+        {/* Search Bar */}
+        <div className="mb-8">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary/50" />
+            <input
+              type="text"
+              placeholder="Buscar herramientas..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 border border-primary/20 rounded-lg font-paragraph text-base focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-primary/50 hover:text-primary"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Category Filter */}
+        <div className="flex flex-wrap gap-2 md:gap-3">
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-4 md:px-6 py-2 md:py-3 rounded-full font-paragraph text-sm md:text-base transition-all ${
+                selectedCategory === cat
+                  ? 'bg-primary text-white border border-primary'
+                  : 'border border-primary/30 text-primary hover:border-primary/60'
+              }`}
             >
-              <h3 className="font-heading text-lg text-primary mb-2">{method.name}</h3>
-              <p className="font-paragraph text-sm text-primary/70">{method.description}</p>
-            </motion.a>
+              {cat}
+            </motion.button>
           ))}
+        </div>
+
+        {/* Results Count */}
+        <div className="mt-6 text-primary/70 font-paragraph text-sm">
+          {filteredTools.length} producto{filteredTools.length !== 1 ? 's' : ''} encontrado{filteredTools.length !== 1 ? 's' : ''}
         </div>
       </section>
 
-      {/* Main Categories Grid */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
-        <h2 className="font-heading text-4xl md:text-5xl text-primary mb-12">
-          Categorías de herramientas
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {toolCategories.map((category, idx) => (
-            <motion.div
-              key={category.id}
-              id={category.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="border border-primary/20 rounded-lg p-8 hover:border-primary/50 hover:shadow-lg transition-all group scroll-mt-20"
-            >
-              <div className="text-4xl mb-4">{category.icon}</div>
-              <h3 className="font-heading text-2xl text-primary mb-3">{category.title}</h3>
-              <p className="font-paragraph text-sm text-primary/70 mb-6 leading-relaxed">
-                {category.description}
-              </p>
-              
-              <div className="space-y-2 mb-6">
-                {category.tools.map((tool, toolIdx) => (
-                  <div key={toolIdx} className="flex items-start gap-2">
-                    <ChevronRight className="w-4 h-4 text-primary/50 mt-0.5 flex-shrink-0" />
-                    <span className="font-paragraph text-sm text-primary/80">{tool}</span>
-                  </div>
-                ))}
-              </div>
-
-              {category.link ? (
-                <Link
-                  to={category.link}
-                  className="inline-flex items-center justify-center w-full font-paragraph text-base px-6 py-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white transition-colors rounded"
-                >
-                  Ver anillo de color
-                </Link>
-              ) : (
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center w-full font-paragraph text-base px-6 py-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white transition-colors rounded group-hover:bg-primary group-hover:text-white"
-                >
-                  Consultar disponibilidad
-                </Link>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Process Stages */}
-      <section className="w-full bg-background py-16 md:py-24">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24">
-          <h2 className="font-heading text-4xl md:text-5xl text-primary mb-12">
-            Tres etapas del proceso
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {processStages.map((stage, idx) => (
+      {/* Products Grid */}
+      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
+        {filteredTools.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {filteredTools.map((tool, idx) => (
               <motion.div
-                key={idx}
+                key={tool.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="space-y-4"
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className="border border-primary/15 rounded-lg overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-heading text-xl">
-                    {idx + 1}
+                {/* Image */}
+                <div className="relative h-48 md:h-56 bg-background/50 overflow-hidden">
+                  <Image
+                    src={tool.image}
+                    alt={tool.name}
+                    width={300}
+                    height={300}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 right-3 bg-primary/90 text-white px-3 py-1 rounded-full text-xs font-paragraph">
+                    {tool.category}
                   </div>
-                  <h3 className="font-heading text-2xl text-primary">{stage.stage}</h3>
                 </div>
-                <p className="font-paragraph text-base text-primary/80 leading-relaxed">
-                  {stage.description}
-                </p>
-                <div className="pt-4 border-t border-primary/20">
-                  <p className="font-paragraph text-sm text-primary/70">
-                    <span className="font-semibold">Herramientas clave:</span> {stage.tools}
+
+                {/* Content */}
+                <div className="p-5 md:p-6">
+                  <h3 className="font-heading text-lg md:text-xl text-primary mb-2 line-clamp-2">
+                    {tool.name}
+                  </h3>
+                  <p className="font-paragraph text-sm text-primary/70 mb-4 line-clamp-2">
+                    {tool.description}
                   </p>
+
+                  {/* Button */}
+                  <Link
+                    to="/contact"
+                    className="block w-full text-center font-paragraph text-base px-4 py-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white transition-colors rounded"
+                  >
+                    Consultar disponibilidad
+                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-16 md:py-24">
-        <h2 className="font-heading text-4xl md:text-5xl text-primary mb-12">
-          Preguntas frecuentes
-        </h2>
-        <div className="space-y-6">
-          {faqItems.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 transition-colors"
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <p className="font-paragraph text-lg text-primary/60 mb-4">
+              No se encontraron productos que coincidan con tu búsqueda.
+            </p>
+            <button
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategory('Todos');
+              }}
+              className="font-paragraph text-base text-primary hover:opacity-70 transition-opacity underline"
             >
-              <div className="flex items-start gap-4">
-                <HelpCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div className="flex-1">
-                  <h3 className="font-heading text-lg text-primary mb-3">{item.question}</h3>
-                  <p className="font-paragraph text-base text-primary/80 leading-relaxed">
-                    {item.answer}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              Limpiar filtros
+            </button>
+          </motion.div>
+        )}
       </section>
 
       {/* CTA Section */}
-      <section className="w-full bg-primary text-white py-16 md:py-24">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 text-center space-y-8">
+      <section className="w-full bg-primary text-white py-12 md:py-16 mt-8 md:mt-12">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 text-center space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="space-y-4"
+            className="space-y-3"
           >
-            <h2 className="font-heading text-4xl md:text-5xl">
-              ¿Necesitas asesoramiento personalizado?
+            <h2 className="font-heading text-3xl md:text-4xl">
+              ¿Necesitas asesoramiento?
             </h2>
-            <p className="font-paragraph text-lg text-white/90 max-w-2xl mx-auto">
-              Nuestro equipo de expertos está disponible para ayudarte a elegir las herramientas adecuadas para tu técnica y necesidades específicas.
+            <p className="font-paragraph text-base md:text-lg text-white/90 max-w-2xl mx-auto">
+              Nuestro equipo de expertos está disponible para ayudarte a elegir las herramientas adecuadas.
             </p>
           </motion.div>
           <motion.div
@@ -352,7 +243,7 @@ export default function ToolsAccessoriesPage() {
           >
             <Link
               to="/contact"
-              className="inline-flex items-center justify-center font-paragraph text-lg px-10 py-4 border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-colors rounded"
+              className="inline-flex items-center justify-center font-paragraph text-base md:text-lg px-8 md:px-10 py-3 md:py-4 border-2 border-white bg-transparent text-white hover:bg-white hover:text-primary transition-colors rounded"
             >
               Consultar disponibilidad
             </Link>
