@@ -99,25 +99,22 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
         </div>
       </div>
 
-      {/* Selected Preview - Large Circle at Top */}
+      {/* Selected Preview - Large Square at Top */}
       {currentSelected && (
         <div className="mb-12 p-8 border border-secondary/20 bg-secondary/2">
           <div className="flex flex-col md:flex-row items-center gap-8">
-            {/* Large Hair Circle Preview */}
+            {/* Large Hair Square Preview */}
             <div className="flex-shrink-0">
-              <div className="relative w-32 h-32 md:w-40 md:h-40">
-                {/* Double Ring */}
-                <div className="absolute inset-0 rounded-full border-4 border-secondary"></div>
-                <div className="absolute inset-2 rounded-full border-2 border-secondary/30"></div>
+              <div className="relative w-44 h-44 md:w-56 md:h-56 border border-secondary/20 rounded-md bg-white p-2">
                 
                 {/* Hair Image or Placeholder */}
-                <div className="absolute inset-4 rounded-full overflow-hidden bg-secondary/5 flex items-center justify-center">
+                <div className="w-full h-full overflow-hidden bg-secondary/5 flex items-center justify-center">
                   {currentSelected.hasImage && currentSelected.imageUrl ? (
                     <Image
                       src={currentSelected.imageUrl}
                       alt={currentSelected.code}
                       className="w-full h-full object-cover"
-                      width={160}
+                      width={420}
                     />
                   ) : (
                     <div className="text-center px-4">
@@ -159,23 +156,23 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
         </div>
       )}
 
-      {/* Color Grid - Circular Swatches */}
+      {/* Color Grid - Square Reference Cards */}
       <div className="mb-8">
         <p className="font-paragraph text-sm text-secondary/60 mb-6">
           {filteredColors.length} referencias de tono
         </p>
-        <div className={`grid gap-6 md:gap-8 ${compact ? 'grid-cols-5 md:grid-cols-7 lg:grid-cols-7' : 'grid-cols-5 md:grid-cols-7 lg:grid-cols-7'}`}>
+        <div className={`grid gap-4 md:gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4`}>
           {filteredColors.map((color, index) => (
             <button
               key={`${color.series}-${color.code}-${index}`}
               onClick={() => handleSelectColor(color)}
-              className="flex flex-col items-center gap-2 transition-all group"
+              className="flex flex-col items-stretch gap-2 p-2 md:p-3 bg-white border border-secondary/20 rounded-md hover:border-secondary/50 transition-all group text-left"
               title={color.code}
             >
-              {/* Circular Swatch - 40-44px */}
+              {/* Square Swatch */}
               <div className="relative">
                 <div
-                  className={`w-10 h-10 md:w-11 md:h-11 rounded-full overflow-hidden border-2 transition-all flex items-center justify-center ${
+                  className={`w-full aspect-square overflow-hidden border border-secondary/10 transition-all flex items-center justify-center ${
                     selectedColor?.code === color.code || selectedCode === color.code
                       ? 'border-secondary ring-4 ring-secondary ring-offset-2'
                       : 'border-secondary/30 group-hover:border-secondary/70'
@@ -187,27 +184,23 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
                       src={color.imageUrl}
                       alt={color.code}
                       className="w-full h-full object-cover"
-                      width={44}
+                      width={420}
                     />
                   ) : (
-                    <span className="text-xs text-secondary/40 font-semibold text-center px-1">Foto pendiente</span>
+                    <span className="text-sm text-secondary/50 font-medium text-center px-3">Foto pendiente</span>
                   )}
                 </div>
-                
-                {/* Indicator for missing image */}
-                {!color.hasImage && (
-                  <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-destructive rounded-full border border-white"></div>
-                )}
               </div>
 
               {/* Code Label */}
-              <span className={`font-paragraph text-xs font-semibold text-center leading-tight break-words max-w-[3rem] ${
+              <span className={`font-paragraph text-base font-semibold text-center leading-tight break-all ${
                 selectedColor?.code === color.code || selectedCode === color.code
                   ? 'text-secondary'
                   : 'text-secondary/70 group-hover:text-secondary'
               }`}>
                 {color.code}
               </span>
+              <span className="font-paragraph text-[10px] uppercase tracking-wide text-secondary/50 text-center">{color.seriesLabel}</span>
             </button>
           ))}
         </div>
