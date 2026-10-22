@@ -149,13 +149,13 @@ export default function ToolsAccessoriesPage() {
                 className="border border-primary/15 rounded-lg overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group"
               >
                 {/* Image */}
-                <div className="relative h-48 md:h-56 bg-white overflow-hidden">
+                <div className={`relative h-48 md:h-56 bg-white overflow-hidden ${tool.id === '40' ? 'p-4' : ''}`}>
                   <Image
                     src={tool.image}
                     alt={tool.name}
                     width={300}
                     height={300}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className={`w-full h-full ${tool.id === '40' ? 'object-contain object-center' : 'object-cover group-hover:scale-105 transition-transform duration-300'}`}
                   />
                 </div>
 
