@@ -153,7 +153,7 @@ export default function ToolsAccessoriesPage() {
                 onMouseLeave={() => setHoveredId(null)}
               >
                 {/* Image */}
-                <div className="relative h-48 md:h-56 bg-white overflow-hidden">
+                <div className="relative aspect-square md:aspect-auto md:h-56 bg-white overflow-hidden">
                   <Image
                     src={hoveredId === tool.id && tool.imageHover ? tool.imageHover : tool.image}
                     alt={tool.name}
