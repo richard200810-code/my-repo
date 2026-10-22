@@ -108,23 +108,28 @@ const toolCategories = [
 const applicationMethods = [
   {
     name: 'Tape-In',
-    description: 'Piezas adhesivas para integración plana y discreta'
+    description: 'Piezas adhesivas para integración plana y discreta',
+    categoryId: 'tape-in'
   },
   {
     name: 'Weft / Costura',
-    description: 'Método tradicional de costura para máxima durabilidad'
+    description: 'Método tradicional de costura para máxima durabilidad',
+    categoryId: 'weft-sewing'
   },
   {
     name: 'I-Tip / Flat-Tip',
-    description: 'Puntas individuales para aplicación precisa'
+    description: 'Puntas individuales para aplicación precisa',
+    categoryId: 'i-tip-flat-tip'
   },
   {
     name: 'K-Tip / Queratina',
-    description: 'Fusión por calor para acabado natural'
+    description: 'Fusión por calor para acabado natural',
+    categoryId: 'k-tip-keratin'
   },
   {
     name: 'Clip-In',
-    description: 'Extensiones removibles para versatilidad'
+    description: 'Extensiones removibles para versatilidad',
+    categoryId: 'clip-in'
   }
 ];
 
@@ -153,11 +158,11 @@ const faqItems = [
   },
   {
     question: '¿Cómo elijo el kit de herramientas adecuado?',
-    answer: 'La elección depende de tu técnica de aplicación preferida y experiencia. Ofrecemos kits básicos para principiantes y kits profesionales completos. Contáctanos para una consulta personalizada.'
+    answer: 'Podemos orientarte para elegir las herramientas según el método de aplicación; consulta disponibilidad antes de comprar.'
   },
   {
     question: '¿Cómo debo cuidar mis herramientas?',
-    answer: 'Limpia regularmente con agua tibia y jabón suave. Guarda en un lugar seco. Revisa pinzas y cuchillas periódicamente. Las herramientas bien mantenidas duran años.'
+    answer: 'Limpia y guarda cada herramienta según las instrucciones del fabricante. Desconecta y deja enfriar los equipos térmicos antes de limpiarlos; evita humedad en componentes eléctricos.'
   },
   {
     question: '¿Cómo confirmo disponibilidad de productos?',
@@ -196,16 +201,17 @@ export default function ToolsAccessoriesPage() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           {applicationMethods.map((method, idx) => (
-            <motion.div
+            <motion.a
               key={idx}
+              href={`#${method.categoryId}`}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.05 }}
-              className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 hover:bg-background/30 transition-all cursor-pointer"
+              className="border border-primary/20 rounded-lg p-6 hover:border-primary/50 hover:bg-background/30 transition-all cursor-pointer block"
             >
               <h3 className="font-heading text-lg text-primary mb-2">{method.name}</h3>
               <p className="font-paragraph text-sm text-primary/70">{method.description}</p>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </section>
@@ -219,10 +225,11 @@ export default function ToolsAccessoriesPage() {
           {toolCategories.map((category, idx) => (
             <motion.div
               key={category.id}
+              id={category.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
-              className="border border-primary/20 rounded-lg p-8 hover:border-primary/50 hover:shadow-lg transition-all group"
+              className="border border-primary/20 rounded-lg p-8 hover:border-primary/50 hover:shadow-lg transition-all group scroll-mt-20"
             >
               <div className="text-4xl mb-4">{category.icon}</div>
               <h3 className="font-heading text-2xl text-primary mb-3">{category.title}</h3>
