@@ -48,10 +48,10 @@ export default function ContactPage() {
           className="text-center mb-16"
         >
           <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
-            Get in Touch
+            Ponte en contacto
           </h1>
           <p className="font-paragraph text-lg text-primary max-w-2xl mx-auto">
-            Have questions about our products? We're here to help you find the perfect hair extensions or wigs.
+            ¿Tienes preguntas sobre nuestros productos? Estamos aquí para ayudarte a encontrar las extensiones de cabello o pelucas perfectas.
           </p>
         </motion.div>
 
@@ -65,10 +65,10 @@ export default function ContactPage() {
           >
             <div>
               <h2 className="font-heading text-3xl text-primary mb-6">
-                Contact Information
+                Información de contacto
               </h2>
               <p className="font-paragraph text-base text-primary leading-relaxed mb-8">
-                Reach out to us through any of the following channels. Our team is ready to assist you with product inquiries, orders, or any questions you may have.
+                Comunícate con nosotros a través de cualquiera de los siguientes canales. Nuestro equipo está listo para asistirte con consultas de productos, pedidos o cualquier pregunta que tengas.
               </p>
             </div>
 
@@ -80,7 +80,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
-                    Email
+                    Correo electrónico
                   </h3>
                   <p className="font-paragraph text-base text-primary/70">richard200810@gmail.comin.com</p>
                 </div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
-                    Phone
+                    Tel / WhatsApp:
                   </h3>
                   <p className="font-paragraph text-base text-primary/70">+52 (55) 3955 5886</p>
                 </div>
@@ -106,9 +106,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-paragraph text-base text-primary font-semibold mb-1">
-                    Address
+                    Dirección
                   </h3>
-
+                  <p className="font-paragraph text-base text-primary/70">CDMX / GDL / MTY</p>
                 </div>
               </div>
             </div>
@@ -116,12 +116,12 @@ export default function ContactPage() {
             {/* Business Hours */}
             <div className="pt-8 border-t border-primary/10">
               <h3 className="font-heading text-xl text-primary mb-4">
-                Business Hours
+                Horario de atención
               </h3>
               <div className="space-y-2 font-paragraph text-base text-primary/70">
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday: 10:00 AM - 4:00 PM</p>
-                <p>Sunday: Closed</p>
+                <p>Lunes - Viernes: 9:00 AM - 6:00 PM</p>
+                <p>Sábado: 10:00 AM - 4:00 PM</p>
+                <p>Domingo: Cerrado</p>
               </div>
             </div>
           </motion.div>
@@ -136,7 +136,7 @@ export default function ContactPage() {
               {/* Name */}
               <div className="space-y-2">
                 <label htmlFor="name" className="font-paragraph text-base text-primary font-semibold">
-                  Name *
+                  Nombre *
                 </label>
                 <input
                   type="text"
@@ -146,14 +146,14 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
-                  placeholder="Your name"
+                  placeholder="Tu nombre"
                 />
               </div>
 
               {/* Email */}
               <div className="space-y-2">
                 <label htmlFor="email" className="font-paragraph text-base text-primary font-semibold">
-                  Email *
+                  Correo electrónico *
                 </label>
                 <input
                   type="email"
@@ -163,14 +163,14 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
-                  placeholder="your.email@example.com"
+                  placeholder="tu.correo@ejemplo.com"
                 />
               </div>
 
               {/* Phone */}
               <div className="space-y-2">
                 <label htmlFor="phone" className="font-paragraph text-base text-primary font-semibold">
-                  Phone
+                  Tel / WhatsApp:
                 </label>
                 <input
                   type="tel"
@@ -186,7 +186,7 @@ export default function ContactPage() {
               {/* Message */}
               <div className="space-y-2">
                 <label htmlFor="message" className="font-paragraph text-base text-primary font-semibold">
-                  Message *
+                  Mensaje *
                 </label>
                 <textarea
                   id="message"
@@ -196,7 +196,7 @@ export default function ContactPage() {
                   required
                   rows={6}
                   className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors resize-none"
-                  placeholder="Tell us about your inquiry..."
+                  placeholder="Cuéntanos sobre tu consulta..."
                 />
               </div>
 
@@ -208,7 +208,7 @@ export default function ContactPage() {
                   className="p-4 border border-primary/20 bg-buttonbackground"
                 >
                   <p className="font-paragraph text-base text-primary">
-                    Thank you for your message! We'll get back to you soon.
+                    ¡Gracias por tu mensaje! Nos pondremos en contacto pronto.
                   </p>
                 </motion.div>
               )}
@@ -220,11 +220,11 @@ export default function ContactPage() {
                 className="w-full px-8 py-4 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
-                  'Sending...'
+                  'Enviando...'
                 ) : (
                   <>
                     <Send className="w-5 h-5" />
-                    Send Message
+                    Enviar mensaje
                   </>
                 )}
               </button>
