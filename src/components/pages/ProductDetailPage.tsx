@@ -175,6 +175,25 @@ export default function ProductDetailPage() {
                   </div>
                 </div>
 
+                {/* Color Consultation Section */}
+                <div className="space-y-3 p-6 bg-secondary/5 border border-secondary/10">
+                  <h3 className="font-heading text-lg text-secondary">
+                    Consultar disponibilidad de color
+                  </h3>
+                  <p className="font-paragraph text-sm text-secondary/70">
+                    Disponibilidad por confirmar
+                  </p>
+                  <p className="font-paragraph text-xs text-secondary/60">
+                    Selecciona un color de nuestra guía completa para consultar disponibilidad y opciones personalizadas.
+                  </p>
+                  <a
+                    href="/academy/color-ring"
+                    className="inline-block px-6 py-2 bg-secondary text-white font-paragraph text-sm hover:bg-secondary/90 transition-colors uppercase tracking-wide"
+                  >
+                    Ver Guía de Colores
+                  </a>
+                </div>
+
                 {/* Add to Cart Button */}
                 <button
                   onClick={() => actions.addToCart({

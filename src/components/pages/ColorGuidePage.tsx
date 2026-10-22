@@ -58,24 +58,27 @@ export default function ColorGuidePage() {
           <h2 className="font-heading text-3xl md:text-4xl text-secondary mb-12">
             Familias de color
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-8 border border-secondary/10">
-              <h3 className="font-heading text-xl text-secondary mb-4">Virgin Hair</h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-4">
+              <h3 className="font-heading text-xl text-secondary mb-2">Virgin Hair</h3>
+              <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">63 tonos</p>
+              <p className="font-paragraph text-base text-secondary/70">
                 Cabello virgen sin procesar. Tonos naturales desde negro profundo hasta rubio platino blanco, incluyendo variantes especiales como rojos y tonos creativos.
               </p>
             </div>
 
             <div className="bg-white p-8 border border-secondary/10">
-              <h3 className="font-heading text-xl text-secondary mb-4">Remy Hair</h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-4">
+              <h3 className="font-heading text-xl text-secondary mb-2">Remy Hair</h3>
+              <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">53 tonos</p>
+              <p className="font-paragraph text-base text-secondary/70">
                 Mezclas de tonos para crear efectos naturales y dimensionales. Combinaciones de dos o tres tonos para mayor versatilidad en aplicación.
               </p>
             </div>
 
             <div className="bg-white p-8 border border-secondary/10">
-              <h3 className="font-heading text-xl text-secondary mb-4">Rooted & Mezclas</h3>
-              <p className="font-paragraph text-base text-secondary/70 mb-4">
+              <h3 className="font-heading text-xl text-secondary mb-2">Customized Color Ring</h3>
+              <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">49 tonos</p>
+              <p className="font-paragraph text-base text-secondary/70">
                 Cabello con raíz natural. Diseñado para un look más realista con contraste entre raíz y largo, incluyendo opciones plateadas.
               </p>
             </div>
