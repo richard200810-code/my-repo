@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Image } from '@/components/ui/image';
 
 export default function AcademyPage() {
   return (
@@ -19,7 +20,7 @@ export default function AcademyPage() {
         </section>
 
         {/* Color Guide Featured Block */}
-        <section className="w-full py-16 md:py-24 bg-white">
+        <section className="w-full py-16 md:py-24 bg-background">
           <div className="max-w-[100rem] mx-auto px-4 md:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               {/* Content */}
@@ -39,11 +40,14 @@ export default function AcademyPage() {
               </div>
               
               {/* Visual Element */}
-              <div className="bg-background rounded-lg p-8 flex items-center justify-center min-h-[300px]">
-                <div className="text-center">
-                  <div className="text-6xl mb-4">🎨</div>
-                  <p className="font-paragraph text-secondary">Selector de colores interactivo</p>
-                </div>
+              <div className="rounded-lg overflow-hidden min-h-[300px]">
+                <Image
+                  src="https://static.wixstatic.com/media/37e681_afaa5974b3854f918d8e59af7e06da4b~mv2.png?originWidth=576&originHeight=384"
+                  alt="Colorful hair - vibrant pink, blue, and purple waves"
+                  width={576}
+                  height={384}
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
