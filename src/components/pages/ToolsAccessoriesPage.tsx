@@ -160,7 +160,7 @@ export default function ToolsAccessoriesPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 md:p-6 bg-white">
+                <div className="p-5 md:p-6 bg-background">
                   <h3 className="font-heading text-lg md:text-xl text-primary mb-4 line-clamp-3">
                     {tool.name}
                   </h3>
@@ -168,7 +168,7 @@ export default function ToolsAccessoriesPage() {
                   {/* Button */}
                   <Link
                     to="/contact"
-                    className="block w-full text-center font-paragraph text-base px-4 py-3 border border-primary bg-white text-primary hover:bg-primary hover:text-white transition-colors rounded"
+                    className="block w-full text-center font-paragraph text-base px-4 py-3 border border-primary bg-transparent text-primary hover:bg-primary hover:text-white transition-colors rounded"
                   >
                     Consultar disponibilidad
                   </Link>
