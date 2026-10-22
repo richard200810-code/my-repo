@@ -113,9 +113,9 @@ export default function ToolsAccessoriesPage() {
                 key={tool.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                animate={{ y: hoveredId === tool.id ? -8 : 0 }}
-                className="border border-primary/15 rounded-lg overflow-hidden hover:border-primary/40 transition-all group"
+                transition={{ duration: 0.25 }}
+                whileHover={{ y: -12, scale: 1.02 }}
+                className="border border-primary/15 rounded-lg overflow-hidden hover:border-primary/40 hover:shadow-xl transition-shadow group"
                 onMouseEnter={() => setHoveredId(tool.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
