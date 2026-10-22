@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, Search } from 'lucide-react';
 import { Image } from '@/components/ui/image';
-import { allColors, searchColors } from '@/lib/colorData';
+import { allColors } from '@/lib/colorData';
 
 interface HairColor {
   code: string;
@@ -162,12 +162,12 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
       {/* Color Grid - Circular Swatches */}
       <div className="mb-8">
         <p className="font-paragraph text-sm text-secondary/60 mb-6">
-          {filteredColors.length} tonos disponibles
+          {filteredColors.length} referencias de tono
         </p>
         <div className={`grid gap-6 md:gap-8 ${compact ? 'grid-cols-5 md:grid-cols-7 lg:grid-cols-7' : 'grid-cols-5 md:grid-cols-7 lg:grid-cols-7'}`}>
-          {filteredColors.map(color => (
+          {filteredColors.map((color, index) => (
             <button
-              key={color.code}
+              key={`${color.series}-${color.code}-${index}`}
               onClick={() => handleSelectColor(color)}
               className="flex flex-col items-center gap-2 transition-all group"
               title={color.code}
@@ -217,7 +217,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
       {filteredColors.length === 0 && (
         <div className="py-12 text-center">
           <p className="font-paragraph text-secondary/60">
-            No hay tonos disponibles con los filtros seleccionados.
+            No hay referencias de tono con los filtros seleccionados.
           </p>
         </div>
       )}
