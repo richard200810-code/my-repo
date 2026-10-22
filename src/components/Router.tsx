@@ -18,6 +18,7 @@ import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage'
 import ColorGuidePage from '@/components/pages/ColorGuidePage';
 import DebugProductImages from '@/components/pages/DebugProductImages';
 import CRMPage from '@/components/pages/CRMPage';
+import ToolsAccessoriesPage from '@/components/pages/ToolsAccessoriesPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -145,6 +146,13 @@ const router = createBrowserRouter([
         element: <CRMPage />,
         routeMetadata: {
           pageIdentifier: 'crm',
+        },
+      },
+      {
+        path: "tools-accessories",
+        element: <ToolsAccessoriesPage />,
+        routeMetadata: {
+          pageIdentifier: 'tools-accessories',
         },
       },
       {
