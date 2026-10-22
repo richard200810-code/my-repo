@@ -5,7 +5,7 @@
 
 export interface HairColor {
   code: string;
-  series: 'virgin' | 'remy' | 'customized';
+  series: 'virgin' | 'remy' | 'customized' | 'additional';
   seriesLabel: string;
   imageUrl?: string;
   hasImage: boolean;
@@ -255,13 +255,14 @@ const customizedColorRing: HairColor[] = [
 ];
 
 // Complete catalog
-export const allColors: HairColor[] = [...virginHair, ...remyHair, ...customizedColorRing];
+export const allColors: HairColor[] = [...virginHair, ...remyHair, ...customizedColorRing, ...referenciasAdicionales];
 
 // Export by series
 export const colorsBySeries = {
   virgin: virginHair,
   remy: remyHair,
   customized: customizedColorRing,
+  additional: referenciasAdicionales,
 };
 
 // Verify counts
@@ -269,6 +270,7 @@ export const colorCounts = {
   virgin: virginHair.length,
   remy: remyHair.length,
   customized: customizedColorRing.length,
+  additional: referenciasAdicionales.length,
   total: allColors.length,
 };
 

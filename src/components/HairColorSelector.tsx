@@ -5,7 +5,7 @@ import { allColors, searchColors } from '@/lib/colorData';
 
 interface HairColor {
   code: string;
-  series: 'virgin' | 'remy' | 'customized';
+  series: 'virgin' | 'remy' | 'customized' | 'additional';
   seriesLabel: string;
   imageUrl?: string;
   hasImage: boolean;
@@ -25,8 +25,8 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
   const filteredColors = allColors.filter(c => {
     if (selectedSeries && c.series !== selectedSeries) return false;
     if (searchQuery) {
-      const results = searchColors(searchQuery);
-      if (!results.find(r => r.code === c.code)) return false;
+      const q = searchQuery.toLowerCase().trim();
+      if (!c.code.toLowerCase().includes(q)) return false;
     }
     return true;
   });
@@ -35,6 +35,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
     virgin: 'Virgin Hair (63)',
     remy: 'Remy Hair (53)',
     customized: 'Customized Color Ring (49)',
+    additional: 'Referencias adicionales (180)',
   };
 
   const handleSelectColor = (color: HairColor) => {
@@ -189,7 +190,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
                       width={44}
                     />
                   ) : (
-                    <span className="text-xs text-secondary/30 font-semibold">?</span>
+                    <span className="text-xs text-secondary/40 font-semibold text-center px-1">Foto pendiente</span>
                   )}
                 </div>
                 

@@ -8,6 +8,7 @@ import { Image } from '@/components/ui/image';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import HairColorSelector from '@/components/HairColorSelector';
 import { ArrowLeft } from 'lucide-react';
 
 export default function ProductDetailPage() {
@@ -176,7 +177,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Color Consultation Section */}
-                <div className="space-y-3 p-6 bg-secondary/5 border border-secondary/10">
+                <div className="space-y-4 p-6 bg-secondary/5 border border-secondary/10">
                   <h3 className="font-heading text-lg text-secondary">
                     Consultar disponibilidad de color
                   </h3>
@@ -186,12 +187,9 @@ export default function ProductDetailPage() {
                   <p className="font-paragraph text-xs text-secondary/60">
                     Selecciona un color de nuestra guía completa para consultar disponibilidad y opciones personalizadas.
                   </p>
-                  <a
-                    href="/academy/color-ring"
-                    className="inline-block px-6 py-2 bg-secondary text-white font-paragraph text-sm hover:bg-secondary/90 transition-colors uppercase tracking-wide"
-                  >
-                    Ver Guía de Colores
-                  </a>
+                  <div className="max-h-96 overflow-y-auto">
+                    <HairColorSelector compact={true} />
+                  </div>
                 </div>
 
                 {/* Add to Cart Button */}
