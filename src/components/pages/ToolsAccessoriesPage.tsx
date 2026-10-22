@@ -1,27 +1,22 @@
-import { Link } from 'react-router-dom';
-import { Search, X } from 'lucide-react';
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
+import { motion } from 'framer-motion';
+import { Search, X } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const toolProducts = [
-  { id: '1', name: 'Pinza para Extensiones', category: 'Herramientas', image: 'https://static.wixstatic.com/media/37e681_963975beef7f4211b0b0f95ab593c6a2~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_f797cfa314b24882afa0a1292fc47477~mv2.png?originWidth=256&originHeight=256' },
-  { id: '2', name: 'Aguja de Ventilación', category: 'Herramientas', image: 'https://static.wixstatic.com/media/37e681_7a540e4532634ce4975f82970f4a6939~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_357e5b626c444df5bf6011a13b61d8a8~mv2.png?originWidth=256&originHeight=256' },
-  { id: '3', name: 'Soporte de Extensiones', category: 'Instalación', image: 'https://static.wixstatic.com/media/37e681_2aa38c89e685471d81acd27b9bf55107~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_c16c46520b9c4ed7a3a1f89bdaa545ff~mv2.png?originWidth=256&originHeight=256' },
-  { id: '4', name: 'Cinta Adhesiva Doble Cara', category: 'Tape-In', image: 'https://static.wixstatic.com/media/37e681_28bffdeff9134ad5984724480b655368~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_ee1fb8735f5f4500b1f5a4eb2d8a237c~mv2.png?originWidth=256&originHeight=256' },
-  { id: '5', name: 'Anillas de Silicona', category: 'Cuentas', image: 'https://static.wixstatic.com/media/37e681_624f56a6c1d3495198cc02b955508aef~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_a0bb45f1eb0847709746d45153769ba3~mv2.png?originWidth=256&originHeight=256' },
-  { id: '6', name: 'Hilo de Nylon', category: 'Materiales', image: 'https://static.wixstatic.com/media/37e681_d26fcfc2787f45c1bb4e7a2cb09d680f~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_3d020efeb0c34e2db929ac49715e35b3~mv2.png?originWidth=256&originHeight=256' },
-  { id: '7', name: 'Clips de Separación', category: 'Clips', image: 'https://static.wixstatic.com/media/37e681_c955252b8a054540ad383c4d6c165b00~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_68b903035d014bb1a9436b02f2ff038b~mv2.png?originWidth=256&originHeight=256' },
-  { id: '8', name: 'Protector de Cuero Cabelludo', category: 'Protección', image: 'https://static.wixstatic.com/media/37e681_7b3f7568815a46ddba48634d04980c10~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_4607114b67b84c2e9fe6d956d82a8b79~mv2.png?originWidth=256&originHeight=256' },
-  { id: '9', name: 'Plancha de Queratina', category: 'K-Tip', image: 'https://static.wixstatic.com/media/37e681_44e9b0623e244e868105cf506afc6179~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_e578b725be004e5f813034bbbce80a38~mv2.png?originWidth=256&originHeight=256' },
-  { id: '10', name: 'Malla de Integración', category: 'Materiales', image: 'https://static.wixstatic.com/media/37e681_d1f735de220a4eaab0c890f8fcfd7921~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_666d3a3739504eb69fb909e21812e61c~mv2.png?originWidth=256&originHeight=256' },
-  { id: '11', name: 'Kit de Herramientas Profesional', category: 'Kits', image: 'https://static.wixstatic.com/media/37e681_8a2211a47dce4eb6ac92faeefa7c72ae~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_d24c5a6ec60741d186b53ec7e89a211a~mv2.png?originWidth=256&originHeight=256' },
-  { id: '12', name: 'Aguja de Costura de Madera', category: 'Herramientas', image: 'https://static.wixstatic.com/media/37e681_28ae4ceffd81416bba09dd6495775324~mv2.png?originWidth=256&originHeight=256', imageHover: 'https://static.wixstatic.com/media/37e681_3cd4d6b0af5f4d2db8a560ac61a27408~mv2.png?originWidth=256&originHeight=256' }
+  { id: '1', name: 'Hilo de Costura para Extensiones', category: 'Materiales', image: 'https://static.wixstatic.com/media/37e681_686b9df1b6da42d59ad7527806630715~mv2.jpg', imageHover: 'https://thehairshop.com/cdn/shop/files/cotton-thread_black_1080x.jpg?v=1736465255' },
+  { id: '2', name: 'Enhebrador de Bucle', category: 'Herramientas', image: 'https://static.wixstatic.com/media/37e681_65062145685f4eb980b7c17df70c6ef7~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_65062145685f4eb980b7c17df70c6ef7~mv2.jpg' },
+  { id: '3', name: 'Kit Esencial para Cortina', category: 'Kits', image: 'https://static.wixstatic.com/media/37e681_4c2970713d494a9bad3981575147760c~mv2.jpg', imageHover: 'https://thehairshop.com/cdn/shop/products/weft_essential_working_blonde_1__74785.1651178532.1280.1280_1080x.jpg?v=1678443014' },
+  { id: '4', name: 'Soporte para Extensiones', category: 'Instalación', image: 'https://static.wixstatic.com/media/37e681_85b668ac19524c0cba073ed616da34f0~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_85b668ac19524c0cba073ed616da34f0~mv2.jpg' },
+  { id: '5', name: 'Kit Básico de Instalación', category: 'Kits', image: 'https://static.wixstatic.com/media/37e681_407f71c6aa514543bfb86299adf484ca~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_407f71c6aa514543bfb86299adf484ca~mv2.jpg' },
+  { id: '6', name: 'Trípode para Cabeza de Práctica', category: 'Instalación', image: 'https://static.wixstatic.com/media/37e681_eb335862c1504a50a0e30051f7428cb1~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_eb335862c1504a50a0e30051f7428cb1~mv2.jpg' },
+  { id: '7', name: 'Cintas Adhesivas para Prótesis Capilares', category: 'Tape-In', image: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg' }
 ];
 
-const categories = ['Todos', 'Instalación', 'Herramientas', 'Kits', 'Cuentas', 'Materiales', 'Tape-In', 'K-Tip', 'Clips', 'Protección'];
+const categories = ['Todos', 'Instalación', 'Herramientas', 'Kits', 'Materiales', 'Tape-In'];
 
 export default function ToolsAccessoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
@@ -30,7 +25,7 @@ export default function ToolsAccessoriesPage() {
 
   const filteredTools = useMemo(() => {
     return toolProducts.filter(tool => {
-      const categories = tool.categories || [tool.category];
+      const categories = [tool.category];
       const matchesCategory = selectedCategory === 'Todos' || categories.includes(selectedCategory);
       const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
@@ -40,7 +35,7 @@ export default function ToolsAccessoriesPage() {
   return (
     <div className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="w-full bg-background py-12 md:py-16">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24">
@@ -131,7 +126,7 @@ export default function ToolsAccessoriesPage() {
                     alt={tool.name}
                     width={300}
                     height={300}
-                    className="w-full h-full object-cover transition-all duration-300"
+                    className={`w-full h-full object-contain transition-transform duration-300 ${hoveredId === tool.id ? 'scale-[1.04]' : 'scale-100'}`}
                   />
                 </div>
 
