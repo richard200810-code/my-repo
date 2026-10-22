@@ -460,7 +460,7 @@ export const allColors: HairColor[] = shadeCodes.map((code, index) => ({
   code,
   series: 'additional',
   seriesLabel: 'Referencia de color',
-  imageUrl: 'https://static.wixstatic.com/media/' + shadeMediaFiles[index] + '/v1/fit/w_700,h_700,q_92/file.jpg',
+  imageUrl: code === '2/1001' ? 'https://l-extension.fr/cdn/shop/products/90f23089-dd3b-4956-ad96-491ecaa76477_1024x1024@2x.jpg?v=1618930325' : 'https://static.wixstatic.com/media/' + shadeMediaFiles[index] + '/v1/fit/w_700,h_700,q_92/file.jpg',
   hasImage: Boolean(shadeMediaFiles[index]),
 }));
 
