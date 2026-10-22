@@ -63,7 +63,7 @@ export default function ToolsAccessoriesPage() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Header />
       
       {/* Hero Section */}
@@ -86,7 +86,7 @@ export default function ToolsAccessoriesPage() {
       </section>
 
       {/* Filters and Search Section */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
+      <section className="w-full bg-background max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
         {/* Search Bar */}
         <div className="mb-8">
           <div className="relative">
@@ -135,7 +135,7 @@ export default function ToolsAccessoriesPage() {
       </section>
 
       {/* Products Grid */}
-      <section className="w-full max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
+      <section className="w-full bg-background max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 py-8 md:py-12">
         {filteredTools.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredTools.map((tool, idx) => (
@@ -147,7 +147,7 @@ export default function ToolsAccessoriesPage() {
                 className="border border-primary/15 rounded-lg overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group"
               >
                 {/* Image */}
-                <div className="relative h-48 md:h-56 bg-background/50 overflow-hidden">
+                <div className="relative h-48 md:h-56 bg-white overflow-hidden">
                   <Image
                     src={tool.image}
                     alt={tool.name}
@@ -158,7 +158,7 @@ export default function ToolsAccessoriesPage() {
                 </div>
 
                 {/* Content */}
-                <div className="p-5 md:p-6">
+                <div className="p-5 md:p-6 bg-white">
                   <h3 className="font-heading text-lg md:text-xl text-primary mb-4 line-clamp-3">
                     {tool.name}
                   </h3>
