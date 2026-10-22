@@ -18,12 +18,10 @@ interface HairColorSelectorProps {
 }
 
 export default function HairColorSelector({ onSelect, selectedCode, compact = false }: HairColorSelectorProps) {
-  const [selectedSeries, setSelectedSeries] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<HairColor | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredColors = allColors.filter(c => {
-    if (selectedSeries && c.series !== selectedSeries) return false;
     if (searchQuery) {
       const q = searchQuery.toLowerCase().trim();
       if (!c.code.toLowerCase().includes(q)) return false;
@@ -31,12 +29,6 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
     return true;
   });
 
-  const seriesLabels: Record<string, string> = {
-    virgin: 'Virgin Hair (63)',
-    remy: 'Remy Hair (53)',
-    customized: 'Customized Color Ring (49)',
-    additional: 'Referencias adicionales (180)',
-  };
 
   const handleSelectColor = (color: HairColor) => {
     setSelectedColor(color);
@@ -58,7 +50,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
             <Search className="absolute left-3 top-3 w-5 h-5 text-secondary/40" />
             <input
               type="text"
-              placeholder="Ej: 613, R1B-4, DXB..."
+              placeholder="Ej: 613, P9A/24, R2-P9A/16A..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 border border-secondary/20 bg-white text-secondary placeholder-secondary/40 font-paragraph text-sm focus:outline-none focus:border-secondary/50"
@@ -66,37 +58,6 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
           </div>
         </div>
 
-        {/* Series Filter */}
-        <div>
-          <label className="font-paragraph text-sm text-secondary/70 block mb-3 uppercase tracking-wide">
-            Serie
-          </label>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setSelectedSeries(null)}
-              className={`px-4 py-2 font-paragraph text-sm transition-all border ${
-                selectedSeries === null
-                  ? 'bg-secondary text-white border-secondary'
-                  : 'bg-white text-secondary border-secondary/20 hover:border-secondary/50'
-              }`}
-            >
-              Todos
-            </button>
-            {Object.entries(seriesLabels).map(([key, label]) => (
-              <button
-                key={key}
-                onClick={() => setSelectedSeries(key)}
-                className={`px-4 py-2 font-paragraph text-sm transition-all border ${
-                  selectedSeries === key
-                    ? 'bg-secondary text-white border-secondary'
-                    : 'bg-white text-secondary border-secondary/20 hover:border-secondary/50'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Selected Preview - Large Square at Top */}
@@ -136,7 +97,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
                 </p>
               </div>
               <div className="space-y-2 text-sm font-paragraph text-secondary/60">
-                <p><span className="font-semibold">Serie:</span> {currentSelected.seriesLabel}</p>
+                <p><span className="font-semibold">Código:</span> {currentSelected.code}</p>
                 {!currentSelected.hasImage && (
                   <p className="text-secondary/70 italic">Imagen pendiente</p>
                 )}
