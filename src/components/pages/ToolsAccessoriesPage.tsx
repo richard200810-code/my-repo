@@ -45,7 +45,8 @@ const toolProducts = [
   { id: '36', name: 'Invisible Hair Kits', category: 'Kits', image: 'https://static.wixstatic.com/media/f08e6d_e99e1fb5f9364e6b83bfdea0050a5361~mv2.jpg' },
   { id: '37', name: 'Long Length Hair Extension Heat Protector Shield Template Disk Scalp Protector', category: 'Protección', image: 'https://static.wixstatic.com/media/f08e6d_6f3cfb22d66b4b4bac5260fb42eb8660~mv2.jpg' },
   { id: '38', name: 'Wooden Drawing Mat With Curved Needles For Hair Separation Hair Extensions', category: 'Herramientas', image: 'https://static.wixstatic.com/media/f08e6d_2b828460d0c045ff8a278e7b6c3c95d2~mv2.jpg' },
-  { id: '39', name: '6D Hair Extensions Machine', category: 'Máquinas', image: 'https://static.wixstatic.com/media/f08e6d_f5b68eaff08a41ee87f1c1700e71c90f~mv2.jpg' }
+  { id: '39', name: '6D Hair Extensions Machine', category: 'Máquinas', image: 'https://static.wixstatic.com/media/f08e6d_f5b68eaff08a41ee87f1c1700e71c90f~mv2.jpg' },
+  { id: '40', name: 'Pinza para extensiones de cinta adhesiva', categories: ['Instalación', 'Tape-In'], image: 'https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp' }
 ];
 
 const categories = ['Todos', 'Instalación', 'Herramientas', 'Kits', 'Cuentas', 'Materiales', 'Tape-In', 'K-Tip', 'Weft', 'I-Tip', 'Nano', 'Clips', 'Color', 'Protección', 'Máquinas'];
@@ -56,7 +57,8 @@ export default function ToolsAccessoriesPage() {
 
   const filteredTools = useMemo(() => {
     return toolProducts.filter(tool => {
-      const matchesCategory = selectedCategory === 'Todos' || tool.category === selectedCategory;
+      const categories = tool.categories || [tool.category];
+      const matchesCategory = selectedCategory === 'Todos' || categories.includes(selectedCategory);
       const matchesSearch = tool.name.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
