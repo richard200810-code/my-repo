@@ -13,7 +13,9 @@ const toolProducts = [
   { id: '4', name: 'Soporte para Extensiones', category: 'Instalación', image: 'https://static.wixstatic.com/media/37e681_85b668ac19524c0cba073ed616da34f0~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_85b668ac19524c0cba073ed616da34f0~mv2.jpg' },
   { id: '5', name: 'Kit Básico de Instalación', category: 'Kits', image: 'https://static.wixstatic.com/media/37e681_407f71c6aa514543bfb86299adf484ca~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_407f71c6aa514543bfb86299adf484ca~mv2.jpg' },
   { id: '6', name: 'Trípode para Cabeza de Práctica', category: 'Instalación', image: 'https://static.wixstatic.com/media/37e681_eb335862c1504a50a0e30051f7428cb1~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_eb335862c1504a50a0e30051f7428cb1~mv2.jpg' },
-  { id: '7', name: 'Cintas Adhesivas para Prótesis Capilares', category: 'Tape-In', image: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg' }
+  { id: '7', name: 'Cintas Adhesivas para Prótesis Capilares', category: 'Tape-In', image: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg', imageHover: 'https://static.wixstatic.com/media/37e681_de42e6bf846f46f09ca32a8155519326~mv2.jpg' },
+  { id: '8', name: 'Pinza de Presión para Tape-In', category: 'Tape-In', image: 'https://static.wixstatic.com/media/37e681_4d8eec753248434b8891602b3e0e7e08~mv2.png', imageHover: 'https://static.wixstatic.com/media/37e681_4d8eec753248434b8891602b3e0e7e08~mv2.png' },
+  { id: '9', name: 'Microtubos para Extensiones', category: 'Materiales', image: 'https://thehairshop.com/cdn/shop/products/Black_92a846b0-383c-4c4c-bd61-8d2836cb31eb_1080x.png?v=1681512592', imageHover: 'https://thehairshop.com/cdn/shop/products/Black_92a846b0-383c-4c4c-bd61-8d2836cb31eb_1080x.png?v=1681512592' }
 ];
 
 const categories = ['Todos', 'Instalación', 'Herramientas', 'Kits', 'Materiales', 'Tape-In'];
