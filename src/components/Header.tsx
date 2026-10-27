@@ -5,6 +5,7 @@ import { useCart } from '@/integrations';
 import Cart from '@/components/Cart';
 import SearchPanel from '@/components/SearchPanel';
 import AccountPanel from '@/components/AccountPanel';
+import { Image } from '@/components/ui/image';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,7 +28,9 @@ export default function Header() {
         <div className="max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-6">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="font-heading text-2xl md:text-3xl text-primary">Lux Hair</Link>
+            <Link to="/" className="flex items-center">
+              <Image src="https://static.wixstatic.com/media/37e681_2c43341cdb5745e8bd16dcd9cda34679~mv2.png" alt="Lux Hair Logo" style={{ width: 'clamp(125px, 20vw, 180px)', height: 'auto', objectFit: 'contain', display: 'block' }} />
+            </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-12">
