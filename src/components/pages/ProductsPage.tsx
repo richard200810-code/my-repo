@@ -18,7 +18,7 @@ export default function ProductsPage() {
   const [selectedApplicationMethod, setSelectedApplicationMethod] = useState<string>('all');
   const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
-  
+
   const { addingItemId, actions } = useCart();
   const { currency } = useCurrency();
 
@@ -43,13 +43,13 @@ export default function ProductsPage() {
         {},
         { limit: LIMIT, skip }
       );
-      
+
       if (skip === 0) {
         setProducts(result.items);
       } else {
         setProducts(prev => [...prev, ...result.items]);
       }
-      
+
       setHasNext(result.hasNext);
     } catch (error) {
       console.error('Failed to load products:', error);
@@ -114,7 +114,7 @@ export default function ProductsPage() {
 
     if (selectedApplicationMethod !== 'all') {
       const acceptedValues = APPLICATION_ALIAS_MAP[selectedApplicationMethod] || [normalizeString(selectedApplicationMethod)];
-      
+
       filtered = filtered.filter(p => {
         const normalizedProductValue = getApplicationValue(p);
         return acceptedValues.includes(normalizedProductValue);
@@ -313,7 +313,7 @@ export default function ProductsPage() {
                               {product.itemName}
                             </h3>
                           </Link>
-                          
+
                           <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
                             {product.productType && <span>{product.productType}</span>}
                             {product.color && (
@@ -331,7 +331,7 @@ export default function ProductsPage() {
                           </div>
 
                           <p className="font-paragraph text-lg text-primary font-semibold">
-                            {formatPrice(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
+                      className="hidden">(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
                           </p>
 
                           {/* Add to Cart Button */}
