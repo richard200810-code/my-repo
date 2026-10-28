@@ -341,6 +341,13 @@ export default function ProductsPage() {
                               itemId: product._id,
                               quantity: 1
                             })}
+                            disabled={addingItemId === product._id}
+                            className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                          >
+                            {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
+                          </button>
+                        </div>
+                      </motion.div>
                     ))}
                   </motion.div>
                 )}
