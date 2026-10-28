@@ -330,8 +330,7 @@ export default function ProductsPage() {
                             )}
                           </div>
 
-                          <p className="font-paragraph text-lg text-primary font-semibold">
-                      className="hidden">(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
+                          sName="hidden">(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
                           </p>
 
                           {/* Add to Cart Button */}
