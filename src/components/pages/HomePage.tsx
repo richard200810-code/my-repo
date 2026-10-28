@@ -309,7 +309,7 @@ export default function HomePage() {
             <ul className="space-y-3 font-paragraph text-lg">
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Selección de colecciones curada
+                Selección curada de colecciones
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
@@ -317,7 +317,7 @@ export default function HomePage() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Soporte de colección experto
+                Asesoría experta
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
