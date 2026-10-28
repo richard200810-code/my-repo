@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Menu, X, ShoppingCart, Search, User } from 'lucide-react';
-import { useState } from 'react';
-import { useCart } from '@/integrations';
+import AccountPanel from '@/components/AccountPanel';
 import Cart from '@/components/Cart';
 import SearchPanel from '@/components/SearchPanel';
-import AccountPanel from '@/components/AccountPanel';
 import { Image } from '@/components/ui/image';
+import { useCart } from '@/integrations';
+import { Menu, Search, ShoppingCart, User, X } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,102 +15,117 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Inicio', path: '/' },
-    { name: "Compra", path: '/stores' },
+    { name: 'Compra', path: '/stores' },
     { name: 'Productos', path: '/products' },
     { name: 'Herramientas y Accesorios', path: '/tools-accessories' },
     { name: 'Academia', path: '/academy' },
-    { name: 'Contacto', path: '/contact' }
+    { name: 'Contacto', path: '/contact' },
   ];
+
+  const openSearch = () => {
+    setMobileMenuOpen(false);
+    setSearchOpen(true);
+  };
+
+  const openAccount = () => {
+    setMobileMenuOpen(false);
+    setAccountOpen(true);
+  };
+
+  const openCart = () => {
+    setMobileMenuOpen(false);
+    actions.toggleCart();
+  };
 
   return (
     <>
-      <header className="w-full bg-background border-b border-primary/10 sticky top-0 z-40">
-        <div className="max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-6">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <Image src="https://static.wixstatic.com/media/37e681_2c43341cdb5745e8bd16dcd9cda34679~mv2.png" alt="Lux Hair Logo" style={{ width: 'clamp(125px, 20vw, 180px)', height: 'auto', objectFit: 'contain', display: 'block' }} />
-            </Link>
+      <header
+        className="sticky top-0 z-40 w-full overflow-x-clip border-b"
+        style={{
+          backgroundColor: '#F5F1EA',
+          borderBottomColor: 'rgba(139, 115, 85, 0.22)',
+        }}
+      >
+        <div className="mx-auto flex w-full max-w-[1280px] items-center px-5 py-3 sm:px-8">
+          <Link to="/" className="flex shrink-0 items-center" aria-label="LUX HAIR Inicio">
+            <Image src="https://static.wixstatic.com/media/37e681_2c43341cdb5745e8bd16dcd9cda34679~mv2.png" alt="LUX HAIR — YOUR HAIR" style={{
+                width: 'clamp(165px, 16vw, 210px)',
+                height: 'auto',
+                objectFit: 'contain',
+                display: 'block',
+                flexShrink: 0,
+              }} />
+          </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-12">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="font-paragraph text-base text-primary hover:opacity-70 transition-opacity"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Cart Icon */}
-            <div className="flex items-center gap-4">
-              {/* Search Icon */}
-              <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 hover:opacity-70 transition-opacity"
-                aria-label="Buscar"
+          <nav className="ml-auto hidden items-center gap-6 lg:flex" aria-label="Navegación principal">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="whitespace-nowrap font-paragraph text-[15px] text-primary transition-opacity hover:opacity-65"
               >
-                <Search className="w-6 h-6 text-primary" />
-              </button>
+                {link.name}
+              </Link>
+            ))}
+          </nav>
 
-              {/* Account Icon */}
-              <button
-                onClick={() => setAccountOpen(true)}
-                className="p-2 hover:opacity-70 transition-opacity"
-                aria-label="Mi cuenta"
-              >
-                <User className="w-6 h-6 text-primary" />
-              </button>
-
-              {/* Cart Icon */}
-              <button
-                onClick={actions.toggleCart}
-                className="relative p-2 hover:opacity-70 transition-opacity"
-                aria-label="Carrito de compras"
-              >
-                <ShoppingCart className="w-6 h-6 text-primary" />
-                {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-paragraph w-5 h-5 rounded-full flex items-center justify-center">
-                    {itemCount}
-                  </span>
-                )}
-              </button>
-
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2"
-                aria-label="Alternar menú"
-              >
-                {mobileMenuOpen ? (
-                  <X className="w-6 h-6 text-primary" />
-                ) : (
-                  <Menu className="w-6 h-6 text-primary" />
-                )}
-              </button>
-            </div>
+          <div className="ml-6 hidden shrink-0 items-center gap-2 lg:flex">
+            <button onClick={() => setSearchOpen(true)} className="p-2 transition-opacity hover:opacity-65" aria-label="Buscar">
+              <Search className="h-5 w-5 text-primary" />
+            </button>
+            <button onClick={() => setAccountOpen(true)} className="p-2 transition-opacity hover:opacity-65" aria-label="Mi cuenta">
+              <User className="h-5 w-5 text-primary" />
+            </button>
+            <button onClick={actions.toggleCart} className="relative p-2 transition-opacity hover:opacity-65" aria-label="Carrito de compras">
+              <ShoppingCart className="h-5 w-5 text-primary" />
+              {itemCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary font-paragraph text-xs text-primary-foreground">
+                  {itemCount}
+                </span>
+              )}
+            </button>
           </div>
 
-          {/* Mobile Navigation */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden mt-6 pb-4 space-y-4 border-t border-primary/10 pt-6">
+          <button
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            className="ml-auto inline-flex h-11 w-11 shrink-0 items-center justify-center text-primary lg:hidden"
+            aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+
+        {mobileMenuOpen && (
+          <div className="border-t lg:hidden" style={{ borderTopColor: 'rgba(139, 115, 85, 0.18)' }}>
+            <nav className="mx-auto flex w-full max-w-[1280px] flex-col gap-1 px-5 py-4 sm:px-8" aria-label="Navegación móvil">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block font-paragraph text-base text-primary hover:opacity-70 transition-opacity"
+                  className="py-2.5 font-paragraph text-base text-primary transition-opacity hover:opacity-65"
                 >
                   {link.name}
                 </Link>
               ))}
+              <div className="mt-2 flex items-center gap-2 border-t pt-3" style={{ borderTopColor: 'rgba(139, 115, 85, 0.18)' }}>
+                <button onClick={openSearch} className="flex items-center gap-2 p-2 font-paragraph text-sm text-primary" aria-label="Buscar">
+                  <Search className="h-5 w-5" /> Buscar
+                </button>
+                <button onClick={openAccount} className="flex items-center gap-2 p-2 font-paragraph text-sm text-primary" aria-label="Mi cuenta">
+                  <User className="h-5 w-5" /> Cuenta
+                </button>
+                <button onClick={openCart} className="relative flex items-center gap-2 p-2 font-paragraph text-sm text-primary" aria-label="Carrito de compras">
+                  <ShoppingCart className="h-5 w-5" /> Carrito
+                  {itemCount > 0 && <span className="font-paragraph text-xs">({itemCount})</span>}
+                </button>
+              </div>
             </nav>
-          )}
-        </div>
+          </div>
+        )}
       </header>
+
       <SearchPanel isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
       <AccountPanel isOpen={accountOpen} onClose={() => setAccountOpen(false)} />
       <Cart />
