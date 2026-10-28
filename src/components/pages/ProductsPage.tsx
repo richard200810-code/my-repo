@@ -330,7 +330,7 @@ export default function ProductsPage() {
                             )}
                           </div>
 
-                          <p className="font-paragraph text-lg text-primary font-semibold">
+                          <p className="hidden">
                       className="hidden">(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
                           </p>
 
