@@ -127,7 +127,19 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
             <button
               key={`${color.series}-${color.code}-${index}`}
               onClick={() => handleSelectColor(color)}
-              className="flex flex-col items-stretch gap-2 p-2 md:p-3 bg-white border border-secondary/20 rounded-md hover:border-secondary/50 transition-all group text-left"
+              className="flex flex-col items-stretch gap-2 p-2 md:p-3 border rounded-[12px] hover:border-secondary/50 transition-all group text-left hover:-translate-y-px"
+              style={{
+                backgroundColor: 'rgba(245,241,234,0.34)',
+                borderColor: 'rgba(73,63,54,0.08)',
+                borderWidth: '1px',
+                boxShadow: '0 5px 14px rgba(48,40,34,0.04)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 6px 16px rgba(48,40,34,0.08)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 5px 14px rgba(48,40,34,0.04)';
+              }}
               title={color.code}
             >
               {/* Square Swatch */}
