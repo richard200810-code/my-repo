@@ -127,30 +127,36 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
             <button
               key={`${color.series}-${color.code}-${index}`}
               onClick={() => handleSelectColor(color)}
-              className="flex flex-col items-stretch gap-2 p-2 md:p-3 border rounded-[12px] hover:border-secondary/50 transition-all group text-left hover:-translate-y-px"
+              className="flex flex-col items-stretch gap-2 text-left"
               style={{
-                backgroundColor: 'rgba(245,241,234,0.34)',
-                borderColor: 'rgba(73,63,54,0.08)',
-                borderWidth: '1px',
-                boxShadow: '0 5px 14px rgba(48,40,34,0.04)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 6px 16px rgba(48,40,34,0.08)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 5px 14px rgba(48,40,34,0.04)';
+                backgroundColor: 'transparent',
+                border: 'none',
+                boxShadow: 'none'
               }}
               title={color.code}
             >
-              {/* Square Swatch */}
+              {/* Square Swatch - Image with border-radius and thin border */}
               <div className="relative">
                 <div
-                  className={`w-full aspect-square overflow-hidden border border-secondary/10 transition-all flex items-center justify-center ${
+                  className={`w-full aspect-square overflow-hidden flex items-center justify-center ${
                     selectedColor?.code === color.code || selectedCode === color.code
-                      ? 'border-secondary ring-4 ring-secondary ring-offset-2'
-                      : 'border-secondary/30 group-hover:border-secondary/70'
+                      ? 'ring-4 ring-secondary ring-offset-2'
+                      : ''
                   }`}
-                  style={{ backgroundColor: color.hasImage ? 'transparent' : '#f0f0f0' }}
+                  style={{
+                    backgroundColor: color.hasImage ? 'transparent' : '#f0f0f0',
+                    borderRadius: '8px',
+                    border: '1px solid rgba(73,63,54,0.10)',
+                    transform: 'scale(1)',
+                    transformOrigin: 'center',
+                    transition: 'transform 300ms ease-in-out'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.01)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
                 >
                   {color.hasImage && color.imageUrl ? (
                     <Image
@@ -169,7 +175,7 @@ export default function HairColorSelector({ onSelect, selectedCode, compact = fa
               <span className={`font-paragraph text-base font-semibold text-center leading-tight break-all ${
                 selectedColor?.code === color.code || selectedCode === color.code
                   ? 'text-secondary'
-                  : 'text-secondary/70 group-hover:text-secondary'
+                  : 'text-secondary/70'
               }`}>
                 {color.code}
               </span>
