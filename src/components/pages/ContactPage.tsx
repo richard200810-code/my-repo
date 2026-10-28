@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, AlertCircle } from 'lucide-react';
+import { BaseCrudService } from '@/integrations';
+import { Customers } from '@/entities';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,20 +15,62 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const submissionTime = new Date();
+      
+      // 1. Save to customers collection
+      const customerData: Customers = {
+        _id: crypto.randomUUID(),
+        companyName: 'Contact Form Submission',
+        contactPerson: formData.name,
+        email: formData.email,
+        phoneNumber: formData.phone,
+        notes: formData.message,
+        source: 'Contact Form',
+        customerType: 'Lead',
+        salesStage: 'New Inquiry',
+        createdBy: 'Contact Form',
+        _createdDate: submissionTime,
+      };
 
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
+      await BaseCrudService.create<Customers>('customers', customerData);
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000);
+      // 2. Send email notification to Richard200810@gmail.com
+      // Using Wix Automations: This would be triggered by a database event
+      // The automation should be configured in Wix Dashboard to:
+      // - Listen for new items in 'customers' collection
+      // - Send email to Richard200810@gmail.com with form details
+      // See IMPLEMENTATION NOTES below for setup instructions
+
+      // 3. Send WhatsApp notification to +52 55 3955 5886
+      // This requires Wix WhatsApp Business integration
+      // See IMPLEMENTATION NOTES below for setup instructions
+
+      setSubmitSuccess(true);
+      setFormData({ name: '', email: '', phone: '', message: '' });
+
+      // Reset success message after 5 seconds
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitError(
+        error instanceof Error 
+          ? error.message 
+          : 'Error al enviar el formulario. Por favor, intenta de nuevo.'
+      );
+      
+      // Reset error after 5 seconds
+      setTimeout(() => setSubmitError(null), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -209,6 +253,20 @@ export default function ContactPage() {
                 >
                   <p className="font-paragraph text-base text-primary">
                     ¡Gracias por tu mensaje! Nos pondremos en contacto pronto.
+                  </p>
+                </motion.div>
+              )}
+
+              {/* Error Message */}
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 border border-destructive/20 bg-destructive/10 flex gap-3"
+                >
+                  <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
+                  <p className="font-paragraph text-base text-destructive">
+                    {submitError}
                   </p>
                 </motion.div>
               )}
