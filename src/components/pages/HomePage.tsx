@@ -282,10 +282,10 @@ export default function HomePage() {
       <section className="relative w-full max-w-[120rem] mx-auto px-6 md:px-12 lg:px-20 py-32">
         <div className="text-center mb-16">
           <h2 className="font-heading text-5xl md:text-7xl text-primary mb-6">
-            Descubre Nuestros Vendedores
+            Descubre Nuestras Colecciones
           </h2>
           <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Explora un mercado curado de vendedores premium de extensiones de cabello y pelucas, cada uno ofreciendo colecciones únicas y experiencia.
+            Explora un mercado curado de colecciones premium de extensiones de cabello y pelucas, cada una ofreciendo estilos únicos y experiencia excepcional.
           </p>
         </div>
 
@@ -302,14 +302,14 @@ export default function HomePage() {
                 Un Mercado de Excelencia
               </h3>
               <p className="font-paragraph text-lg text-primary/70 leading-relaxed">
-                Nuestro centro comercial reúne a los mejores vendedores de la industria del cabello. Cada tienda es cuidadosamente seleccionada para garantizar calidad, autenticidad y servicio al cliente excepcional.
+                Nuestro centro comercial reúne las mejores colecciones de la industria del cabello. Cada tienda es cuidadosamente seleccionada para garantizar calidad, autenticidad y servicio al cliente excepcional.
               </p>
             </div>
 
             <ul className="space-y-3 font-paragraph text-lg">
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Selección de vendedores curada
+                Selección de colecciones curada
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
@@ -317,7 +317,7 @@ export default function HomePage() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
-                Soporte de vendedor experto
+                Soporte de colección experto
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-primary rounded-full" />
@@ -329,7 +329,7 @@ export default function HomePage() {
               to="/stores"
               className="inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
-              Explorar Todos los Vendedores
+              Explorar Todas las Colecciones
               <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
@@ -343,7 +343,7 @@ export default function HomePage() {
           >
             <Image
               src="https://static.wixstatic.com/media/37e681_3dbc4c8d9a494f8a8fbe0138857f89d9~mv2.png?originWidth=768&originHeight=960"
-              alt="Vendedores del centro comercial"
+              alt="Colecciones del centro comercial"
               width={600}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
