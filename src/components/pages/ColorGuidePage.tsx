@@ -9,7 +9,7 @@ export default function ColorGuidePage() {
   const [selectedCode, setSelectedCode] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5F1EA' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#B7AEA3' }}>
       <Header />
 
       {/* Breadcrumb */}
@@ -53,13 +53,13 @@ export default function ColorGuidePage() {
       </section>
 
       {/* Information Section */}
-      <section className="w-full py-16 md:py-24" style={{ backgroundColor: '#EDE7DE' }}>
+      <section className="w-full py-16 md:py-24" style={{ backgroundColor: '#B7AEA3' }}>
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
           <h2 className="font-heading text-3xl md:text-4xl text-secondary mb-12">
             Familias de color
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#F5F1EA' }}>
+            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#FFFFFF' }}>
               <h3 className="font-heading text-xl text-secondary mb-2">Virgin Hair</h3>
               <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">63 tonos</p>
               <p className="font-paragraph text-base text-secondary/70">
@@ -67,7 +67,7 @@ export default function ColorGuidePage() {
               </p>
             </div>
 
-            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#F5F1EA' }}>
+            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#FFFFFF' }}>
               <h3 className="font-heading text-xl text-secondary mb-2">Remy Hair</h3>
               <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">53 tonos</p>
               <p className="font-paragraph text-base text-secondary/70">
@@ -75,7 +75,7 @@ export default function ColorGuidePage() {
               </p>
             </div>
 
-            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#F5F1EA' }}>
+            <div className="p-8 border border-secondary/10" style={{ backgroundColor: '#FFFFFF' }}>
               <h3 className="font-heading text-xl text-secondary mb-2">Customized Color Ring</h3>
               <p className="font-paragraph text-sm text-secondary/50 mb-4 uppercase tracking-wide">49 tonos</p>
               <p className="font-paragraph text-base text-secondary/70">
@@ -87,9 +87,9 @@ export default function ColorGuidePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="w-full py-16 md:py-24" style={{ backgroundColor: '#EDE7DE' }}>
+      <section className="w-full py-16 md:py-24" style={{ backgroundColor: '#B7AEA3' }}>
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-          <div className="p-8 md:p-12 border border-secondary/10 flex flex-col md:flex-row items-center justify-between gap-8" style={{ backgroundColor: '#F5F1EA' }}>
+          <div className="p-8 md:p-12 border border-secondary/10 flex flex-col md:flex-row items-center justify-between gap-8" style={{ backgroundColor: '#FFFFFF' }}>
             <div>
               <h3 className="font-heading text-2xl md:text-3xl text-secondary mb-3">
                 ¿Necesitas asesoramiento personalizado?
