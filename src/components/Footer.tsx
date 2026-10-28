@@ -71,7 +71,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-secondary-foreground/80 mt-1 flex-shrink-0" />
-                <span className="font-paragraph text-base text-secondary-foreground/80">Polanco CDMX Mexico</span>
+                <span className="font-paragraph text-base text-secondary-foreground/80">CDMX Mexico</span>
               </div>
             </div>
           </div>
