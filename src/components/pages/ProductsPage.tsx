@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { BaseCrudService } from '@/integrations';
-import { HairExtensionsandWigs } from '@/entities';
-import { useCart, useCurrency, formatPrice, DEFAULT_CURRENCY } from '@/integrations';
-import { Image } from '@/components/ui/image';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import ApplicationMegaMenu from '@/components/ApplicationMegaMenu';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { Image } from '@/components/ui/image';
+import { HairExtensionsandWigs } from '@/entities';
+import { BaseCrudService, useCart, useCurrency } from '@/integrations';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<HairExtensionsandWigs[]>([]);
@@ -330,8 +329,7 @@ export default function ProductsPage() {
                             )}
                           </div>
 
-                          sName="hidden">(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
-                          </p>
+
 
                           {/* Add to Cart Button */}
                           <button
