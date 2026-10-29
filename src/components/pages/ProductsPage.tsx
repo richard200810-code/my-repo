@@ -309,29 +309,10 @@ export default function ProductsPage() {
                         <div className="space-y-2">
                           <Link to={`/products/${product._id}`}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                              {product.itemName}
+                              {getCategoryName(product)}
                             </h3>
                           </Link>
-
-                          <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
-                            {product.productType && <span>{product.productType}</span>}
-                            {product.color && (
-                              <>
-                                <span>•</span>
-                                <span>{product.color}</span>
-                              </>
-                            )}
-                            {product.length && (
-                              <>
-                                <span>•</span>
-                                <span>{product.length}"</span>
-                              </>
-                            )}
-                          </div>
-
-
-
-                          {/* Add to Cart Button */}
+{/* Add to Cart Button */}
                           <button
                             onClick={() => actions.addToCart({
                               collectionId: 'hairextensions',
@@ -341,7 +322,7 @@ export default function ProductsPage() {
                             disabled={addingItemId === product._id}
                             className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                           >
-                            {addingItemId === product._id ? 'Agregando...' : 'Agregar al Carrito'}
+                            {addingItemId === product._id ? 'Agregando...' : 'Ver categoría'}
                           </button>
                         </div>
                       </motion.div>
