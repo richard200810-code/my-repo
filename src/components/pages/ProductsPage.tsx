@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
-import { BaseCrudService, useCart, useCurrency } from '@/integrations';
+import { BaseCrudService, useCurrency } from '@/integrations';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,6 @@ export default function ProductsPage() {
   const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
 
-  const { addingItemId, actions } = useCart();
   const { currency } = useCurrency();
 
   const LIMIT = 12;
@@ -320,18 +319,13 @@ export default function ProductsPage() {
                               {getCategoryName(product)}
                             </h3>
                           </Link>
-{/* Add to Cart Button */}
-                          <button
-                            onClick={() => actions.addToCart({
-                              collectionId: 'hairextensions',
-                              itemId: product._id,
-                              quantity: 1
-                            })}
-                            disabled={addingItemId === product._id}
-                            className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+{/* Category Link */}
+                          <Link
+                            to={`/products?application=${encodeURIComponent(getApplicationValue(product))}`}
+                            className="inline-flex w-full items-center justify-center px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                           >
-                            {addingItemId === product._id ? 'Agregando...' : 'Ver categoría'}
-                          </button>
+                            Ver categoría
+                          </Link>
                         </div>
                       </motion.div>
                     ))}
