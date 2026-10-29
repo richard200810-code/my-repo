@@ -138,6 +138,44 @@ export default function ProductsPage() {
   const lengths = ['all', ...PREDEFINED_LENGTHS];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
 
+  const getCatalogCategory = (product: HairExtensionsandWigs): string => {
+    const name = (product.itemName || '').toLowerCase();
+    if (name.includes('double') && name.includes('flat')) return 'Extensiones Double Piece Flat Weft';
+    if (name.includes('hand tied')) return 'Extensiones Hand Tied Weft';
+    if (name.includes('machine')) return 'Extensiones Machine Weft';
+    if (name.includes('volume')) return 'Extensiones Volume Weft';
+    if (name.includes('flat weft')) return 'Extensiones Flat Weft';
+    if (name.includes('genius') && name.includes('hole')) return 'Extensiones Genius Weft with Hole';
+    if (name.includes('genius')) return 'Extensiones Genius Weft';
+    if (name.includes('seamless') && name.includes('tape')) return 'Extensiones Seamless Tape in';
+    if (name.includes('invisible') && name.includes('tape')) return 'Extensiones Invisible Tape in';
+    if (name.includes('mini tape')) return 'Extensiones Mini Tape in';
+    if (name.includes('long tape')) return 'Extensiones Long Tape in';
+    if (name.includes('clip')) return 'Extensiones Clip in';
+    if (name.includes('i-tip')) return 'Extensiones I-Tip';
+    if (name.includes('nano-tip')) return 'Extensiones Nano-Tip';
+    if (name.includes('k-tip')) return 'Extensiones K-Tip';
+    if (name.includes('u-tip')) return 'Extensiones U-Tip';
+    if (name.includes('wig')) return 'Pelucas';
+    if (name.includes('fusion') || name.includes('keratin')) return 'Extensiones de queratina';
+    if (name.includes('weft') || name.includes('sew-in')) return 'Extensiones Weft';
+    const type = product.productType || '';
+    const fallback: Record<string, string> = {
+      'Tape Invisible': 'Extensiones Invisible Tape in',
+      'Tape Normal': 'Extensiones Tape in',
+      'Tape-in Extension': 'Extensiones Tape in',
+      'K-tip': 'Extensiones K-Tip',
+      'I-tip': 'Extensiones I-Tip',
+      'Clip-in': 'Extensiones Clip in',
+      'Clip-in Extension': 'Extensiones Clip in',
+      'Sew-in': 'Extensiones Weft',
+      'Fusion': 'Extensiones de queratina',
+      'Pre-bonded': 'Extensiones U-Tip',
+      'Wig': 'Pelucas'
+    };
+    return fallback[type] || 'Extensiones de cabello';
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
