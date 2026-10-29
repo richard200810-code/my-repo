@@ -199,15 +199,15 @@ export default function ProductsPage() {
         {/* Page Header */}
         <div className="mb-12 text-center">
           <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
-            Nuestra Colección
+            Tipos de producto
           </h1>
           <p className="font-paragraph text-lg text-primary max-w-2xl mx-auto">
-            Explora nuestra selección premium de extensiones de cabello y pelucas
+            Explora nuestras categorías profesionales de extensiones de cabello y pelucas
           </p>
         </div>
 
         {/* Horizontal Filters Row - Desktop Only */}
-        <div className="hidden lg:grid grid-cols-3 gap-6 mb-8">
+        <div className="hidden">
           {/* Application Filter */}
           <div className="space-y-2">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
@@ -257,7 +257,7 @@ export default function ProductsPage() {
         </div>
 
         {/* Mobile Filters - Accordion Style */}
-        <div className="lg:hidden mb-8 space-y-4">
+        <div className="hidden">
           {/* Application Filter */}
           <div className="space-y-2">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
@@ -378,7 +378,7 @@ export default function ProductsPage() {
                 )}
 
                 {/* Load More Button */}
-                {hasNext && (
+                {false && (
                   <div className="text-center">
                     <button
                       onClick={loadMore}
