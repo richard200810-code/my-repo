@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
-import { BaseCrudService, useCurrency } from '@/integrations';
+import { BaseCrudService, useCart, useCurrency } from '@/integrations';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,7 @@ export default function ProductsPage() {
   const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
 
+  const { addingItemId, actions } = useCart();
   const { currency } = useCurrency();
 
   const LIMIT = 12;
@@ -138,19 +139,11 @@ export default function ProductsPage() {
   const lengths = ['all', ...PREDEFINED_LENGTHS];
   const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
 
-  // Display each product as a clear Spanish category.
-  const getCategoryName = (product: HairExtensionsandWigs): string => {
-    const source = normalizeString(product.productType || product.applicationMethod || product.itemName || '');
-    if (source.includes('invisible') && source.includes('tape')) return 'Extensiones adhesivas invisibles';
-    if (source.includes('tape')) return 'Extensiones adhesivas';
-    if (source.includes('ktip') || source.includes('keratin')) return 'Extensiones K-Tip';
-    if (source.includes('itip') || source.includes('bead')) return 'Extensiones I-Tip';
-    if (source.includes('clip')) return 'Extensiones Clip-in';
-    if (source.includes('weft') || source.includes('sew')) return 'Extensiones Weft';
-    if (source.includes('wig')) return 'Pelucas';
-    if (source.includes('ponytail')) return 'Colas de caballo';
-    return 'Extensiones de cabello';
-  }; md:px-16 lg:px-24 py-16">
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
         {/* Page Header */}
         <div className="mb-12 text-center">
           <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
@@ -316,16 +309,40 @@ export default function ProductsPage() {
                         <div className="space-y-2">
                           <Link to={`/products/${product._id}`}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                              {getCategoryName(product)}
+                              {product.itemName}
                             </h3>
                           </Link>
-{/* Category Link */}
-                          <Link
-                            to={`/products?application=${encodeURIComponent(getApplicationValue(product))}`}
-                            className="inline-flex w-full items-center justify-center px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+
+                          <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
+                            {product.productType && <span>{product.productType}</span>}
+                            {product.color && (
+                              <>
+                                <span>•</span>
+                                <span>{product.color}</span>
+                              </>
+                            )}
+                            {product.length && (
+                              <>
+                                <span>•</span>
+                                <span>{product.length}"</span>
+                              </>
+                            )}
+                          </div>
+
+
+
+                          {/* Add to Cart Button */}
+                          <button
+                            onClick={() => actions.addToCart({
+                              collectionId: 'hairextensions',
+                              itemId: product._id,
+                              quantity: 1
+                            })}
+                            disabled={addingItemId === product._id}
+                            className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
                           >
-                            Ver categoría
-                          </Link>
+                            {addingItemId === product._id ? 'Agregando...' : 'Ver categoría'}
+                          </button>
                         </div>
                       </motion.div>
                     ))}
