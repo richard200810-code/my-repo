@@ -346,11 +346,11 @@ export default function ProductsPage() {
                         className="group space-y-4"
                       >
                         {/* Product Image */}
-                        <Link to={`/products/${product._id}`} className="block">
+                        <Link to={category.href} className="block">
                           <div className="aspect-[3/4] overflow-hidden mb-4">
                             <Image
-                              src={product.itemImage || 'https://static.wixstatic.com/media/37e681_9e787a2481d1449eac415e51fe35f9ff~mv2.png?originWidth=384&originHeight=512'}
-                              alt={product.itemName || 'Product'}
+                              src={category.image}
+                              alt={category.title}
                               width={400}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
@@ -359,14 +359,14 @@ export default function ProductsPage() {
 
                         {/* Product Info */}
                         <div className="space-y-2">
-                          <Link to={`/products?application=${encodeURIComponent(product.productType || '')}`}>
+                          <Link to={category.href}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                              {getCatalogCategory(product)}
+                              {category.title}
                             </h3>
                           </Link>
 
                           <Link
-                            to={`/products?application=${encodeURIComponent(product.productType || '')}`}
+                            to={category.href}
                             className="inline-flex w-full items-center justify-center px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                           >
                             Ver categoría
