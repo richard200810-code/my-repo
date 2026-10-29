@@ -189,6 +189,18 @@ export default function ProductsPage() {
     ['Extensiones I-Tip','I-Tip hair extensions','https://thehairshop.com/cdn/shop/products/i_tip_808_hair_extensions_the_hair_shop_st_1__11985.1546542073.1280.1280_300x300.jpg?v=1710455969'],
     ['Extensiones K-Tip','K Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_hair_extensions_the_hair_shop_st_1__01293.1641514967.1280.1280_300x300.jpg?v=1710456002'],
     ['Extensiones U-Tip','U-Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_exclusive_hair_extensions_the_hair_shop_st_1.jpg__08204.1541034445.1280.1280_300x300.jpg?v=1710455968'],
+    ['Extensiones Lace Clip in','Lace Clip in','https://thehairshop.com/cdn/shop/products/26in_clipins3-NEW-2__29197_300x300.jpg?v=1680912989'],
+    ['Extensiones PU Clip in','PU Clip in','https://thehairshop.com/cdn/shop/files/skinny_clip_in_3_piece_hair_extensions_the_hair_shop_300x300.jpg?v=1760554406'],
+    ['Extensiones Mini Tape in','Mini Tape in','https://thehairshop.com/cdn/shop/files/IMG_7509_300x300.jpg?v=1710201861'],
+    ['Extensiones Nano-Tip','Nano-Tip hair extensions','https://thehairshop.com/cdn/shop/files/microtip_300x300.jpg?v=1737574105'],
+    ['Extensiones V-Tip','V-Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_hair_extensions_the_hair_shop_st_1__01293.1641514967.1280.1280_300x300.jpg?v=1710456002'],
+    ['Extensiones Y-Tip','Y-Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_hair_extensions_the_hair_shop_st_1__01293.1641514967.1280.1280_300x300.jpg?v=1710456002'],
+    ['Extensiones Micro Loop','Micro Loop hair extension','https://thehairshop.com/cdn/shop/files/microtip_300x300.jpg?v=1737574105'],
+    ['Extensiones Feather Weft','Feather hair weft','https://thehairshop.com/cdn/shop/products/one-step-weft_hair_extensions_the_hair_shop_st_1__52648.1604697498.1280.1280_300x300.jpg?v=1678492544'],
+    ['Extensiones H6 Feather','H6 Feather hair extensions','https://thehairshop.com/cdn/shop/products/one-step-weft_hair_extensions_the_hair_shop_st_1__52648.1604697498.1280.1280_300x300.jpg?v=1678492544'],
+    ['Color Ombre','Ombre','https://thehairshop.com/cdn/shop/products/1_BLACK_Color_swatches_2019final_2e66a2a4-630d-452f-8fd7-b4b7b2c643e6_300x300.jpg?v=1678755397'],
+    ['Color Piano','Piano Color','https://thehairshop.com/cdn/shop/products/1_BLACK_Color_swatches_2019final_2e66a2a4-630d-452f-8fd7-b4b7b2c643e6_300x300.jpg?v=1678755397'],
+    ['Color Balayage','Balayage','https://thehairshop.com/cdn/shop/products/1_BLACK_Color_swatches_2019final_2e66a2a4-630d-452f-8fd7-b4b7b2c643e6_300x300.jpg?v=1678755397'],
   ].map(([title, application, image]) => ({ title, application, image, href: '/products?application=' + encodeURIComponent(application) }));
 
   return (
