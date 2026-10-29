@@ -176,6 +176,21 @@ export default function ProductsPage() {
     return fallback[type] || 'Extensiones de cabello';
   };
 
+  const CATEGORY_CARDS = [
+    ['Extensiones Genius Weft','Genius Weft','https://thehairshop.com/cdn/shop/files/Main_Image_Smart_Weft_02_300x300.png?v=1733175586'],
+    ['Extensiones Hand Tied Weft','Hand Tied Weft','https://thehairshop.com/cdn/shop/products/one-step-weft_hair_extensions_the_hair_shop_st_1__52648.1604697498.1280.1280_300x300.jpg?v=1678492544'],
+    ['Extensiones Flat Weft','Flat Weft','https://thehairshop.com/cdn/shop/products/weft_808_hair_extensions_the_hair_shop_5__57993.1542309127.1280.1280_300x300.jpg?v=1678746590'],
+    ['Extensiones Machine Weft','Machine Weft','https://thehairshop.com/cdn/shop/files/Main_Image_Smart_Weft_02_300x300.png?v=1733175586'],
+    ['Extensiones Volume Weft','Volume Weft','https://thehairshop.com/cdn/shop/files/Features_Smart_Weft_300x300.jpg?v=1733175469'],
+    ['Extensiones Clip in','Clip in','https://thehairshop.com/cdn/shop/products/26in_clipins3-NEW-2__29197_300x300.jpg?v=1680912989'],
+    ['Extensiones Tape in','Tape in','https://thehairshop.com/cdn/shop/products/smart_tab_tape_in_hair_extensions_the_hair_shop_edit__38488.1556046196.1280.1280_300x300.jpg?v=1678666872'],
+    ['Extensiones Seamless Tape in','Seamless Tape in','https://thehairshop.com/cdn/shop/products/skinweft_tape_in_hair_extensions_the_hair_shop_1__44145.1556322582.1280.1280_300x300.jpg?v=1678488297'],
+    ['Extensiones Invisible Tape in','Invisible Tape in','https://thehairshop.com/cdn/shop/products/skinweft_tape_in_hair_extensions_the_hair_shop_1__44145.1556322582.1280.1280_300x300.jpg?v=1678488297'],
+    ['Extensiones I-Tip','I-Tip hair extensions','https://thehairshop.com/cdn/shop/products/i_tip_808_hair_extensions_the_hair_shop_st_1__11985.1546542073.1280.1280_300x300.jpg?v=1710455969'],
+    ['Extensiones K-Tip','K Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_hair_extensions_the_hair_shop_st_1__01293.1641514967.1280.1280_300x300.jpg?v=1710456002'],
+    ['Extensiones U-Tip','U-Tip hair extensions','https://thehairshop.com/cdn/shop/products/keratip_808_exclusive_hair_extensions_the_hair_shop_st_1.jpg__08204.1541034445.1280.1280_300x300.jpg?v=1710455968'],
+  ].map(([title, application, image]) => ({ title, application, image, href: '/products?application=' + encodeURIComponent(application) }));
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
