@@ -313,7 +313,10 @@ export default function ProductsPage() {
                                product.productType === 'K-tip' ? 'Extensiones K-Tip' :
                                product.productType === 'I-tip' ? 'Extensiones I-Tip' :
                                product.productType === 'Clip-in' ? 'Extensiones Clip-in' :
+                               product.productType === 'Clip-in Extension' ? 'Extensiones Clip-in' :
                                product.productType === 'Sew-in' ? 'Extensiones Weft' :
+                               product.productType === 'Pre-bonded' ? 'Extensiones U-Tip Pre-bonded' :
+                               product.productType === 'Tape-in Extension' ? 'Extensiones Tape' :
                                product.productType === 'Wig' ? 'Pelucas' :
                                'Extensiones de cabello'}
                             </h3>
