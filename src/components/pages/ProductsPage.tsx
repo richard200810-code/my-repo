@@ -3,7 +3,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
-import { BaseCrudService, useCart, useCurrency } from '@/integrations';
+import { BaseCrudService, useCurrency } from '@/integrations';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,6 @@ export default function ProductsPage() {
   const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
 
-  const { addingItemId, actions } = useCart();
   const { currency } = useCurrency();
 
   const LIMIT = 12;
@@ -307,42 +306,25 @@ export default function ProductsPage() {
 
                         {/* Product Info */}
                         <div className="space-y-2">
-                          <Link to={`/products/${product._id}`}>
+                          <Link to={`/products?application=${encodeURIComponent(product.productType || '')}`}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                              {product.itemName}
+                              {product.productType === 'Tape Invisible' ? 'Extensiones adhesivas invisibles' :
+                               product.productType === 'Tape Normal' ? 'Extensiones adhesivas' :
+                               product.productType === 'K-tip' ? 'Extensiones K-Tip' :
+                               product.productType === 'I-tip' ? 'Extensiones I-Tip' :
+                               product.productType === 'Clip-in' ? 'Extensiones Clip-in' :
+                               product.productType === 'Sew-in' ? 'Extensiones Weft' :
+                               product.productType === 'Wig' ? 'Pelucas' :
+                               'Extensiones de cabello'}
                             </h3>
                           </Link>
 
-                          <div className="flex items-center gap-3 text-sm font-paragraph text-primary/70">
-                            {product.productType && <span>{product.productType}</span>}
-                            {product.color && (
-                              <>
-                                <span>•</span>
-                                <span>{product.color}</span>
-                              </>
-                            )}
-                            {product.length && (
-                              <>
-                                <span>•</span>
-                                <span>{product.length}"</span>
-                              </>
-                            )}
-                          </div>
-
-
-
-                          {/* Add to Cart Button */}
-                          <button
-                            onClick={() => actions.addToCart({
-                              collectionId: 'hairextensions',
-                              itemId: product._id,
-                              quantity: 1
-                            })}
-                            disabled={addingItemId === product._id}
-                            className="w-full px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300 disabled:opacity-50"
+                          <Link
+                            to={`/products?application=${encodeURIComponent(product.productType || '')}`}
+                            className="inline-flex w-full items-center justify-center px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                           >
-                            {addingItemId === product._id ? 'Agregando...' : 'Ver categoría'}
-                          </button>
+                            Ver categoría
+                          </Link>
                         </div>
                       </motion.div>
                     ))}
