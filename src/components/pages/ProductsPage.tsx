@@ -137,17 +137,21 @@ export default function ProductsPage() {
 
   // Extract unique values for filters
   const lengths = ['all', ...PREDEFINED_LENGTHS];
-  const colors =
+  const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
+
   // Display each product as a clear Spanish category.
   const getCategoryName = (product: HairExtensionsandWigs): string => {
-    return product.productType || 'Extensiones de cabello';
-  }; ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-
-      <main className="w-full max-w-[100rem] mx-auto px-8 md:px-16 lg:px-24 py-16">
+    const source = normalizeString(product.productType || product.applicationMethod || product.itemName || '');
+    if (source.includes('invisible') && source.includes('tape')) return 'Extensiones adhesivas invisibles';
+    if (source.includes('tape')) return 'Extensiones adhesivas';
+    if (source.includes('ktip') || source.includes('keratin')) return 'Extensiones K-Tip';
+    if (source.includes('itip') || source.includes('bead')) return 'Extensiones I-Tip';
+    if (source.includes('clip')) return 'Extensiones Clip-in';
+    if (source.includes('weft') || source.includes('sew')) return 'Extensiones Weft';
+    if (source.includes('wig')) return 'Pelucas';
+    if (source.includes('ponytail')) return 'Colas de caballo';
+    return 'Extensiones de cabello';
+  }; md:px-16 lg:px-24 py-16">
         {/* Page Header */}
         <div className="mb-12 text-center">
           <h1 className="font-heading text-5xl md:text-6xl text-primary mb-6">
