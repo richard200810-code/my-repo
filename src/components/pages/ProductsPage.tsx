@@ -315,6 +315,7 @@ export default function ProductsPage() {
                                product.productType === 'Clip-in' ? 'Extensiones Clip-in' :
                                product.productType === 'Clip-in Extension' ? 'Extensiones Clip-in' :
                                product.productType === 'Sew-in' ? 'Extensiones Weft' :
+                               product.productType === 'Fusion' ? 'Extensiones Fusion' :
                                product.productType === 'Pre-bonded' ? 'Extensiones U-Tip Pre-bonded' :
                                product.productType === 'Tape-in Extension' ? 'Extensiones Tape' :
                                product.productType === 'Wig' ? 'Pelucas' :
