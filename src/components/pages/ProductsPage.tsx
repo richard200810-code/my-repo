@@ -137,7 +137,11 @@ export default function ProductsPage() {
 
   // Extract unique values for filters
   const lengths = ['all', ...PREDEFINED_LENGTHS];
-  const colors = ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
+  const colors =
+  // Display each product as a clear Spanish category.
+  const getCategoryName = (product: HairExtensionsandWigs): string => {
+    return product.productType || 'Extensiones de cabello';
+  }; ['all', ...Array.from(new Set(products.map(p => p.color).filter(Boolean)))];
 
   return (
     <div className="min-h-screen bg-background">
