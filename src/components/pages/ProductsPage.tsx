@@ -308,18 +308,7 @@ export default function ProductsPage() {
                         <div className="space-y-2">
                           <Link to={`/products?application=${encodeURIComponent(product.productType || '')}`}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
-                              {product.productType === 'Tape Invisible' ? 'Extensiones Tape Invisibles' :
-                               product.productType === 'Tape Normal' ? 'Extensiones Tape Clásicas' :
-                               product.productType === 'K-tip' ? 'Extensiones K-Tip' :
-                               product.productType === 'I-tip' ? 'Extensiones I-Tip' :
-                               product.productType === 'Clip-in' ? 'Extensiones Clip-in' :
-                               product.productType === 'Clip-in Extension' ? 'Extensiones Clip-in' :
-                               product.productType === 'Sew-in' ? 'Extensiones Weft' :
-                               product.productType === 'Fusion' ? 'Extensiones Fusion' :
-                               product.productType === 'Pre-bonded' ? 'Extensiones U-Tip Pre-bonded' :
-                               product.productType === 'Tape-in Extension' ? 'Extensiones Tape' :
-                               product.productType === 'Wig' ? 'Pelucas' :
-                               'Extensiones de cabello'}
+                              {getCatalogCategory(product)}
                             </h3>
                           </Link>
 
