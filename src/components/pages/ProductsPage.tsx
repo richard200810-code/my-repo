@@ -221,7 +221,7 @@ export default function ProductsPage() {
         {/* Horizontal Filters Row - Desktop Only */}
         <div className="hidden">
           {/* Application Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Aplicación
             </h3>
@@ -232,7 +232,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Length Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Longitud
             </h3>
@@ -250,7 +250,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Color Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Color
             </h3>
@@ -271,7 +271,7 @@ export default function ProductsPage() {
         {/* Mobile Filters - Accordion Style */}
         <div className="hidden">
           {/* Application Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Aplicación
             </h3>
@@ -282,7 +282,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Length Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Longitud
             </h3>
@@ -300,7 +300,7 @@ export default function ProductsPage() {
           </div>
 
           {/* Color Filter */}
-          <div className="space-y-2">
+          <div className="space-y-3 px-5 pb-5 pt-4">
             <h3 className="font-paragraph text-sm text-primary font-semibold">
               Color
             </h3>
@@ -355,11 +355,11 @@ export default function ProductsPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.05 }}
-                        className="group space-y-4"
+                        className="group overflow-hidden rounded-2xl border border-primary/10 bg-white/40 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                       >
                         {/* Product Image */}
                         <Link to={category.href} className="block">
-                          <div className="aspect-[3/4] overflow-hidden mb-4">
+                          <div className="aspect-[4/5] overflow-hidden rounded-t-2xl bg-primary/5">
                             <Image
                               src={category.image}
                               alt={category.title}
@@ -370,7 +370,7 @@ export default function ProductsPage() {
                         </Link>
 
                         {/* Product Info */}
-                        <div className="space-y-2">
+                        <div className="space-y-3 px-5 pb-5 pt-4">
                           <Link to={category.href}>
                             <h3 className="font-heading text-xl text-primary hover:opacity-70 transition-opacity">
                               {category.title}
@@ -379,7 +379,7 @@ export default function ProductsPage() {
 
                           <Link
                             to={category.href}
-                            className="inline-flex w-full items-center justify-center px-6 py-3 border-2 border-buttonborder bg-buttonbackground text-primary font-paragraph text-base hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                            className="inline-flex w-full items-center justify-center rounded-xl border border-primary/20 bg-buttonbackground/70 px-6 py-3 text-primary font-paragraph text-base transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
                           >
                             Ver categoría
                           </Link>
