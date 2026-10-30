@@ -379,7 +379,7 @@ export default function ProductsPage() {
 
                           <Link
                             to={category.href}
-                            className="inline-flex w-full items-center justify-center rounded-xl border border-primary/20 bg-buttonbackground/70 px-6 py-3 text-primary font-paragraph text-base transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+                            className="inline-flex w-full items-center justify-center rounded-full border border-primary bg-primary px-6 py-3 text-primary-foreground font-paragraph text-xs uppercase tracking-widest transition-all duration-300 hover:bg-transparent hover:text-primary"
                           >
                             Ver categoría
                           </Link>
