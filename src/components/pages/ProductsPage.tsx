@@ -2,7 +2,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
-import { BaseCrudService, useCurrency, formatPrice, DEFAULT_CURRENCY } from '@/integrations';
+import { BaseCrudService, DEFAULT_CURRENCY, formatPrice, useCurrency } from '@/integrations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
