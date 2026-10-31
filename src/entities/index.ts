@@ -12,6 +12,10 @@ export interface Customers {
   _createdDate?: Date;
   _updatedDate?: Date;
   /** @wixFieldType text */
+  helpOptions?: string;
+  /** @wixFieldType text */
+  businessType?: string;
+  /** @wixFieldType text */
   companyName?: string;
   /** @wixFieldType text */
   contactPerson?: string;

@@ -11,7 +11,9 @@ export default function ContactPage() {
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    businessType: '',
+    helpOptions: [] as string[]
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -33,6 +35,8 @@ export default function ContactPage() {
         email: formData.email,
         phoneNumber: formData.phone,
         notes: formData.message,
+        businessType: formData.businessType,
+        helpOptions: formData.helpOptions.join(', '),
         source: 'Contact Form',
         customerType: 'Lead',
         salesStage: 'New Inquiry',
@@ -54,7 +58,7 @@ export default function ContactPage() {
       // See IMPLEMENTATION NOTES below for setup instructions
 
       setSubmitSuccess(true);
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '', businessType: '', helpOptions: [] });
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitSuccess(false), 5000);
@@ -73,10 +77,20 @@ export default function ContactPage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      helpOptions: checked
+        ? [...prev.helpOptions, name]
+        : prev.helpOptions.filter(option => option !== name)
     }));
   };
 
@@ -226,6 +240,54 @@ export default function ContactPage() {
                   placeholder="(555) 123-4567"
                 />
               </div>
+
+              {/* Business Type Dropdown */}
+              <div className="space-y-2">
+                <label htmlFor="businessType" className="font-paragraph text-base text-primary font-semibold">
+                  ¿Qué tipo de negocio de cabello tienes? *
+                </label>
+                <select
+                  id="businessType"
+                  name="businessType"
+                  value={formData.businessType}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 border border-buttonborder bg-background text-primary font-paragraph text-base focus:outline-none focus:border-primary transition-colors"
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="Dueño/a de salón">Dueño/a de salón</option>
+                  <option value="Estilista">Estilista</option>
+                  <option value="Tienda en línea">Tienda en línea</option>
+                  <option value="Distribuidor/a">Distribuidor/a</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+
+              {/* Help Options Checkboxes */}
+              <div className="space-y-3">
+                <label className="font-paragraph text-base text-primary font-semibold block">
+                  ¿Cómo podemos ayudarte? *
+                </label>
+                <div className="space-y-2">
+                  {['Muestra', 'Cotización mayorista', 'Matching de color', 'Cabello personalizado', 'Empaque personalizado', 'Otro'].map((option) => (
+                    <div key={option} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={option}
+                        name={option}
+                        checked={formData.helpOptions.includes(option)}
+                        onChange={handleCheckboxChange}
+                        className="w-4 h-4 border border-buttonborder bg-background text-primary cursor-pointer"
+                      />
+                      <label htmlFor={option} className="ml-3 font-paragraph text-base text-primary cursor-pointer">
+                        {option}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ... keep existing code (Message field and below) */}
 
               {/* Message */}
               <div className="space-y-2">
