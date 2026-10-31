@@ -1,7 +1,7 @@
-import Footer from '@/components/Footer';
-import Header from '@/components/Header';
-import { Image } from '@/components/ui/image';
 import { Link } from 'react-router-dom';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Image } from '@/components/ui/image';
 
 export default function AcademyPage() {
   return (
