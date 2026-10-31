@@ -2,10 +2,10 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
-import { BaseCrudService, DEFAULT_CURRENCY, formatPrice, useCurrency } from '@/integrations';
+import { BaseCrudService } from '@/integrations';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function ProductsPage() {
@@ -18,7 +18,6 @@ export default function ProductsPage() {
   const [selectedLength, setSelectedLength] = useState<string>('all');
   const [selectedColor, setSelectedColor] = useState<string>('all');
 
-  const { currency } = useCurrency();
   const LIMIT = 12;
 
   const PREDEFINED_LENGTHS = [14, 16, 18, 20, 22, 24, 26, 28, 30].map(n => n.toString());
@@ -205,339 +204,53 @@ export default function ProductsPage() {
     return acc;
   }, {} as Record<string, HairExtensionsandWigs[]>);
 
+
+
+  const CATEGORY_SECTIONS = [
+    { key: 'weft', eyebrow: '01 / VOLUMEN CONTINUO', title: 'Weft profesional', copy: 'Una base continua para crear volumen limpio, uniforme y cómodo en el salón.', detail: 'Cosido o beads · Base continua · Mantenimiento moderado', application: 'Genius Weft', keys: ['Extensiones Weft','Extensiones Genius Weft','Extensiones Hand Tied Weft','Extensiones Flat Weft','Extensiones Machine Weft','Extensiones Volume Weft'], image: CATEGORY_CARDS[0][2] },
+    { key: 'keratin', eyebrow: '02 / PRECISIÓN POR MECHÓN', title: 'Keratin & Strand', copy: 'Sistemas por mechón para trabajar zonas concretas con un acabado preciso y natural.', detail: 'Fusión térmica o anilla · Punta definida · Control por mechón', application: 'K-Tip', keys: ['Extensiones de queratina','Extensiones K-Tip','Extensiones I-Tip','Extensiones U-Tip','Extensiones Nano-Tip'], image: 'https://static.wixstatic.com/media/37e681_c59916f2ea464b55a7f07601f820b544~mv2.png?originWidth=576&originHeight=448' },
+    { key: 'tape', eyebrow: '03 / INTEGRACIÓN INVISIBLE', title: 'Tape-in', copy: 'Una aplicación rápida y plana para cambios de longitud y densidad que se integran con discreción.', detail: 'Adhesivo profesional · Cinta plana · Reposición sencilla', application: 'Tape In', keys: ['Extensiones Tape in','Extensiones Seamless Tape in','Extensiones Invisible Tape in','Extensiones Mini Tape in'], image: 'https://static.wixstatic.com/media/37e681_d251183a168b4faab31a53ff7f91a2d6~mv2.png?originWidth=384&originHeight=256' },
+    { key: 'ready', eyebrow: '04 / CAMBIO REMOVIBLE', title: 'Ready to Wear', copy: 'Volumen y longitud para transformar el look sin compromiso de instalación permanente.', detail: 'Clip o base PU · Retiro diario · Flexibilidad total', application: 'Clip In', keys: ['Extensiones Clip in','Pelucas'], image: 'https://static.wixstatic.com/media/37e681_f673605ffb4e4ccaa90f195532411dea~mv2.png?originWidth=192&originHeight=192' },
+    { key: 'color', eyebrow: '05 / COLOR Y DIMENSIÓN', title: 'Color & Blends', copy: 'Mezclas, contrastes y acabados de color para completar una propuesta personalizada.', detail: 'Color uniforme · Mezcla de tonos · Consulta de disponibilidad', application: 'all', keys: ['Extensiones de cabello'], image: 'https://static.wixstatic.com/media/37e681_a9729fe488844738b6b47fbd7249b4cb~mv2.png?originWidth=192&originHeight=192' }
+  ];
+
+  const collectProducts = (keys: string[]) => keys.flatMap(key => groupedProducts[key] || []).slice(0, 3);
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background text-primary">
       <Header />
 
-      {/* Hero Section - Asymmetric Magazine Style */}
-      <section className="w-full max-w-[120rem] mx-auto px-4 py-16 md:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {/* Large Image - Left */}
-          <motion.div
-            className="md:col-span-2 relative"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="relative overflow-hidden rounded-2xl h-96 md:h-[500px]">
-              <Image
-                src="https://static.wixstatic.com/media/37e681_c59916f2ea464b55a7f07601f820b544~mv2.png?originWidth=576&originHeight=448"
-                alt="Extensiones de cabello premium"
-                width={600}
-                height={500}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-            </div>
-          </motion.div>
-
-          {/* Floating Numbers & Content - Right */}
-          <motion.div
-            className="flex flex-col justify-center space-y-8"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div>
-              <h1 className="font-heading text-5xl md:text-6xl text-primary mb-4">
-                Extensiones Premium
-              </h1>
-              <p className="font-paragraph text-lg text-secondary/80">
-                Descubre nuestra colección de extensiones de cabello de alta calidad con múltiples sistemas de aplicación.
-              </p>
-            </div>
-
-            {/* Floating Numbers */}
-            <div className="space-y-4">
-              <motion.div
-                className="flex items-center space-x-4 p-4 bg-buttonbackground rounded-lg"
-                whileHover={{ y: -4 }}
-              >
-                <span className="text-4xl font-heading text-primary">50+</span>
-                <span className="font-paragraph text-sm">Sistemas de aplicación</span>
-              </motion.div>
-              <motion.div
-                className="flex items-center space-x-4 p-4 bg-buttonbackground rounded-lg"
-                whileHover={{ y: -4 }}
-              >
-                <span className="text-4xl font-heading text-primary">100%</span>
-                <span className="font-paragraph text-sm">Cabello natural</span>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* "Cómo elegir" Section */}
-      <section className="w-full max-w-[100rem] mx-auto px-4 py-16 md:py-24">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="font-heading text-4xl md:text-5xl text-primary mb-4">
-            Cómo elegir
-          </h2>
-          <p className="font-paragraph text-lg text-secondary/70 max-w-2xl mx-auto">
-            Encuentra el sistema perfecto para tus necesidades
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CHOICE_OPTIONS.map((option, idx) => (
-            <motion.div
-              key={idx}
-              className="p-6 bg-background rounded-xl border border-buttonborder/20 hover:border-buttonborder/50 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -4 }}
-            >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white mb-4">
-                <Check size={24} />
-              </div>
-              <h3 className="font-heading text-xl text-primary mb-2">{option.title}</h3>
-              <p className="font-paragraph text-sm text-secondary/70">{option.desc}</p>
+      <main>
+        <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
+          <div className="absolute inset-0 -z-10"><Image src="https://static.wixstatic.com/media/37e681_c59916f2ea464b55a7f07601f820b544~mv2.png?originWidth=576&originHeight=448" alt="Cabello humano LUX HAIR" width={1600} height={900} className="h-full w-full object-cover opacity-45" /><div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/30" /></div>
+          <div className="mx-auto grid min-h-[680px] max-w-[120rem] items-end gap-12 px-6 pb-16 pt-28 md:grid-cols-[1.05fr_0.95fr] md:px-16 md:pb-24 lg:px-24">
+            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.3em] text-primary-foreground/60">Catálogo profesional · LUX HAIR</p>
+              <h1 className="max-w-4xl font-heading text-5xl leading-[0.95] md:text-7xl lg:text-8xl">Elige la construcción que define el resultado.</h1>
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-primary-foreground/75 md:text-xl">Una vista completa de nuestros sistemas de extensión para que el salón pueda comparar aplicación, integración y mantenimiento antes de elegir.</p>
+              <div className="mt-10 flex flex-wrap gap-4"><a href="#sistemas" className="rounded-full bg-background px-6 py-3 text-sm font-semibold text-primary transition-transform hover:-translate-y-1">Explorar sistemas</a><Link to="/contact" className="rounded-full border border-primary-foreground/40 px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10">Hablar con un asesor</Link></div>
             </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Comparison Matrix */}
-      <section className="w-full max-w-[100rem] mx-auto px-4 py-16 md:py-24">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="font-heading text-4xl md:text-5xl text-primary mb-4">
-            Matriz Comparativa
-          </h2>
-        </motion.div>
-
-        <motion.div
-          className="overflow-x-auto rounded-xl border border-buttonborder/20"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <table className="w-full">
-            <thead className="bg-primary text-white">
-              <tr>
-                <th className="px-6 py-4 text-left font-heading">Sistema</th>
-                <th className="px-6 py-4 text-left font-heading">Aplicación</th>
-                <th className="px-6 py-4 text-left font-heading">Punto de unión</th>
-                <th className="px-6 py-4 text-left font-heading">Uso ideal</th>
-                <th className="px-6 py-4 text-left font-heading">Mantenimiento</th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMPARISON_DATA.map((row, idx) => (
-                <tr key={idx} className={idx % 2 === 0 ? 'bg-background/30' : 'bg-white'}>
-                  <td className="px-6 py-4 font-heading text-primary">{row.sistema}</td>
-                  <td className="px-6 py-4 font-paragraph text-secondary">{row.aplicacion}</td>
-                  <td className="px-6 py-4 font-paragraph text-secondary">{row.union}</td>
-                  <td className="px-6 py-4 font-paragraph text-secondary">{row.ideal}</td>
-                  <td className="px-6 py-4 font-paragraph text-secondary">{row.mantenimiento}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </motion.div>
-      </section>
-
-      {/* Filters */}
-      <section className="w-full max-w-[100rem] mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="font-heading text-sm text-primary mb-2 block">Método de aplicación</label>
-            <select
-              value={selectedApplicationMethod}
-              onChange={(e) => setSelectedApplicationMethod(e.target.value)}
-              className="w-full px-4 py-2 border border-buttonborder rounded-lg font-paragraph text-sm"
-            >
-              <option value="all">Todos</option>
-              {Object.keys(APPLICATION_ALIAS_MAP).map(method => (
-                <option key={method} value={method}>{method}</option>
-              ))}
-            </select>
+            <motion.div className="justify-self-end md:max-w-sm" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}><div className="border-l border-primary-foreground/30 pl-6"><p className="text-6xl font-heading md:text-8xl">05</p><p className="mt-2 text-sm uppercase tracking-[0.2em] text-primary-foreground/60">familias de aplicación</p><p className="mt-8 text-3xl font-heading">Una selección pensada para profesionales.</p></div></motion.div>
           </div>
+        </section>
 
-          <div>
-            <label className="font-heading text-sm text-primary mb-2 block">Largo (pulgadas)</label>
-            <select
-              value={selectedLength}
-              onChange={(e) => setSelectedLength(e.target.value)}
-              className="w-full px-4 py-2 border border-buttonborder rounded-lg font-paragraph text-sm"
-            >
-              {lengths.map(length => (
-                <option key={length} value={length}>
-                  {length === 'all' ? 'Todos' : `${length}"`}
-                </option>
-              ))}
-            </select>
-          </div>
+        <section className="border-b border-primary/10 bg-background px-6 py-10 md:px-16 lg:px-24"><div className="mx-auto grid max-w-[120rem] gap-4 md:grid-cols-3"><div className="flex items-center gap-4 border-l-2 border-primary px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">01</span><span className="font-heading text-xl">Elige el sistema</span></div><div className="flex items-center gap-4 border-l-2 border-primary/30 px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">02</span><span className="font-heading text-xl">Define el largo</span></div><div className="flex items-center gap-4 border-l-2 border-primary/15 px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">03</span><span className="font-heading text-xl">Ajusta el color</span></div></div></section>
 
-          <div>
-            <label className="font-heading text-sm text-primary mb-2 block">Color</label>
-            <select
-              value={selectedColor}
-              onChange={(e) => setSelectedColor(e.target.value)}
-              className="w-full px-4 py-2 border border-buttonborder rounded-lg font-paragraph text-sm"
-            >
-              {colors.map(color => (
-                <option key={color} value={color}>
-                  {color === 'all' ? 'Todos' : color}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </section>
+        <section id="sistemas" className="mx-auto max-w-[120rem] px-6 py-20 md:px-16 md:py-28 lg:px-24"><div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary/50">Mapa de selección</p><h2 className="max-w-3xl font-heading text-4xl leading-tight md:text-6xl">Cinco maneras de construir una mejor experiencia.</h2></div><p className="max-w-md text-base leading-relaxed text-primary/65">No todas las extensiones resuelven lo mismo. Compara el punto de unión, la rutina de mantenimiento y el acabado que busca tu cliente.</p></div>
+          <div className="space-y-20">{CATEGORY_SECTIONS.map((section, index) => { const items = collectProducts(section.keys); return <motion.article key={section.key} className={
+            'grid gap-10 border-t border-primary/15 pt-8 md:grid-cols-[0.32fr_0.68fr] md:gap-16 ' + (index % 2 === 1 ? 'md:[&>div:first-child]:order-2' : '')
+          } initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
+            <div className="flex flex-col justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/45">{section.eyebrow}</p><h3 className="mt-5 font-heading text-4xl leading-none md:text-5xl">{section.title}</h3><p className="mt-6 max-w-md text-base leading-relaxed text-primary/70">{section.copy}</p><p className="mt-6 text-sm font-semibold leading-relaxed text-primary/55">{section.detail}</p></div><Link to={section.application === 'all' ? '/products' :               `/products?application=${encodeURIComponent(section.application)}`            } className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Ver categoría <ArrowRight className="h-4 w-4" /></Link></div>
+            <div><div className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10"><Image src={section.image} alt={section.title} width={1200} height={520} className="h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]" /><div className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]">{String(index + 1).padStart(2, '0')} / 05</div></div><div className="grid gap-4 sm:grid-cols-3">{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link key={product._id} to={product._id === section.key ? '/contact' : `/products/${product._id}`} className="group border-t border-primary/15 pt-4"><div className="mb-4 overflow-hidden rounded-xl bg-primary/5"><Image src={product.itemImage || section.image} alt={product.itemName || section.title} width={500} height={360} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" /></div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-primary/45">{product.length ? product.length + '"' : product.color || 'LUX HAIR'}</p><h4 className="mt-2 font-heading text-lg leading-tight">{product.itemName || section.title}</h4><span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold">Ver ficha <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link>)}</div></div>
+          </motion.article>})}</div>
+        </section>
 
-      {/* Products by Category */}
-      <section className="w-full max-w-[100rem] mx-auto px-4 py-16">
-        {Object.entries(groupedProducts).map(([category, categoryProducts]) => (
-          <motion.div
-            key={category}
-            className="mb-20"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-8">
-              <h3 className="font-heading text-3xl text-primary mb-4">{category}</h3>
-              {CATEGORY_DETAILS[category] && (
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-sm">
-                  <div>
-                    <p className="font-heading text-primary">Sistema</p>
-                    <p className="font-paragraph text-secondary/70">{CATEGORY_DETAILS[category].sistema}</p>
-                  </div>
-                  <div>
-                    <p className="font-heading text-primary">Aplicación</p>
-                    <p className="font-paragraph text-secondary/70">{CATEGORY_DETAILS[category].aplicacion}</p>
-                  </div>
-                  <div>
-                    <p className="font-heading text-primary">Punto de unión</p>
-                    <p className="font-paragraph text-secondary/70">{CATEGORY_DETAILS[category].union}</p>
-                  </div>
-                  <div>
-                    <p className="font-heading text-primary">Uso ideal</p>
-                    <p className="font-paragraph text-secondary/70">{CATEGORY_DETAILS[category].ideal}</p>
-                  </div>
-                  <div>
-                    <p className="font-heading text-primary">Mantenimiento</p>
-                    <p className="font-paragraph text-secondary/70">{CATEGORY_DETAILS[category].mantenimiento}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+        <section className="bg-primary px-6 py-20 text-primary-foreground md:px-16 md:py-28 lg:px-24"><div className="mx-auto max-w-[120rem]"><div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary-foreground/55">Decisión de salón</p><h2 className="font-heading text-4xl leading-tight md:text-6xl">Compara antes de recomendar.</h2></div><p className="max-w-xl text-base leading-relaxed text-primary-foreground/70">Una guía rápida para alinear el sistema con el estilo de vida, el volumen y la rutina de mantenimiento de cada cliente.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-primary-foreground/20 bg-primary-foreground/15 md:grid-cols-5">{['Sistema','Aplicación','Unión','Uso ideal','Mantenimiento'].map(label => <div key={label} className="bg-primary px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">{label}</div>)}{COMPARISON_DATA.map(row => <React.Fragment key={row.sistema}><div className="bg-background px-5 py-5 font-heading text-lg text-primary">{row.sistema}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.aplicacion}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.union}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.ideal}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.mantenimiento}</div></React.Fragment>)}</div></div></section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categoryProducts.slice(0, 6).map((product, idx) => (
-                <motion.div
-                  key={product._id}
-                  className="group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -8 }}
-                >
-                  <Link to={`/products/${product._id}`} className="block">
-                    <div className="relative overflow-hidden rounded-2xl mb-4 h-64 md:h-72">
-                      {/* Layered rounded image */}
-                      <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                        <Image
-                          src={product.itemImage || 'https://static.wixstatic.com/media/37e681_d251183a168b4faab31a53ff7f91a2d6~mv2.png?originWidth=384&originHeight=256'}
-                          alt={product.itemName || 'Producto'}
-                          width={400}
-                          height={300}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      </div>
+        <section className="mx-auto max-w-[120rem] px-6 py-20 md:px-16 lg:px-24"><div className="flex flex-col gap-8 rounded-[2rem] bg-primary/5 p-8 md:flex-row md:items-center md:justify-between md:p-12"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/50">Filtro profesional</p><h2 className="mt-3 font-heading text-3xl md:text-4xl">Encuentra una referencia concreta.</h2><p className="mt-3 max-w-xl text-primary/65">Filtra por método, largo y color sin perder la vista general del catálogo.</p></div><div className="grid w-full gap-3 md:max-w-2xl md:grid-cols-3"><select aria-label="Método de aplicación" value={selectedApplicationMethod} onChange={(e) => setSelectedApplicationMethod(e.target.value)} className="rounded-full border border-primary/20 bg-background px-4 py-3 text-sm"><option value="all">Todos los métodos</option>{Object.keys(APPLICATION_ALIAS_MAP).map(method => <option key={method} value={method}>{method}</option>)}</select><select aria-label="Largo" value={selectedLength} onChange={(e) => setSelectedLength(e.target.value)} className="rounded-full border border-primary/20 bg-background px-4 py-3 text-sm"><option value="all">Todos los largos</option>{lengths.filter(length => length !== 'all').map(length => <option key={length} value={length}>{length}"</option>)}</select><select aria-label="Color" value={selectedColor} onChange={(e) => setSelectedColor(e.target.value)} className="rounded-full border border-primary/20 bg-background px-4 py-3 text-sm"><option value="all">Todos los colores</option>{colors.filter(color => color !== 'all').map(color => <option key={color} value={color}>{color}</option>)}</select></div></div></section>
 
-                      {/* Floating label overlay */}
-                      <motion.div
-                        className="absolute top-4 right-4 bg-primary text-white px-4 py-2 rounded-full"
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      >
-                        <span className="font-heading text-sm">{product.length}"</span>
-                      </motion.div>
-
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-
-                    <div className="space-y-3">
-                      <h4 className="font-heading text-lg text-primary line-clamp-2">
-                        {product.itemName}
-                      </h4>
-                      <p className="font-paragraph text-sm text-secondary/70 line-clamp-2">
-                        {product.itemDescription}
-                      </p>
-                      <div className="flex items-center justify-between pt-2">
-                        <span className="font-heading text-xl text-primary">
-                          {formatPrice(product.itemPrice || 0, currency ?? DEFAULT_CURRENCY)}
-                        </span>
-                        <motion.div
-                          className="text-primary"
-                          whileHover={{ x: 4 }}
-                        >
-                          <ArrowRight size={20} />
-                        </motion.div>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {categoryProducts.length > 6 && (
-              <motion.div
-                className="mt-8 text-center"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <button className="px-8 py-3 bg-primary text-white rounded-lg font-heading hover:bg-secondary transition-colors">
-                  Ver más en {category}
-                </button>
-              </motion.div>
-            )}
-          </motion.div>
-        ))}
-      </section>
-
-      {/* Load More */}
-      {hasNext && (
-        <motion.div
-          className="w-full max-w-[100rem] mx-auto px-4 py-8 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <button
-            onClick={loadMore}
-            disabled={isLoading}
-            className="px-8 py-3 bg-primary text-white rounded-lg font-heading hover:bg-secondary transition-colors disabled:opacity-50"
-          >
-            {isLoading ? 'Cargando...' : 'Cargar más productos'}
-          </button>
-        </motion.div>
-      )}
-
+        {isLoading && <div className="px-6 pb-12 text-center text-sm text-primary/55">Cargando referencias...</div>}
+      </main>
       <Footer />
     </div>
   );
