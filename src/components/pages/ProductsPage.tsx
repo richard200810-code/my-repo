@@ -4,7 +4,7 @@ import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { motion } from 'framer-motion';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
