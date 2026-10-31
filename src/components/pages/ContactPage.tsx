@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Mail, Phone, MapPin, Send, AlertCircle } from 'lucide-react';
-import { BaseCrudService } from '@/integrations';
+import Header from '@/components/Header';
 import { Customers } from '@/entities';
+import { BaseCrudService } from '@/integrations';
+import { motion } from 'framer-motion';
+import { AlertCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { useState } from 'react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ export default function ContactPage() {
 
     try {
       const submissionTime = new Date();
-      
+
       // 1. Save to customers collection
       const customerData: Customers = {
         _id: crypto.randomUUID(),
@@ -34,7 +34,7 @@ export default function ContactPage() {
         contactPerson: formData.name,
         email: formData.email,
         phoneNumber: formData.phone,
-        notes: formData.message,
+        notes: [formData.message, `Tipo de negocio: ${formData.businessType}`, `Cómo podemos ayudarte: ${formData.helpOptions.join(', ')}`].filter(Boolean).join('\n'),
         businessType: formData.businessType,
         helpOptions: formData.helpOptions.join(', '),
         source: 'Contact Form',
@@ -65,11 +65,11 @@ export default function ContactPage() {
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(
-        error instanceof Error 
-          ? error.message 
+        error instanceof Error
+          ? error.message
           : 'Error al enviar el formulario. Por favor, intenta de nuevo.'
       );
-      
+
       // Reset error after 5 seconds
       setTimeout(() => setSubmitError(null), 5000);
     } finally {
