@@ -91,6 +91,7 @@ function KnowledgeSection() {
             <p className="mt-3 font-paragraph leading-relaxed text-primary/75">{article.summary}</p>
             <span className="mt-5 inline-block text-sm font-semibold text-primary">Leer guía →</span>
           </a>)}
+          <a href="#como-elegir-extensiones" className="rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 hover:bg-primary/[0.08]"><span className="text-xs uppercase tracking-widest text-primary/60">Guía 04</span><h3 className="mt-4 font-heading text-2xl text-primary">Cómo elegir extensiones de cabello</h3><p className="mt-3 font-paragraph leading-relaxed text-primary/75">Encuentra la opción adecuada para ti: objetivo, método, color y rutina.</p><span className="mt-5 inline-block text-sm font-semibold text-primary">Leer guía →</span></a>
         </nav>
         <div className="space-y-16">
           {KNOWLEDGE_ARTICLES.map((article, index) => <article key={article.id} id={article.id} className="scroll-mt-24 border-t border-primary/15 pt-10">
@@ -112,8 +113,35 @@ function KnowledgeSection() {
             <details className="mt-6 rounded-xl border border-primary/15 p-5"><summary className="cursor-pointer font-paragraph font-semibold text-primary">Fuentes y referencias educativas</summary><ul className="mt-4 space-y-3">{article.sources.map(([label,url]) => <li key={url}><a href={url} target="_blank" rel="noopener noreferrer" className="break-words font-paragraph text-sm text-primary underline underline-offset-4">{label} ↗</a></li>)}</ul></details>
             <div className="mt-6 flex flex-wrap gap-5 text-sm text-primary"><a href={'#'+KNOWLEDGE_ARTICLES[(index + 1) % KNOWLEDGE_ARTICLES.length].id} className="underline underline-offset-4">{'Siguiente: '+KNOWLEDGE_ARTICLES[(index + 1) % KNOWLEDGE_ARTICLES.length].title}</a><a href="#knowledge" className="underline underline-offset-4">Volver a Knowledge ↑</a></div>
           </article>)}
+          <ChoiceGuide />
         </div>
       </div>
     </section>
   );
+}
+
+// Original LUX Hair editorial illustrations: schematic, not installation instructions.
+function ChoiceSketch({kind}: {kind: number}) {
+  return <svg viewBox="0 0 480 220" role="img" aria-label={['Definir largo y volumen en consulta','Cuatro familias de fijación: cinta, cortina, unión y anillo','Comparar tonos y texturas bajo la misma luz','Organizar una rutina de cuidado y revisión'][kind]} className="w-full rounded-xl bg-[#f5f0e8]" fill="none" stroke="#493b30" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    {kind === 0 && <><path d="M100 70a25 25 0 1 0 50 0a25 25 0 1 0-50 0M80 170v-30q0-35 45-35t45 35v30M280 65a25 25 0 1 0 50 0a25 25 0 1 0-50 0M260 170v-30q0-35 45-35t45 35v30"/><path d="M170 65h60v40h-25l-15 15v-15h-20zM350 60v110m-8-95h16m-16 25h16m-16 25h16m-16 25h16" stroke="#a68a58"/></>}
+    {kind === 1 && <>{[60,180,300,420].map((x,i)=><g key={x}><path d={`M${x-22} 45h44M${x-16} 80q-10 50 0 90M${x} 80q-8 50 0 90M${x+16} 80q-6 50 0 90`}/>{i===0?<rect x={x-27} y="58" width="54" height="20" rx="4" fill="#cbb78f"/>:i===1?<path d={`M${x-30} 63q15 22 30 0q15 22 30 0`} stroke="#a68a58"/>:i===2?<path d={`M${x-12} 58h24l-5 22h-14z`} fill="#cbb78f"/>:<ellipse cx={x} cy="68" rx="13" ry="10" fill="#cbb78f"/>}<text x={x} y="198" textAnchor="middle" fill="#493b30" stroke="none" fontSize="14">{['Tape','Weft','Unión','Anillo'][i]}</text></g>)}</>}
+    {kind === 2 && <>{['#3b2a22','#79523b','#b59064','#d9bc85'].map((c,i)=><g key={c}><path d={`M${95+i*90} 55v105`} stroke={c} strokeWidth="30"/><path d={`M${85+i*90} 55q-12 32 0 52t0 53`} stroke="#f5f0e8" strokeWidth="2"/></g>)}<path d="M60 185h360" stroke="#a68a58"/></>}
+    {kind === 3 && <><rect x="65" y="55" width="120" height="115" rx="10"/><path d="M65 85h120M95 40v30M155 40v30M90 110l8 8 15-18M135 110h30M90 145l8 8 15-18M135 145h30" stroke="#a68a58"/><path d="M280 55h65v65h-65zM291 120v48h43v-48M288 65v40m12-40v40m12-40v40m12-40v40m12-40v40"/></>}
+  </svg>;
+}
+function ChoiceGuide() {
+  const blocks = [
+    {title:'1. Define el resultado que buscas',kind:0,caption:'Consulta: acuerda el largo y el volumen antes de elegir.',paragraphs:['Elegir extensiones no consiste únicamente en añadir largo. Piensa qué te gustaría conseguir: más volumen, mayor longitud o una transformación más visible. Decide si buscas un acabado discreto o con más presencia.','La cantidad de cabello debe guardar proporción con tu cabello natural y con el resultado deseado. Pide a un profesional que valore el peso, la distribución y la cantidad apropiadas para tu caso.']},
+    {title:'2. Compara los métodos de colocación',kind:1,caption:'Esquema de fijaciones: cinta, cortina, unión y anillo. No es una guía de autoaplicación.',paragraphs:['Entre las opciones puedes encontrar Tape-In, cortinas o wefts, mechones con unión de queratina, microanillos y opciones temporales como Clip-In o coletas. Cada familia tiene requisitos distintos de colocación, retiro y mantenimiento.','Confirma qué técnica corresponde al producto elegido y si requiere aplicación profesional. El nombre de la punta, por sí solo, no confirma la herramienta ni la compatibilidad. Consulta también nuestra guía de métodos de colocación.']},
+    {title:'3. Busca una combinación natural de color y textura',kind:2,caption:'Compara las muestras bajo la misma luz; los tonos dibujados son ilustrativos, no una carta de color.',paragraphs:['Compara el tono de las extensiones con el de tu cabello con buena iluminación. Si tu color tiene luces y varios matices, valora con tu estilista si conviene combinar tonos.','Considera cómo cae tu cabello seco y con su acabado habitual —liso, ondulado o rizado— para elegir una textura que se integre. La pantalla no sustituye una muestra física ni una valoración de color.']},
+    {title:'4. Ten en cuenta tu rutina y planifica el cuidado',kind:3,caption:'Rutina y calendario: cuida el cabello y acuerda una revisión según tu sistema.',paragraphs:['Piensa cuánto tiempo dedicas al peinado, si llevas el cabello recogido, haces ejercicio o nadas. Si frecuentas la piscina o el mar, coméntalo antes de elegir y pide instrucciones para el producto concreto.','Desenreda con suavidad desde las puntas hacia arriba, evita tirones y sigue las indicaciones de calor y cuidado de la fijación. Consulta cómo preparar el cabello antes de dormir.','El calendario depende del método, del crecimiento y del estado del cabello. Acuerda cuándo revisar, ajustar o retirar las extensiones; no hay un único intervalo para todos los sistemas. Si la colocación provoca dolor o tensión persistente, solicita una revisión.']}
+  ];
+  return <article id="como-elegir-extensiones" className="scroll-mt-24 border-t border-primary/15 pt-10">
+    <p className="text-xs uppercase tracking-widest text-primary/60">Knowledge · 04</p>
+    <h3 className="mt-3 max-w-4xl font-heading text-3xl leading-tight text-primary md:text-4xl">Cómo elegir extensiones de cabello: encuentra la opción adecuada para ti</h3>
+    <p className="my-6 max-w-4xl font-paragraph leading-relaxed text-primary/80">Elige con una idea clara del resultado, una referencia de tu color y textura, y un plan compatible con tu vida diaria. Esta guía te ayuda a preparar la conversación con tu estilista.</p>
+    <div className="grid gap-10 lg:grid-cols-2">{blocks.map(b=><section key={b.title} className="min-w-0"><h4 className="mb-5 font-heading text-2xl text-primary">{b.title}</h4><figure><ChoiceSketch kind={b.kind}/><figcaption className="mt-3 text-sm leading-relaxed text-primary/65">{b.caption}</figcaption></figure>{b.paragraphs.map(p=><p key={p} className="mt-4 font-paragraph leading-relaxed text-primary/80">{p}</p>)}</section>)}</div>
+    <aside className="mt-8 rounded-xl border border-primary/15 bg-primary/[0.035] p-6"><h4 className="font-heading text-2xl text-primary">Antes de decidir</h4><p className="mt-4 font-paragraph leading-relaxed text-primary/80">Lleva a tu consulta una idea del largo y volumen deseados, una referencia de tu tono y textura, y una descripción de tu rutina. Pregunta por colocación, cuidados, mantenimiento y retiro. Confirma siempre las instrucciones de la referencia que realmente vas a usar.</p></aside>
+    <div className="mt-6 flex flex-wrap gap-5 text-sm text-primary"><a href="#metodos-de-colocacion-de-extensiones" className="underline underline-offset-4">Comparar métodos de colocación →</a><a href="#duracion-y-mantenimiento-de-extensiones" className="underline underline-offset-4">Planificar el mantenimiento →</a><a href="#knowledge" className="underline underline-offset-4">Volver a Knowledge ↑</a></div>
+  </article>;
 }
