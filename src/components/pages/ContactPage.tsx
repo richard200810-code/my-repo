@@ -23,7 +23,7 @@ export default function ContactPage() {
     setSubmitError(null);
 
     try {
-      // Send form data using Wix Forms API (native email flow)
+      // Send form data to backend API
       const response = await fetch('/api/contact-form', {
         method: 'POST',
         headers: {
@@ -35,15 +35,14 @@ export default function ContactPage() {
           phone: formData.phone,
           message: formData.message,
           businessType: formData.businessType,
-          helpOptions: formData.helpOptions.join(', '),
-          // Additional metadata for email notification
-          submittedAt: new Date().toISOString(),
-          recipientEmail: 'richard200810@gmail.com',
+          helpOptions: formData.helpOptions,
         }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Error al enviar el formulario. Por favor, intenta de nuevo.');
+        throw new Error(data.error || 'Error al enviar el formulario. Por favor, intenta de nuevo.');
       }
 
       setSubmitSuccess(true);

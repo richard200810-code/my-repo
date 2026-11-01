@@ -4,6 +4,31 @@
  */
 
 /**
+ * Collection ID: contactsubmissions
+ * Interface for ContactSubmissions
+ */
+export interface ContactSubmissions {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  fullName?: string;
+  /** @wixFieldType text */
+  email?: string;
+  /** @wixFieldType text */
+  phoneNumber?: string;
+  /** @wixFieldType text */
+  businessType?: string;
+  /** @wixFieldType text */
+  helpOptions?: string;
+  /** @wixFieldType text */
+  message?: string;
+  /** @wixFieldType datetime */
+  submissionDate?: Date | string;
+}
+
+
+/**
  * Collection ID: customers
  * Interface for Customers
  */
