@@ -1,7 +1,5 @@
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { Customers } from '@/entities';
-import { BaseCrudService } from '@/integrations';
 import { motion } from 'framer-motion';
 import { AlertCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useState } from 'react';
@@ -25,37 +23,28 @@ export default function ContactPage() {
     setSubmitError(null);
 
     try {
-      const submissionTime = new Date();
+      // Send form data using Wix Forms API (native email flow)
+      const response = await fetch('/api/contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          businessType: formData.businessType,
+          helpOptions: formData.helpOptions.join(', '),
+          // Additional metadata for email notification
+          submittedAt: new Date().toISOString(),
+          recipientEmail: 'richard200810@gmail.com',
+        }),
+      });
 
-      // 1. Save to customers collection
-      const customerData: Customers = {
-        _id: crypto.randomUUID(),
-        companyName: 'Contact Form Submission',
-        contactPerson: formData.name,
-        email: formData.email,
-        phoneNumber: formData.phone,
-        notes: [formData.message, `Tipo de negocio: ${formData.businessType}`, `Cómo podemos ayudarte: ${formData.helpOptions.join(', ')}`].filter(Boolean).join('\n'),
-        businessType: formData.businessType,
-        helpOptions: formData.helpOptions.join(', '),
-        source: 'Contact Form',
-        customerType: 'Lead',
-        salesStage: 'New Inquiry',
-        createdBy: 'Contact Form',
-        _createdDate: submissionTime,
-      };
-
-      await BaseCrudService.create<Customers>('customers', customerData);
-
-      // 2. Send email notification to Richard200810@gmail.com
-      // Using Wix Automations: This would be triggered by a database event
-      // The automation should be configured in Wix Dashboard to:
-      // - Listen for new items in 'customers' collection
-      // - Send email to Richard200810@gmail.com with form details
-      // See IMPLEMENTATION NOTES below for setup instructions
-
-      // 3. Send WhatsApp notification to +52 55 3955 5886
-      // This requires Wix WhatsApp Business integration
-      // See IMPLEMENTATION NOTES below for setup instructions
+      if (!response.ok) {
+        throw new Error('Error al enviar el formulario. Por favor, intenta de nuevo.');
+      }
 
       setSubmitSuccess(true);
       setFormData({ name: '', email: '', phone: '', message: '', businessType: '', helpOptions: [] });
