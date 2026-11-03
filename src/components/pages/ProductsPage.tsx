@@ -234,7 +234,7 @@ export default function ProductsPage() {
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-primary-foreground/75 md:text-xl">Una vista completa de nuestros sistemas de extensión para que el salón pueda comparar aplicación, integración y mantenimiento antes de elegir.</p>
               <div className="mt-10 flex flex-wrap gap-4"><a href="#sistemas" className="rounded-full bg-background px-6 py-3 text-sm font-semibold text-primary transition-transform hover:-translate-y-1">Explorar sistemas</a><Link to="/contact" className="rounded-full border border-primary-foreground/40 px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10">Hablar con un asesor</Link></div>
             </motion.div>
-            <motion.div className="justify-self-end md:max-w-sm" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>tipos de</motion.div>
+            <motion.div className="justify-self-end md:max-w-sm" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>APLICACIONES DE EXTENSIONES</motion.div>
           </div>
         </section>
 
