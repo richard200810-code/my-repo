@@ -224,7 +224,6 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-background text-primary">
       <Header />
-
       <main>
         <section className="relative isolate overflow-hidden bg-primary text-primary-foreground">
           <div className="absolute inset-0 -z-10"><Image src="https://static.wixstatic.com/media/37e681_c59916f2ea464b55a7f07601f820b544~mv2.png?originWidth=576&originHeight=448" alt="Cabello humano LUX HAIR" width={1600} height={900} className="h-full w-full object-cover opacity-45" /><div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/30" /></div>
@@ -235,7 +234,7 @@ export default function ProductsPage() {
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-primary-foreground/75 md:text-xl">Una vista completa de nuestros sistemas de extensión para que el salón pueda comparar aplicación, integración y mantenimiento antes de elegir.</p>
               <div className="mt-10 flex flex-wrap gap-4"><a href="#sistemas" className="rounded-full bg-background px-6 py-3 text-sm font-semibold text-primary transition-transform hover:-translate-y-1">Explorar sistemas</a><Link to="/contact" className="rounded-full border border-primary-foreground/40 px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10">Hablar con un asesor</Link></div>
             </motion.div>
-            <motion.div className="justify-self-end md:max-w-sm" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}><div className="border-l border-primary-foreground/30 pl-6"><p className="text-6xl font-heading md:text-8xl">34</p><p className="mt-2 text-sm uppercase tracking-[0.2em] text-primary-foreground/60">tipos de producto</p><p className="mt-8 text-3xl font-heading">Una selección pensada para profesionales.</p></div></motion.div>
+            <motion.div className="justify-self-end md:max-w-sm" initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>tipos de</motion.div>
           </div>
         </section>
 
