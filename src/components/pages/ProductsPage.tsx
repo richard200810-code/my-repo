@@ -167,7 +167,7 @@ export default function ProductsPage() {
   };
 
   const CATEGORY_CARDS = [
-    ['Extensiones Genius Weft', 'Genius Weft', 'https://static.wixstatic.com/media/37e681_425359dee0394c43a1e81722cecb231f~mv2.png?originWidth=192&originHeight=192'],
+    ['Extensiones Genius Weft', 'Genius Weft', 'https://static.wixstatic.com/media/37e681_cda21b5817604751be39feb53ac2c2c6~mv2.png'],
     ['Extensiones Hand Tied Weft', 'Hand Tied Weft', 'https://static.wixstatic.com/media/37e681_f673605ffb4e4ccaa90f195532411dea~mv2.png?originWidth=192&originHeight=192'],
     ['Extensiones Flat Weft', 'Flat Weft', 'https://static.wixstatic.com/media/37e681_f441944f0604442da9a9000439a4f34b~mv2.png?originWidth=192&originHeight=192'],
     ['Extensiones Machine Weft', 'Machine Weft', 'https://static.wixstatic.com/media/37e681_3ef9d05378f642f6903f2f3bcd06d068~mv2.png?originWidth=192&originHeight=192'],
