@@ -1,5 +1,4 @@
-// Featured first: tape extension pliers.
-// import Footer from '@/components/Footer';
+// Featured first: tape extension pliers.import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { motion } from 'framer-motion';
