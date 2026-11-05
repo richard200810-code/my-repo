@@ -7,6 +7,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const toolProducts = [
+  {"id":"40","name":"Pinza para extensiones de cinta adhesiva","categories":["Instalación","Tape-In"],"image":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp","imageHover":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp"},
   {"id":"1","name":"Soporte acrílico para extensiones de cabello","categories":["Instalación"],"image":"https://static.wixstatic.com/media/f08e6d_10244c1e989d4a1c9ead7c2e74f19560~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_10244c1e989d4a1c9ead7c2e74f19560~mv2.jpg"},
   {"id":"2","name":"Pinza profesional para extensiones de cabello","categories":["Herramientas"],"image":"https://static.wixstatic.com/media/f08e6d_e4f8650d65f24477a4ef2b4ec9ef0409~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_e4f8650d65f24477a4ef2b4ec9ef0409~mv2.jpg"},
   {"id":"3","name":"Kit profesional de herramientas para extensiones","categories":["Kits"],"image":"https://static.wixstatic.com/media/f08e6d_3e403ec619cb41f3879631e084eed92f~mv2.png","imageHover":"https://static.wixstatic.com/media/f08e6d_3e403ec619cb41f3879631e084eed92f~mv2.png"},
@@ -46,7 +47,6 @@ const toolProducts = [
   {"id":"37","name":"Discos protectores térmicos largos para el cuero cabelludo","categories":["Protección"],"image":"https://static.wixstatic.com/media/f08e6d_6f3cfb22d66b4b4bac5260fb42eb8660~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_6f3cfb22d66b4b4bac5260fb42eb8660~mv2.jpg"},
   {"id":"38","name":"Base de madera con agujas curvas para separar cabello","categories":["Herramientas"],"image":"https://static.wixstatic.com/media/f08e6d_2b828460d0c045ff8a278e7b6c3c95d2~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_2b828460d0c045ff8a278e7b6c3c95d2~mv2.jpg"},
   {"id":"39","name":"Máquina para extensiones 6D","categories":["Máquinas"],"image":"https://static.wixstatic.com/media/f08e6d_f5b68eaff08a41ee87f1c1700e71c90f~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_f5b68eaff08a41ee87f1c1700e71c90f~mv2.jpg"},
-  {"id":"40","name":"Pinza para extensiones de cinta adhesiva","categories":["Instalación","Tape-In"],"image":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp","imageHover":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp"},
 ];
 
 const categories = ['Todos', 'Instalación', 'Herramientas', 'Kits', 'Cuentas', 'Materiales', 'Tape-In', 'K-Tip', 'Weft', 'I-Tip', 'Nano', 'Clips', 'Color', 'Protección', 'Máquinas'];
