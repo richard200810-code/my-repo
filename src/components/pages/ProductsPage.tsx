@@ -241,12 +241,57 @@ export default function ProductsPage() {
         <section className="border-b border-primary/10 bg-background px-6 py-10 md:px-16 lg:px-24"><div className="mx-auto grid max-w-[120rem] gap-4 md:grid-cols-3"><div className="flex items-center gap-4 border-l-2 border-primary px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">01</span><span className="font-heading text-xl">Elige el tipo de producto</span></div><div className="flex items-center gap-4 border-l-2 border-primary/30 px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">02</span><span className="font-heading text-xl">Define el largo</span></div><div className="flex items-center gap-4 border-l-2 border-primary/15 px-5 py-3"><span className="text-xs font-semibold tracking-[0.2em] text-primary/45">03</span><span className="font-heading text-xl">Ajusta el color</span></div></div></section>
 
         <section id="sistemas" className="mx-auto max-w-[120rem] px-6 py-20 md:px-16 md:py-28 lg:px-24"><div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary/50">Mapa de selección</p><h2 className="max-w-3xl font-heading text-4xl leading-tight md:text-6xl">Seis familias de construcción profesional.</h2></div><p className="max-w-md text-base leading-relaxed text-primary/65">Cada familia ofrece una solución diferente. Compara el punto de unión, la rutina de mantenimiento y el acabado que busca tu cliente.</p></div>
-          <div className="space-y-20">{CATEGORY_SECTIONS.map((section, index) => { const items = collectProducts(section.keys); const subtypes = parseSubtypes(section.detail); return <motion.article key={section.key} className={
-            'grid gap-10 border-t border-primary/15 pt-8 md:grid-cols-[0.32fr_0.68fr] md:gap-16 ' + (index % 2 === 1 ? 'md:[&>div:first-child]:order-2' : '')
-          } initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
-            <div className="flex flex-col justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/45">{section.eyebrow}</p><h3 className="mt-5 font-heading text-4xl leading-none md:text-5xl">{section.title}</h3><p className="mt-6 max-w-md text-base leading-relaxed text-primary/70">{section.copy}</p><div className="mt-6 flex flex-wrap gap-2">{subtypes.map((subtype, idx) => <span key={idx} className="inline-block rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">{subtype}</span>)}</div></div><Link to={section.application === 'all' ? '/products' :               `/products?application=${encodeURIComponent(section.application)}`            } className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Ver categoría <ArrowRight className="h-4 w-4" /></Link></div>
-            <div><div className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10"><Image src={section.image} alt={section.title} width={1200} height={520} className="h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]" /><div className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]">{String(index + 1).padStart(2, '0')} / 06</div></div><div className="grid gap-4 sm:grid-cols-3">{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link key={product._id} to={product._id === section.key ? '/contact' : `/products/${product._id}`} className="group border-t border-primary/15 pt-4"><div className="mb-4 overflow-hidden rounded-xl bg-primary/5"><Image src={product.itemImage || section.image} alt={product.itemName || section.title} width={500} height={360} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" /></div><p className="text-xs font-semibold uppercase tracking-[0.15em] text-primary/45">{product.length ? product.length + '"' : product.color || 'LUX HAIR'}</p><h4 className="mt-2 font-heading text-lg leading-tight">{product.itemName || section.title}</h4><span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold">Ver ficha <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span></Link>)}</div></div>
-          </motion.article>})}</div>
+          <div className="space-y-20">{CATEGORY_SECTIONS.map((section, index) => { const items = collectProducts(section.keys); const subtypes = parseSubtypes(section.detail); return (
+            <motion.article key={section.key} className={
+              'grid gap-10 border-t border-primary/15 pt-8 md:grid-cols-[0.32fr_0.68fr] md:gap-16 ' + (index % 2 === 1 ? 'md:[&>div:first-child]:order-2' : '')
+            } initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
+              <div className="flex flex-col justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/45">{section.eyebrow}</p><h3 className="mt-5 font-heading text-4xl leading-none md:text-5xl">{section.title}</h3><p className="mt-6 max-w-md text-base leading-relaxed text-primary/70">{section.copy}</p><div className="mt-6 flex flex-wrap gap-2">{subtypes.map((subtype, idx) => <span key={idx} className="inline-block rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">{subtype}</span>)}</div></div><Link to={section.application === 'all' ? '/products' :               `/products?application=${encodeURIComponent(section.application)}`            } className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Ver categoría <ArrowRight className="h-4 w-4" /></Link></div>
+              <div focalPointX={72.48995983935743} focalPointY={27.710843373493976}><div
+                className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}><Image
+                src={section.image}
+                alt={section.title}
+                width={1200}
+                height={520}
+                className="h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]"
+                focalPointX={59.63855421686747}
+                focalPointY={44.57831325301205} /><div
+                className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}>{String(index + 1).padStart(2, '0')} / 06</div></div><div
+                className="grid gap-4 sm:grid-cols-3"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
+                key={product._id}
+                to={product._id === section.key ? '/contact' : `/products/${product._id}`}
+                className="group border-t border-primary/15 pt-4"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}><div
+                className="mb-4 overflow-hidden rounded-xl bg-primary/5"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}><Image
+                src={product.itemImage || section.image}
+                alt={product.itemName || section.title}
+                width={500}
+                height={360}
+                className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976} /></div><p
+                className="text-xs font-semibold uppercase tracking-[0.15em] text-primary/45"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}>{product.length ? product.length + '"' : product.color || 'LUX HAIR'}</p><h4
+                className="mt-2 font-heading text-lg leading-tight"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}>{product.itemName || section.title}</h4><span
+                className="mt-3 inline-flex items-center gap-2 text-sm font-semibold"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976}>Ver ficha <ArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                focalPointX={72.48995983935743}
+                focalPointY={27.710843373493976} /></span></Link>)}</div></div>
+            </motion.article>
+          );})}</div>
         </section>
 
         <section className="bg-primary px-6 py-20 text-primary-foreground md:px-16 md:py-28 lg:px-24"><div className="mx-auto max-w-[120rem]"><div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary-foreground/55">Decisión de salón</p><h2 className="font-heading text-4xl leading-tight md:text-6xl">Compara antes de recomendar.</h2></div><p className="max-w-xl text-base leading-relaxed text-primary-foreground/70">Una guía rápida para alinear el sistema con el estilo de vida, el volumen y la rutina de mantenimiento de cada cliente.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-primary-foreground/20 bg-primary-foreground/15 md:grid-cols-5">{['Sistema','Aplicación','Unión','Uso ideal','Mantenimiento'].map(label => <div key={label} className="bg-primary px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">{label}</div>)}{COMPARISON_DATA.map(row => <React.Fragment key={row.sistema}><div className="bg-background px-5 py-5 font-heading text-lg text-primary">{row.sistema}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.aplicacion}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.union}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.ideal}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.mantenimiento}</div></React.Fragment>)}</div></div></section>
