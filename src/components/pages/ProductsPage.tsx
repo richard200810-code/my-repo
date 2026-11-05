@@ -255,8 +255,8 @@ export default function ProductsPage() {
                 width={1200}
                 height={520}
                 className="h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]"
-                focalPointX={59.63855421686747}
-                focalPointY={44.57831325301205} /><div
+                focalPointX={91.76706827309236}
+                focalPointY={13.855421686746988} /><div
                 className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}>{String(index + 1).padStart(2, '0')} / 06</div></div><div
