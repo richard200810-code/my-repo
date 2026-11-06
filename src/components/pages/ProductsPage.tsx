@@ -254,7 +254,7 @@ export default function ProductsPage() {
                 alt={section.title}
                 width={1200}
                 height={520}
-                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover transition-transform duration-700 scale-[1.1] translate-x-[-15%] translate-y-[14%] md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
+                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover transition-transform duration-700 scale-[1.02] translate-x-[-3%] translate-y-[4%] md:scale-[1.08] md:translate-x-[-15%] md:translate-y-[10%] lg:scale-[1.12] lg:translate-x-[-27%] lg:translate-y-[14%] md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
                 focalPointX={91.76706827309236}
                 focalPointY={13.855421686746988} /><div
                 className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
