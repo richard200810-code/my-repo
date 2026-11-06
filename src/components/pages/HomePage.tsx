@@ -58,6 +58,19 @@ const SectionDivider = () => (
 // --- Main Page Component ---
 
 export default function HomePage() {
+  React.useEffect(() => {
+    const existingMeta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    const previousDescription = existingMeta?.content;
+    const descriptionMeta = existingMeta ?? document.createElement('meta');
+    descriptionMeta.setAttribute('name', 'description');
+    descriptionMeta.setAttribute('content', 'LUX HAIR es una empresa en Ciudad de México especializada en extensiones de cabello y pelucas. Ofrecemos métodos, largos y colores con asesoría personalizada.');
+    if (!existingMeta) document.head.appendChild(descriptionMeta);
+
+    return () => {
+      if (existingMeta) descriptionMeta.setAttribute('content', previousDescription ?? '');
+      else descriptionMeta.remove();
+    };
+  }, []);
   // Canonical Data Sources (Preserved from original code)
   const features = [
     {
