@@ -285,7 +285,7 @@ export default function HomePage() {
             Descubre Nuestras Colecciones
           </h2>
           <p className="font-paragraph text-lg text-primary/70 max-w-2xl mx-auto">
-            Explora un mercado curado de colecciones premium de extensiones de cabello y pelucas, cada una ofreciendo estilos únicos y experiencia excepcional.
+            LUX HAIR es una empresa en Ciudad de México especializada en extensiones de cabello y pelucas. Ofrecemos distintos métodos, largos y colores, con asesoría personalizada para profesionales y clientes.
           </p>
         </div>
 
