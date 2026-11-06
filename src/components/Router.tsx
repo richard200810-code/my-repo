@@ -1,31 +1,37 @@
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { ScrollToTop } from '@/lib/scroll-to-top';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
-import HomePage from '@/components/pages/HomePage';
-import ProductsPage from '@/components/pages/ProductsPage';
-import ProductDetailPage from '@/components/pages/ProductDetailPage';
-import ContactPage from '@/components/pages/ContactPage';
-import StoresPage from '@/components/pages/StoresPage';
-import StoreDetailPage from '@/components/pages/StoreDetailPage';
-import AcademyPage from '@/components/pages/AcademyPage';
-import HairWeftGuidePage from '@/components/pages/HairWeftGuidePage';
-import ClipInGuidePage from '@/components/pages/ClipInGuidePage';
-import TapeInGuidePage from '@/components/pages/TapeInGuidePage';
-import KeratinGuidePage from '@/components/pages/KeratinGuidePage';
-import FeatherGuidePage from '@/components/pages/FeatherGuidePage';
-import DoublePieceFlatWeftPage from '@/components/pages/DoublePieceFlatWeftPage';
-import ColorGuidePage from '@/components/pages/ColorGuidePage';
-import DebugProductImages from '@/components/pages/DebugProductImages';
-import CRMPage from '@/components/pages/CRMPage';
-import ToolsAccessoriesPage from '@/components/pages/ToolsAccessoriesPage';
+
+// Lazy load all page components
+const HomePage = lazy(() => import('@/components/pages/HomePage'));
+const ProductsPage = lazy(() => import('@/components/pages/ProductsPage'));
+const ProductDetailPage = lazy(() => import('@/components/pages/ProductDetailPage'));
+const ContactPage = lazy(() => import('@/components/pages/ContactPage'));
+const StoresPage = lazy(() => import('@/components/pages/StoresPage'));
+const StoreDetailPage = lazy(() => import('@/components/pages/StoreDetailPage'));
+const AcademyPage = lazy(() => import('@/components/pages/AcademyPage'));
+const HairWeftGuidePage = lazy(() => import('@/components/pages/HairWeftGuidePage'));
+const ClipInGuidePage = lazy(() => import('@/components/pages/ClipInGuidePage'));
+const TapeInGuidePage = lazy(() => import('@/components/pages/TapeInGuidePage'));
+const KeratinGuidePage = lazy(() => import('@/components/pages/KeratinGuidePage'));
+const FeatherGuidePage = lazy(() => import('@/components/pages/FeatherGuidePage'));
+const DoublePieceFlatWeftPage = lazy(() => import('@/components/pages/DoublePieceFlatWeftPage'));
+const ColorGuidePage = lazy(() => import('@/components/pages/ColorGuidePage'));
+const DebugProductImages = lazy(() => import('@/components/pages/DebugProductImages'));
+const CRMPage = lazy(() => import('@/components/pages/CRMPage'));
+const ToolsAccessoriesPage = lazy(() => import('@/components/pages/ToolsAccessoriesPage'));
 
 // Layout component that includes ScrollToTop
 function Layout() {
   return (
     <>
       <ScrollToTop />
-      <Outlet />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

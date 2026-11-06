@@ -1,4 +1,4 @@
-scale-[1.02]import Footer from '@/components/Footer';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { Image } from '@/components/ui/image';
 import { HairExtensionsandWigs } from '@/entities';
