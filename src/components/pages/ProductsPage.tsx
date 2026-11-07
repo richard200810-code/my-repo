@@ -249,7 +249,7 @@ export default function ProductsPage() {
               <div focalPointX={72.48995983935743} focalPointY={27.710843373493976}><div
                 className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10 lg:h-[360px]" style={section.key === 'tramas' ? { backgroundColor: '#B7AEA3' } : undefined}
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}><Image
+                focalPointY={27.710843373493976}><div className="absolute inset-0 hidden lg:block" style={{ backgroundImage: 'url("https://static.wixstatic.com/media/37e681_0006e03d3fba4ab584bd46d6cdfd3f0b~mv2.png")', backgroundSize: 'cover', backgroundPosition: '48% 54%' }} /><Image
                 src={section.image}
                 alt={section.title}
                 width={1200}
