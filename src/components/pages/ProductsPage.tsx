@@ -275,7 +275,7 @@ export default function ProductsPage() {
                 alt={product.itemName || section.title}
                 width={500}
                 height={360}
-                className={section.key === 'halo' ? 'aspect-[4/3] w-full object-contain mix-blend-multiply transition-transform duration-500' : 'aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105'}
+                className={section.key === 'halo' || section.key === 'feather' ? 'aspect-[4/3] w-full object-contain mix-blend-multiply transition-transform duration-500' : 'aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105'}
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976} /></div><p
                 className="text-xs font-semibold uppercase tracking-[0.15em] text-primary/45"
