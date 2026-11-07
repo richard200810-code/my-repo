@@ -247,14 +247,14 @@ export default function ProductsPage() {
             } initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
               <div className="flex flex-col justify-between"><div><p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/45">{section.eyebrow}</p><h3 className="mt-5 font-heading text-4xl leading-none md:text-5xl">{section.title}</h3><p className="mt-6 max-w-md text-base leading-relaxed text-primary/70">{section.copy}</p><div className="mt-6 flex flex-wrap gap-2">{subtypes.map((subtype, idx) => <span key={idx} className="inline-block rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">{subtype}</span>)}</div></div><Link to={section.application === 'all' ? '/products' :               `/products?application=${encodeURIComponent(section.application)}`            } className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Ver categoría <ArrowRight className="h-4 w-4" /></Link></div>
               <div focalPointX={72.48995983935743} focalPointY={27.710843373493976}><div
-                className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10 lg:h-[360px]" style={section.key === 'tramas' ? { backgroundImage: 'url("https://static.wixstatic.com/media/37e681_1a45d31667b14bd896ed77b702c1797f~mv2.png")', backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
+                className="relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10 lg:h-[360px]" style={section.key === 'tramas' ? { backgroundImage: 'url("https://static.wixstatic.com/media/37e681_1a45d31667b14bd896ed77b702c1797f~mv2.png")', backgroundSize: 'cover', backgroundPosition: '48% 54%' } : undefined}
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}><Image
                 src={section.image}
                 alt={section.title}
                 width={1200}
                 height={520}
-                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover object-[center_30%] transition-transform duration-700 scale-[1.12] translate-x-[-4.5%] translate-y-[4.5%] md:scale-[1.15] md:translate-x-[-6%] md:translate-y-[6%] lg:scale-[1.18] lg:translate-x-[-7.5%] lg:translate-y-[7.5%] md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
+                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover object-[center_30%] transition-transform duration-700 scale-[1.12] translate-x-[-4.5%] translate-y-[4.5%] md:scale-[1.15] md:translate-x-[-6%] md:translate-y-[6%] md:h-[360px] lg:hidden' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
                 focalPointX={91.76706827309236}
                 focalPointY={13.855421686746988} /><div
                 className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
