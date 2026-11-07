@@ -268,7 +268,7 @@ export default function ProductsPage() {
                 className="group border-t border-primary/15 pt-4"
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}><div
-                className="mb-4 overflow-hidden rounded-xl bg-primary/5"
+                className={section.key === 'halo' || section.key === 'feather' ? 'mb-4 overflow-hidden rounded-xl bg-[#e6ddd2]' : 'mb-4 overflow-hidden rounded-xl bg-primary/5'}
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}><Image
                 src={product.itemImage || section.image}
