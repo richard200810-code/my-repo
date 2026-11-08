@@ -254,7 +254,7 @@ export default function ProductsPage() {
                 alt={section.title}
                 width={1200}
                 height={520}
-                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover object-[center_30%] transition-transform duration-700 scale-[1.12] translate-x-[-4.5%] translate-y-[4.5%] md:scale-[1.15] md:translate-x-[-6%] md:translate-y-[6%] md:h-[360px] lg:hidden' : section.key === 'halo' ? 'h-[280px] w-full object-cover object-center mix-blend-multiply transition-transform duration-700 md:h-[360px]' : section.key === 'feather' ? 'h-[280px] w-full object-cover object-center mix-blend-multiply transition-transform duration-700 md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
+                className={section.key === 'tramas' ? 'h-[280px] w-full object-cover object-[center_30%] transition-transform duration-700 scale-[1.12] translate-x-[-4.5%] translate-y-[4.5%] md:scale-[1.15] md:translate-x-[-6%] md:translate-y-[6%] md:h-[360px] lg:hidden' : section.key === 'halo' ? 'h-[280px] w-full object-cover object-right mix-blend-multiply transition-transform duration-700 md:h-[360px] md:object-center' : section.key === 'feather' ? 'h-[280px] w-full object-cover object-center mix-blend-multiply transition-transform duration-700 md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
                 focalPointX={91.76706827309236}
                 focalPointY={13.855421686746988} /><div
                 className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
@@ -275,7 +275,7 @@ export default function ProductsPage() {
                 alt={product.itemName || section.title}
                 width={500}
                 height={360}
-                className={section.key === 'halo' ? 'aspect-[4/3] w-full object-contain mix-blend-multiply transition-transform duration-500' : 'aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105'}
+                className={section.key === 'halo' ? 'aspect-[4/3] w-full object-cover object-right mix-blend-multiply transition-transform duration-500' : 'aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105'}
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976} /></div><p
                 className="text-xs font-semibold uppercase tracking-[0.15em] text-primary/45"
