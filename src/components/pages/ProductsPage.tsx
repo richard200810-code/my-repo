@@ -262,7 +262,7 @@ export default function ProductsPage() {
                 focalPointY={27.710843373493976}>{String(index + 1).padStart(2, '0')} / 06</div></div><div
                 className="grid gap-4 sm:grid-cols-3"
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://vlighthairextension.com/cdn/shop/files/QQ_20230516102940.jpg?v=1764055628&width=960' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
+                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://static.wixstatic.com/media/37e681_1cb940bcacd3453ebb38706d3621c693~mv2.png' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
                 key={product._id}
                 to={product._id === section.key ? '/contact' : `/products/${product._id}`}
                 className="group border-t border-primary/15 pt-4"
