@@ -312,8 +312,8 @@ export default function ProductsPage() {
               <div className="mt-6 flex flex-wrap gap-2"><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Sin sistema de fijación</span><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Cabello a granel</span></div>
               <Link to="/contact" className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Consultar disponibilidad <ArrowRight className="h-4 w-4" /></Link>
             </div>
-            <div className="flex items-center justify-center bg-[#e8dfd5] p-5 md:p-8 lg:p-0">
-              <Image src="https://static.wixstatic.com/media/37e681_2095c3b9cb8c487bb3c4d762c5a0ddba~mv2.jpg" alt="Cabello lacio en coleta, atado con cinta de satén, sin sistema de fijación" width={800} height={1067} className="h-[340px] w-full object-cover md:h-[440px] lg:h-[520px]" />
+            <div className="flex items-center justify-center bg-[#e8dfd5] p-5 md:p-8">
+              <Image src="https://static.wixstatic.com/media/37e681_2095c3b9cb8c487bb3c4d762c5a0ddba~mv2.jpg" alt="Cabello lacio en coleta, atado con cinta de satén, sin sistema de fijación" width={800} height={1067} className="aspect-[4/5] w-full max-w-[440px] rounded-[1.5rem] object-cover object-center" />
             </div>
           </div>
         </section>
