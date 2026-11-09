@@ -216,7 +216,7 @@ export default function ProductsPage() {
     { key: 'puntas', eyebrow: '03 / PUNTAS', title: 'Puntas', copy: 'Sistemas por mechón con fusión térmica o anilla. Control preciso y acabado natural para zonas específicas.', detail: 'I-Tip · Nano-Tip · K-Tip · U-Tip · Plastic Nano Tip · V-Tip · Y-Tip', application: 'K-Tip', keys: ['Extensiones de queratina','Extensiones K-Tip','Extensiones I-Tip','Extensiones U-Tip','Extensiones Nano-Tip'], image: 'https://static.wixstatic.com/media/37e681_f88af35d1d69481ab4596826d141f409~mv2.png' },
     { key: 'clipin', eyebrow: '04 / CLIP-IN', title: 'Clip-in', copy: 'Volumen removible sin compromiso de instalación. Flexibilidad total para cambios diarios y experimentación.', detail: 'Clip In · One Piece Clip In · Lace Clip In · PU Clip In', application: 'Clip In', keys: ['Extensiones Clip in','Pelucas'], image: 'https://cdn.shopify.com/s/files/1/0568/0244/3362/files/Best_Clip_Hair_Extensions_Info_Comparison_Photos_2048x2048.webp?v=1772606497' },
     { key: 'halo', eyebrow: '05 / HALO Y COLA DE CABALLO', title: 'Halo y cola de caballo', copy: 'Dos opciones removibles: Halo con banda y cola de caballo postiza con clip. Aportan largo o volumen de forma inmediata.', detail: 'Halo · Cola de caballo postiza', application: 'Halo', keys: ['Extensiones de cabello'], image: 'https://gistarhair.com/wp-content/uploads/2025/12/gistar-halo-hair-banner.webp' },
-    { key: 'feather', eyebrow: '06 / FEATHER', title: 'Feather', copy: 'Micro loop y anilla para precisión fina. Integración suave con control detallado por mechón.', detail: 'Micro Loop · Feather Hair Weft · H6 Feather', application: 'Micro Loop Hair Extension', keys: ['Extensiones de cabello'], image: 'https://unimehair.com/cdn/shop/files/202502261715541.jpg?v=1753095634' }
+    { key: 'feather', eyebrow: '06 / FEATHER', title: 'Feather', copy: 'Micro loop y anilla para precisión fina. Integración suave con control detallado por mechón.', detail: 'Micro Loop · Feather Hair Weft · H6 Feather', application: 'Micro Loop Hair Extension', keys: ['Extensiones de cabello'], image: 'https://image.made-in-china.com/2f0j00MypiVPwffhgn/Top-Quality-Feather-Hair-Extension-Hand-Tied-Feather-Line-Hair-Extensions.jpg' }
   ];
 
   const collectProducts = (keys: string[]) => keys.flatMap(key => groupedProducts[key] || []).slice(0, 3);
@@ -251,7 +251,7 @@ export default function ProductsPage() {
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[440px] grid-rows-2 lg:h-[360px] lg:grid-cols-2 lg:grid-rows-1">
                   <div className="relative min-h-0 overflow-hidden bg-[#e6ddd2]">
-                    <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-center mix-blend-multiply" />
+                    <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-[center_68%] mix-blend-multiply" />
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] lg:border-l lg:border-t-0">
