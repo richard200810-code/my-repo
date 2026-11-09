@@ -215,8 +215,8 @@ export default function ProductsPage() {
     { key: 'tapein', eyebrow: '02 / TAPE-IN', title: 'Tape-in', copy: 'Aplicación rápida y plana con adhesivo profesional. Ideal para cambios de longitud y densidad con integración discreta.', detail: 'Tape In · Mini Tape In · Seamless Tape In · Invisible Tape In · PU Invisible with Hole · PU with Hole · Long Invisible Tape In · Long Tape In · Stitched Tape In', application: 'Tape In', keys: ['Extensiones Tape in','Extensiones Seamless Tape in','Extensiones Invisible Tape in','Extensiones Mini Tape in'], image: 'https://static.wixstatic.com/media/37e681_2c03c601d341434a92d50aea0b0091ef~mv2.png' },
     { key: 'puntas', eyebrow: '03 / PUNTAS', title: 'Puntas', copy: 'Sistemas por mechón con fusión térmica o anilla. Control preciso y acabado natural para zonas específicas.', detail: 'I-Tip · Nano-Tip · K-Tip · U-Tip · Plastic Nano Tip · V-Tip · Y-Tip', application: 'K-Tip', keys: ['Extensiones de queratina','Extensiones K-Tip','Extensiones I-Tip','Extensiones U-Tip','Extensiones Nano-Tip'], image: 'https://static.wixstatic.com/media/37e681_f88af35d1d69481ab4596826d141f409~mv2.png' },
     { key: 'clipin', eyebrow: '04 / CLIP-IN', title: 'Clip-in', copy: 'Volumen removible sin compromiso de instalación. Flexibilidad total para cambios diarios y experimentación.', detail: 'Clip In · One Piece Clip In · Lace Clip In · PU Clip In', application: 'Clip In', keys: ['Extensiones Clip in','Pelucas'], image: 'https://cdn.shopify.com/s/files/1/0568/0244/3362/files/Best_Clip_Hair_Extensions_Info_Comparison_Photos_2048x2048.webp?v=1772606497' },
-    { key: 'halo', eyebrow: '05 / HALO Y COLETA', title: 'Halo y coleta', copy: 'Cambio rápido con banda elástica o clip. Solución versátil para volumen instantáneo y peinados versátiles.', detail: 'Halo · Ponytail', application: 'Halo', keys: ['Extensiones de cabello'], image: 'https://gistarhair.com/wp-content/uploads/2025/09/gistar-wrap-ponytail-banner.webp' },
-    { key: 'feather', eyebrow: '06 / FEATHER', title: 'Feather', copy: 'Micro loop y anilla para precisión fina. Integración suave con control detallado por mechón.', detail: 'Micro Loop · Feather Hair Weft · H6 Feather', application: 'Micro Loop Hair Extension', keys: ['Extensiones de cabello'], image: 'https://cdn.shopify.com/s/files/1/0464/9074/7036/files/googoo_hair_extensions_Feather_Weft_Hair_Extension_1.jpg?v=1766451863' }
+    { key: 'halo', eyebrow: '05 / HALO Y COLETA', title: 'Halo y coleta', copy: 'Cambio rápido con banda elástica o clip. Solución versátil para volumen instantáneo y peinados versátiles.', detail: 'Halo · Ponytail', application: 'Halo', keys: ['Extensiones de cabello'], image: 'https://gistarhair.com/wp-content/uploads/2025/12/gistar-halo-hair-banner.webp' },
+    { key: 'feather', eyebrow: '06 / FEATHER', title: 'Feather', copy: 'Micro loop y anilla para precisión fina. Integración suave con control detallado por mechón.', detail: 'Micro Loop · Feather Hair Weft · H6 Feather', application: 'Micro Loop Hair Extension', keys: ['Extensiones de cabello'], image: 'https://www.fullshine.net/cdn/shop/files/fullshine_virgin_human_hair_feather_weft_extensions_collection.webp?v=1789178401&width=1600' }
   ];
 
   const collectProducts = (keys: string[]) => keys.flatMap(key => groupedProducts[key] || []).slice(0, 3);
@@ -249,20 +249,29 @@ export default function ProductsPage() {
               <div focalPointX={72.48995983935743} focalPointY={27.710843373493976}><div
                 className={section.key === 'feather' || section.key === 'halo' ? 'relative mb-8 overflow-hidden rounded-[2rem] bg-[#e6ddd2] lg:h-[360px]' : 'relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10 lg:h-[360px]'} style={section.key === 'tramas' ? { backgroundImage: 'url("https://static.wixstatic.com/media/37e681_7ff01284741d47ddb5511c8d80e4abc5~mv2.png")', backgroundSize: 'cover', backgroundPosition: '48% 54%' } : undefined}
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}><Image
+                focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[440px] grid-rows-2 lg:h-[360px] lg:grid-cols-2 lg:grid-rows-1">
+                  <div className="relative min-h-0 overflow-hidden bg-[#e6ddd2]">
+                    <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-center mix-blend-multiply" />
+                    <span className="absolute bottom-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
+                  </div>
+                  <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] lg:border-l lg:border-t-0">
+                    <Image src="https://www.perfectlocks.com/cdn/shop/collections/collection-brown-ponytails-big.jpg?v=1770905803&width=1200" alt="Coleta de cabello castaño lacio" width={1200} height={620} className="h-full w-full object-cover object-center mix-blend-multiply" />
+                    <span className="absolute bottom-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Coleta</span>
+                  </div>
+                </div> : <Image
                 src={section.image}
                 alt={section.title}
                 width={1200}
                 height={520}
                 className={section.key === 'tramas' ? 'h-[280px] w-full object-cover object-[center_30%] transition-transform duration-700 scale-[1.12] translate-x-[-4.5%] translate-y-[4.5%] md:scale-[1.15] md:translate-x-[-6%] md:translate-y-[6%] md:h-[360px] lg:hidden' : section.key === 'halo' ? 'h-[280px] w-full object-cover object-right mix-blend-multiply transition-transform duration-700 md:h-[360px] md:object-center' : section.key === 'feather' ? 'h-[280px] w-full object-cover object-center mix-blend-multiply transition-transform duration-700 md:h-[360px]' : section.key === 'tapein' ? 'h-[280px] w-full object-cover object-[center_95%] transition-transform duration-700 hover:scale-105 md:h-[360px]' : 'h-[280px] w-full object-cover transition-transform duration-700 hover:scale-105 md:h-[360px]'}
                 focalPointX={91.76706827309236}
-                focalPointY={13.855421686746988} /><div
+                focalPointY={13.855421686746988} />}<div
                 className="absolute bottom-5 left-5 rounded-full bg-background/90 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.18em]"
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}>{String(index + 1).padStart(2, '0')} / 06</div></div><div
                 className="grid gap-4 sm:grid-cols-3"
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://static.wixstatic.com/media/37e681_f515f4ff5266496186dab86cb1237211~mv2.png' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
+                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://static.wixstatic.com/media/37e681_f515f4ff5266496186dab86cb1237211~mv2.png' : section.key === 'halo' ? 'https://gistarhair.com/wp-content/uploads/2025/09/gistar-wrap-ponytail-banner.webp' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
                 key={product._id}
                 to={product._id === section.key ? '/contact' : `/products/${product._id}`}
                 className="group border-t border-primary/15 pt-4"
