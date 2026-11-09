@@ -271,7 +271,7 @@ export default function ProductsPage() {
                 focalPointY={27.710843373493976}>{String(index + 1).padStart(2, '0')} / 06</div></div><div
                 className="grid gap-4 sm:grid-cols-3"
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://static.wixstatic.com/media/37e681_f515f4ff5266496186dab86cb1237211~mv2.png' : section.key === 'halo' ? 'https://gistarhair.com/wp-content/uploads/2025/09/gistar-wrap-ponytail-banner.webp' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
+                focalPointY={27.710843373493976}>{(items.length ? items : [{ _id: section.key, itemName: 'Consulta de disponibilidad', itemDescription: 'Solicita información de colores, largos y formatos disponibles.', itemImage: section.key === 'feather' ? 'https://static.wixstatic.com/media/37e681_05f146f0033145f2915e504923228f99~mv2.jpg' : section.key === 'halo' ? 'https://gistarhair.com/wp-content/uploads/2025/09/gistar-wrap-ponytail-banner.webp' : section.image, length: undefined, color: 'Por confirmar' } as HairExtensionsandWigs]).map((product) => <Link
                 key={product._id}
                 to={product._id === section.key ? '/contact' : `/products/${product._id}`}
                 className="group border-t border-primary/15 pt-4"
