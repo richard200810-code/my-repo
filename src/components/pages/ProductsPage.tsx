@@ -252,11 +252,11 @@ export default function ProductsPage() {
                 focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[440px] grid-rows-2 lg:h-[360px] lg:grid-cols-2 lg:grid-rows-1">
                   <div className="relative min-h-0 overflow-hidden bg-[#e6ddd2]">
                     <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-center mix-blend-multiply" />
-                    <span className="absolute bottom-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
+                    <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] lg:border-l lg:border-t-0">
-                    <Image src="https://www.perfectlocks.com/cdn/shop/collections/collection-brown-ponytails-big.jpg?v=1770905803&width=1200" alt="Coleta de cabello castaño lacio" width={1200} height={620} className="h-full w-full object-cover object-center mix-blend-multiply" />
-                    <span className="absolute bottom-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Coleta</span>
+                    <Image src="https://www.cliphair.com/cdn/shop/files/18-613-wpt_website-full.jpg?v=1773404662&width=720" alt="Coleta rubia lisa con cierre envolvente" width={720} height={720} className="h-full w-full object-contain mix-blend-multiply" />
+                    <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Coleta</span>
                   </div>
                 </div> : <Image
                 src={section.image}
