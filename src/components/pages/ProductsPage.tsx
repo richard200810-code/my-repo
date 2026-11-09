@@ -186,7 +186,7 @@ export default function ProductsPage() {
     { sistema: 'Tape-in', aplicacion: 'Adhesivo', union: 'Cinta', ideal: 'Versatilidad', mantenimiento: 'Bajo' },
     { sistema: 'Puntas', aplicacion: 'Fusión térmica', union: 'Queratina', ideal: 'Precisión', mantenimiento: 'Alto' },
     { sistema: 'Clip-in', aplicacion: 'Clip', union: 'Clip', ideal: 'Facilidad', mantenimiento: 'Mínimo' },
-    { sistema: 'Halo y coleta', aplicacion: 'Banda/Clip', union: 'Banda elástica', ideal: 'Cambio rápido', mantenimiento: 'Mínimo' },
+    { sistema: 'Halo / cola de caballo postiza', aplicacion: 'Banda / clip', union: 'Banda o clip', ideal: 'Cambio rápido', mantenimiento: 'Mínimo' },
     { sistema: 'Feather', aplicacion: 'Micro loop', union: 'Anilla', ideal: 'Precisión fina', mantenimiento: 'Moderado' }
   ];
 
@@ -215,7 +215,7 @@ export default function ProductsPage() {
     { key: 'tapein', eyebrow: '02 / TAPE-IN', title: 'Tape-in', copy: 'Aplicación rápida y plana con adhesivo profesional. Ideal para cambios de longitud y densidad con integración discreta.', detail: 'Tape In · Mini Tape In · Seamless Tape In · Invisible Tape In · PU Invisible with Hole · PU with Hole · Long Invisible Tape In · Long Tape In · Stitched Tape In', application: 'Tape In', keys: ['Extensiones Tape in','Extensiones Seamless Tape in','Extensiones Invisible Tape in','Extensiones Mini Tape in'], image: 'https://static.wixstatic.com/media/37e681_2c03c601d341434a92d50aea0b0091ef~mv2.png' },
     { key: 'puntas', eyebrow: '03 / PUNTAS', title: 'Puntas', copy: 'Sistemas por mechón con fusión térmica o anilla. Control preciso y acabado natural para zonas específicas.', detail: 'I-Tip · Nano-Tip · K-Tip · U-Tip · Plastic Nano Tip · V-Tip · Y-Tip', application: 'K-Tip', keys: ['Extensiones de queratina','Extensiones K-Tip','Extensiones I-Tip','Extensiones U-Tip','Extensiones Nano-Tip'], image: 'https://static.wixstatic.com/media/37e681_f88af35d1d69481ab4596826d141f409~mv2.png' },
     { key: 'clipin', eyebrow: '04 / CLIP-IN', title: 'Clip-in', copy: 'Volumen removible sin compromiso de instalación. Flexibilidad total para cambios diarios y experimentación.', detail: 'Clip In · One Piece Clip In · Lace Clip In · PU Clip In', application: 'Clip In', keys: ['Extensiones Clip in','Pelucas'], image: 'https://cdn.shopify.com/s/files/1/0568/0244/3362/files/Best_Clip_Hair_Extensions_Info_Comparison_Photos_2048x2048.webp?v=1772606497' },
-    { key: 'halo', eyebrow: '05 / HALO Y COLETA', title: 'Halo y coleta', copy: 'Cambio rápido con banda elástica o clip. Solución versátil para volumen instantáneo y peinados versátiles.', detail: 'Halo · Ponytail', application: 'Halo', keys: ['Extensiones de cabello'], image: 'https://gistarhair.com/wp-content/uploads/2025/12/gistar-halo-hair-banner.webp' },
+    { key: 'halo', eyebrow: '05 / HALO Y COLA DE CABALLO', title: 'Halo y cola de caballo', copy: 'Dos opciones removibles: Halo con banda y cola de caballo postiza con clip. Aportan largo o volumen de forma inmediata.', detail: 'Halo · Cola de caballo postiza', application: 'Halo', keys: ['Extensiones de cabello'], image: 'https://gistarhair.com/wp-content/uploads/2025/12/gistar-halo-hair-banner.webp' },
     { key: 'feather', eyebrow: '06 / FEATHER', title: 'Feather', copy: 'Micro loop y anilla para precisión fina. Integración suave con control detallado por mechón.', detail: 'Micro Loop · Feather Hair Weft · H6 Feather', application: 'Micro Loop Hair Extension', keys: ['Extensiones de cabello'], image: 'https://www.fullshine.net/cdn/shop/files/fullshine_virgin_human_hair_feather_weft_extensions_collection.webp?v=1789178401&width=1600' }
   ];
 
@@ -255,8 +255,8 @@ export default function ProductsPage() {
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] lg:border-l lg:border-t-0">
-                    <Image src="https://www.cliphair.com/cdn/shop/files/18-613-wpt_website-full.jpg?v=1773404662&width=720" alt="Coleta rubia lisa con cierre envolvente" width={720} height={720} className="h-full w-full object-contain mix-blend-multiply" />
-                    <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Coleta</span>
+                    <Image src="https://www.cliphair.com/cdn/shop/files/18-613-wpt_website-full.jpg?v=1773404662&width=720" alt="Cola de caballo postiza rubia con cierre envolvente" width={720} height={720} className="h-full w-full object-contain mix-blend-multiply" />
+                    <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Cola de caballo postiza</span>
                   </div>
                 </div> : <Image
                 src={section.image}
@@ -301,6 +301,21 @@ export default function ProductsPage() {
                 focalPointY={27.710843373493976} /></span></Link>)}</div></div>
             </motion.article>
           );})}</div>
+        </section>
+
+        <section id="cabello-en-coleta" className="mx-auto max-w-[120rem] px-6 pb-20 md:px-16 md:pb-28 lg:px-24">
+          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-[#eee7df] lg:grid-cols-[0.56fr_0.44fr]">
+            <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/50">Formato independiente · sin sistema de fijación</p>
+              <h2 className="mt-5 font-heading text-4xl leading-tight md:text-5xl">Cabello en coleta</h2>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-primary/70">Cabello reunido en un extremo, sin trama, cinta, clip ni punta de queratina. El profesional puede prepararlo según el método de trabajo que necesite.</p>
+              <div className="mt-6 flex flex-wrap gap-2"><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Sin sistema de fijación</span><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Cabello a granel</span></div>
+              <Link to="/contact" className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Consultar disponibilidad <ArrowRight className="h-4 w-4" /></Link>
+            </div>
+            <div className="flex items-center justify-center bg-[#e5dbd1] p-5 md:p-8">
+              <Image src="https://www.hairesthetic.com/cdn/shop/products/bulk_remystraight-01_5f492dbb-d1e8-43de-9a8b-189194db7641_2048x.jpg?v=1559272959" alt="Cabello lacio en coleta, atado en un extremo y sin sistema de fijación" width={800} height={1067} className="h-[340px] w-full object-contain mix-blend-multiply md:h-[440px] lg:h-[520px]" />
+            </div>
+          </div>
         </section>
 
         <section className="bg-primary px-6 py-20 text-primary-foreground md:px-16 md:py-28 lg:px-24"><div className="mx-auto max-w-[120rem]"><div className="grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end"><div><p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary-foreground/55">Decisión de salón</p><h2 className="font-heading text-4xl leading-tight md:text-6xl">Compara antes de recomendar.</h2></div><p className="max-w-xl text-base leading-relaxed text-primary-foreground/70">Una guía rápida para alinear el sistema con el estilo de vida, el volumen y la rutina de mantenimiento de cada cliente.</p></div><div className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-primary-foreground/20 bg-primary-foreground/15 md:grid-cols-5">{['Sistema','Aplicación','Unión','Uso ideal','Mantenimiento'].map(label => <div key={label} className="bg-primary px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/60">{label}</div>)}{COMPARISON_DATA.map(row => <React.Fragment key={row.sistema}><div className="bg-background px-5 py-5 font-heading text-lg text-primary">{row.sistema}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.aplicacion}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.union}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.ideal}</div><div className="bg-background px-5 py-5 text-sm text-primary/70">{row.mantenimiento}</div></React.Fragment>)}</div></div></section>
