@@ -304,7 +304,7 @@ export default function ProductsPage() {
         </section>
 
         <section id="cabello-en-coleta" className="mx-auto max-w-[120rem] px-6 pb-20 md:px-16 md:pb-28 lg:px-24">
-          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-[#eee7df] lg:grid-cols-[0.56fr_0.44fr]">
+          <div className="grid overflow-hidden rounded-[2rem] border border-primary/10 bg-[#e8dfd5] lg:grid-cols-[0.56fr_0.44fr]">
             <div className="flex flex-col justify-center p-8 md:p-12 lg:p-16">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary/50">Formato independiente · sin sistema de fijación</p>
               <h2 className="mt-5 font-heading text-4xl leading-tight md:text-5xl">Cabello en coleta</h2>
@@ -312,8 +312,8 @@ export default function ProductsPage() {
               <div className="mt-6 flex flex-wrap gap-2"><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Sin sistema de fijación</span><span className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary/70">Cabello a granel</span></div>
               <Link to="/contact" className="mt-8 inline-flex w-fit items-center gap-3 rounded-full border border-primary/25 px-5 py-3 text-sm font-semibold transition-all hover:bg-primary hover:text-primary-foreground">Consultar disponibilidad <ArrowRight className="h-4 w-4" /></Link>
             </div>
-            <div className="flex items-center justify-center bg-[#e5dbd1] p-5 md:p-8">
-              <Image src="https://www.hairesthetic.com/cdn/shop/products/bulk_remystraight-01_5f492dbb-d1e8-43de-9a8b-189194db7641_2048x.jpg?v=1559272959" alt="Cabello lacio en coleta, atado en un extremo y sin sistema de fijación" width={800} height={1067} className="h-[340px] w-full object-contain mix-blend-multiply md:h-[440px] lg:h-[520px]" />
+            <div className="flex items-center justify-center bg-[#e8dfd5] p-5 md:p-8">
+              <Image src="https://static.wixstatic.com/media/37e681_2095c3b9cb8c487bb3c4d762c5a0ddba~mv2.jpg" alt="Cabello lacio en coleta, atado con cinta de satén, sin sistema de fijación" width={800} height={1067} className="h-[340px] w-full object-cover md:h-[440px] lg:h-[520px]" />
             </div>
           </div>
         </section>
