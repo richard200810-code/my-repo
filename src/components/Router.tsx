@@ -1,3 +1,4 @@
+import PageSEO from '@/components/PageSEO';
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
@@ -29,6 +30,7 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
+      <PageSEO />
       <Suspense fallback={<LoadingSpinner />}>
         <Outlet />
       </Suspense>
