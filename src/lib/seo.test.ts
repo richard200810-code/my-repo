@@ -26,13 +26,14 @@ describe('public page SEO', () => {
     expect(getPageSEO('/crm').noindex).toBe(true);
     expect(getPageSEO('/debug-images').noindex).toBe(true);
     expect(getPageSEO('/missing').noindex).toBe(true);
+    expect(getPageSEO('/stores/store-1').noindex).toBe(true);
   });
   it('builds an XML sitemap with static and actual CMS detail URLs only', async () => {
     const { sitemapXML } = await seo();
     const xml = sitemapXML(['product-1'], ['store-1']);
     expect(xml).toContain('https://www.luxhair.mx/products/product-1');
-    expect(xml).toContain('https://www.luxhair.mx/stores/store-1');
-    expect((xml.match(/<loc>/g) || []).length).toBe(15);
+    expect(xml).not.toContain('/stores/store-1');
+    expect((xml.match(/<loc>/g) || []).length).toBe(14);
     expect(xml).not.toContain('/crm');
     expect(xml).not.toContain('/debug-images');
     expect(xml).not.toContain('<lastmod>');
