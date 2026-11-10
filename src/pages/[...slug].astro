@@ -1,6 +1,6 @@
 ---
-import { loadPageSEO } from '@/lib/seo-data';
-import { MANAGED_META, pageSEOTags } from '@/lib/seo';
+import { loadPageSEO, sitemapIDs } from '@/lib/seo-data';
+import { MANAGED_META, pageSEOTags, sitemapXML } from '@/lib/seo';
 import { SEO } from '@wix/seo/components';
 import { loadSEOTagsServiceConfig } from '@wix/seo/services';
 import { Head } from "@/components/Head";
@@ -9,6 +9,15 @@ import "@wix/wix-vibe-plugins/plugins-vars.css";
 import "@wix/wix-vibe-plugins/plugins-theme.css";
 import "@/styles/global.css";
 
+// Wix reserves its default sitemap routes; serve the supplemental map explicitly.
+if (Astro.url.pathname === '/sitemap-index.xml') {
+  try {
+    const [products, stores] = await Promise.all([sitemapIDs('hairextensions'), sitemapIDs('stores')]);
+    return new Response(sitemapXML(products, stores), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
+  } catch {
+    return new Response('Sitemap temporarily unavailable', { status: 503, headers: { 'Retry-After': '300' } });
+  }
+}
 const pageSEO = await loadPageSEO(Astro.url.pathname);
 const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
   pageUrl: pageSEO.canonical,

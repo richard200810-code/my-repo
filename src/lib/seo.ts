@@ -40,7 +40,7 @@ export function sitemapXML(products: string[] = [], stores: string[] = []): stri
   return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + [...new Set(paths)].map(path => '<url><loc>' + escape(SITE_ORIGIN + path) + '</loc></url>').join('\n') + '\n</urlset>\n';
 }
 export const MANAGED_META = ['description', 'robots', 'og:title', 'og:description', 'og:url', 'og:locale', 'twitter:title', 'twitter:description'];
-export function pageSEOTags(page: PageSEO) {
+export function pageSEOTags(page: PageSEO): Array<{ type: string; props?: Record<string, string>; children?: string }> {
   return [
     { type: 'title', children: page.title },
     { type: 'link', props: { rel: 'canonical', href: page.canonical } },
