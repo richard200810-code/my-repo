@@ -31,13 +31,14 @@ export function getPageSEO(value: string, detail?: PublicDetail | null): PageSEO
     title: (plainText(detail?.name || name).slice(0, 100)) + ' | LUX HAIR México',
     description: plainText(detail?.description || description).slice(0, 170),
     canonical: SITE_ORIGIN + path,
-    noindex: !known && (!(product || store) || detail === null),
+    // Unlinked store detail records are demo shops, pending real storefront content.
+    noindex: store || !known && (!(product || store) || detail === null),
   };
 }
 export function sitemapXML(products: string[] = [], stores: string[] = []): string {
   const paths = [...Object.keys(PUBLIC_PAGES), ...products.filter(Boolean).map(id => '/products/' + encodeURIComponent(id)), ...stores.filter(Boolean).map(id => '/stores/' + encodeURIComponent(id))];
   const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
-  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + [...new Set(paths)].map(path => '<url><loc>' + escape(SITE_ORIGIN + path) + '</loc></url>').join('\n') + '\n</urlset>\n';
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + [...new Set(paths)].filter(path => !getPageSEO(path).noindex).map(path => '<url><loc>' + escape(SITE_ORIGIN + path) + '</loc></url>').join('\n') + '\n</urlset>\n';
 }
 export const MANAGED_META = ['description', 'robots', 'og:title', 'og:description', 'og:url', 'og:locale', 'twitter:title', 'twitter:description'];
 export function pageSEOTags(page: PageSEO): Array<{ type: string; props?: Record<string, string>; children?: string }> {

@@ -12,8 +12,8 @@ import "@/styles/global.css";
 // Wix reserves its default sitemap routes; serve the supplemental map explicitly.
 if (Astro.url.pathname === '/sitemap-index.xml') {
   try {
-    const [products, stores] = await Promise.all([sitemapIDs('hairextensions'), sitemapIDs('stores')]);
-    return new Response(sitemapXML(products, stores), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
+    const products = await sitemapIDs('hairextensions');
+    return new Response(sitemapXML(products), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
   } catch {
     return new Response('Sitemap temporarily unavailable', { status: 503, headers: { 'Retry-After': '300' } });
   }
