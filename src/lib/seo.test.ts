@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 
 async function seo() {
   expect(existsSync(resolve('src/lib/seo.ts')), 'shared route SEO exists').toBe(true);
-  return import('./seo');
+  const path = './seo'; return import(path);
 }
 
 describe('public page SEO', () => {
@@ -21,7 +21,7 @@ describe('public page SEO', () => {
   it('uses public product names and excludes private and unknown pages', async () => {
     const { getPageSEO } = await seo();
     const page = getPageSEO('/products/abc', { name: 'Clip-In Natural', description: '<p>Cabello natural</p>' });
-    expect(page.title).toBe('Clip-In Natural | LUX HAIR Mxico');
+    expect(page.title).toBe('Clip-In Natural | LUX HAIR México');
     expect(page.description).toBe('Cabello natural');
     expect(getPageSEO('/crm').noindex).toBe(true);
     expect(getPageSEO('/debug-images').noindex).toBe(true);
