@@ -1,4 +1,6 @@
 ---
+import { loadPageSEO } from '@/lib/seo-data';
+import { MANAGED_META, pageSEOTags } from '@/lib/seo';
 import { SEO } from '@wix/seo/components';
 import { loadSEOTagsServiceConfig } from '@wix/seo/services';
 import { Head } from "@/components/Head";
@@ -7,15 +9,17 @@ import "@wix/wix-vibe-plugins/plugins-vars.css";
 import "@wix/wix-vibe-plugins/plugins-theme.css";
 import "@/styles/global.css";
 
+const pageSEO = await loadPageSEO(Astro.url.pathname);
 const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
-  pageUrl: Astro.url.href,
+  pageUrl: pageSEO.canonical,
   itemData: {
-    pageName: 'Home',
+    pageName: pageSEO.title.split(' | ')[0],
   },
 });
+seoTagsServiceConfig.tags = [...seoTagsServiceConfig.tags.filter(tag => tag.type !== 'title' && tag.props?.rel !== 'canonical' && !MANAGED_META.includes(tag.props?.name || tag.props?.property)), ...pageSEOTags(pageSEO)];
 ---
 
-<html lang="en" class="w-full h-full">
+<html lang="es-MX" class="w-full h-full">
   <head>
     <Head />
     <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />
