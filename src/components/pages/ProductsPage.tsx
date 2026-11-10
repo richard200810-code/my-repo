@@ -251,7 +251,7 @@ export default function ProductsPage() {
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[440px] grid-rows-2 lg:h-[360px] lg:grid-cols-[1.25fr_0.75fr] lg:grid-rows-1">
                   <div className="relative min-h-0 overflow-hidden bg-[#e6ddd2]">
-                    <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-[center_68%] mix-blend-multiply" />
+                    <Image src={section.image} alt="Extensión Halo de cabello lacio" width={960} height={540} className="h-full w-full object-cover object-[center_36%] mix-blend-multiply" />
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] lg:border-l lg:border-t-0">
