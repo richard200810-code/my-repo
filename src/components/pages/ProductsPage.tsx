@@ -255,7 +255,7 @@ export default function ProductsPage() {
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative order-1 min-h-0 overflow-hidden">
-                    <Image src="https://pahairextensions.com/cdn/shop/products/8Pony-Hair-Extensions_b0481c17-21f8-4318-8ef6-0fdcd285b515.jpg?v=1726622923&width=2400" alt="PONY TAIL castaña con cierre envolvente" width={720} height={720} className="h-full w-full object-contain mix-blend-multiply" />
+                    <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-full aspect-[0.30] overflow-hidden"><Image src="https://static.wixstatic.com/media/37e681_e7ac099e01c74a62b83c25ce607e799d~mv2.jpg" alt="PONY TAIL castaña" width={960} height={960} className="absolute inset-y-0 left-0 h-full w-[333.333%] max-w-none mix-blend-multiply" /></div></div>
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">PONY TAIL</span>
                   </div>
                 </div> : <Image
