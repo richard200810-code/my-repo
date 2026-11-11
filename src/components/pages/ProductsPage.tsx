@@ -251,7 +251,7 @@ export default function ProductsPage() {
                 focalPointX={72.48995983935743}
                 focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[620px] grid-rows-2 bg-[#e6dbcf] md:h-[360px] md:grid-cols-2 md:grid-rows-1" style={{ backgroundImage: "radial-gradient(ellipse 62% 85% at 28% 16%, rgba(255,250,244,0.8), transparent 76%), radial-gradient(ellipse 52% 78% at 80% 100%, rgba(151,122,99,0.18), transparent 80%), linear-gradient(138deg, #ece3da 0%, #dccdbf 52%, #e9ded3 100%)" }}>
                   <div className="relative min-h-0 overflow-hidden">
-                    <Image src={section.image} alt="Extensión Halo con banda y línea transparente" width={800} height={1000} className="h-full w-full object-contain mix-blend-multiply" />
+                    <div className="absolute inset-0 flex items-center justify-center"><div className="relative h-full aspect-[0.51] overflow-hidden"><Image src="https://static.wixstatic.com/media/37e681_dd17226bd6754b9e81d5568800ba59eb~mv2.png" alt="Extensión Halo con banda transparente, sin modelo" width={1500} height={1482} className="absolute inset-y-0 right-0 h-full w-[200%] max-w-none mix-blend-multiply" /></div></div>
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
                   <div className="relative min-h-0 overflow-hidden border-t border-[#8f7868]/20 md:border-l md:border-t-0">
