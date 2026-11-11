@@ -249,12 +249,12 @@ export default function ProductsPage() {
               <div focalPointX={72.48995983935743} focalPointY={27.710843373493976}><div
                 className={section.key === 'feather' || section.key === 'halo' ? 'relative mb-8 overflow-hidden rounded-[2rem] bg-[#e6ddd2] lg:h-[360px]' : 'relative mb-8 overflow-hidden rounded-[2rem] bg-primary/10 lg:h-[360px]'} style={section.key === 'tramas' ? { backgroundImage: 'url("https://static.wixstatic.com/media/37e681_7ff01284741d47ddb5511c8d80e4abc5~mv2.png")', backgroundSize: 'cover', backgroundPosition: '48% 54%' } : undefined}
                 focalPointX={72.48995983935743}
-                focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[620px] grid-rows-2 md:h-[360px] md:grid-cols-2 md:grid-rows-1">
-                  <div className="relative min-h-0 overflow-hidden bg-[#e6ddd2]">
+                focalPointY={27.710843373493976}>{section.key === 'halo' ? <div className="grid h-[620px] grid-rows-2 bg-[#e6dbcf] md:h-[360px] md:grid-cols-2 md:grid-rows-1" style={{ backgroundImage: "radial-gradient(ellipse 62% 85% at 28% 16%, rgba(255,250,244,0.8), transparent 76%), radial-gradient(ellipse 52% 78% at 80% 100%, rgba(151,122,99,0.18), transparent 80%), linear-gradient(138deg, #ece3da 0%, #dccdbf 52%, #e9ded3 100%)" }}>
+                  <div className="relative min-h-0 overflow-hidden">
                     <Image src={section.image} alt="Extensión Halo con banda y línea transparente" width={800} height={1000} className="h-full w-full object-contain mix-blend-multiply" />
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">Halo</span>
                   </div>
-                  <div className="relative min-h-0 overflow-hidden border-t border-background/60 bg-[#e6ddd2] md:border-l md:border-t-0">
+                  <div className="relative min-h-0 overflow-hidden border-t border-[#8f7868]/20 md:border-l md:border-t-0">
                     <Image src="https://pahairextensions.com/cdn/shop/products/8Pony-Hair-Extensions_b0481c17-21f8-4318-8ef6-0fdcd285b515.jpg?v=1726622923&width=2400" alt="PONY TAIL castaña con cierre envolvente" width={720} height={720} className="h-full w-full object-contain mix-blend-multiply" />
                     <span className="absolute top-4 left-5 rounded-full bg-background/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]">PONY TAIL</span>
                   </div>
