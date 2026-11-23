@@ -6,6 +6,11 @@ import { Search, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+const toCardImageUrl = (url: string) => {
+  if (!url.startsWith('https://static.wixstatic.com/media/') || url.includes('/v1/')) return url;
+  return `${url}/v1/fit/w_640,h_640/card.webp`;
+};
+
 const toolProducts = [
   {"id":"40","name":"Pinza para extensiones de cinta adhesiva","categories":["Instalación","Tape-In"],"image":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp","imageHover":"https://http2.mlstatic.com/D_NQ_NP_2X_675979-CBT99439302355_112025-F.webp"},
   {"id":"1","name":"Soporte acrílico para extensiones de cabello","categories":["Instalación"],"image":"https://static.wixstatic.com/media/f08e6d_10244c1e989d4a1c9ead7c2e74f19560~mv2.jpg","imageHover":"https://static.wixstatic.com/media/f08e6d_10244c1e989d4a1c9ead7c2e74f19560~mv2.jpg"},
@@ -155,8 +160,10 @@ export default function ToolsAccessoriesPage() {
                 {/* Image */}
                 <div className="relative aspect-square md:aspect-auto md:h-56 bg-white overflow-hidden">
                   <Image
-                    src={hoveredId === tool.id && tool.imageHover ? tool.imageHover : tool.image}
+                    src={toCardImageUrl(hoveredId === tool.id && tool.imageHover ? tool.imageHover : tool.image)}
                     alt={tool.name}
+                    loading={idx < 4 ? 'eager' : 'lazy'}
+                    decoding="async"
                     width={300}
                     height={300}
                     className={`w-full h-full object-contain transition-transform duration-300 ${hoveredId === tool.id ? 'scale-[1.04]' : 'scale-100'}`}
