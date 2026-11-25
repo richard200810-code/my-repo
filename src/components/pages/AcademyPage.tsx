@@ -156,9 +156,9 @@ function LengthGuide() {
     <div className="mt-9 grid items-start gap-9 lg:grid-cols-[minmax(0,757px)_minmax(260px,1fr)] lg:gap-12">
       <figure className="min-w-0">
         <div className="overflow-hidden rounded-2xl border border-primary/10 bg-[#f7f4f0] p-2 shadow-sm sm:p-4">
-          <img src="https://static.wixstatic.com/media/37e681_83f05e480e6142bf8649207ef56c11cd~mv2.png" alt="Comparación visual de extensiones de 10 a 32 pulgadas, equivalentes aproximadamente a 25 a 80 centímetros, sobre tres tipos de cabello" width="757" height="343" loading="lazy" className="mx-auto block h-auto w-full max-w-[757px] rounded-lg" />
+          <Image src="https://static.wixstatic.com/media/37e681_83f05e480e6142bf8649207ef56c11cd~mv2.png" alt="Comparación visual de extensiones de 10 a 32 pulgadas, equivalentes aproximadamente a 25 a 80 centímetros, sobre tres tipos de cabello" width="757" height="343" loading="lazy" className="mx-auto block h-auto w-full max-w-[757px] rounded-lg" />
         </div>
-        <figcaption className="mt-3 font-paragraph text-sm leading-relaxed text-primary/65">Referencia visual de largo. Las líneas muestran medidas aproximadas; el resultado real varía según el cuerpo y la colocación.</figcaption>
+        <figcaption className="mt-3 font-paragraph text-sm leading-relaxed text-primary/65">Referencia visual de largo. Las líneas muestran medidas aproximadas; el resultado real varía según el cuerpo y la colocación. <a href="https://static.wixstatic.com/media/37e681_83f05e480e6142bf8649207ef56c11cd~mv2.png" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">Ver imagen completa ↗</a></figcaption>
       </figure>
       <div className="space-y-7 font-paragraph text-primary/80">
         <div><span className="text-xs uppercase tracking-widest text-primary/55">01 · Visualiza</span><h4 className="mt-2 font-heading text-2xl text-primary">Elige dónde quieres que termine</h4><p className="mt-3 leading-relaxed">Piensa en el efecto final: más volumen a tu altura actual, largo a media espalda o un cambio más marcado. Usa la imagen como punto de partida, no como una promesa de dónde caerá cada medida.</p></div>
