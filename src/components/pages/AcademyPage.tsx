@@ -92,6 +92,7 @@ function KnowledgeSection() {
             <span className="mt-5 inline-block text-sm font-semibold text-primary">Leer guía →</span>
           </a>)}
           <a href="#como-elegir-extensiones" className="rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 hover:bg-primary/[0.08]"><span className="text-xs uppercase tracking-widest text-primary/60">Guía 04</span><h3 className="mt-4 font-heading text-2xl text-primary">Cómo elegir extensiones de cabello</h3><p className="mt-3 font-paragraph leading-relaxed text-primary/75">Encuentra la opción adecuada para ti: objetivo, método, color y rutina.</p><span className="mt-5 inline-block text-sm font-semibold text-primary">Leer guía →</span></a>
+          <a href="#guia-de-largos-de-extensiones" className="rounded-2xl border border-primary/15 bg-primary/[0.035] p-6 transition-colors hover:bg-primary/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"><span className="text-xs uppercase tracking-widest text-primary/60">Guía 05</span><h3 className="mt-4 font-heading text-2xl text-primary">¿Qué largo de extensiones elegir?</h3><p className="mt-3 font-paragraph leading-relaxed text-primary/75">Compara medidas en centímetros y pulgadas y visualiza el efecto antes de decidir.</p><span className="mt-5 inline-block text-sm font-semibold text-primary">Leer guía →</span></a>
         </nav>
         <div className="space-y-16">
           {KNOWLEDGE_ARTICLES.map((article, index) => <article key={article.id} id={article.id} className="scroll-mt-24 border-t border-primary/15 pt-10">
@@ -114,6 +115,7 @@ function KnowledgeSection() {
             <div className="mt-6 flex flex-wrap gap-5 text-sm text-primary"><a href={'#'+KNOWLEDGE_ARTICLES[(index + 1) % KNOWLEDGE_ARTICLES.length].id} className="underline underline-offset-4">{'Siguiente: '+KNOWLEDGE_ARTICLES[(index + 1) % KNOWLEDGE_ARTICLES.length].title}</a><a href="#knowledge" className="underline underline-offset-4">Volver a Knowledge ↑</a></div>
           </article>)}
           <ChoiceGuide />
+          <LengthGuide />
         </div>
       </div>
     </section>
@@ -143,5 +145,28 @@ function ChoiceGuide() {
     <div className="grid gap-10 lg:grid-cols-2">{blocks.map(b=><section key={b.title} className="min-w-0"><h4 className="mb-5 font-heading text-2xl text-primary">{b.title}</h4><figure><ChoiceSketch kind={b.kind}/><figcaption className="mt-3 text-sm leading-relaxed text-primary/65">{b.caption}</figcaption></figure>{b.paragraphs.map(p=><p key={p} className="mt-4 font-paragraph leading-relaxed text-primary/80">{p}</p>)}</section>)}</div>
     <aside className="mt-8 rounded-xl border border-primary/15 bg-primary/[0.035] p-6"><h4 className="font-heading text-2xl text-primary">Antes de decidir</h4><p className="mt-4 font-paragraph leading-relaxed text-primary/80">Lleva a tu consulta una idea del largo y volumen deseados, una referencia de tu tono y textura, y una descripción de tu rutina. Pregunta por colocación, cuidados, mantenimiento y retiro. Confirma siempre las instrucciones de la referencia que realmente vas a usar.</p></aside>
     <div className="mt-6 flex flex-wrap gap-5 text-sm text-primary"><a href="#metodos-de-colocacion-de-extensiones" className="underline underline-offset-4">Comparar métodos de colocación →</a><a href="#duracion-y-mantenimiento-de-extensiones" className="underline underline-offset-4">Planificar el mantenimiento →</a><a href="#knowledge" className="underline underline-offset-4">Volver a Knowledge ↑</a></div>
+  </article>;
+}
+
+function LengthGuide() {
+  return <article id="guia-de-largos-de-extensiones" className="scroll-mt-24 border-t border-primary/15 pt-10">
+    <p className="text-xs uppercase tracking-widest text-primary/60">Knowledge · 05</p>
+    <h3 className="mt-3 max-w-4xl font-heading text-3xl leading-tight text-primary md:text-4xl">¿Qué largo de extensiones elegir?</h3>
+    <p className="mt-5 max-w-3xl font-paragraph text-lg leading-relaxed text-primary/80">Una misma medida puede verse distinta según tu estatura, el punto donde se coloca la extensión y la textura del cabello. Usa esta guía visual para definir el resultado que buscas antes de elegir el largo.</p>
+    <div className="mt-9 grid items-start gap-9 lg:grid-cols-[minmax(0,757px)_minmax(260px,1fr)] lg:gap-12">
+      <figure className="min-w-0">
+        <div className="overflow-hidden rounded-2xl border border-primary/10 bg-[#f7f4f0] p-2 shadow-sm sm:p-4">
+          <img src="https://static.wixstatic.com/media/37e681_83f05e480e6142bf8649207ef56c11cd~mv2.png" alt="Comparación visual de extensiones de 10 a 32 pulgadas, equivalentes aproximadamente a 25 a 80 centímetros, sobre tres tipos de cabello" width="757" height="343" loading="lazy" className="mx-auto block h-auto w-full max-w-[757px] rounded-lg" />
+        </div>
+        <figcaption className="mt-3 font-paragraph text-sm leading-relaxed text-primary/65">Referencia visual de largo. Las líneas muestran medidas aproximadas; el resultado real varía según el cuerpo y la colocación.</figcaption>
+      </figure>
+      <div className="space-y-7 font-paragraph text-primary/80">
+        <div><span className="text-xs uppercase tracking-widest text-primary/55">01 · Visualiza</span><h4 className="mt-2 font-heading text-2xl text-primary">Elige dónde quieres que termine</h4><p className="mt-3 leading-relaxed">Piensa en el efecto final: más volumen a tu altura actual, largo a media espalda o un cambio más marcado. Usa la imagen como punto de partida, no como una promesa de dónde caerá cada medida.</p></div>
+        <div><span className="text-xs uppercase tracking-widest text-primary/55">02 · Mide</span><h4 className="mt-2 font-heading text-2xl text-primary">Comprueba el largo en tu cuerpo</h4><p className="mt-3 leading-relaxed">Con una cinta flexible, mide desde el punto donde se colocará la extensión hasta la altura deseada. Si aún no sabes el método de colocación, revísalo con tu estilista antes de comprar.</p></div>
+        <div><span className="text-xs uppercase tracking-widest text-primary/55">03 · Ajusta</span><h4 className="mt-2 font-heading text-2xl text-primary">Considera tu textura</h4><p className="mt-3 leading-relaxed">El cabello ondulado o rizado suele verse más corto que la misma pieza estirada. Confirma cómo se mide el producto que elegiste y compara el largo con una textura similar a la tuya.</p></div>
+      </div>
+    </div>
+    <aside className="mt-9 max-w-4xl rounded-xl border border-primary/15 bg-primary/[0.035] p-6"><h4 className="font-heading text-2xl text-primary">Pulgadas y centímetros</h4><p className="mt-3 font-paragraph leading-relaxed text-primary/80">La imagen redondea las equivalencias: 10″ ≈ 25 cm, 16″ ≈ 40 cm, 20″ ≈ 50 cm, 24″ ≈ 60 cm y 32″ ≈ 80 cm. Una pulgada equivale exactamente a 2.54 cm; consulta la medida publicada para cada referencia.</p></aside>
+    <div className="mt-6 flex flex-wrap gap-5 text-sm text-primary"><a href="#como-elegir-extensiones" className="underline underline-offset-4">Ver la guía para elegir extensiones →</a><a href="#knowledge" className="underline underline-offset-4">Volver a Knowledge ↑</a></div>
   </article>;
 }
